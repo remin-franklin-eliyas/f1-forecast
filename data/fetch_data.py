@@ -1,293 +1,258 @@
 """
 =============================================================
 F1 CONSTRUCTORS CHAMPIONSHIP FORECASTING PROJECT
-Phase 1: Data Collection
+Phase 1: Data Collection (v2 — FastF1 + OpenF1)
 =============================================================
 
+WHY WE SWITCHED FROM JOLPICA:
+  Jolpica/Ergast lags badly on recent seasons (2025/2026).
+  FastF1 pulls directly from F1's official live timing API
+  so data is available within minutes of a session ending.
+
 WHAT THIS SCRIPT DOES:
-- Connects to the Jolpica F1 API (free, no API key needed!)
-- Downloads constructor standings after every race
-- Handles rate limits (HTTP 429) automatically with retries
-- Saves progress as it goes — safe to restart if interrupted
-- Saves everything to a clean CSV file for our models later
+  - Uses FastF1 for historical seasons (2018–2024)
+  - Uses OpenF1 API for the live 2025 season
+  - Merges both into one clean CSV
 
 HOW TO RUN:
-    python fetch_data.py
+    pip install fastf1
+    python3 fetch_data.py
 
 REQUIREMENTS:
-    pip install requests pandas
+    pip install fastf1 requests pandas
 """
 
+import os
 import requests
 import pandas as pd
-import time
-import os
+import fastf1
 
 # ── CONFIG ────────────────────────────────────────────────
-BASE_URL = "https://api.jolpi.ca/ergast/f1"
-
-# Change these to whatever season(s) you want to study
-SEASONS = [2021, 2022, 2023, 2024, 2025]
-
-# Where to save our data
+# FastF1 caches downloaded data so re-runs are instant
+CACHE_DIR   = "f1_cache"
 OUTPUT_PATH = "constructor_standings.csv"
 
-# Rate limiting settings
-#   DELAY_BETWEEN_REQUESTS : seconds to wait between every API call
-#   RETRY_WAIT             : seconds to wait after a 429 before retrying
-#   MAX_RETRIES            : how many times to retry a failed request
-DELAY_BETWEEN_REQUESTS = 1.2
-RETRY_WAIT             = 15
-MAX_RETRIES            = 5
+# Historical seasons via FastF1
+FASTF1_SEASONS = [2021, 2022, 2023, 2024, 2025]
+
+# Live season via OpenF1
+OPENF1_SEASON = 2026
 # ─────────────────────────────────────────────────────────
 
 
-def api_get(url: str) -> dict | None:
+def setup_fastf1():
+    """Enable FastF1 cache — avoids re-downloading data on every run."""
+    os.makedirs(CACHE_DIR, exist_ok=True)
+    fastf1.Cache.enable_cache(CACHE_DIR)
+    print(f"  ✅ FastF1 cache enabled → ./{CACHE_DIR}/")
+
+
+def fetch_fastf1_season(season: int) -> list[dict]:
     """
-    A smart wrapper around requests.get() that:
-      1. Waits between every call so we don't hammer the API
-      2. Automatically retries if we get a 429 (rate limited)
-      3. Returns None if it still fails after MAX_RETRIES attempts
+    Pulls constructor standings for every completed race
+    in a season using FastF1.
 
-    WHY THIS MATTERS:
-    The Jolpica API has a rate limit — if you send too many
-    requests too fast, it returns HTTP 429 ("Too Many Requests").
-    Instead of crashing, we just wait and try again.
+    HOW FASTF1 WORKS:
+    It connects to F1's official timing API, downloads the
+    session data, and gives it back as a Pandas DataFrame.
+    The cache means the second run is instant.
     """
-    for attempt in range(1, MAX_RETRIES + 1):
-        try:
-            response = requests.get(url, timeout=15)
+    print(f"\n📅 FastF1 — Season {season}")
+    rows = []
 
-            if response.status_code == 200:
-                return response.json()
-
-            elif response.status_code == 429:
-                # Rate limited — wait longer, then retry
-                wait = RETRY_WAIT * attempt   # back off more each attempt
-                print(f"    ⏳ Rate limited (429). Waiting {wait}s before retry {attempt}/{MAX_RETRIES}...")
-                time.sleep(wait)
-
-            else:
-                print(f"    ⚠ HTTP {response.status_code} for {url}")
-                return None
-
-        except requests.exceptions.Timeout:
-            print(f"    ⚠ Timeout on attempt {attempt}. Retrying...")
-            time.sleep(RETRY_WAIT)
-
-        except requests.exceptions.ConnectionError:
-            print(f"    ⚠ Connection error on attempt {attempt}. Retrying...")
-            time.sleep(RETRY_WAIT)
-
-    print(f"    ❌ Gave up after {MAX_RETRIES} attempts: {url}")
-    return None
-
-
-def get_race_schedule(season: int) -> list[dict]:
-    """
-    Fetches all race rounds for a given season.
-    Returns a list of dicts with round number and race name.
-    """
-    print(f"  → Fetching race schedule for {season}...")
-
-    url  = f"{BASE_URL}/{season}/races.json"
-    data = api_get(url)
-    time.sleep(DELAY_BETWEEN_REQUESTS)
-
-    if data is None:
-        print(f"  ❌ Could not fetch schedule for {season}")
-        return []
-
-    races = data["MRData"]["RaceTable"]["Races"]
-
-    schedule = []
-    for race in races:
-        schedule.append({
-            "season":    int(race["season"]),
-            "round":     int(race["round"]),
-            "race_name": race["raceName"],
-            "circuit":   race["Circuit"]["circuitName"],
-            "country":   race["Circuit"]["Location"]["country"],
-            "date":      race["date"],
-        })
-
-    print(f"     Found {len(schedule)} races in {season}")
-    return schedule
-
-
-def get_constructor_standings(season: int, round_num: int) -> list[dict]:
-    """
-    Fetches constructor championship standings after a specific round.
-    Returns a list of dicts — one per constructor.
-    """
-    url  = f"{BASE_URL}/{season}/{round_num}/constructorStandings.json"
-    data = api_get(url)
-    time.sleep(DELAY_BETWEEN_REQUESTS)
-
-    if data is None:
-        return []
-
+    # Get the event schedule for this season
     try:
-        standings_list = (
-            data["MRData"]["StandingsTable"]
-                ["StandingsLists"][0]
-                ["ConstructorStandings"]
-        )
-    except (KeyError, IndexError):
-        return []
+        schedule = fastf1.get_event_schedule(season, include_testing=False)
+    except Exception as e:
+        print(f"  ❌ Could not get schedule for {season}: {e}")
+        return rows
 
-    standings = []
-    for s in standings_list:
-        standings.append({
-            "season":           season,
-            "round":            round_num,
-            "position":         int(s["position"]),
-            "constructor_id":   s["Constructor"]["constructorId"],
-            "constructor_name": s["Constructor"]["name"],
-            "nationality":      s["Constructor"]["nationality"],
-            "points":           float(s["points"]),
-            "wins":             int(s["wins"]),
-        })
+    # Filter to only completed races (EventFormat != testing)
+    races = schedule[schedule["EventFormat"] != "testing"].reset_index(drop=True)
 
-    return standings
+    # Running cumulative points tracker (FastF1 gives per-race results,
+    # we build cumulative standings ourselves)
+    cumulative = {}   # constructor_name → cumulative points
 
+    for _, event in races.iterrows():
+        round_num = int(event["RoundNumber"])
+        race_name = event["EventName"]
+        country   = event["Country"]
+        circuit   = event["Location"]
+        date      = str(event["EventDate"])[:10]
 
-def load_existing_data(path: str) -> pd.DataFrame:
-    """
-    Loads any previously saved data so we can resume.
-    If no file exists yet, returns an empty DataFrame.
+        print(f"  🏁 Round {round_num:02d} — {race_name}")
 
-    WHY THIS MATTERS:
-    If the script crashes or gets interrupted halfway through,
-    we don't want to start over from scratch. This lets us
-    pick up where we left off.
-    """
-    if os.path.exists(path):
-        df = pd.read_csv(path)
-        print(f"  📂 Found existing data: {len(df)} rows already saved")
-        return df
-    return pd.DataFrame()
-
-
-def already_fetched(existing_df: pd.DataFrame, season: int, round_num: int) -> bool:
-    """
-    Checks if we already have data for a given season + round.
-    Returns True if we can skip it, False if we need to fetch it.
-    """
-    if existing_df.empty:
-        return False
-    return ((existing_df["season"] == season) &
-            (existing_df["round"]  == round_num)).any()
-
-
-def fetch_all_seasons(seasons: list[int]) -> pd.DataFrame:
-    """
-    Main loop — goes through every season and round,
-    skipping anything we've already downloaded.
-    Saves progress to CSV after each round so it's safe to interrupt.
-    """
-    # Load any data we already have (resume support)
-    existing_df = load_existing_data(OUTPUT_PATH)
-    all_rows    = existing_df.to_dict("records") if not existing_df.empty else []
-
-    for season in seasons:
-        print(f"\n📅 Season {season}")
-
-        schedule = get_race_schedule(season)
-        if not schedule:
+        try:
+            session = fastf1.get_session(season, round_num, "R")
+            session.load(telemetry=False, weather=False, messages=False)
+        except Exception as e:
+            print(f"       ⚠ Could not load session: {e}")
             continue
 
-        for race in schedule:
-            round_num = race["round"]
-            race_name = race["race_name"]
+        # session.results gives us per-driver finishing data
+        results = session.results
+        if results is None or results.empty:
+            print(f"       ⚠ No results yet — skipping")
+            continue
 
-            # Skip if already in our saved data
-            if already_fetched(existing_df, season, round_num):
-                print(f"  ✓  Round {round_num:02d} — {race_name} (already saved, skipping)")
-                continue
+        # Aggregate points by team for this race
+        race_points = (
+            results.groupby("TeamName")["Points"]
+                   .sum()
+                   .reset_index()
+                   .rename(columns={"TeamName": "constructor_name",
+                                    "Points":   "points_this_round"})
+        )
 
-            print(f"  🏁 Round {round_num:02d} — {race_name}")
+        # Update cumulative totals
+        for _, r in race_points.iterrows():
+            team = r["constructor_name"]
+            pts  = float(r["points_this_round"])
+            cumulative[team] = cumulative.get(team, 0.0) + pts
 
-            standings = get_constructor_standings(season, round_num)
+        # Sort by cumulative points to assign positions
+        sorted_teams = sorted(cumulative.items(), key=lambda x: x[1], reverse=True)
 
-            if not standings:
-                print(f"       ⚠ No standings returned — skipping")
-                continue
+        for pos, (team, total_pts) in enumerate(sorted_teams, start=1):
+            rows.append({
+                "season":           season,
+                "round":            round_num,
+                "race_name":        race_name,
+                "circuit":          circuit,
+                "country":          country,
+                "date":             date,
+                "position":         pos,
+                "constructor_name": team,
+                "points":           total_pts,
+                "points_this_round": cumulative.get(team, 0) - (
+                    # recompute points_this_round properly
+                    cumulative.get(team, 0) - race_points[
+                        race_points["constructor_name"] == team
+                    ]["points_this_round"].sum()
+                    if team in race_points["constructor_name"].values else 0
+                ),
+            })
 
-            # Attach race metadata
-            for row in standings:
-                row["race_name"] = race_name
-                row["circuit"]   = race["circuit"]
-                row["country"]   = race["country"]
-                row["date"]      = race["date"]
-                all_rows.append(row)
+    return rows
 
-            # Save after every single round — safe to interrupt anytime
-            pd.DataFrame(all_rows).to_csv(OUTPUT_PATH, index=False)
 
-    return pd.DataFrame(all_rows)
+def fetch_openf1_season(season: int) -> list[dict]:
+    """
+    Pulls constructor standings from OpenF1 for the live/recent season.
+
+    OpenF1 has real-time data updated within minutes of a session.
+    It covers 2023 onwards with 18 endpoints.
+
+    API DOCS: https://openf1.org/docs/
+    """
+    print(f"\n📅 OpenF1 — Season {season} (live data)")
+    rows = []
+
+    # Step 1: get all race meetings for this season
+    url      = f"https://api.openf1.org/v1/meetings?year={season}"
+    response = requests.get(url, timeout=15)
+
+    if response.status_code != 200:
+        print(f"  ❌ OpenF1 meetings fetch failed (HTTP {response.status_code})")
+        return rows
+
+    meetings = response.json()
+    # Filter out testing events
+    races = [m for m in meetings if "Grand Prix" in m.get("meeting_name", "")]
+    print(f"  Found {len(races)} races in {season}")
+
+    for i, meeting in enumerate(races, start=1):
+        meeting_key = meeting["meeting_key"]
+        race_name   = meeting["meeting_name"]
+        country     = meeting["country_name"]
+        circuit     = meeting["circuit_short_name"]
+        date        = meeting.get("date_start", "")[:10]
+
+        print(f"  🏁 Round {i:02d} — {race_name}")
+
+        # Step 2: get the race session key for this meeting
+        sess_url  = f"https://api.openf1.org/v1/sessions?meeting_key={meeting_key}&session_name=Race"
+        sess_resp = requests.get(sess_url, timeout=15)
+
+        if sess_resp.status_code != 200 or not sess_resp.json():
+            print(f"       ⚠ No race session found — skipping")
+            continue
+
+        session_key = sess_resp.json()[0]["session_key"]
+
+        # Step 3: get constructor standings from this session
+        # OpenF1 /position endpoint gives live positions during a session
+        # For constructor standings we use the /team_radio or /laps endpoints
+        # The cleanest is the championship standings endpoint
+        standings_url  = (
+            f"https://api.openf1.org/v1/championship_standings"
+            f"?session_key={session_key}"
+        )
+        stand_resp = requests.get(standings_url, timeout=15)
+
+        if stand_resp.status_code != 200 or not stand_resp.json():
+            print(f"       ⚠ No standings data — skipping")
+            continue
+
+        standings = stand_resp.json()
+
+        # Group by team (OpenF1 gives driver-level standings)
+        team_points = {}
+        for entry in standings:
+            team = entry.get("constructor_name", "Unknown")
+            pts  = float(entry.get("points", 0))
+            team_points[team] = max(team_points.get(team, 0), pts)
+
+        sorted_teams = sorted(team_points.items(), key=lambda x: x[1], reverse=True)
+
+        for pos, (team, pts) in enumerate(sorted_teams, start=1):
+            rows.append({
+                "season":           season,
+                "round":            i,
+                "race_name":        race_name,
+                "circuit":          circuit,
+                "country":          country,
+                "date":             date,
+                "position":         pos,
+                "constructor_name": team,
+                "points":           pts,
+                "points_this_round": None,  # enriched later
+            })
+
+    return rows
 
 
 def clean_and_enrich(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Adds useful computed columns for our models later.
+    """Adds computed columns needed for our forecasting models."""
 
-    WHY SOME ROUNDS HAVE NO STANDINGS:
-    Future races in the 2025 calendar haven't happened yet,
-    so the API returns empty standings for them. We drop those
-    rows before computing anything, keeping only completed rounds.
-    """
-    # Convert date to proper datetime format
-    df["date"] = pd.to_datetime(df["date"])
+    df["date"] = pd.to_datetime(df["date"], errors="coerce")
 
-    # Drop any rows where core data is missing (future/unraced rounds)
-    before = len(df)
+    # Drop rows with no core data
     df = df.dropna(subset=["position", "points", "constructor_name"])
-    dropped = before - len(df)
-    if dropped:
-        print(f"     ℹ Dropped {dropped} incomplete rows (future rounds with no results)")
-
-    # Drop duplicate season+round+constructor combinations (safety net for resume merges)
-    df = df.drop_duplicates(subset=["season", "round", "constructor_id"])
-
-    # Sort chronologically
+    df = df.drop_duplicates(subset=["season", "round", "constructor_name"])
     df = df.sort_values(["season", "round", "position"]).reset_index(drop=True)
 
-    # ── Points gap to leader ───────────────────────────────
-    # For each season+round, find the leader's (position=1) points,
-    # then subtract every team's points to get "how far behind" they are.
+    # Points gap to leader
     leader_df = (
         df[df["position"] == 1][["season", "round", "points"]]
           .rename(columns={"points": "leader_points"})
-          .drop_duplicates(subset=["season", "round"])   # one leader per round
+          .drop_duplicates(subset=["season", "round"])
     )
+    df = df.merge(leader_df, on=["season", "round"], how="left")
+    df["points_gap"] = df["leader_points"] - df["points"]
 
-    # Only merge if we actually have leader rows (guards against all-empty seasons)
-    if not leader_df.empty:
-        df = df.merge(leader_df, on=["season", "round"], how="left")
-        df["points_gap"] = df["leader_points"] - df["points"]
-    else:
-        df["leader_points"] = float("nan")
-        df["points_gap"]    = float("nan")
-
-    # ── Points scored this round ───────────────────────────
-    # How many points did each team pick up in this specific race?
-    # (cumulative points this round  minus  cumulative points last round)
-    df = df.sort_values(["season", "constructor_id", "round"])
+    # Points scored this round (if not already set)
+    df = df.sort_values(["season", "constructor_name", "round"])
     df["points_this_round"] = (
-        df.groupby(["season", "constructor_id"])["points"]
+        df.groupby(["season", "constructor_name"])["points"]
           .diff()
-          .fillna(df["points"])   # round 1 has no previous round, so use total
+          .fillna(df["points"])
     )
 
-    # ── Season progress % ─────────────────────────────────
-    # What % of the season has been completed at this round?
-    # Useful feature: "how locked-in is the championship?"
-    #
-    # NOTE: total_rounds = the LAST COMPLETED round in the data,
-    #       not necessarily the full calendar length.
-    completed_rounds = df.groupby("season")["round"].max().rename("total_rounds")
-    df = df.merge(completed_rounds, on="season", how="left")
+    # Season progress %
+    completed = df.groupby("season")["round"].max().rename("total_rounds")
+    df = df.merge(completed, on="season", how="left")
     df["season_progress_pct"] = (df["round"] / df["total_rounds"] * 100).round(1)
 
     return df
@@ -295,37 +260,42 @@ def clean_and_enrich(df: pd.DataFrame) -> pd.DataFrame:
 
 def main():
     print("=" * 55)
-    print("  F1 Constructors Championship — Data Collection")
+    print("  F1 Constructors Championship — Data Collection v2")
+    print("  Sources: FastF1 (historical) + OpenF1 (live 2025)")
     print("=" * 55)
-    print(f"\n  Settings:")
-    print(f"    Seasons to fetch  : {SEASONS}")
-    print(f"    Delay per request : {DELAY_BETWEEN_REQUESTS}s")
-    print(f"    Retry wait (429)  : {RETRY_WAIT}s (×attempt number)")
-    print(f"    Max retries       : {MAX_RETRIES}")
-    print(f"    Output file       : {OUTPUT_PATH}")
-    print(f"\n  💡 Safe to Ctrl+C and restart — progress is saved after each round.\n")
 
-    # Fetch everything (with resume support)
-    df = fetch_all_seasons(SEASONS)
+    setup_fastf1()
 
-    if df.empty:
-        print("\n❌ No data collected. Check your internet connection.")
+    all_rows = []
+
+    # ── Historical seasons via FastF1 ─────────────────────
+    for season in FASTF1_SEASONS:
+        rows = fetch_fastf1_season(season)
+        all_rows.extend(rows)
+        print(f"  → {len(rows)} rows collected for {season}")
+
+    # ── Live 2025 season via OpenF1 ───────────────────────
+    rows_2025 = fetch_openf1_season(OPENF1_SEASON)
+    all_rows.extend(rows_2025)
+    print(f"  → {len(rows_2025)} rows collected for {OPENF1_SEASON}")
+
+    if not all_rows:
+        print("\n❌ No data collected.")
         return
 
-    # Clean and enrich
-    print("\n🔧 Cleaning and enriching data...")
+    df = pd.DataFrame(all_rows)
+
+    print("\n🔧 Cleaning and enriching...")
     df = clean_and_enrich(df)
 
-    # Final save (with enriched columns)
     df.to_csv(OUTPUT_PATH, index=False)
 
-    # Summary
     print(f"\n✅ Done! Saved {len(df):,} rows → {OUTPUT_PATH}")
-    print(f"\n📊 Quick Summary:")
-    print(f"   Seasons collected : {sorted(df['season'].unique().tolist())}")
-    print(f"   Total race rounds : {df.groupby('season')['round'].max().to_dict()}")
-    print(f"   Constructors found: {sorted(df['constructor_name'].unique().tolist())}")
-    print(f"\n   Columns in dataset:")
+    print(f"\n📊 Summary:")
+    print(f"   Seasons : {sorted(df['season'].unique().tolist())}")
+    print(f"   Rounds  : {df.groupby('season')['round'].max().to_dict()}")
+    print(f"   Teams   : {sorted(df['constructor_name'].unique().tolist())}")
+    print(f"\n   Columns:")
     for col in df.columns:
         print(f"     • {col}")
 
