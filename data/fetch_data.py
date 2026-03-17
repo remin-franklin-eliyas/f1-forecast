@@ -30,7 +30,7 @@ import requests
 
 # ── CONFIG ────────────────────────────────────────────────
 # FastF1 caches downloaded data so re-runs are instant
-CACHE_DIR   = "f1_cache"
+CACHE_DIR = "f1_cache"
 OUTPUT_PATH = "constructor_standings.csv"
 
 # Historical seasons via FastF1
@@ -73,14 +73,14 @@ def fetch_fastf1_season(season: int) -> list[dict]:
 
     # Running cumulative points tracker (FastF1 gives per-race results,
     # we build cumulative standings ourselves)
-    cumulative = {}   # constructor_name → cumulative points
+    cumulative = {}  # constructor_name → cumulative points
 
     for _, event in races.iterrows():
         round_num = int(event["RoundNumber"])
         race_name = event["EventName"]
-        country   = event["Country"]
-        circuit   = event["Location"]
-        date      = str(event["EventDate"])[:10]
+        country = event["Country"]
+        circuit = event["Location"]
+        date = str(event["EventDate"])[:10]
 
         print(f"  🏁 Round {round_num:02d} — {race_name}")
 
@@ -100,40 +100,44 @@ def fetch_fastf1_season(season: int) -> list[dict]:
         # Aggregate points by team for this race
         race_points = (
             results.groupby("TeamName")["Points"]
-                   .sum()
-                   .reset_index()
-                   .rename(columns={"TeamName": "constructor_name",
-                                    "Points":   "points_this_round"})
+            .sum()
+            .reset_index()
+            .rename(columns={"TeamName": "constructor_name", "Points": "points_this_round"})
         )
 
         # Update cumulative totals
         for _, r in race_points.iterrows():
             team = r["constructor_name"]
-            pts  = float(r["points_this_round"])
+            pts = float(r["points_this_round"])
             cumulative[team] = cumulative.get(team, 0.0) + pts
 
         # Sort by cumulative points to assign positions
         sorted_teams = sorted(cumulative.items(), key=lambda x: x[1], reverse=True)
 
         for pos, (team, total_pts) in enumerate(sorted_teams, start=1):
-            rows.append({
-                "season":           season,
-                "round":            round_num,
-                "race_name":        race_name,
-                "circuit":          circuit,
-                "country":          country,
-                "date":             date,
-                "position":         pos,
-                "constructor_name": team,
-                "points":           total_pts,
-                "points_this_round": cumulative.get(team, 0) - (
-                    # recompute points_this_round properly
-                    cumulative.get(team, 0) - race_points[
-                        race_points["constructor_name"] == team
-                    ]["points_this_round"].sum()
-                    if team in race_points["constructor_name"].values else 0
-                ),
-            })
+            rows.append(
+                {
+                    "season": season,
+                    "round": round_num,
+                    "race_name": race_name,
+                    "circuit": circuit,
+                    "country": country,
+                    "date": date,
+                    "position": pos,
+                    "constructor_name": team,
+                    "points": total_pts,
+                    "points_this_round": cumulative.get(team, 0)
+                    - (
+                        # recompute points_this_round properly
+                        cumulative.get(team, 0)
+                        - race_points[race_points["constructor_name"] == team][
+                            "points_this_round"
+                        ].sum()
+                        if team in race_points["constructor_name"].values
+                        else 0
+                    ),
+                }
+            )
 
     return rows
 
@@ -151,7 +155,7 @@ def fetch_openf1_season(season: int) -> list[dict]:
     rows = []
 
     # Step 1: get all race meetings for this season
-    url      = f"https://api.openf1.org/v1/meetings?year={season}"
+    url = f"https://api.openf1.org/v1/meetings?year={season}"
     response = requests.get(url, timeout=15)
 
     if response.status_code != 200:
@@ -165,15 +169,15 @@ def fetch_openf1_season(season: int) -> list[dict]:
 
     for i, meeting in enumerate(races, start=1):
         meeting_key = meeting["meeting_key"]
-        race_name   = meeting["meeting_name"]
-        country     = meeting["country_name"]
-        circuit     = meeting["circuit_short_name"]
-        date        = meeting.get("date_start", "")[:10]
+        race_name = meeting["meeting_name"]
+        country = meeting["country_name"]
+        circuit = meeting["circuit_short_name"]
+        date = meeting.get("date_start", "")[:10]
 
         print(f"  🏁 Round {i:02d} — {race_name}")
 
         # Step 2: get the race session key for this meeting
-        sess_url  = f"https://api.openf1.org/v1/sessions?meeting_key={meeting_key}&session_name=Race"
+        sess_url = f"https://api.openf1.org/v1/sessions?meeting_key={meeting_key}&session_name=Race"
         sess_resp = requests.get(sess_url, timeout=15)
 
         if sess_resp.status_code != 200 or not sess_resp.json():
@@ -186,9 +190,8 @@ def fetch_openf1_season(season: int) -> list[dict]:
         # OpenF1 /position endpoint gives live positions during a session
         # For constructor standings we use the /team_radio or /laps endpoints
         # The cleanest is the championship standings endpoint
-        standings_url  = (
-            f"https://api.openf1.org/v1/championship_standings"
-            f"?session_key={session_key}"
+        standings_url = (
+            f"https://api.openf1.org/v1/championship_standings?session_key={session_key}"
         )
         stand_resp = requests.get(standings_url, timeout=15)
 
@@ -202,24 +205,26 @@ def fetch_openf1_season(season: int) -> list[dict]:
         team_points = {}
         for entry in standings:
             team = entry.get("constructor_name", "Unknown")
-            pts  = float(entry.get("points", 0))
+            pts = float(entry.get("points", 0))
             team_points[team] = max(team_points.get(team, 0), pts)
 
         sorted_teams = sorted(team_points.items(), key=lambda x: x[1], reverse=True)
 
         for pos, (team, pts) in enumerate(sorted_teams, start=1):
-            rows.append({
-                "season":           season,
-                "round":            i,
-                "race_name":        race_name,
-                "circuit":          circuit,
-                "country":          country,
-                "date":             date,
-                "position":         pos,
-                "constructor_name": team,
-                "points":           pts,
-                "points_this_round": None,  # enriched later
-            })
+            rows.append(
+                {
+                    "season": season,
+                    "round": i,
+                    "race_name": race_name,
+                    "circuit": circuit,
+                    "country": country,
+                    "date": date,
+                    "position": pos,
+                    "constructor_name": team,
+                    "points": pts,
+                    "points_this_round": None,  # enriched later
+                }
+            )
 
     return rows
 
@@ -237,8 +242,8 @@ def clean_and_enrich(df: pd.DataFrame) -> pd.DataFrame:
     # Points gap to leader
     leader_df = (
         df[df["position"] == 1][["season", "round", "points"]]
-          .rename(columns={"points": "leader_points"})
-          .drop_duplicates(subset=["season", "round"])
+        .rename(columns={"points": "leader_points"})
+        .drop_duplicates(subset=["season", "round"])
     )
     df = df.merge(leader_df, on=["season", "round"], how="left")
     df["points_gap"] = df["leader_points"] - df["points"]
@@ -246,9 +251,7 @@ def clean_and_enrich(df: pd.DataFrame) -> pd.DataFrame:
     # Points scored this round (if not already set)
     df = df.sort_values(["season", "constructor_name", "round"])
     df["points_this_round"] = (
-        df.groupby(["season", "constructor_name"])["points"]
-          .diff()
-          .fillna(df["points"])
+        df.groupby(["season", "constructor_name"])["points"].diff().fillna(df["points"])
     )
 
     # Season progress %
