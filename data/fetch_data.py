@@ -23,9 +23,10 @@ REQUIREMENTS:
 """
 
 import os
-import requests
-import pandas as pd
+
 import fastf1
+import pandas as pd
+import requests
 
 # ── CONFIG ────────────────────────────────────────────────
 # FastF1 caches downloaded data so re-runs are instant
@@ -93,7 +94,7 @@ def fetch_fastf1_season(season: int) -> list[dict]:
         # session.results gives us per-driver finishing data
         results = session.results
         if results is None or results.empty:
-            print(f"       ⚠ No results yet — skipping")
+            print("       ⚠ No results yet — skipping")
             continue
 
         # Aggregate points by team for this race
@@ -176,7 +177,7 @@ def fetch_openf1_season(season: int) -> list[dict]:
         sess_resp = requests.get(sess_url, timeout=15)
 
         if sess_resp.status_code != 200 or not sess_resp.json():
-            print(f"       ⚠ No race session found — skipping")
+            print("       ⚠ No race session found — skipping")
             continue
 
         session_key = sess_resp.json()[0]["session_key"]
@@ -192,7 +193,7 @@ def fetch_openf1_season(season: int) -> list[dict]:
         stand_resp = requests.get(standings_url, timeout=15)
 
         if stand_resp.status_code != 200 or not stand_resp.json():
-            print(f"       ⚠ No standings data — skipping")
+            print("       ⚠ No standings data — skipping")
             continue
 
         standings = stand_resp.json()
@@ -291,11 +292,11 @@ def main():
     df.to_csv(OUTPUT_PATH, index=False)
 
     print(f"\n✅ Done! Saved {len(df):,} rows → {OUTPUT_PATH}")
-    print(f"\n📊 Summary:")
+    print("\n📊 Summary:")
     print(f"   Seasons : {sorted(df['season'].unique().tolist())}")
     print(f"   Rounds  : {df.groupby('season')['round'].max().to_dict()}")
     print(f"   Teams   : {sorted(df['constructor_name'].unique().tolist())}")
-    print(f"\n   Columns:")
+    print("\n   Columns:")
     for col in df.columns:
         print(f"     • {col}")
 

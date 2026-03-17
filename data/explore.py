@@ -19,11 +19,12 @@ REQUIREMENTS:
     pip install pandas matplotlib seaborn
 """
 
-import pandas as pd
+import os
+
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
+import pandas as pd
 import seaborn as sns
-import os
 
 # ── CONFIG ────────────────────────────────────────────────
 _HERE       = os.path.dirname(os.path.abspath(__file__))  # .../data/
