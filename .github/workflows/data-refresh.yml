@@ -1,0 +1,41 @@
+name: Refresh Data
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"   # every Monday at 06:00 UTC after the race weekend
+  workflow_dispatch:        # allow manual trigger from the Actions tab
+
+jobs:
+  refresh:
+    name: Fetch latest constructor standings
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Restore FastF1 cache
+        uses: actions/cache@v4
+        with:
+          path: data/f1_cache
+          key: f1-cache-${{ runner.os }}-${{ hashFiles('data/fetch_data.py') }}
+          restore-keys: |
+            f1-cache-${{ runner.os }}-
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt fastf1
+
+      - name: Fetch data
+        run: python data/fetch_data.py
+
+      - name: Commit updated standings
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: refresh constructor standings data [skip ci]"
+          file_pattern: "data/constructor_standings.csv"
