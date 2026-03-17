@@ -1,0 +1,1141 @@
+season,round,position,constructor_id,constructor_name,nationality,points,wins,race_name,circuit,country,date,leader_points,points_gap,points_this_round,total_rounds,season_progress_pct
+2021,1,7,alfa,Alfa Romeo,Swiss,0.0,0,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2021-03-28,41.0,41.0,0.0,22.0,4.5
+2021,2,8,alfa,Alfa Romeo,Swiss,0.0,0,Emilia Romagna Grand Prix,Autodromo Enzo e Dino Ferrari,Italy,2021-04-18,60.0,60.0,0.0,22.0,9.1
+2021,3,8,alfa,Alfa Romeo,Swiss,0.0,0,Portuguese Grand Prix,Autódromo Internacional do Algarve,Portugal,2021-05-02,101.0,101.0,0.0,22.0,13.6
+2021,4,8,alfa,Alfa Romeo,Swiss,0.0,0,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2021-05-09,141.0,141.0,0.0,22.0,18.2
+2021,5,8,alfa,Alfa Romeo,Swiss,1.0,0,Monaco Grand Prix,Circuit de Monaco,Monaco,2021-05-23,149.0,148.0,1.0,22.0,22.7
+2021,6,8,alfa,Alfa Romeo,Swiss,2.0,0,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2021-06-06,174.0,172.0,1.0,22.0,27.3
+2021,7,8,alfa,Alfa Romeo,Swiss,2.0,0,French Grand Prix,Circuit Paul Ricard,France,2021-06-20,215.0,213.0,0.0,22.0,31.8
+2021,8,8,alfa,Alfa Romeo,Swiss,2.0,0,Styrian Grand Prix,Red Bull Ring,Austria,2021-06-27,252.0,250.0,0.0,22.0,36.4
+2021,9,8,alfa,Alfa Romeo,Swiss,2.0,0,Austrian Grand Prix,Red Bull Ring,Austria,2021-07-04,286.0,284.0,0.0,22.0,40.9
+2021,10,8,alfa,Alfa Romeo,Swiss,2.0,0,British Grand Prix,Silverstone Circuit,UK,2021-07-18,289.0,287.0,0.0,22.0,45.5
+2021,11,9,alfa,Alfa Romeo,Swiss,3.0,0,Hungarian Grand Prix,Hungaroring,Hungary,2021-08-01,303.0,300.0,1.0,22.0,50.0
+2021,12,9,alfa,Alfa Romeo,Swiss,3.0,0,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2021-08-29,310.5,307.5,0.0,22.0,54.5
+2021,13,9,alfa,Alfa Romeo,Swiss,3.0,0,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2021-09-05,344.5,341.5,0.0,22.0,59.1
+2021,14,9,alfa,Alfa Romeo,Swiss,3.0,0,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2021-09-12,362.5,359.5,0.0,22.0,63.6
+2021,15,9,alfa,Alfa Romeo,Swiss,7.0,0,Russian Grand Prix,Sochi Autodrom,Russia,2021-09-26,397.5,390.5,4.0,22.0,68.2
+2021,16,9,alfa,Alfa Romeo,Swiss,7.0,0,Turkish Grand Prix,Istanbul Park,Turkey,2021-10-10,433.5,426.5,0.0,22.0,72.7
+2021,17,9,alfa,Alfa Romeo,Swiss,7.0,0,United States Grand Prix,Circuit of the Americas,USA,2021-10-24,460.5,453.5,0.0,22.0,77.3
+2021,18,9,alfa,Alfa Romeo,Swiss,11.0,0,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2021-11-07,478.5,467.5,4.0,22.0,81.8
+2021,19,9,alfa,Alfa Romeo,Swiss,11.0,0,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2021-11-14,521.5,510.5,0.0,22.0,86.4
+2021,20,9,alfa,Alfa Romeo,Swiss,11.0,0,Qatar Grand Prix,Losail International Circuit,Qatar,2021-11-21,546.5,535.5,0.0,22.0,90.9
+2021,21,9,alfa,Alfa Romeo,Swiss,13.0,0,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2021-12-05,587.5,574.5,2.0,22.0,95.5
+2021,22,9,alfa,Alfa Romeo,Swiss,13.0,0,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2021-12-12,613.5,600.5,0.0,22.0,100.0
+2021,1,5,alphatauri,AlphaTauri,Italian,2.0,0,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2021-03-28,41.0,39.0,2.0,22.0,4.5
+2021,2,5,alphatauri,AlphaTauri,Italian,8.0,0,Emilia Romagna Grand Prix,Autodromo Enzo e Dino Ferrari,Italy,2021-04-18,60.0,52.0,6.0,22.0,9.1
+2021,3,6,alphatauri,AlphaTauri,Italian,9.0,0,Portuguese Grand Prix,Autódromo Internacional do Algarve,Portugal,2021-05-02,101.0,92.0,1.0,22.0,13.6
+2021,4,6,alphatauri,AlphaTauri,Italian,10.0,0,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2021-05-09,141.0,131.0,1.0,22.0,18.2
+2021,5,6,alphatauri,AlphaTauri,Italian,18.0,0,Monaco Grand Prix,Circuit de Monaco,Monaco,2021-05-23,149.0,131.0,8.0,22.0,22.7
+2021,6,5,alphatauri,AlphaTauri,Italian,39.0,0,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2021-06-06,174.0,135.0,21.0,22.0,27.3
+2021,7,5,alphatauri,AlphaTauri,Italian,45.0,0,French Grand Prix,Circuit Paul Ricard,France,2021-06-20,215.0,170.0,6.0,22.0,31.8
+2021,8,5,alphatauri,AlphaTauri,Italian,46.0,0,Styrian Grand Prix,Red Bull Ring,Austria,2021-06-27,252.0,206.0,1.0,22.0,36.4
+2021,9,5,alphatauri,AlphaTauri,Italian,48.0,0,Austrian Grand Prix,Red Bull Ring,Austria,2021-07-04,286.0,238.0,2.0,22.0,40.9
+2021,10,5,alphatauri,AlphaTauri,Italian,49.0,0,British Grand Prix,Silverstone Circuit,UK,2021-07-18,289.0,240.0,1.0,22.0,45.5
+2021,11,6,alphatauri,AlphaTauri,Italian,68.0,0,Hungarian Grand Prix,Hungaroring,Hungary,2021-08-01,303.0,235.0,19.0,22.0,50.0
+2021,12,6,alphatauri,AlphaTauri,Italian,72.0,0,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2021-08-29,310.5,238.5,4.0,22.0,54.5
+2021,13,6,alphatauri,AlphaTauri,Italian,84.0,0,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2021-09-05,344.5,260.5,12.0,22.0,59.1
+2021,14,6,alphatauri,AlphaTauri,Italian,84.0,0,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2021-09-12,362.5,278.5,0.0,22.0,63.6
+2021,15,6,alphatauri,AlphaTauri,Italian,84.0,0,Russian Grand Prix,Sochi Autodrom,Russia,2021-09-26,397.5,313.5,0.0,22.0,68.2
+2021,16,6,alphatauri,AlphaTauri,Italian,92.0,0,Turkish Grand Prix,Istanbul Park,Turkey,2021-10-10,433.5,341.5,8.0,22.0,72.7
+2021,17,6,alphatauri,AlphaTauri,Italian,94.0,0,United States Grand Prix,Circuit of the Americas,USA,2021-10-24,460.5,366.5,2.0,22.0,77.3
+2021,18,6,alphatauri,AlphaTauri,Italian,106.0,0,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2021-11-07,478.5,372.5,12.0,22.0,81.8
+2021,19,6,alphatauri,AlphaTauri,Italian,112.0,0,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2021-11-14,521.5,409.5,6.0,22.0,86.4
+2021,20,6,alphatauri,AlphaTauri,Italian,112.0,0,Qatar Grand Prix,Losail International Circuit,Qatar,2021-11-21,546.5,434.5,0.0,22.0,90.9
+2021,21,6,alphatauri,AlphaTauri,Italian,120.0,0,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2021-12-05,587.5,467.5,8.0,22.0,95.5
+2021,22,6,alphatauri,AlphaTauri,Italian,142.0,0,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2021-12-12,613.5,471.5,22.0,22.0,100.0
+2021,1,8,alpine,Alpine F1 Team,French,0.0,0,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2021-03-28,41.0,41.0,0.0,22.0,4.5
+2021,2,7,alpine,Alpine F1 Team,French,3.0,0,Emilia Romagna Grand Prix,Autodromo Enzo e Dino Ferrari,Italy,2021-04-18,60.0,57.0,3.0,22.0,9.1
+2021,3,5,alpine,Alpine F1 Team,French,13.0,0,Portuguese Grand Prix,Autódromo Internacional do Algarve,Portugal,2021-05-02,101.0,88.0,10.0,22.0,13.6
+2021,4,5,alpine,Alpine F1 Team,French,15.0,0,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2021-05-09,141.0,126.0,2.0,22.0,18.2
+2021,5,7,alpine,Alpine F1 Team,French,17.0,0,Monaco Grand Prix,Circuit de Monaco,Monaco,2021-05-23,149.0,132.0,2.0,22.0,22.7
+2021,6,7,alpine,Alpine F1 Team,French,25.0,0,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2021-06-06,174.0,149.0,8.0,22.0,27.3
+2021,7,7,alpine,Alpine F1 Team,French,29.0,0,French Grand Prix,Circuit Paul Ricard,France,2021-06-20,215.0,186.0,4.0,22.0,31.8
+2021,8,7,alpine,Alpine F1 Team,French,31.0,0,Styrian Grand Prix,Red Bull Ring,Austria,2021-06-27,252.0,221.0,2.0,22.0,36.4
+2021,9,7,alpine,Alpine F1 Team,French,32.0,0,Austrian Grand Prix,Red Bull Ring,Austria,2021-07-04,286.0,254.0,1.0,22.0,40.9
+2021,10,7,alpine,Alpine F1 Team,French,40.0,0,British Grand Prix,Silverstone Circuit,UK,2021-07-18,289.0,249.0,8.0,22.0,45.5
+2021,11,5,alpine,Alpine F1 Team,French,77.0,1,Hungarian Grand Prix,Hungaroring,Hungary,2021-08-01,303.0,226.0,37.0,22.0,50.0
+2021,12,5,alpine,Alpine F1 Team,French,80.0,1,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2021-08-29,310.5,230.5,3.0,22.0,54.5
+2021,13,5,alpine,Alpine F1 Team,French,90.0,1,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2021-09-05,344.5,254.5,10.0,22.0,59.1
+2021,14,5,alpine,Alpine F1 Team,French,95.0,1,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2021-09-12,362.5,267.5,5.0,22.0,63.6
+2021,15,5,alpine,Alpine F1 Team,French,103.0,1,Russian Grand Prix,Sochi Autodrom,Russia,2021-09-26,397.5,294.5,8.0,22.0,68.2
+2021,16,5,alpine,Alpine F1 Team,French,104.0,1,Turkish Grand Prix,Istanbul Park,Turkey,2021-10-10,433.5,329.5,1.0,22.0,72.7
+2021,17,5,alpine,Alpine F1 Team,French,104.0,1,United States Grand Prix,Circuit of the Americas,USA,2021-10-24,460.5,356.5,0.0,22.0,77.3
+2021,18,5,alpine,Alpine F1 Team,French,106.0,1,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2021-11-07,478.5,372.5,2.0,22.0,81.8
+2021,19,5,alpine,Alpine F1 Team,French,112.0,1,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2021-11-14,521.5,409.5,6.0,22.0,86.4
+2021,20,5,alpine,Alpine F1 Team,French,137.0,1,Qatar Grand Prix,Losail International Circuit,Qatar,2021-11-21,546.5,409.5,25.0,22.0,90.9
+2021,21,5,alpine,Alpine F1 Team,French,149.0,1,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2021-12-05,587.5,438.5,12.0,22.0,95.5
+2021,22,5,alpine,Alpine F1 Team,French,155.0,1,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2021-12-12,613.5,458.5,6.0,22.0,100.0
+2021,1,6,aston_martin,Aston Martin,British,1.0,0,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2021-03-28,41.0,40.0,1.0,22.0,4.5
+2021,2,6,aston_martin,Aston Martin,British,5.0,0,Emilia Romagna Grand Prix,Autodromo Enzo e Dino Ferrari,Italy,2021-04-18,60.0,55.0,4.0,22.0,9.1
+2021,3,7,aston_martin,Aston Martin,British,5.0,0,Portuguese Grand Prix,Autódromo Internacional do Algarve,Portugal,2021-05-02,101.0,96.0,0.0,22.0,13.6
+2021,4,7,aston_martin,Aston Martin,British,5.0,0,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2021-05-09,141.0,136.0,0.0,22.0,18.2
+2021,5,5,aston_martin,Aston Martin,British,19.0,0,Monaco Grand Prix,Circuit de Monaco,Monaco,2021-05-23,149.0,130.0,14.0,22.0,22.7
+2021,6,6,aston_martin,Aston Martin,British,37.0,0,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2021-06-06,174.0,137.0,18.0,22.0,27.3
+2021,7,6,aston_martin,Aston Martin,British,40.0,0,French Grand Prix,Circuit Paul Ricard,France,2021-06-20,215.0,175.0,3.0,22.0,31.8
+2021,8,6,aston_martin,Aston Martin,British,44.0,0,Styrian Grand Prix,Red Bull Ring,Austria,2021-06-27,252.0,208.0,4.0,22.0,36.4
+2021,9,6,aston_martin,Aston Martin,British,44.0,0,Austrian Grand Prix,Red Bull Ring,Austria,2021-07-04,286.0,242.0,0.0,22.0,40.9
+2021,10,6,aston_martin,Aston Martin,British,48.0,0,British Grand Prix,Silverstone Circuit,UK,2021-07-18,289.0,241.0,4.0,22.0,45.5
+2021,11,7,aston_martin,Aston Martin,British,48.0,0,Hungarian Grand Prix,Hungaroring,Hungary,2021-08-01,303.0,255.0,0.0,22.0,50.0
+2021,12,7,aston_martin,Aston Martin,British,53.0,0,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2021-08-29,310.5,257.5,5.0,22.0,54.5
+2021,13,7,aston_martin,Aston Martin,British,53.0,0,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2021-09-05,344.5,291.5,0.0,22.0,59.1
+2021,14,7,aston_martin,Aston Martin,British,59.0,0,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2021-09-12,362.5,303.5,6.0,22.0,63.6
+2021,15,7,aston_martin,Aston Martin,British,59.0,0,Russian Grand Prix,Sochi Autodrom,Russia,2021-09-26,397.5,338.5,0.0,22.0,68.2
+2021,16,7,aston_martin,Aston Martin,British,61.0,0,Turkish Grand Prix,Istanbul Park,Turkey,2021-10-10,433.5,372.5,2.0,22.0,72.7
+2021,17,7,aston_martin,Aston Martin,British,62.0,0,United States Grand Prix,Circuit of the Americas,USA,2021-10-24,460.5,398.5,1.0,22.0,77.3
+2021,18,7,aston_martin,Aston Martin,British,68.0,0,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2021-11-07,478.5,410.5,6.0,22.0,81.8
+2021,19,7,aston_martin,Aston Martin,British,68.0,0,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2021-11-14,521.5,453.5,0.0,22.0,86.4
+2021,20,7,aston_martin,Aston Martin,British,77.0,0,Qatar Grand Prix,Losail International Circuit,Qatar,2021-11-21,546.5,469.5,9.0,22.0,90.9
+2021,21,7,aston_martin,Aston Martin,British,77.0,0,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2021-12-05,587.5,510.5,0.0,22.0,95.5
+2021,22,7,aston_martin,Aston Martin,British,77.0,0,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2021-12-12,613.5,536.5,0.0,22.0,100.0
+2021,1,4,ferrari,Ferrari,Italian,12.0,0,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2021-03-28,41.0,29.0,12.0,22.0,4.5
+2021,2,4,ferrari,Ferrari,Italian,34.0,0,Emilia Romagna Grand Prix,Autodromo Enzo e Dino Ferrari,Italy,2021-04-18,60.0,26.0,22.0,22.0,9.1
+2021,3,4,ferrari,Ferrari,Italian,42.0,0,Portuguese Grand Prix,Autódromo Internacional do Algarve,Portugal,2021-05-02,101.0,59.0,8.0,22.0,13.6
+2021,4,4,ferrari,Ferrari,Italian,60.0,0,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2021-05-09,141.0,81.0,18.0,22.0,18.2
+2021,5,4,ferrari,Ferrari,Italian,78.0,0,Monaco Grand Prix,Circuit de Monaco,Monaco,2021-05-23,149.0,71.0,18.0,22.0,22.7
+2021,6,3,ferrari,Ferrari,Italian,94.0,0,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2021-06-06,174.0,80.0,16.0,22.0,27.3
+2021,7,4,ferrari,Ferrari,Italian,94.0,0,French Grand Prix,Circuit Paul Ricard,France,2021-06-20,215.0,121.0,0.0,22.0,31.8
+2021,8,4,ferrari,Ferrari,Italian,108.0,0,Styrian Grand Prix,Red Bull Ring,Austria,2021-06-27,252.0,144.0,14.0,22.0,36.4
+2021,9,4,ferrari,Ferrari,Italian,122.0,0,Austrian Grand Prix,Red Bull Ring,Austria,2021-07-04,286.0,164.0,14.0,22.0,40.9
+2021,10,4,ferrari,Ferrari,Italian,148.0,0,British Grand Prix,Silverstone Circuit,UK,2021-07-18,289.0,141.0,26.0,22.0,45.5
+2021,11,3,ferrari,Ferrari,Italian,163.0,0,Hungarian Grand Prix,Hungaroring,Hungary,2021-08-01,303.0,140.0,15.0,22.0,50.0
+2021,12,4,ferrari,Ferrari,Italian,165.5,0,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2021-08-29,310.5,145.0,2.5,22.0,54.5
+2021,13,3,ferrari,Ferrari,Italian,181.5,0,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2021-09-05,344.5,163.0,16.0,22.0,59.1
+2021,14,4,ferrari,Ferrari,Italian,201.5,0,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2021-09-12,362.5,161.0,20.0,22.0,63.6
+2021,15,4,ferrari,Ferrari,Italian,216.5,0,Russian Grand Prix,Sochi Autodrom,Russia,2021-09-26,397.5,181.0,15.0,22.0,68.2
+2021,16,4,ferrari,Ferrari,Italian,232.5,0,Turkish Grand Prix,Istanbul Park,Turkey,2021-10-10,433.5,201.0,16.0,22.0,72.7
+2021,17,4,ferrari,Ferrari,Italian,250.5,0,United States Grand Prix,Circuit of the Americas,USA,2021-10-24,460.5,210.0,18.0,22.0,77.3
+2021,18,3,ferrari,Ferrari,Italian,268.5,0,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2021-11-07,478.5,210.0,18.0,22.0,81.8
+2021,19,3,ferrari,Ferrari,Italian,287.5,0,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2021-11-14,521.5,234.0,19.0,22.0,86.4
+2021,20,3,ferrari,Ferrari,Italian,297.5,0,Qatar Grand Prix,Losail International Circuit,Qatar,2021-11-21,546.5,249.0,10.0,22.0,90.9
+2021,21,3,ferrari,Ferrari,Italian,307.5,0,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2021-12-05,587.5,280.0,10.0,22.0,95.5
+2021,22,3,ferrari,Ferrari,Italian,323.5,0,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2021-12-12,613.5,290.0,16.0,22.0,100.0
+2021,1,10,haas,Haas F1 Team,American,0.0,0,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2021-03-28,41.0,41.0,0.0,22.0,4.5
+2021,2,10,haas,Haas F1 Team,American,0.0,0,Emilia Romagna Grand Prix,Autodromo Enzo e Dino Ferrari,Italy,2021-04-18,60.0,60.0,0.0,22.0,9.1
+2021,3,10,haas,Haas F1 Team,American,0.0,0,Portuguese Grand Prix,Autódromo Internacional do Algarve,Portugal,2021-05-02,101.0,101.0,0.0,22.0,13.6
+2021,4,10,haas,Haas F1 Team,American,0.0,0,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2021-05-09,141.0,141.0,0.0,22.0,18.2
+2021,5,10,haas,Haas F1 Team,American,0.0,0,Monaco Grand Prix,Circuit de Monaco,Monaco,2021-05-23,149.0,149.0,0.0,22.0,22.7
+2021,6,9,haas,Haas F1 Team,American,0.0,0,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2021-06-06,174.0,174.0,0.0,22.0,27.3
+2021,7,10,haas,Haas F1 Team,American,0.0,0,French Grand Prix,Circuit Paul Ricard,France,2021-06-20,215.0,215.0,0.0,22.0,31.8
+2021,8,10,haas,Haas F1 Team,American,0.0,0,Styrian Grand Prix,Red Bull Ring,Austria,2021-06-27,252.0,252.0,0.0,22.0,36.4
+2021,9,10,haas,Haas F1 Team,American,0.0,0,Austrian Grand Prix,Red Bull Ring,Austria,2021-07-04,286.0,286.0,0.0,22.0,40.9
+2021,10,10,haas,Haas F1 Team,American,0.0,0,British Grand Prix,Silverstone Circuit,UK,2021-07-18,289.0,289.0,0.0,22.0,45.5
+2021,11,10,haas,Haas F1 Team,American,0.0,0,Hungarian Grand Prix,Hungaroring,Hungary,2021-08-01,303.0,303.0,0.0,22.0,50.0
+2021,12,10,haas,Haas F1 Team,American,0.0,0,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2021-08-29,310.5,310.5,0.0,22.0,54.5
+2021,13,10,haas,Haas F1 Team,American,0.0,0,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2021-09-05,344.5,344.5,0.0,22.0,59.1
+2021,14,10,haas,Haas F1 Team,American,0.0,0,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2021-09-12,362.5,362.5,0.0,22.0,63.6
+2021,15,10,haas,Haas F1 Team,American,0.0,0,Russian Grand Prix,Sochi Autodrom,Russia,2021-09-26,397.5,397.5,0.0,22.0,68.2
+2021,16,10,haas,Haas F1 Team,American,0.0,0,Turkish Grand Prix,Istanbul Park,Turkey,2021-10-10,433.5,433.5,0.0,22.0,72.7
+2021,17,10,haas,Haas F1 Team,American,0.0,0,United States Grand Prix,Circuit of the Americas,USA,2021-10-24,460.5,460.5,0.0,22.0,77.3
+2021,18,10,haas,Haas F1 Team,American,0.0,0,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2021-11-07,478.5,478.5,0.0,22.0,81.8
+2021,19,10,haas,Haas F1 Team,American,0.0,0,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2021-11-14,521.5,521.5,0.0,22.0,86.4
+2021,20,10,haas,Haas F1 Team,American,0.0,0,Qatar Grand Prix,Losail International Circuit,Qatar,2021-11-21,546.5,546.5,0.0,22.0,90.9
+2021,21,10,haas,Haas F1 Team,American,0.0,0,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2021-12-05,587.5,587.5,0.0,22.0,95.5
+2021,22,10,haas,Haas F1 Team,American,0.0,0,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2021-12-12,613.5,613.5,0.0,22.0,100.0
+2021,1,3,mclaren,McLaren,British,18.0,0,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2021-03-28,41.0,23.0,18.0,22.0,4.5
+2021,2,3,mclaren,McLaren,British,41.0,0,Emilia Romagna Grand Prix,Autodromo Enzo e Dino Ferrari,Italy,2021-04-18,60.0,19.0,23.0,22.0,9.1
+2021,3,3,mclaren,McLaren,British,53.0,0,Portuguese Grand Prix,Autódromo Internacional do Algarve,Portugal,2021-05-02,101.0,48.0,12.0,22.0,13.6
+2021,4,3,mclaren,McLaren,British,65.0,0,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2021-05-09,141.0,76.0,12.0,22.0,18.2
+2021,5,3,mclaren,McLaren,British,80.0,0,Monaco Grand Prix,Circuit de Monaco,Monaco,2021-05-23,149.0,69.0,15.0,22.0,22.7
+2021,6,4,mclaren,McLaren,British,92.0,0,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2021-06-06,174.0,82.0,12.0,22.0,27.3
+2021,7,3,mclaren,McLaren,British,110.0,0,French Grand Prix,Circuit Paul Ricard,France,2021-06-20,215.0,105.0,18.0,22.0,31.8
+2021,8,3,mclaren,McLaren,British,120.0,0,Styrian Grand Prix,Red Bull Ring,Austria,2021-06-27,252.0,132.0,10.0,22.0,36.4
+2021,9,3,mclaren,McLaren,British,141.0,0,Austrian Grand Prix,Red Bull Ring,Austria,2021-07-04,286.0,145.0,21.0,22.0,40.9
+2021,10,3,mclaren,McLaren,British,163.0,0,British Grand Prix,Silverstone Circuit,UK,2021-07-18,289.0,126.0,22.0,22.0,45.5
+2021,11,4,mclaren,McLaren,British,163.0,0,Hungarian Grand Prix,Hungaroring,Hungary,2021-08-01,303.0,140.0,0.0,22.0,50.0
+2021,12,3,mclaren,McLaren,British,169.0,0,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2021-08-29,310.5,141.5,6.0,22.0,54.5
+2021,13,4,mclaren,McLaren,British,170.0,0,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2021-09-05,344.5,174.5,1.0,22.0,59.1
+2021,14,3,mclaren,McLaren,British,215.0,1,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2021-09-12,362.5,147.5,45.0,22.0,63.6
+2021,15,3,mclaren,McLaren,British,234.0,1,Russian Grand Prix,Sochi Autodrom,Russia,2021-09-26,397.5,163.5,19.0,22.0,68.2
+2021,16,3,mclaren,McLaren,British,240.0,1,Turkish Grand Prix,Istanbul Park,Turkey,2021-10-10,433.5,193.5,6.0,22.0,72.7
+2021,17,3,mclaren,McLaren,British,254.0,1,United States Grand Prix,Circuit of the Americas,USA,2021-10-24,460.5,206.5,14.0,22.0,77.3
+2021,18,4,mclaren,McLaren,British,255.0,1,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2021-11-07,478.5,223.5,1.0,22.0,81.8
+2021,19,4,mclaren,McLaren,British,256.0,1,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2021-11-14,521.5,265.5,1.0,22.0,86.4
+2021,20,4,mclaren,McLaren,British,258.0,1,Qatar Grand Prix,Losail International Circuit,Qatar,2021-11-21,546.5,288.5,2.0,22.0,90.9
+2021,21,4,mclaren,McLaren,British,269.0,1,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2021-12-05,587.5,318.5,11.0,22.0,95.5
+2021,22,4,mclaren,McLaren,British,275.0,1,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2021-12-12,613.5,338.5,6.0,22.0,100.0
+2021,1,1,mercedes,Mercedes,German,41.0,1,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2021-03-28,41.0,0.0,41.0,22.0,4.5
+2021,2,1,mercedes,Mercedes,German,60.0,1,Emilia Romagna Grand Prix,Autodromo Enzo e Dino Ferrari,Italy,2021-04-18,60.0,0.0,19.0,22.0,9.1
+2021,3,1,mercedes,Mercedes,German,101.0,2,Portuguese Grand Prix,Autódromo Internacional do Algarve,Portugal,2021-05-02,101.0,0.0,41.0,22.0,13.6
+2021,4,1,mercedes,Mercedes,German,141.0,3,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2021-05-09,141.0,0.0,40.0,22.0,18.2
+2021,5,2,mercedes,Mercedes,German,148.0,3,Monaco Grand Prix,Circuit de Monaco,Monaco,2021-05-23,149.0,1.0,7.0,22.0,22.7
+2021,6,2,mercedes,Mercedes,German,148.0,3,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2021-06-06,174.0,26.0,0.0,22.0,27.3
+2021,7,2,mercedes,Mercedes,German,178.0,3,French Grand Prix,Circuit Paul Ricard,France,2021-06-20,215.0,37.0,30.0,22.0,31.8
+2021,8,2,mercedes,Mercedes,German,212.0,3,Styrian Grand Prix,Red Bull Ring,Austria,2021-06-27,252.0,40.0,34.0,22.0,36.4
+2021,9,2,mercedes,Mercedes,German,242.0,3,Austrian Grand Prix,Red Bull Ring,Austria,2021-07-04,286.0,44.0,30.0,22.0,40.9
+2021,10,2,mercedes,Mercedes,German,285.0,4,British Grand Prix,Silverstone Circuit,UK,2021-07-18,289.0,4.0,43.0,22.0,45.5
+2021,11,1,mercedes,Mercedes,German,303.0,4,Hungarian Grand Prix,Hungaroring,Hungary,2021-08-01,303.0,0.0,18.0,22.0,50.0
+2021,12,1,mercedes,Mercedes,German,310.5,4,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2021-08-29,310.5,0.0,7.5,22.0,54.5
+2021,13,1,mercedes,Mercedes,German,344.5,4,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2021-09-05,344.5,0.0,34.0,22.0,59.1
+2021,14,1,mercedes,Mercedes,German,362.5,4,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2021-09-12,362.5,0.0,18.0,22.0,63.6
+2021,15,1,mercedes,Mercedes,German,397.5,5,Russian Grand Prix,Sochi Autodrom,Russia,2021-09-26,397.5,0.0,35.0,22.0,68.2
+2021,16,1,mercedes,Mercedes,German,433.5,6,Turkish Grand Prix,Istanbul Park,Turkey,2021-10-10,433.5,0.0,36.0,22.0,72.7
+2021,17,1,mercedes,Mercedes,German,460.5,6,United States Grand Prix,Circuit of the Americas,USA,2021-10-24,460.5,0.0,27.0,22.0,77.3
+2021,18,1,mercedes,Mercedes,German,478.5,6,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2021-11-07,478.5,0.0,18.0,22.0,81.8
+2021,19,1,mercedes,Mercedes,German,521.5,7,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2021-11-14,521.5,0.0,43.0,22.0,86.4
+2021,20,1,mercedes,Mercedes,German,546.5,8,Qatar Grand Prix,Losail International Circuit,Qatar,2021-11-21,546.5,0.0,25.0,22.0,90.9
+2021,21,1,mercedes,Mercedes,German,587.5,9,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2021-12-05,587.5,0.0,41.0,22.0,95.5
+2021,22,1,mercedes,Mercedes,German,613.5,9,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2021-12-12,613.5,0.0,26.0,22.0,100.0
+2021,1,2,red_bull,Red Bull,Austrian,28.0,0,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2021-03-28,41.0,13.0,28.0,22.0,4.5
+2021,2,2,red_bull,Red Bull,Austrian,53.0,1,Emilia Romagna Grand Prix,Autodromo Enzo e Dino Ferrari,Italy,2021-04-18,60.0,7.0,25.0,22.0,9.1
+2021,3,2,red_bull,Red Bull,Austrian,83.0,1,Portuguese Grand Prix,Autódromo Internacional do Algarve,Portugal,2021-05-02,101.0,18.0,30.0,22.0,13.6
+2021,4,2,red_bull,Red Bull,Austrian,112.0,1,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2021-05-09,141.0,29.0,29.0,22.0,18.2
+2021,5,1,red_bull,Red Bull,Austrian,149.0,2,Monaco Grand Prix,Circuit de Monaco,Monaco,2021-05-23,149.0,0.0,37.0,22.0,22.7
+2021,6,1,red_bull,Red Bull,Austrian,174.0,3,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2021-06-06,174.0,0.0,25.0,22.0,27.3
+2021,7,1,red_bull,Red Bull,Austrian,215.0,4,French Grand Prix,Circuit Paul Ricard,France,2021-06-20,215.0,0.0,41.0,22.0,31.8
+2021,8,1,red_bull,Red Bull,Austrian,252.0,5,Styrian Grand Prix,Red Bull Ring,Austria,2021-06-27,252.0,0.0,37.0,22.0,36.4
+2021,9,1,red_bull,Red Bull,Austrian,286.0,6,Austrian Grand Prix,Red Bull Ring,Austria,2021-07-04,286.0,0.0,34.0,22.0,40.9
+2021,10,1,red_bull,Red Bull,Austrian,289.0,6,British Grand Prix,Silverstone Circuit,UK,2021-07-18,289.0,0.0,3.0,22.0,45.5
+2021,11,2,red_bull,Red Bull,Austrian,291.0,6,Hungarian Grand Prix,Hungaroring,Hungary,2021-08-01,303.0,12.0,2.0,22.0,50.0
+2021,12,2,red_bull,Red Bull,Austrian,303.5,7,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2021-08-29,310.5,7.0,12.5,22.0,54.5
+2021,13,2,red_bull,Red Bull,Austrian,332.5,8,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2021-09-05,344.5,12.0,29.0,22.0,59.1
+2021,14,2,red_bull,Red Bull,Austrian,344.5,8,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2021-09-12,362.5,18.0,12.0,22.0,63.6
+2021,15,2,red_bull,Red Bull,Austrian,364.5,8,Russian Grand Prix,Sochi Autodrom,Russia,2021-09-26,397.5,33.0,20.0,22.0,68.2
+2021,16,2,red_bull,Red Bull,Austrian,397.5,8,Turkish Grand Prix,Istanbul Park,Turkey,2021-10-10,433.5,36.0,33.0,22.0,72.7
+2021,17,2,red_bull,Red Bull,Austrian,437.5,9,United States Grand Prix,Circuit of the Americas,USA,2021-10-24,460.5,23.0,40.0,22.0,77.3
+2021,18,2,red_bull,Red Bull,Austrian,477.5,10,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2021-11-07,478.5,1.0,40.0,22.0,81.8
+2021,19,2,red_bull,Red Bull,Austrian,510.5,10,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2021-11-14,521.5,11.0,33.0,22.0,86.4
+2021,20,2,red_bull,Red Bull,Austrian,541.5,10,Qatar Grand Prix,Losail International Circuit,Qatar,2021-11-21,546.5,5.0,31.0,22.0,90.9
+2021,21,2,red_bull,Red Bull,Austrian,559.5,10,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2021-12-05,587.5,28.0,18.0,22.0,95.5
+2021,22,2,red_bull,Red Bull,Austrian,585.5,11,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2021-12-12,613.5,28.0,26.0,22.0,100.0
+2021,1,9,williams,Williams,British,0.0,0,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2021-03-28,41.0,41.0,0.0,22.0,4.5
+2021,2,9,williams,Williams,British,0.0,0,Emilia Romagna Grand Prix,Autodromo Enzo e Dino Ferrari,Italy,2021-04-18,60.0,60.0,0.0,22.0,9.1
+2021,3,9,williams,Williams,British,0.0,0,Portuguese Grand Prix,Autódromo Internacional do Algarve,Portugal,2021-05-02,101.0,101.0,0.0,22.0,13.6
+2021,4,9,williams,Williams,British,0.0,0,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2021-05-09,141.0,141.0,0.0,22.0,18.2
+2021,5,9,williams,Williams,British,0.0,0,Monaco Grand Prix,Circuit de Monaco,Monaco,2021-05-23,149.0,149.0,0.0,22.0,22.7
+2021,6,10,williams,Williams,British,0.0,0,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2021-06-06,174.0,174.0,0.0,22.0,27.3
+2021,7,9,williams,Williams,British,0.0,0,French Grand Prix,Circuit Paul Ricard,France,2021-06-20,215.0,215.0,0.0,22.0,31.8
+2021,8,9,williams,Williams,British,0.0,0,Styrian Grand Prix,Red Bull Ring,Austria,2021-06-27,252.0,252.0,0.0,22.0,36.4
+2021,9,9,williams,Williams,British,0.0,0,Austrian Grand Prix,Red Bull Ring,Austria,2021-07-04,286.0,286.0,0.0,22.0,40.9
+2021,10,9,williams,Williams,British,0.0,0,British Grand Prix,Silverstone Circuit,UK,2021-07-18,289.0,289.0,0.0,22.0,45.5
+2021,11,8,williams,Williams,British,10.0,0,Hungarian Grand Prix,Hungaroring,Hungary,2021-08-01,303.0,293.0,10.0,22.0,50.0
+2021,12,8,williams,Williams,British,20.0,0,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2021-08-29,310.5,290.5,10.0,22.0,54.5
+2021,13,8,williams,Williams,British,20.0,0,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2021-09-05,344.5,324.5,0.0,22.0,59.1
+2021,14,8,williams,Williams,British,22.0,0,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2021-09-12,362.5,340.5,2.0,22.0,63.6
+2021,15,8,williams,Williams,British,23.0,0,Russian Grand Prix,Sochi Autodrom,Russia,2021-09-26,397.5,374.5,1.0,22.0,68.2
+2021,16,8,williams,Williams,British,23.0,0,Turkish Grand Prix,Istanbul Park,Turkey,2021-10-10,433.5,410.5,0.0,22.0,72.7
+2021,17,8,williams,Williams,British,23.0,0,United States Grand Prix,Circuit of the Americas,USA,2021-10-24,460.5,437.5,0.0,22.0,77.3
+2021,18,8,williams,Williams,British,23.0,0,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2021-11-07,478.5,455.5,0.0,22.0,81.8
+2021,19,8,williams,Williams,British,23.0,0,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2021-11-14,521.5,498.5,0.0,22.0,86.4
+2021,20,8,williams,Williams,British,23.0,0,Qatar Grand Prix,Losail International Circuit,Qatar,2021-11-21,546.5,523.5,0.0,22.0,90.9
+2021,21,8,williams,Williams,British,23.0,0,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2021-12-05,587.5,564.5,0.0,22.0,95.5
+2021,22,8,williams,Williams,British,23.0,0,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2021-12-12,613.5,590.5,0.0,22.0,100.0
+2022,5,5,alfa,Alfa Romeo,Swiss,31.0,0,Miami Grand Prix,Miami International Autodrome,USA,2022-05-08,157.0,126.0,31.0,22.0,22.7
+2022,13,6,alfa,Alfa Romeo,Swiss,51.0,0,Hungarian Grand Prix,Hungaroring,Hungary,2022-07-31,431.0,380.0,20.0,22.0,59.1
+2022,22,6,alfa,Alfa Romeo,Swiss,55.0,0,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2022-11-20,759.0,704.0,4.0,22.0,100.0
+2022,5,7,alphatauri,AlphaTauri,Italian,16.0,0,Miami Grand Prix,Miami International Autodrome,USA,2022-05-08,157.0,141.0,16.0,22.0,22.7
+2022,13,8,alphatauri,AlphaTauri,Italian,27.0,0,Hungarian Grand Prix,Hungaroring,Hungary,2022-07-31,431.0,404.0,11.0,22.0,59.1
+2022,22,9,alphatauri,AlphaTauri,Italian,35.0,0,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2022-11-20,759.0,724.0,8.0,22.0,100.0
+2022,5,6,alpine,Alpine F1 Team,French,26.0,0,Miami Grand Prix,Miami International Autodrome,USA,2022-05-08,157.0,131.0,26.0,22.0,22.7
+2022,13,4,alpine,Alpine F1 Team,French,99.0,0,Hungarian Grand Prix,Hungaroring,Hungary,2022-07-31,431.0,332.0,73.0,22.0,59.1
+2022,22,4,alpine,Alpine F1 Team,French,173.0,0,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2022-11-20,759.0,586.0,74.0,22.0,100.0
+2022,5,9,aston_martin,Aston Martin,British,6.0,0,Miami Grand Prix,Miami International Autodrome,USA,2022-05-08,157.0,151.0,6.0,22.0,22.7
+2022,13,9,aston_martin,Aston Martin,British,20.0,0,Hungarian Grand Prix,Hungaroring,Hungary,2022-07-31,431.0,411.0,14.0,22.0,59.1
+2022,22,7,aston_martin,Aston Martin,British,55.0,0,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2022-11-20,759.0,704.0,35.0,22.0,100.0
+2022,5,1,ferrari,Ferrari,Italian,157.0,2,Miami Grand Prix,Miami International Autodrome,USA,2022-05-08,157.0,0.0,157.0,22.0,22.7
+2022,13,2,ferrari,Ferrari,Italian,334.0,4,Hungarian Grand Prix,Hungaroring,Hungary,2022-07-31,431.0,97.0,177.0,22.0,59.1
+2022,22,2,ferrari,Ferrari,Italian,554.0,4,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2022-11-20,759.0,205.0,220.0,22.0,100.0
+2022,5,8,haas,Haas F1 Team,American,15.0,0,Miami Grand Prix,Miami International Autodrome,USA,2022-05-08,157.0,142.0,15.0,22.0,22.7
+2022,13,7,haas,Haas F1 Team,American,34.0,0,Hungarian Grand Prix,Hungaroring,Hungary,2022-07-31,431.0,397.0,19.0,22.0,59.1
+2022,22,8,haas,Haas F1 Team,American,37.0,0,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2022-11-20,759.0,722.0,3.0,22.0,100.0
+2022,5,4,mclaren,McLaren,British,46.0,0,Miami Grand Prix,Miami International Autodrome,USA,2022-05-08,157.0,111.0,46.0,22.0,22.7
+2022,13,5,mclaren,McLaren,British,95.0,0,Hungarian Grand Prix,Hungaroring,Hungary,2022-07-31,431.0,336.0,49.0,22.0,59.1
+2022,22,5,mclaren,McLaren,British,159.0,0,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2022-11-20,759.0,600.0,64.0,22.0,100.0
+2022,5,3,mercedes,Mercedes,German,95.0,0,Miami Grand Prix,Miami International Autodrome,USA,2022-05-08,157.0,62.0,95.0,22.0,22.7
+2022,13,3,mercedes,Mercedes,German,304.0,0,Hungarian Grand Prix,Hungaroring,Hungary,2022-07-31,431.0,127.0,209.0,22.0,59.1
+2022,22,3,mercedes,Mercedes,German,515.0,1,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2022-11-20,759.0,244.0,211.0,22.0,100.0
+2022,5,2,red_bull,Red Bull,Austrian,151.0,3,Miami Grand Prix,Miami International Autodrome,USA,2022-05-08,157.0,6.0,151.0,22.0,22.7
+2022,13,1,red_bull,Red Bull,Austrian,431.0,9,Hungarian Grand Prix,Hungaroring,Hungary,2022-07-31,431.0,0.0,280.0,22.0,59.1
+2022,22,1,red_bull,Red Bull,Austrian,759.0,17,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2022-11-20,759.0,0.0,328.0,22.0,100.0
+2022,5,10,williams,Williams,British,3.0,0,Miami Grand Prix,Miami International Autodrome,USA,2022-05-08,157.0,154.0,3.0,22.0,22.7
+2022,13,10,williams,Williams,British,3.0,0,Hungarian Grand Prix,Hungaroring,Hungary,2022-07-31,431.0,428.0,0.0,22.0,59.1
+2022,22,10,williams,Williams,British,8.0,0,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2022-11-20,759.0,751.0,5.0,22.0,100.0
+2022,1,1,ferrari,Ferrari,Italian,44.0,1,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2022-03-20,,,,,
+2022,1,2,mercedes,Mercedes,German,27.0,0,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2022-03-20,,,,,
+2022,1,3,haas,Haas F1 Team,American,10.0,0,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2022-03-20,,,,,
+2022,1,4,alfa,Alfa Romeo,Swiss,9.0,0,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2022-03-20,,,,,
+2022,1,5,alpine,Alpine F1 Team,French,8.0,0,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2022-03-20,,,,,
+2022,1,6,alphatauri,AlphaTauri,Italian,4.0,0,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2022-03-20,,,,,
+2022,1,7,aston_martin,Aston Martin,British,0.0,0,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2022-03-20,,,,,
+2022,1,8,williams,Williams,British,0.0,0,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2022-03-20,,,,,
+2022,1,9,mclaren,McLaren,British,0.0,0,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2022-03-20,,,,,
+2022,1,10,red_bull,Red Bull,Austrian,0.0,0,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2022-03-20,,,,,
+2022,2,1,ferrari,Ferrari,Italian,78.0,1,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2022-03-27,,,,,
+2022,2,2,mercedes,Mercedes,German,38.0,0,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2022-03-27,,,,,
+2022,2,3,red_bull,Red Bull,Austrian,37.0,1,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2022-03-27,,,,,
+2022,2,4,alpine,Alpine F1 Team,French,16.0,0,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2022-03-27,,,,,
+2022,2,5,haas,Haas F1 Team,American,12.0,0,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2022-03-27,,,,,
+2022,2,6,alfa,Alfa Romeo,Swiss,9.0,0,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2022-03-27,,,,,
+2022,2,7,alphatauri,AlphaTauri,Italian,8.0,0,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2022-03-27,,,,,
+2022,2,8,mclaren,McLaren,British,6.0,0,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2022-03-27,,,,,
+2022,2,9,aston_martin,Aston Martin,British,0.0,0,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2022-03-27,,,,,
+2022,2,10,williams,Williams,British,0.0,0,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2022-03-27,,,,,
+2022,3,1,ferrari,Ferrari,Italian,104.0,2,Australian Grand Prix,Albert Park Grand Prix Circuit,Australia,2022-04-10,,,,,
+2022,3,2,mercedes,Mercedes,German,65.0,0,Australian Grand Prix,Albert Park Grand Prix Circuit,Australia,2022-04-10,,,,,
+2022,3,3,red_bull,Red Bull,Austrian,55.0,1,Australian Grand Prix,Albert Park Grand Prix Circuit,Australia,2022-04-10,,,,,
+2022,3,4,mclaren,McLaren,British,24.0,0,Australian Grand Prix,Albert Park Grand Prix Circuit,Australia,2022-04-10,,,,,
+2022,3,5,alpine,Alpine F1 Team,French,22.0,0,Australian Grand Prix,Albert Park Grand Prix Circuit,Australia,2022-04-10,,,,,
+2022,3,6,alfa,Alfa Romeo,Swiss,13.0,0,Australian Grand Prix,Albert Park Grand Prix Circuit,Australia,2022-04-10,,,,,
+2022,3,7,haas,Haas F1 Team,American,12.0,0,Australian Grand Prix,Albert Park Grand Prix Circuit,Australia,2022-04-10,,,,,
+2022,3,8,alphatauri,AlphaTauri,Italian,10.0,0,Australian Grand Prix,Albert Park Grand Prix Circuit,Australia,2022-04-10,,,,,
+2022,3,9,williams,Williams,British,1.0,0,Australian Grand Prix,Albert Park Grand Prix Circuit,Australia,2022-04-10,,,,,
+2022,3,10,aston_martin,Aston Martin,British,0.0,0,Australian Grand Prix,Albert Park Grand Prix Circuit,Australia,2022-04-10,,,,,
+2022,4,1,ferrari,Ferrari,Italian,124.0,2,Emilia Romagna Grand Prix,Autodromo Enzo e Dino Ferrari,Italy,2022-04-24,,,,,
+2022,4,2,red_bull,Red Bull,Austrian,113.0,2,Emilia Romagna Grand Prix,Autodromo Enzo e Dino Ferrari,Italy,2022-04-24,,,,,
+2022,4,3,mercedes,Mercedes,German,77.0,0,Emilia Romagna Grand Prix,Autodromo Enzo e Dino Ferrari,Italy,2022-04-24,,,,,
+2022,4,4,mclaren,McLaren,British,46.0,0,Emilia Romagna Grand Prix,Autodromo Enzo e Dino Ferrari,Italy,2022-04-24,,,,,
+2022,4,5,alfa,Alfa Romeo,Swiss,25.0,0,Emilia Romagna Grand Prix,Autodromo Enzo e Dino Ferrari,Italy,2022-04-24,,,,,
+2022,4,6,alpine,Alpine F1 Team,French,22.0,0,Emilia Romagna Grand Prix,Autodromo Enzo e Dino Ferrari,Italy,2022-04-24,,,,,
+2022,4,7,alphatauri,AlphaTauri,Italian,16.0,0,Emilia Romagna Grand Prix,Autodromo Enzo e Dino Ferrari,Italy,2022-04-24,,,,,
+2022,4,8,haas,Haas F1 Team,American,15.0,0,Emilia Romagna Grand Prix,Autodromo Enzo e Dino Ferrari,Italy,2022-04-24,,,,,
+2022,4,9,aston_martin,Aston Martin,British,5.0,0,Emilia Romagna Grand Prix,Autodromo Enzo e Dino Ferrari,Italy,2022-04-24,,,,,
+2022,4,10,williams,Williams,British,1.0,0,Emilia Romagna Grand Prix,Autodromo Enzo e Dino Ferrari,Italy,2022-04-24,,,,,
+2022,6,1,red_bull,Red Bull,Austrian,195.0,4,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2022-05-22,,,,,
+2022,6,2,ferrari,Ferrari,Italian,169.0,2,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2022-05-22,,,,,
+2022,6,3,mercedes,Mercedes,German,120.0,0,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2022-05-22,,,,,
+2022,6,4,mclaren,McLaren,British,50.0,0,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2022-05-22,,,,,
+2022,6,5,alfa,Alfa Romeo,Swiss,39.0,0,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2022-05-22,,,,,
+2022,6,6,alpine,Alpine F1 Team,French,34.0,0,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2022-05-22,,,,,
+2022,6,7,alphatauri,AlphaTauri,Italian,17.0,0,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2022-05-22,,,,,
+2022,6,8,haas,Haas F1 Team,American,15.0,0,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2022-05-22,,,,,
+2022,6,9,aston_martin,Aston Martin,British,6.0,0,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2022-05-22,,,,,
+2022,6,10,williams,Williams,British,3.0,0,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2022-05-22,,,,,
+2022,7,1,red_bull,Red Bull,Austrian,235.0,5,Monaco Grand Prix,Circuit de Monaco,Monaco,2022-05-29,,,,,
+2022,7,2,ferrari,Ferrari,Italian,199.0,2,Monaco Grand Prix,Circuit de Monaco,Monaco,2022-05-29,,,,,
+2022,7,3,mercedes,Mercedes,German,134.0,0,Monaco Grand Prix,Circuit de Monaco,Monaco,2022-05-29,,,,,
+2022,7,4,mclaren,McLaren,British,59.0,0,Monaco Grand Prix,Circuit de Monaco,Monaco,2022-05-29,,,,,
+2022,7,5,alfa,Alfa Romeo,Swiss,41.0,0,Monaco Grand Prix,Circuit de Monaco,Monaco,2022-05-29,,,,,
+2022,7,6,alpine,Alpine F1 Team,French,40.0,0,Monaco Grand Prix,Circuit de Monaco,Monaco,2022-05-29,,,,,
+2022,7,7,alphatauri,AlphaTauri,Italian,17.0,0,Monaco Grand Prix,Circuit de Monaco,Monaco,2022-05-29,,,,,
+2022,7,8,haas,Haas F1 Team,American,15.0,0,Monaco Grand Prix,Circuit de Monaco,Monaco,2022-05-29,,,,,
+2022,7,9,aston_martin,Aston Martin,British,7.0,0,Monaco Grand Prix,Circuit de Monaco,Monaco,2022-05-29,,,,,
+2022,7,10,williams,Williams,British,3.0,0,Monaco Grand Prix,Circuit de Monaco,Monaco,2022-05-29,,,,,
+2022,8,1,red_bull,Red Bull,Austrian,279.0,6,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2022-06-12,,,,,
+2022,8,2,ferrari,Ferrari,Italian,199.0,2,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2022-06-12,,,,,
+2022,8,3,mercedes,Mercedes,German,161.0,0,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2022-06-12,,,,,
+2022,8,4,mclaren,McLaren,British,65.0,0,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2022-06-12,,,,,
+2022,8,5,alpine,Alpine F1 Team,French,47.0,0,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2022-06-12,,,,,
+2022,8,6,alfa,Alfa Romeo,Swiss,41.0,0,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2022-06-12,,,,,
+2022,8,7,alphatauri,AlphaTauri,Italian,27.0,0,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2022-06-12,,,,,
+2022,8,8,haas,Haas F1 Team,American,15.0,0,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2022-06-12,,,,,
+2022,8,9,aston_martin,Aston Martin,British,15.0,0,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2022-06-12,,,,,
+2022,8,10,williams,Williams,British,3.0,0,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2022-06-12,,,,,
+2022,9,1,red_bull,Red Bull,Austrian,304.0,7,Canadian Grand Prix,Circuit Gilles Villeneuve,Canada,2022-06-19,,,,,
+2022,9,2,ferrari,Ferrari,Italian,228.0,2,Canadian Grand Prix,Circuit Gilles Villeneuve,Canada,2022-06-19,,,,,
+2022,9,3,mercedes,Mercedes,German,188.0,0,Canadian Grand Prix,Circuit Gilles Villeneuve,Canada,2022-06-19,,,,,
+2022,9,4,mclaren,McLaren,British,65.0,0,Canadian Grand Prix,Circuit Gilles Villeneuve,Canada,2022-06-19,,,,,
+2022,9,5,alpine,Alpine F1 Team,French,57.0,0,Canadian Grand Prix,Circuit Gilles Villeneuve,Canada,2022-06-19,,,,,
+2022,9,6,alfa,Alfa Romeo,Swiss,51.0,0,Canadian Grand Prix,Circuit Gilles Villeneuve,Canada,2022-06-19,,,,,
+2022,9,7,alphatauri,AlphaTauri,Italian,27.0,0,Canadian Grand Prix,Circuit Gilles Villeneuve,Canada,2022-06-19,,,,,
+2022,9,8,aston_martin,Aston Martin,British,16.0,0,Canadian Grand Prix,Circuit Gilles Villeneuve,Canada,2022-06-19,,,,,
+2022,9,9,haas,Haas F1 Team,American,15.0,0,Canadian Grand Prix,Circuit Gilles Villeneuve,Canada,2022-06-19,,,,,
+2022,9,10,williams,Williams,British,3.0,0,Canadian Grand Prix,Circuit Gilles Villeneuve,Canada,2022-06-19,,,,,
+2022,10,1,red_bull,Red Bull,Austrian,328.0,7,British Grand Prix,Silverstone Circuit,UK,2022-07-03,,,,,
+2022,10,2,ferrari,Ferrari,Italian,265.0,3,British Grand Prix,Silverstone Circuit,UK,2022-07-03,,,,,
+2022,10,3,mercedes,Mercedes,German,204.0,0,British Grand Prix,Silverstone Circuit,UK,2022-07-03,,,,,
+2022,10,4,mclaren,McLaren,British,73.0,0,British Grand Prix,Silverstone Circuit,UK,2022-07-03,,,,,
+2022,10,5,alpine,Alpine F1 Team,French,67.0,0,British Grand Prix,Silverstone Circuit,UK,2022-07-03,,,,,
+2022,10,6,alfa,Alfa Romeo,Swiss,51.0,0,British Grand Prix,Silverstone Circuit,UK,2022-07-03,,,,,
+2022,10,7,alphatauri,AlphaTauri,Italian,27.0,0,British Grand Prix,Silverstone Circuit,UK,2022-07-03,,,,,
+2022,10,8,haas,Haas F1 Team,American,20.0,0,British Grand Prix,Silverstone Circuit,UK,2022-07-03,,,,,
+2022,10,9,aston_martin,Aston Martin,British,18.0,0,British Grand Prix,Silverstone Circuit,UK,2022-07-03,,,,,
+2022,10,10,williams,Williams,British,3.0,0,British Grand Prix,Silverstone Circuit,UK,2022-07-03,,,,,
+2022,11,1,red_bull,Red Bull,Austrian,359.0,7,Austrian Grand Prix,Red Bull Ring,Austria,2022-07-10,,,,,
+2022,11,2,ferrari,Ferrari,Italian,303.0,4,Austrian Grand Prix,Red Bull Ring,Austria,2022-07-10,,,,,
+2022,11,3,mercedes,Mercedes,German,237.0,0,Austrian Grand Prix,Red Bull Ring,Austria,2022-07-10,,,,,
+2022,11,4,mclaren,McLaren,British,81.0,0,Austrian Grand Prix,Red Bull Ring,Austria,2022-07-10,,,,,
+2022,11,5,alpine,Alpine F1 Team,French,81.0,0,Austrian Grand Prix,Red Bull Ring,Austria,2022-07-10,,,,,
+2022,11,6,alfa,Alfa Romeo,Swiss,51.0,0,Austrian Grand Prix,Red Bull Ring,Austria,2022-07-10,,,,,
+2022,11,7,haas,Haas F1 Team,American,34.0,0,Austrian Grand Prix,Red Bull Ring,Austria,2022-07-10,,,,,
+2022,11,8,alphatauri,AlphaTauri,Italian,27.0,0,Austrian Grand Prix,Red Bull Ring,Austria,2022-07-10,,,,,
+2022,11,9,aston_martin,Aston Martin,British,18.0,0,Austrian Grand Prix,Red Bull Ring,Austria,2022-07-10,,,,,
+2022,11,10,williams,Williams,British,3.0,0,Austrian Grand Prix,Red Bull Ring,Austria,2022-07-10,,,,,
+2022,12,1,red_bull,Red Bull,Austrian,396.0,8,French Grand Prix,Circuit Paul Ricard,France,2022-07-24,,,,,
+2022,12,2,ferrari,Ferrari,Italian,314.0,4,French Grand Prix,Circuit Paul Ricard,France,2022-07-24,,,,,
+2022,12,3,mercedes,Mercedes,German,270.0,0,French Grand Prix,Circuit Paul Ricard,France,2022-07-24,,,,,
+2022,12,4,alpine,Alpine F1 Team,French,93.0,0,French Grand Prix,Circuit Paul Ricard,France,2022-07-24,,,,,
+2022,12,5,mclaren,McLaren,British,89.0,0,French Grand Prix,Circuit Paul Ricard,France,2022-07-24,,,,,
+2022,12,6,alfa,Alfa Romeo,Swiss,51.0,0,French Grand Prix,Circuit Paul Ricard,France,2022-07-24,,,,,
+2022,12,7,haas,Haas F1 Team,American,34.0,0,French Grand Prix,Circuit Paul Ricard,France,2022-07-24,,,,,
+2022,12,8,alphatauri,AlphaTauri,Italian,27.0,0,French Grand Prix,Circuit Paul Ricard,France,2022-07-24,,,,,
+2022,12,9,aston_martin,Aston Martin,British,19.0,0,French Grand Prix,Circuit Paul Ricard,France,2022-07-24,,,,,
+2022,12,10,williams,Williams,British,3.0,0,French Grand Prix,Circuit Paul Ricard,France,2022-07-24,,,,,
+2022,14,1,red_bull,Red Bull,Austrian,475.0,10,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2022-08-28,,,,,
+2022,14,2,ferrari,Ferrari,Italian,357.0,4,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2022-08-28,,,,,
+2022,14,3,mercedes,Mercedes,German,316.0,0,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2022-08-28,,,,,
+2022,14,4,alpine,Alpine F1 Team,French,115.0,0,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2022-08-28,,,,,
+2022,14,5,mclaren,McLaren,British,95.0,0,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2022-08-28,,,,,
+2022,14,6,alfa,Alfa Romeo,Swiss,51.0,0,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2022-08-28,,,,,
+2022,14,7,haas,Haas F1 Team,American,34.0,0,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2022-08-28,,,,,
+2022,14,8,alphatauri,AlphaTauri,Italian,29.0,0,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2022-08-28,,,,,
+2022,14,9,aston_martin,Aston Martin,British,24.0,0,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2022-08-28,,,,,
+2022,14,10,williams,Williams,British,4.0,0,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2022-08-28,,,,,
+2022,15,1,red_bull,Red Bull,Austrian,511.0,11,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2022-09-04,,,,,
+2022,15,2,ferrari,Ferrari,Italian,376.0,4,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2022-09-04,,,,,
+2022,15,3,mercedes,Mercedes,German,346.0,0,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2022-09-04,,,,,
+2022,15,4,alpine,Alpine F1 Team,French,125.0,0,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2022-09-04,,,,,
+2022,15,5,mclaren,McLaren,British,101.0,0,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2022-09-04,,,,,
+2022,15,6,alfa,Alfa Romeo,Swiss,51.0,0,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2022-09-04,,,,,
+2022,15,7,haas,Haas F1 Team,American,34.0,0,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2022-09-04,,,,,
+2022,15,8,alphatauri,AlphaTauri,Italian,29.0,0,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2022-09-04,,,,,
+2022,15,9,aston_martin,Aston Martin,British,25.0,0,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2022-09-04,,,,,
+2022,15,10,williams,Williams,British,4.0,0,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2022-09-04,,,,,
+2022,16,1,red_bull,Red Bull,Austrian,545.0,12,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2022-09-11,,,,,
+2022,16,2,ferrari,Ferrari,Italian,406.0,4,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2022-09-11,,,,,
+2022,16,3,mercedes,Mercedes,German,371.0,0,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2022-09-11,,,,,
+2022,16,4,alpine,Alpine F1 Team,French,125.0,0,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2022-09-11,,,,,
+2022,16,5,mclaren,McLaren,British,107.0,0,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2022-09-11,,,,,
+2022,16,6,alfa,Alfa Romeo,Swiss,52.0,0,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2022-09-11,,,,,
+2022,16,7,haas,Haas F1 Team,American,34.0,0,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2022-09-11,,,,,
+2022,16,8,alphatauri,AlphaTauri,Italian,33.0,0,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2022-09-11,,,,,
+2022,16,9,aston_martin,Aston Martin,British,25.0,0,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2022-09-11,,,,,
+2022,16,10,williams,Williams,British,6.0,0,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2022-09-11,,,,,
+2022,17,1,red_bull,Red Bull,Austrian,576.0,13,Singapore Grand Prix,Marina Bay Street Circuit,Singapore,2022-10-02,,,,,
+2022,17,2,ferrari,Ferrari,Italian,439.0,4,Singapore Grand Prix,Marina Bay Street Circuit,Singapore,2022-10-02,,,,,
+2022,17,3,mercedes,Mercedes,German,373.0,0,Singapore Grand Prix,Marina Bay Street Circuit,Singapore,2022-10-02,,,,,
+2022,17,4,mclaren,McLaren,British,129.0,0,Singapore Grand Prix,Marina Bay Street Circuit,Singapore,2022-10-02,,,,,
+2022,17,5,alpine,Alpine F1 Team,French,125.0,0,Singapore Grand Prix,Marina Bay Street Circuit,Singapore,2022-10-02,,,,,
+2022,17,6,alfa,Alfa Romeo,Swiss,52.0,0,Singapore Grand Prix,Marina Bay Street Circuit,Singapore,2022-10-02,,,,,
+2022,17,7,aston_martin,Aston Martin,British,37.0,0,Singapore Grand Prix,Marina Bay Street Circuit,Singapore,2022-10-02,,,,,
+2022,17,8,haas,Haas F1 Team,American,34.0,0,Singapore Grand Prix,Marina Bay Street Circuit,Singapore,2022-10-02,,,,,
+2022,17,9,alphatauri,AlphaTauri,Italian,34.0,0,Singapore Grand Prix,Marina Bay Street Circuit,Singapore,2022-10-02,,,,,
+2022,17,10,williams,Williams,British,6.0,0,Singapore Grand Prix,Marina Bay Street Circuit,Singapore,2022-10-02,,,,,
+2022,18,1,red_bull,Red Bull,Austrian,619.0,14,Japanese Grand Prix,Suzuka Circuit,Japan,2022-10-09,,,,,
+2022,18,2,ferrari,Ferrari,Italian,454.0,4,Japanese Grand Prix,Suzuka Circuit,Japan,2022-10-09,,,,,
+2022,18,3,mercedes,Mercedes,German,387.0,0,Japanese Grand Prix,Suzuka Circuit,Japan,2022-10-09,,,,,
+2022,18,4,alpine,Alpine F1 Team,French,143.0,0,Japanese Grand Prix,Suzuka Circuit,Japan,2022-10-09,,,,,
+2022,18,5,mclaren,McLaren,British,130.0,0,Japanese Grand Prix,Suzuka Circuit,Japan,2022-10-09,,,,,
+2022,18,6,alfa,Alfa Romeo,Swiss,52.0,0,Japanese Grand Prix,Suzuka Circuit,Japan,2022-10-09,,,,,
+2022,18,7,aston_martin,Aston Martin,British,45.0,0,Japanese Grand Prix,Suzuka Circuit,Japan,2022-10-09,,,,,
+2022,18,8,haas,Haas F1 Team,American,34.0,0,Japanese Grand Prix,Suzuka Circuit,Japan,2022-10-09,,,,,
+2022,18,9,alphatauri,AlphaTauri,Italian,34.0,0,Japanese Grand Prix,Suzuka Circuit,Japan,2022-10-09,,,,,
+2022,18,10,williams,Williams,British,8.0,0,Japanese Grand Prix,Suzuka Circuit,Japan,2022-10-09,,,,,
+2022,19,1,red_bull,Red Bull,Austrian,656.0,15,United States Grand Prix,Circuit of the Americas,USA,2022-10-23,,,,,
+2022,19,2,ferrari,Ferrari,Italian,469.0,4,United States Grand Prix,Circuit of the Americas,USA,2022-10-23,,,,,
+2022,19,3,mercedes,Mercedes,German,416.0,0,United States Grand Prix,Circuit of the Americas,USA,2022-10-23,,,,,
+2022,19,4,alpine,Alpine F1 Team,French,149.0,0,United States Grand Prix,Circuit of the Americas,USA,2022-10-23,,,,,
+2022,19,5,mclaren,McLaren,British,138.0,0,United States Grand Prix,Circuit of the Americas,USA,2022-10-23,,,,,
+2022,19,6,alfa,Alfa Romeo,Swiss,52.0,0,United States Grand Prix,Circuit of the Americas,USA,2022-10-23,,,,,
+2022,19,7,aston_martin,Aston Martin,British,49.0,0,United States Grand Prix,Circuit of the Americas,USA,2022-10-23,,,,,
+2022,19,8,haas,Haas F1 Team,American,36.0,0,United States Grand Prix,Circuit of the Americas,USA,2022-10-23,,,,,
+2022,19,9,alphatauri,AlphaTauri,Italian,35.0,0,United States Grand Prix,Circuit of the Americas,USA,2022-10-23,,,,,
+2022,19,10,williams,Williams,British,8.0,0,United States Grand Prix,Circuit of the Americas,USA,2022-10-23,,,,,
+2022,20,1,red_bull,Red Bull,Austrian,696.0,16,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2022-10-30,,,,,
+2022,20,2,ferrari,Ferrari,Italian,487.0,4,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2022-10-30,,,,,
+2022,20,3,mercedes,Mercedes,German,447.0,0,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2022-10-30,,,,,
+2022,20,4,alpine,Alpine F1 Team,French,153.0,0,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2022-10-30,,,,,
+2022,20,5,mclaren,McLaren,British,146.0,0,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2022-10-30,,,,,
+2022,20,6,alfa,Alfa Romeo,Swiss,53.0,0,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2022-10-30,,,,,
+2022,20,7,aston_martin,Aston Martin,British,49.0,0,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2022-10-30,,,,,
+2022,20,8,haas,Haas F1 Team,American,36.0,0,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2022-10-30,,,,,
+2022,20,9,alphatauri,AlphaTauri,Italian,35.0,0,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2022-10-30,,,,,
+2022,20,10,williams,Williams,British,8.0,0,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2022-10-30,,,,,
+2022,21,1,red_bull,Red Bull,Austrian,719.0,16,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2022-11-13,,,,,
+2022,21,2,ferrari,Ferrari,Italian,524.0,4,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2022-11-13,,,,,
+2022,21,3,mercedes,Mercedes,German,505.0,1,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2022-11-13,,,,,
+2022,21,4,alpine,Alpine F1 Team,French,167.0,0,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2022-11-13,,,,,
+2022,21,5,mclaren,McLaren,British,148.0,0,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2022-11-13,,,,,
+2022,21,6,alfa,Alfa Romeo,Swiss,55.0,0,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2022-11-13,,,,,
+2022,21,7,aston_martin,Aston Martin,British,50.0,0,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2022-11-13,,,,,
+2022,21,8,haas,Haas F1 Team,American,37.0,0,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2022-11-13,,,,,
+2022,21,9,alphatauri,AlphaTauri,Italian,35.0,0,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2022-11-13,,,,,
+2022,21,10,williams,Williams,British,8.0,0,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2022-11-13,,,,,
+2023,1,1,red_bull,Red Bull,Austrian,43.0,1,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2023-03-05,,,,,
+2023,1,2,aston_martin,Aston Martin,British,23.0,0,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2023-03-05,,,,,
+2023,1,3,mercedes,Mercedes,German,16.0,0,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2023-03-05,,,,,
+2023,1,4,ferrari,Ferrari,Italian,12.0,0,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2023-03-05,,,,,
+2023,1,5,alfa,Alfa Romeo,Swiss,4.0,0,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2023-03-05,,,,,
+2023,1,6,alpine,Alpine F1 Team,French,2.0,0,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2023-03-05,,,,,
+2023,1,7,williams,Williams,British,1.0,0,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2023-03-05,,,,,
+2023,1,8,alphatauri,AlphaTauri,Italian,0.0,0,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2023-03-05,,,,,
+2023,1,9,haas,Haas F1 Team,American,0.0,0,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2023-03-05,,,,,
+2023,1,10,mclaren,McLaren,British,0.0,0,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2023-03-05,,,,,
+2023,2,1,red_bull,Red Bull,Austrian,87.0,2,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2023-03-19,,,,,
+2023,2,2,aston_martin,Aston Martin,British,38.0,0,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2023-03-19,,,,,
+2023,2,3,mercedes,Mercedes,German,38.0,0,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2023-03-19,,,,,
+2023,2,4,ferrari,Ferrari,Italian,26.0,0,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2023-03-19,,,,,
+2023,2,5,alpine,Alpine F1 Team,French,8.0,0,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2023-03-19,,,,,
+2023,2,6,alfa,Alfa Romeo,Swiss,4.0,0,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2023-03-19,,,,,
+2023,2,7,haas,Haas F1 Team,American,1.0,0,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2023-03-19,,,,,
+2023,2,8,williams,Williams,British,1.0,0,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2023-03-19,,,,,
+2023,2,9,alphatauri,AlphaTauri,Italian,0.0,0,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2023-03-19,,,,,
+2023,2,10,mclaren,McLaren,British,0.0,0,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2023-03-19,,,,,
+2023,3,1,red_bull,Red Bull,Austrian,123.0,3,Australian Grand Prix,Albert Park Grand Prix Circuit,Australia,2023-04-02,,,,,
+2023,3,2,aston_martin,Aston Martin,British,65.0,0,Australian Grand Prix,Albert Park Grand Prix Circuit,Australia,2023-04-02,,,,,
+2023,3,3,mercedes,Mercedes,German,56.0,0,Australian Grand Prix,Albert Park Grand Prix Circuit,Australia,2023-04-02,,,,,
+2023,3,4,ferrari,Ferrari,Italian,26.0,0,Australian Grand Prix,Albert Park Grand Prix Circuit,Australia,2023-04-02,,,,,
+2023,3,5,mclaren,McLaren,British,12.0,0,Australian Grand Prix,Albert Park Grand Prix Circuit,Australia,2023-04-02,,,,,
+2023,3,6,alpine,Alpine F1 Team,French,8.0,0,Australian Grand Prix,Albert Park Grand Prix Circuit,Australia,2023-04-02,,,,,
+2023,3,7,haas,Haas F1 Team,American,7.0,0,Australian Grand Prix,Albert Park Grand Prix Circuit,Australia,2023-04-02,,,,,
+2023,3,8,alfa,Alfa Romeo,Swiss,6.0,0,Australian Grand Prix,Albert Park Grand Prix Circuit,Australia,2023-04-02,,,,,
+2023,3,9,alphatauri,AlphaTauri,Italian,1.0,0,Australian Grand Prix,Albert Park Grand Prix Circuit,Australia,2023-04-02,,,,,
+2023,3,10,williams,Williams,British,1.0,0,Australian Grand Prix,Albert Park Grand Prix Circuit,Australia,2023-04-02,,,,,
+2023,4,1,red_bull,Red Bull,Austrian,180.0,4,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2023-04-30,,,,,
+2023,4,2,aston_martin,Aston Martin,British,87.0,0,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2023-04-30,,,,,
+2023,4,3,mercedes,Mercedes,German,76.0,0,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2023-04-30,,,,,
+2023,4,4,ferrari,Ferrari,Italian,62.0,0,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2023-04-30,,,,,
+2023,4,5,mclaren,McLaren,British,14.0,0,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2023-04-30,,,,,
+2023,4,6,alpine,Alpine F1 Team,French,8.0,0,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2023-04-30,,,,,
+2023,4,7,haas,Haas F1 Team,American,7.0,0,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2023-04-30,,,,,
+2023,4,8,alfa,Alfa Romeo,Swiss,6.0,0,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2023-04-30,,,,,
+2023,4,9,alphatauri,AlphaTauri,Italian,2.0,0,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2023-04-30,,,,,
+2023,4,10,williams,Williams,British,1.0,0,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2023-04-30,,,,,
+2023,5,1,red_bull,Red Bull,Austrian,224.0,5,Miami Grand Prix,Miami International Autodrome,USA,2023-05-07,,,,,
+2023,5,2,aston_martin,Aston Martin,British,102.0,0,Miami Grand Prix,Miami International Autodrome,USA,2023-05-07,,,,,
+2023,5,3,mercedes,Mercedes,German,96.0,0,Miami Grand Prix,Miami International Autodrome,USA,2023-05-07,,,,,
+2023,5,4,ferrari,Ferrari,Italian,78.0,0,Miami Grand Prix,Miami International Autodrome,USA,2023-05-07,,,,,
+2023,5,5,mclaren,McLaren,British,14.0,0,Miami Grand Prix,Miami International Autodrome,USA,2023-05-07,,,,,
+2023,5,6,alpine,Alpine F1 Team,French,14.0,0,Miami Grand Prix,Miami International Autodrome,USA,2023-05-07,,,,,
+2023,5,7,haas,Haas F1 Team,American,8.0,0,Miami Grand Prix,Miami International Autodrome,USA,2023-05-07,,,,,
+2023,5,8,alfa,Alfa Romeo,Swiss,6.0,0,Miami Grand Prix,Miami International Autodrome,USA,2023-05-07,,,,,
+2023,5,9,alphatauri,AlphaTauri,Italian,2.0,0,Miami Grand Prix,Miami International Autodrome,USA,2023-05-07,,,,,
+2023,5,10,williams,Williams,British,1.0,0,Miami Grand Prix,Miami International Autodrome,USA,2023-05-07,,,,,
+2023,6,1,red_bull,Red Bull,Austrian,249.0,6,Monaco Grand Prix,Circuit de Monaco,Monaco,2023-05-28,,,,,
+2023,6,2,aston_martin,Aston Martin,British,120.0,0,Monaco Grand Prix,Circuit de Monaco,Monaco,2023-05-28,,,,,
+2023,6,3,mercedes,Mercedes,German,119.0,0,Monaco Grand Prix,Circuit de Monaco,Monaco,2023-05-28,,,,,
+2023,6,4,ferrari,Ferrari,Italian,90.0,0,Monaco Grand Prix,Circuit de Monaco,Monaco,2023-05-28,,,,,
+2023,6,5,alpine,Alpine F1 Team,French,35.0,0,Monaco Grand Prix,Circuit de Monaco,Monaco,2023-05-28,,,,,
+2023,6,6,mclaren,McLaren,British,17.0,0,Monaco Grand Prix,Circuit de Monaco,Monaco,2023-05-28,,,,,
+2023,6,7,haas,Haas F1 Team,American,8.0,0,Monaco Grand Prix,Circuit de Monaco,Monaco,2023-05-28,,,,,
+2023,6,8,alfa,Alfa Romeo,Swiss,6.0,0,Monaco Grand Prix,Circuit de Monaco,Monaco,2023-05-28,,,,,
+2023,6,9,alphatauri,AlphaTauri,Italian,2.0,0,Monaco Grand Prix,Circuit de Monaco,Monaco,2023-05-28,,,,,
+2023,6,10,williams,Williams,British,1.0,0,Monaco Grand Prix,Circuit de Monaco,Monaco,2023-05-28,,,,,
+2023,7,1,red_bull,Red Bull,Austrian,287.0,7,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2023-06-04,,,,,
+2023,7,2,mercedes,Mercedes,German,152.0,0,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2023-06-04,,,,,
+2023,7,3,aston_martin,Aston Martin,British,134.0,0,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2023-06-04,,,,,
+2023,7,4,ferrari,Ferrari,Italian,100.0,0,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2023-06-04,,,,,
+2023,7,5,alpine,Alpine F1 Team,French,40.0,0,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2023-06-04,,,,,
+2023,7,6,mclaren,McLaren,British,17.0,0,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2023-06-04,,,,,
+2023,7,7,haas,Haas F1 Team,American,8.0,0,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2023-06-04,,,,,
+2023,7,8,alfa,Alfa Romeo,Swiss,8.0,0,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2023-06-04,,,,,
+2023,7,9,alphatauri,AlphaTauri,Italian,2.0,0,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2023-06-04,,,,,
+2023,7,10,williams,Williams,British,1.0,0,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2023-06-04,,,,,
+2023,8,1,red_bull,Red Bull,Austrian,321.0,8,Canadian Grand Prix,Circuit Gilles Villeneuve,Canada,2023-06-18,,,,,
+2023,8,2,mercedes,Mercedes,German,167.0,0,Canadian Grand Prix,Circuit Gilles Villeneuve,Canada,2023-06-18,,,,,
+2023,8,3,aston_martin,Aston Martin,British,154.0,0,Canadian Grand Prix,Circuit Gilles Villeneuve,Canada,2023-06-18,,,,,
+2023,8,4,ferrari,Ferrari,Italian,122.0,0,Canadian Grand Prix,Circuit Gilles Villeneuve,Canada,2023-06-18,,,,,
+2023,8,5,alpine,Alpine F1 Team,French,44.0,0,Canadian Grand Prix,Circuit Gilles Villeneuve,Canada,2023-06-18,,,,,
+2023,8,6,mclaren,McLaren,British,17.0,0,Canadian Grand Prix,Circuit Gilles Villeneuve,Canada,2023-06-18,,,,,
+2023,8,7,alfa,Alfa Romeo,Swiss,9.0,0,Canadian Grand Prix,Circuit Gilles Villeneuve,Canada,2023-06-18,,,,,
+2023,8,8,haas,Haas F1 Team,American,8.0,0,Canadian Grand Prix,Circuit Gilles Villeneuve,Canada,2023-06-18,,,,,
+2023,8,9,williams,Williams,British,7.0,0,Canadian Grand Prix,Circuit Gilles Villeneuve,Canada,2023-06-18,,,,,
+2023,8,10,alphatauri,AlphaTauri,Italian,2.0,0,Canadian Grand Prix,Circuit Gilles Villeneuve,Canada,2023-06-18,,,,,
+2023,9,1,red_bull,Red Bull,Austrian,377.0,9,Austrian Grand Prix,Red Bull Ring,Austria,2023-07-02,,,,,
+2023,9,2,mercedes,Mercedes,German,178.0,0,Austrian Grand Prix,Red Bull Ring,Austria,2023-07-02,,,,,
+2023,9,3,aston_martin,Aston Martin,British,175.0,0,Austrian Grand Prix,Red Bull Ring,Austria,2023-07-02,,,,,
+2023,9,4,ferrari,Ferrari,Italian,154.0,0,Austrian Grand Prix,Red Bull Ring,Austria,2023-07-02,,,,,
+2023,9,5,alpine,Alpine F1 Team,French,47.0,0,Austrian Grand Prix,Red Bull Ring,Austria,2023-07-02,,,,,
+2023,9,6,mclaren,McLaren,British,29.0,0,Austrian Grand Prix,Red Bull Ring,Austria,2023-07-02,,,,,
+2023,9,7,haas,Haas F1 Team,American,11.0,0,Austrian Grand Prix,Red Bull Ring,Austria,2023-07-02,,,,,
+2023,9,8,alfa,Alfa Romeo,Swiss,9.0,0,Austrian Grand Prix,Red Bull Ring,Austria,2023-07-02,,,,,
+2023,9,9,williams,Williams,British,7.0,0,Austrian Grand Prix,Red Bull Ring,Austria,2023-07-02,,,,,
+2023,9,10,alphatauri,AlphaTauri,Italian,2.0,0,Austrian Grand Prix,Red Bull Ring,Austria,2023-07-02,,,,,
+2023,10,1,red_bull,Red Bull,Austrian,411.0,10,British Grand Prix,Silverstone Circuit,UK,2023-07-09,,,,,
+2023,10,2,mercedes,Mercedes,German,203.0,0,British Grand Prix,Silverstone Circuit,UK,2023-07-09,,,,,
+2023,10,3,aston_martin,Aston Martin,British,181.0,0,British Grand Prix,Silverstone Circuit,UK,2023-07-09,,,,,
+2023,10,4,ferrari,Ferrari,Italian,157.0,0,British Grand Prix,Silverstone Circuit,UK,2023-07-09,,,,,
+2023,10,5,mclaren,McLaren,British,59.0,0,British Grand Prix,Silverstone Circuit,UK,2023-07-09,,,,,
+2023,10,6,alpine,Alpine F1 Team,French,47.0,0,British Grand Prix,Silverstone Circuit,UK,2023-07-09,,,,,
+2023,10,7,williams,Williams,British,11.0,0,British Grand Prix,Silverstone Circuit,UK,2023-07-09,,,,,
+2023,10,8,haas,Haas F1 Team,American,11.0,0,British Grand Prix,Silverstone Circuit,UK,2023-07-09,,,,,
+2023,10,9,alfa,Alfa Romeo,Swiss,9.0,0,British Grand Prix,Silverstone Circuit,UK,2023-07-09,,,,,
+2023,10,10,alphatauri,AlphaTauri,Italian,2.0,0,British Grand Prix,Silverstone Circuit,UK,2023-07-09,,,,,
+2023,11,1,red_bull,Red Bull,Austrian,452.0,11,Hungarian Grand Prix,Hungaroring,Hungary,2023-07-23,,,,,
+2023,11,2,mercedes,Mercedes,German,223.0,0,Hungarian Grand Prix,Hungaroring,Hungary,2023-07-23,,,,,
+2023,11,3,aston_martin,Aston Martin,British,184.0,0,Hungarian Grand Prix,Hungaroring,Hungary,2023-07-23,,,,,
+2023,11,4,ferrari,Ferrari,Italian,167.0,0,Hungarian Grand Prix,Hungaroring,Hungary,2023-07-23,,,,,
+2023,11,5,mclaren,McLaren,British,87.0,0,Hungarian Grand Prix,Hungaroring,Hungary,2023-07-23,,,,,
+2023,11,6,alpine,Alpine F1 Team,French,47.0,0,Hungarian Grand Prix,Hungaroring,Hungary,2023-07-23,,,,,
+2023,11,7,williams,Williams,British,11.0,0,Hungarian Grand Prix,Hungaroring,Hungary,2023-07-23,,,,,
+2023,11,8,haas,Haas F1 Team,American,11.0,0,Hungarian Grand Prix,Hungaroring,Hungary,2023-07-23,,,,,
+2023,11,9,alfa,Alfa Romeo,Swiss,9.0,0,Hungarian Grand Prix,Hungaroring,Hungary,2023-07-23,,,,,
+2023,11,10,alphatauri,AlphaTauri,Italian,2.0,0,Hungarian Grand Prix,Hungaroring,Hungary,2023-07-23,,,,,
+2023,12,1,red_bull,Red Bull,Austrian,503.0,12,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2023-07-30,,,,,
+2023,12,2,mercedes,Mercedes,German,247.0,0,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2023-07-30,,,,,
+2023,12,3,aston_martin,Aston Martin,British,196.0,0,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2023-07-30,,,,,
+2023,12,4,ferrari,Ferrari,Italian,191.0,0,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2023-07-30,,,,,
+2023,12,5,mclaren,McLaren,British,103.0,0,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2023-07-30,,,,,
+2023,12,6,alpine,Alpine F1 Team,French,57.0,0,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2023-07-30,,,,,
+2023,12,7,williams,Williams,British,11.0,0,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2023-07-30,,,,,
+2023,12,8,haas,Haas F1 Team,American,11.0,0,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2023-07-30,,,,,
+2023,12,9,alfa,Alfa Romeo,Swiss,9.0,0,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2023-07-30,,,,,
+2023,12,10,alphatauri,AlphaTauri,Italian,3.0,0,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2023-07-30,,,,,
+2023,13,1,red_bull,Red Bull,Austrian,540.0,13,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2023-08-27,,,,,
+2023,13,2,mercedes,Mercedes,German,255.0,0,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2023-08-27,,,,,
+2023,13,3,aston_martin,Aston Martin,British,215.0,0,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2023-08-27,,,,,
+2023,13,4,ferrari,Ferrari,Italian,201.0,0,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2023-08-27,,,,,
+2023,13,5,mclaren,McLaren,British,111.0,0,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2023-08-27,,,,,
+2023,13,6,alpine,Alpine F1 Team,French,73.0,0,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2023-08-27,,,,,
+2023,13,7,williams,Williams,British,15.0,0,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2023-08-27,,,,,
+2023,13,8,haas,Haas F1 Team,American,11.0,0,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2023-08-27,,,,,
+2023,13,9,alfa,Alfa Romeo,Swiss,9.0,0,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2023-08-27,,,,,
+2023,13,10,alphatauri,AlphaTauri,Italian,3.0,0,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2023-08-27,,,,,
+2023,14,1,red_bull,Red Bull,Austrian,583.0,14,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2023-09-03,,,,,
+2023,14,2,mercedes,Mercedes,German,273.0,0,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2023-09-03,,,,,
+2023,14,3,ferrari,Ferrari,Italian,228.0,0,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2023-09-03,,,,,
+2023,14,4,aston_martin,Aston Martin,British,217.0,0,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2023-09-03,,,,,
+2023,14,5,mclaren,McLaren,British,115.0,0,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2023-09-03,,,,,
+2023,14,6,alpine,Alpine F1 Team,French,73.0,0,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2023-09-03,,,,,
+2023,14,7,williams,Williams,British,21.0,0,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2023-09-03,,,,,
+2023,14,8,haas,Haas F1 Team,American,11.0,0,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2023-09-03,,,,,
+2023,14,9,alfa,Alfa Romeo,Swiss,10.0,0,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2023-09-03,,,,,
+2023,14,10,alphatauri,AlphaTauri,Italian,3.0,0,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2023-09-03,,,,,
+2023,15,1,red_bull,Red Bull,Austrian,597.0,14,Singapore Grand Prix,Marina Bay Street Circuit,Singapore,2023-09-17,,,,,
+2023,15,2,mercedes,Mercedes,German,289.0,0,Singapore Grand Prix,Marina Bay Street Circuit,Singapore,2023-09-17,,,,,
+2023,15,3,ferrari,Ferrari,Italian,265.0,1,Singapore Grand Prix,Marina Bay Street Circuit,Singapore,2023-09-17,,,,,
+2023,15,4,aston_martin,Aston Martin,British,217.0,0,Singapore Grand Prix,Marina Bay Street Circuit,Singapore,2023-09-17,,,,,
+2023,15,5,mclaren,McLaren,British,139.0,0,Singapore Grand Prix,Marina Bay Street Circuit,Singapore,2023-09-17,,,,,
+2023,15,6,alpine,Alpine F1 Team,French,81.0,0,Singapore Grand Prix,Marina Bay Street Circuit,Singapore,2023-09-17,,,,,
+2023,15,7,williams,Williams,British,21.0,0,Singapore Grand Prix,Marina Bay Street Circuit,Singapore,2023-09-17,,,,,
+2023,15,8,haas,Haas F1 Team,American,12.0,0,Singapore Grand Prix,Marina Bay Street Circuit,Singapore,2023-09-17,,,,,
+2023,15,9,alfa,Alfa Romeo,Swiss,10.0,0,Singapore Grand Prix,Marina Bay Street Circuit,Singapore,2023-09-17,,,,,
+2023,15,10,alphatauri,AlphaTauri,Italian,5.0,0,Singapore Grand Prix,Marina Bay Street Circuit,Singapore,2023-09-17,,,,,
+2023,16,1,red_bull,Red Bull,Austrian,623.0,15,Japanese Grand Prix,Suzuka Circuit,Japan,2023-09-24,,,,,
+2023,16,2,mercedes,Mercedes,German,305.0,0,Japanese Grand Prix,Suzuka Circuit,Japan,2023-09-24,,,,,
+2023,16,3,ferrari,Ferrari,Italian,285.0,1,Japanese Grand Prix,Suzuka Circuit,Japan,2023-09-24,,,,,
+2023,16,4,aston_martin,Aston Martin,British,221.0,0,Japanese Grand Prix,Suzuka Circuit,Japan,2023-09-24,,,,,
+2023,16,5,mclaren,McLaren,British,172.0,0,Japanese Grand Prix,Suzuka Circuit,Japan,2023-09-24,,,,,
+2023,16,6,alpine,Alpine F1 Team,French,84.0,0,Japanese Grand Prix,Suzuka Circuit,Japan,2023-09-24,,,,,
+2023,16,7,williams,Williams,British,21.0,0,Japanese Grand Prix,Suzuka Circuit,Japan,2023-09-24,,,,,
+2023,16,8,haas,Haas F1 Team,American,12.0,0,Japanese Grand Prix,Suzuka Circuit,Japan,2023-09-24,,,,,
+2023,16,9,alfa,Alfa Romeo,Swiss,10.0,0,Japanese Grand Prix,Suzuka Circuit,Japan,2023-09-24,,,,,
+2023,16,10,alphatauri,AlphaTauri,Italian,5.0,0,Japanese Grand Prix,Suzuka Circuit,Japan,2023-09-24,,,,,
+2023,17,1,red_bull,Red Bull,Austrian,657.0,16,Qatar Grand Prix,Losail International Circuit,Qatar,2023-10-08,,,,,
+2023,17,2,mercedes,Mercedes,German,326.0,0,Qatar Grand Prix,Losail International Circuit,Qatar,2023-10-08,,,,,
+2023,17,3,ferrari,Ferrari,Italian,298.0,1,Qatar Grand Prix,Losail International Circuit,Qatar,2023-10-08,,,,,
+2023,17,4,aston_martin,Aston Martin,British,230.0,0,Qatar Grand Prix,Losail International Circuit,Qatar,2023-10-08,,,,,
+2023,17,5,mclaren,McLaren,British,219.0,0,Qatar Grand Prix,Losail International Circuit,Qatar,2023-10-08,,,,,
+2023,17,6,alpine,Alpine F1 Team,French,90.0,0,Qatar Grand Prix,Losail International Circuit,Qatar,2023-10-08,,,,,
+2023,17,7,williams,Williams,British,23.0,0,Qatar Grand Prix,Losail International Circuit,Qatar,2023-10-08,,,,,
+2023,17,8,alfa,Alfa Romeo,Swiss,16.0,0,Qatar Grand Prix,Losail International Circuit,Qatar,2023-10-08,,,,,
+2023,17,9,haas,Haas F1 Team,American,12.0,0,Qatar Grand Prix,Losail International Circuit,Qatar,2023-10-08,,,,,
+2023,17,10,alphatauri,AlphaTauri,Italian,5.0,0,Qatar Grand Prix,Losail International Circuit,Qatar,2023-10-08,,,,,
+2023,18,1,red_bull,Red Bull,Austrian,706.0,17,United States Grand Prix,Circuit of the Americas,USA,2023-10-22,,,,,
+2023,18,2,mercedes,Mercedes,German,344.0,0,United States Grand Prix,Circuit of the Americas,USA,2023-10-22,,,,,
+2023,18,3,ferrari,Ferrari,Italian,322.0,1,United States Grand Prix,Circuit of the Americas,USA,2023-10-22,,,,,
+2023,18,4,mclaren,McLaren,British,242.0,0,United States Grand Prix,Circuit of the Americas,USA,2023-10-22,,,,,
+2023,18,5,aston_martin,Aston Martin,British,236.0,0,United States Grand Prix,Circuit of the Americas,USA,2023-10-22,,,,,
+2023,18,6,alpine,Alpine F1 Team,French,100.0,0,United States Grand Prix,Circuit of the Americas,USA,2023-10-22,,,,,
+2023,18,7,williams,Williams,British,26.0,0,United States Grand Prix,Circuit of the Americas,USA,2023-10-22,,,,,
+2023,18,8,alfa,Alfa Romeo,Swiss,16.0,0,United States Grand Prix,Circuit of the Americas,USA,2023-10-22,,,,,
+2023,18,9,haas,Haas F1 Team,American,12.0,0,United States Grand Prix,Circuit of the Americas,USA,2023-10-22,,,,,
+2023,18,10,alphatauri,AlphaTauri,Italian,10.0,0,United States Grand Prix,Circuit of the Americas,USA,2023-10-22,,,,,
+2023,19,1,red_bull,Red Bull,Austrian,731.0,18,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2023-10-29,,,,,
+2023,19,2,mercedes,Mercedes,German,371.0,0,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2023-10-29,,,,,
+2023,19,3,ferrari,Ferrari,Italian,349.0,1,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2023-10-29,,,,,
+2023,19,4,mclaren,McLaren,British,256.0,0,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2023-10-29,,,,,
+2023,19,5,aston_martin,Aston Martin,British,236.0,0,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2023-10-29,,,,,
+2023,19,6,alpine,Alpine F1 Team,French,101.0,0,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2023-10-29,,,,,
+2023,19,7,williams,Williams,British,28.0,0,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2023-10-29,,,,,
+2023,19,8,alphatauri,AlphaTauri,Italian,16.0,0,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2023-10-29,,,,,
+2023,19,9,alfa,Alfa Romeo,Swiss,16.0,0,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2023-10-29,,,,,
+2023,19,10,haas,Haas F1 Team,American,12.0,0,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2023-10-29,,,,,
+2023,20,1,red_bull,Red Bull,Austrian,782.0,19,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2023-11-05,,,,,
+2023,20,2,mercedes,Mercedes,German,382.0,0,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2023-11-05,,,,,
+2023,20,3,ferrari,Ferrari,Italian,362.0,1,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2023-11-05,,,,,
+2023,20,4,mclaren,McLaren,British,282.0,0,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2023-11-05,,,,,
+2023,20,5,aston_martin,Aston Martin,British,261.0,0,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2023-11-05,,,,,
+2023,20,6,alpine,Alpine F1 Team,French,108.0,0,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2023-11-05,,,,,
+2023,20,7,williams,Williams,British,28.0,0,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2023-11-05,,,,,
+2023,20,8,alphatauri,AlphaTauri,Italian,21.0,0,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2023-11-05,,,,,
+2023,20,9,alfa,Alfa Romeo,Swiss,16.0,0,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2023-11-05,,,,,
+2023,20,10,haas,Haas F1 Team,American,12.0,0,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2023-11-05,,,,,
+2023,21,1,red_bull,Red Bull,Austrian,822.0,20,Las Vegas Grand Prix,Las Vegas Strip Street Circuit,USA,2023-11-19,,,,,
+2023,21,2,mercedes,Mercedes,German,392.0,0,Las Vegas Grand Prix,Las Vegas Strip Street Circuit,USA,2023-11-19,,,,,
+2023,21,3,ferrari,Ferrari,Italian,388.0,1,Las Vegas Grand Prix,Las Vegas Strip Street Circuit,USA,2023-11-19,,,,,
+2023,21,4,mclaren,McLaren,British,284.0,0,Las Vegas Grand Prix,Las Vegas Strip Street Circuit,USA,2023-11-19,,,,,
+2023,21,5,aston_martin,Aston Martin,British,273.0,0,Las Vegas Grand Prix,Las Vegas Strip Street Circuit,USA,2023-11-19,,,,,
+2023,21,6,alpine,Alpine F1 Team,French,120.0,0,Las Vegas Grand Prix,Las Vegas Strip Street Circuit,USA,2023-11-19,,,,,
+2023,21,7,williams,Williams,British,28.0,0,Las Vegas Grand Prix,Las Vegas Strip Street Circuit,USA,2023-11-19,,,,,
+2023,21,8,alphatauri,AlphaTauri,Italian,21.0,0,Las Vegas Grand Prix,Las Vegas Strip Street Circuit,USA,2023-11-19,,,,,
+2023,21,9,alfa,Alfa Romeo,Swiss,16.0,0,Las Vegas Grand Prix,Las Vegas Strip Street Circuit,USA,2023-11-19,,,,,
+2023,21,10,haas,Haas F1 Team,American,12.0,0,Las Vegas Grand Prix,Las Vegas Strip Street Circuit,USA,2023-11-19,,,,,
+2023,22,1,red_bull,Red Bull,Austrian,860.0,21,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2023-11-26,,,,,
+2023,22,2,mercedes,Mercedes,German,409.0,0,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2023-11-26,,,,,
+2023,22,3,ferrari,Ferrari,Italian,406.0,1,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2023-11-26,,,,,
+2023,22,4,mclaren,McLaren,British,302.0,0,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2023-11-26,,,,,
+2023,22,5,aston_martin,Aston Martin,British,280.0,0,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2023-11-26,,,,,
+2023,22,6,alpine,Alpine F1 Team,French,120.0,0,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2023-11-26,,,,,
+2023,22,7,williams,Williams,British,28.0,0,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2023-11-26,,,,,
+2023,22,8,alphatauri,AlphaTauri,Italian,25.0,0,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2023-11-26,,,,,
+2023,22,9,alfa,Alfa Romeo,Swiss,16.0,0,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2023-11-26,,,,,
+2023,22,10,haas,Haas F1 Team,American,12.0,0,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2023-11-26,,,,,
+2024,1,1,red_bull,Red Bull,Austrian,44.0,1,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2024-03-02,,,,,
+2024,1,2,ferrari,Ferrari,Italian,27.0,0,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2024-03-02,,,,,
+2024,1,3,mercedes,Mercedes,German,16.0,0,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2024-03-02,,,,,
+2024,1,4,mclaren,McLaren,British,12.0,0,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2024-03-02,,,,,
+2024,1,5,aston_martin,Aston Martin,British,3.0,0,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2024-03-02,,,,,
+2024,1,6,sauber,Sauber,Swiss,0.0,0,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2024-03-02,,,,,
+2024,1,7,haas,Haas F1 Team,American,0.0,0,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2024-03-02,,,,,
+2024,1,8,rb,RB F1 Team,Italian,0.0,0,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2024-03-02,,,,,
+2024,1,9,williams,Williams,British,0.0,0,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2024-03-02,,,,,
+2024,1,10,alpine,Alpine F1 Team,French,0.0,0,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2024-03-02,,,,,
+2024,2,1,red_bull,Red Bull,Austrian,87.0,2,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2024-03-09,,,,,
+2024,2,2,ferrari,Ferrari,Italian,49.0,0,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2024-03-09,,,,,
+2024,2,3,mclaren,McLaren,British,28.0,0,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2024-03-09,,,,,
+2024,2,4,mercedes,Mercedes,German,26.0,0,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2024-03-09,,,,,
+2024,2,5,aston_martin,Aston Martin,British,13.0,0,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2024-03-09,,,,,
+2024,2,6,haas,Haas F1 Team,American,1.0,0,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2024-03-09,,,,,
+2024,2,7,williams,Williams,British,0.0,0,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2024-03-09,,,,,
+2024,2,8,sauber,Sauber,Swiss,0.0,0,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2024-03-09,,,,,
+2024,2,9,rb,RB F1 Team,Italian,0.0,0,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2024-03-09,,,,,
+2024,2,10,alpine,Alpine F1 Team,French,0.0,0,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2024-03-09,,,,,
+2024,3,1,red_bull,Red Bull,Austrian,97.0,2,Australian Grand Prix,Albert Park Grand Prix Circuit,Australia,2024-03-24,,,,,
+2024,3,2,ferrari,Ferrari,Italian,93.0,1,Australian Grand Prix,Albert Park Grand Prix Circuit,Australia,2024-03-24,,,,,
+2024,3,3,mclaren,McLaren,British,55.0,0,Australian Grand Prix,Albert Park Grand Prix Circuit,Australia,2024-03-24,,,,,
+2024,3,4,mercedes,Mercedes,German,26.0,0,Australian Grand Prix,Albert Park Grand Prix Circuit,Australia,2024-03-24,,,,,
+2024,3,5,aston_martin,Aston Martin,British,25.0,0,Australian Grand Prix,Albert Park Grand Prix Circuit,Australia,2024-03-24,,,,,
+2024,3,6,rb,RB F1 Team,Italian,6.0,0,Australian Grand Prix,Albert Park Grand Prix Circuit,Australia,2024-03-24,,,,,
+2024,3,7,haas,Haas F1 Team,American,4.0,0,Australian Grand Prix,Albert Park Grand Prix Circuit,Australia,2024-03-24,,,,,
+2024,3,8,williams,Williams,British,0.0,0,Australian Grand Prix,Albert Park Grand Prix Circuit,Australia,2024-03-24,,,,,
+2024,3,9,sauber,Sauber,Swiss,0.0,0,Australian Grand Prix,Albert Park Grand Prix Circuit,Australia,2024-03-24,,,,,
+2024,3,10,alpine,Alpine F1 Team,French,0.0,0,Australian Grand Prix,Albert Park Grand Prix Circuit,Australia,2024-03-24,,,,,
+2024,4,1,red_bull,Red Bull,Austrian,141.0,3,Japanese Grand Prix,Suzuka Circuit,Japan,2024-04-07,,,,,
+2024,4,2,ferrari,Ferrari,Italian,120.0,1,Japanese Grand Prix,Suzuka Circuit,Japan,2024-04-07,,,,,
+2024,4,3,mclaren,McLaren,British,69.0,0,Japanese Grand Prix,Suzuka Circuit,Japan,2024-04-07,,,,,
+2024,4,4,mercedes,Mercedes,German,34.0,0,Japanese Grand Prix,Suzuka Circuit,Japan,2024-04-07,,,,,
+2024,4,5,aston_martin,Aston Martin,British,33.0,0,Japanese Grand Prix,Suzuka Circuit,Japan,2024-04-07,,,,,
+2024,4,6,rb,RB F1 Team,Italian,7.0,0,Japanese Grand Prix,Suzuka Circuit,Japan,2024-04-07,,,,,
+2024,4,7,haas,Haas F1 Team,American,4.0,0,Japanese Grand Prix,Suzuka Circuit,Japan,2024-04-07,,,,,
+2024,4,8,williams,Williams,British,0.0,0,Japanese Grand Prix,Suzuka Circuit,Japan,2024-04-07,,,,,
+2024,4,9,sauber,Sauber,Swiss,0.0,0,Japanese Grand Prix,Suzuka Circuit,Japan,2024-04-07,,,,,
+2024,4,10,alpine,Alpine F1 Team,French,0.0,0,Japanese Grand Prix,Suzuka Circuit,Japan,2024-04-07,,,,,
+2024,5,1,red_bull,Red Bull,Austrian,195.0,4,Chinese Grand Prix,Shanghai International Circuit,China,2024-04-21,,,,,
+2024,5,2,ferrari,Ferrari,Italian,151.0,1,Chinese Grand Prix,Shanghai International Circuit,China,2024-04-21,,,,,
+2024,5,3,mclaren,McLaren,British,96.0,0,Chinese Grand Prix,Shanghai International Circuit,China,2024-04-21,,,,,
+2024,5,4,mercedes,Mercedes,German,52.0,0,Chinese Grand Prix,Shanghai International Circuit,China,2024-04-21,,,,,
+2024,5,5,aston_martin,Aston Martin,British,40.0,0,Chinese Grand Prix,Shanghai International Circuit,China,2024-04-21,,,,,
+2024,5,6,rb,RB F1 Team,Italian,7.0,0,Chinese Grand Prix,Shanghai International Circuit,China,2024-04-21,,,,,
+2024,5,7,haas,Haas F1 Team,American,5.0,0,Chinese Grand Prix,Shanghai International Circuit,China,2024-04-21,,,,,
+2024,5,8,williams,Williams,British,0.0,0,Chinese Grand Prix,Shanghai International Circuit,China,2024-04-21,,,,,
+2024,5,9,alpine,Alpine F1 Team,French,0.0,0,Chinese Grand Prix,Shanghai International Circuit,China,2024-04-21,,,,,
+2024,5,10,sauber,Sauber,Swiss,0.0,0,Chinese Grand Prix,Shanghai International Circuit,China,2024-04-21,,,,,
+2024,6,1,red_bull,Red Bull,Austrian,239.0,4,Miami Grand Prix,Miami International Autodrome,USA,2024-05-05,,,,,
+2024,6,2,ferrari,Ferrari,Italian,187.0,1,Miami Grand Prix,Miami International Autodrome,USA,2024-05-05,,,,,
+2024,6,3,mclaren,McLaren,British,124.0,1,Miami Grand Prix,Miami International Autodrome,USA,2024-05-05,,,,,
+2024,6,4,mercedes,Mercedes,German,64.0,0,Miami Grand Prix,Miami International Autodrome,USA,2024-05-05,,,,,
+2024,6,5,aston_martin,Aston Martin,British,42.0,0,Miami Grand Prix,Miami International Autodrome,USA,2024-05-05,,,,,
+2024,6,6,rb,RB F1 Team,Italian,19.0,0,Miami Grand Prix,Miami International Autodrome,USA,2024-05-05,,,,,
+2024,6,7,haas,Haas F1 Team,American,7.0,0,Miami Grand Prix,Miami International Autodrome,USA,2024-05-05,,,,,
+2024,6,8,alpine,Alpine F1 Team,French,1.0,0,Miami Grand Prix,Miami International Autodrome,USA,2024-05-05,,,,,
+2024,6,9,williams,Williams,British,0.0,0,Miami Grand Prix,Miami International Autodrome,USA,2024-05-05,,,,,
+2024,6,10,sauber,Sauber,Swiss,0.0,0,Miami Grand Prix,Miami International Autodrome,USA,2024-05-05,,,,,
+2024,7,1,red_bull,Red Bull,Austrian,268.0,5,Emilia Romagna Grand Prix,Autodromo Enzo e Dino Ferrari,Italy,2024-05-19,,,,,
+2024,7,2,ferrari,Ferrari,Italian,212.0,1,Emilia Romagna Grand Prix,Autodromo Enzo e Dino Ferrari,Italy,2024-05-19,,,,,
+2024,7,3,mclaren,McLaren,British,154.0,1,Emilia Romagna Grand Prix,Autodromo Enzo e Dino Ferrari,Italy,2024-05-19,,,,,
+2024,7,4,mercedes,Mercedes,German,79.0,0,Emilia Romagna Grand Prix,Autodromo Enzo e Dino Ferrari,Italy,2024-05-19,,,,,
+2024,7,5,aston_martin,Aston Martin,British,44.0,0,Emilia Romagna Grand Prix,Autodromo Enzo e Dino Ferrari,Italy,2024-05-19,,,,,
+2024,7,6,rb,RB F1 Team,Italian,20.0,0,Emilia Romagna Grand Prix,Autodromo Enzo e Dino Ferrari,Italy,2024-05-19,,,,,
+2024,7,7,haas,Haas F1 Team,American,7.0,0,Emilia Romagna Grand Prix,Autodromo Enzo e Dino Ferrari,Italy,2024-05-19,,,,,
+2024,7,8,alpine,Alpine F1 Team,French,1.0,0,Emilia Romagna Grand Prix,Autodromo Enzo e Dino Ferrari,Italy,2024-05-19,,,,,
+2024,7,9,williams,Williams,British,0.0,0,Emilia Romagna Grand Prix,Autodromo Enzo e Dino Ferrari,Italy,2024-05-19,,,,,
+2024,7,10,sauber,Sauber,Swiss,0.0,0,Emilia Romagna Grand Prix,Autodromo Enzo e Dino Ferrari,Italy,2024-05-19,,,,,
+2024,8,1,red_bull,Red Bull,Austrian,276.0,5,Monaco Grand Prix,Circuit de Monaco,Monaco,2024-05-26,,,,,
+2024,8,2,ferrari,Ferrari,Italian,252.0,2,Monaco Grand Prix,Circuit de Monaco,Monaco,2024-05-26,,,,,
+2024,8,3,mclaren,McLaren,British,184.0,1,Monaco Grand Prix,Circuit de Monaco,Monaco,2024-05-26,,,,,
+2024,8,4,mercedes,Mercedes,German,96.0,0,Monaco Grand Prix,Circuit de Monaco,Monaco,2024-05-26,,,,,
+2024,8,5,aston_martin,Aston Martin,British,44.0,0,Monaco Grand Prix,Circuit de Monaco,Monaco,2024-05-26,,,,,
+2024,8,6,rb,RB F1 Team,Italian,24.0,0,Monaco Grand Prix,Circuit de Monaco,Monaco,2024-05-26,,,,,
+2024,8,7,haas,Haas F1 Team,American,7.0,0,Monaco Grand Prix,Circuit de Monaco,Monaco,2024-05-26,,,,,
+2024,8,8,williams,Williams,British,2.0,0,Monaco Grand Prix,Circuit de Monaco,Monaco,2024-05-26,,,,,
+2024,8,9,alpine,Alpine F1 Team,French,2.0,0,Monaco Grand Prix,Circuit de Monaco,Monaco,2024-05-26,,,,,
+2024,8,10,sauber,Sauber,Swiss,0.0,0,Monaco Grand Prix,Circuit de Monaco,Monaco,2024-05-26,,,,,
+2024,9,1,red_bull,Red Bull,Austrian,301.0,6,Canadian Grand Prix,Circuit Gilles Villeneuve,Canada,2024-06-09,,,,,
+2024,9,2,ferrari,Ferrari,Italian,252.0,2,Canadian Grand Prix,Circuit Gilles Villeneuve,Canada,2024-06-09,,,,,
+2024,9,3,mclaren,McLaren,British,212.0,1,Canadian Grand Prix,Circuit Gilles Villeneuve,Canada,2024-06-09,,,,,
+2024,9,4,mercedes,Mercedes,German,124.0,0,Canadian Grand Prix,Circuit Gilles Villeneuve,Canada,2024-06-09,,,,,
+2024,9,5,aston_martin,Aston Martin,British,58.0,0,Canadian Grand Prix,Circuit Gilles Villeneuve,Canada,2024-06-09,,,,,
+2024,9,6,rb,RB F1 Team,Italian,28.0,0,Canadian Grand Prix,Circuit Gilles Villeneuve,Canada,2024-06-09,,,,,
+2024,9,7,haas,Haas F1 Team,American,7.0,0,Canadian Grand Prix,Circuit Gilles Villeneuve,Canada,2024-06-09,,,,,
+2024,9,8,alpine,Alpine F1 Team,French,5.0,0,Canadian Grand Prix,Circuit Gilles Villeneuve,Canada,2024-06-09,,,,,
+2024,9,9,williams,Williams,British,2.0,0,Canadian Grand Prix,Circuit Gilles Villeneuve,Canada,2024-06-09,,,,,
+2024,9,10,sauber,Sauber,Swiss,0.0,0,Canadian Grand Prix,Circuit Gilles Villeneuve,Canada,2024-06-09,,,,,
+2024,10,1,red_bull,Red Bull,Austrian,330.0,7,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2024-06-23,,,,,
+2024,10,2,ferrari,Ferrari,Italian,270.0,2,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2024-06-23,,,,,
+2024,10,3,mclaren,McLaren,British,237.0,1,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2024-06-23,,,,,
+2024,10,4,mercedes,Mercedes,German,151.0,0,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2024-06-23,,,,,
+2024,10,5,aston_martin,Aston Martin,British,58.0,0,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2024-06-23,,,,,
+2024,10,6,rb,RB F1 Team,Italian,28.0,0,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2024-06-23,,,,,
+2024,10,7,alpine,Alpine F1 Team,French,8.0,0,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2024-06-23,,,,,
+2024,10,8,haas,Haas F1 Team,American,7.0,0,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2024-06-23,,,,,
+2024,10,9,williams,Williams,British,2.0,0,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2024-06-23,,,,,
+2024,10,10,sauber,Sauber,Swiss,0.0,0,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2024-06-23,,,,,
+2024,11,1,red_bull,Red Bull,Austrian,355.0,7,Austrian Grand Prix,Red Bull Ring,Austria,2024-06-30,,,,,
+2024,11,2,ferrari,Ferrari,Italian,291.0,2,Austrian Grand Prix,Red Bull Ring,Austria,2024-06-30,,,,,
+2024,11,3,mclaren,McLaren,British,268.0,1,Austrian Grand Prix,Red Bull Ring,Austria,2024-06-30,,,,,
+2024,11,4,mercedes,Mercedes,German,196.0,1,Austrian Grand Prix,Red Bull Ring,Austria,2024-06-30,,,,,
+2024,11,5,aston_martin,Aston Martin,British,58.0,0,Austrian Grand Prix,Red Bull Ring,Austria,2024-06-30,,,,,
+2024,11,6,rb,RB F1 Team,Italian,30.0,0,Austrian Grand Prix,Red Bull Ring,Austria,2024-06-30,,,,,
+2024,11,7,haas,Haas F1 Team,American,19.0,0,Austrian Grand Prix,Red Bull Ring,Austria,2024-06-30,,,,,
+2024,11,8,alpine,Alpine F1 Team,French,9.0,0,Austrian Grand Prix,Red Bull Ring,Austria,2024-06-30,,,,,
+2024,11,9,williams,Williams,British,2.0,0,Austrian Grand Prix,Red Bull Ring,Austria,2024-06-30,,,,,
+2024,11,10,sauber,Sauber,Swiss,0.0,0,Austrian Grand Prix,Red Bull Ring,Austria,2024-06-30,,,,,
+2024,12,1,red_bull,Red Bull,Austrian,373.0,7,British Grand Prix,Silverstone Circuit,UK,2024-07-07,,,,,
+2024,12,2,ferrari,Ferrari,Italian,302.0,2,British Grand Prix,Silverstone Circuit,UK,2024-07-07,,,,,
+2024,12,3,mclaren,McLaren,British,295.0,1,British Grand Prix,Silverstone Circuit,UK,2024-07-07,,,,,
+2024,12,4,mercedes,Mercedes,German,221.0,2,British Grand Prix,Silverstone Circuit,UK,2024-07-07,,,,,
+2024,12,5,aston_martin,Aston Martin,British,68.0,0,British Grand Prix,Silverstone Circuit,UK,2024-07-07,,,,,
+2024,12,6,rb,RB F1 Team,Italian,31.0,0,British Grand Prix,Silverstone Circuit,UK,2024-07-07,,,,,
+2024,12,7,haas,Haas F1 Team,American,27.0,0,British Grand Prix,Silverstone Circuit,UK,2024-07-07,,,,,
+2024,12,8,alpine,Alpine F1 Team,French,9.0,0,British Grand Prix,Silverstone Circuit,UK,2024-07-07,,,,,
+2024,12,9,williams,Williams,British,4.0,0,British Grand Prix,Silverstone Circuit,UK,2024-07-07,,,,,
+2024,12,10,sauber,Sauber,Swiss,0.0,0,British Grand Prix,Silverstone Circuit,UK,2024-07-07,,,,,
+2024,13,1,red_bull,Red Bull,Austrian,389.0,7,Hungarian Grand Prix,Hungaroring,Hungary,2024-07-21,,,,,
+2024,13,2,mclaren,McLaren,British,338.0,2,Hungarian Grand Prix,Hungaroring,Hungary,2024-07-21,,,,,
+2024,13,3,ferrari,Ferrari,Italian,322.0,2,Hungarian Grand Prix,Hungaroring,Hungary,2024-07-21,,,,,
+2024,13,4,mercedes,Mercedes,German,241.0,2,Hungarian Grand Prix,Hungaroring,Hungary,2024-07-21,,,,,
+2024,13,5,aston_martin,Aston Martin,British,69.0,0,Hungarian Grand Prix,Hungaroring,Hungary,2024-07-21,,,,,
+2024,13,6,rb,RB F1 Team,Italian,33.0,0,Hungarian Grand Prix,Hungaroring,Hungary,2024-07-21,,,,,
+2024,13,7,haas,Haas F1 Team,American,27.0,0,Hungarian Grand Prix,Hungaroring,Hungary,2024-07-21,,,,,
+2024,13,8,alpine,Alpine F1 Team,French,9.0,0,Hungarian Grand Prix,Hungaroring,Hungary,2024-07-21,,,,,
+2024,13,9,williams,Williams,British,4.0,0,Hungarian Grand Prix,Hungaroring,Hungary,2024-07-21,,,,,
+2024,13,10,sauber,Sauber,Swiss,0.0,0,Hungarian Grand Prix,Hungaroring,Hungary,2024-07-21,,,,,
+2024,14,1,red_bull,Red Bull,Austrian,408.0,7,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2024-07-28,,,,,
+2024,14,2,mclaren,McLaren,British,366.0,2,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2024-07-28,,,,,
+2024,14,3,ferrari,Ferrari,Italian,345.0,2,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2024-07-28,,,,,
+2024,14,4,mercedes,Mercedes,German,266.0,3,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2024-07-28,,,,,
+2024,14,5,aston_martin,Aston Martin,British,73.0,0,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2024-07-28,,,,,
+2024,14,6,rb,RB F1 Team,Italian,34.0,0,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2024-07-28,,,,,
+2024,14,7,haas,Haas F1 Team,American,27.0,0,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2024-07-28,,,,,
+2024,14,8,alpine,Alpine F1 Team,French,11.0,0,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2024-07-28,,,,,
+2024,14,9,williams,Williams,British,4.0,0,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2024-07-28,,,,,
+2024,14,10,sauber,Sauber,Swiss,0.0,0,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2024-07-28,,,,,
+2024,15,1,red_bull,Red Bull,Austrian,434.0,7,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2024-08-25,,,,,
+2024,15,2,mclaren,McLaren,British,404.0,3,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2024-08-25,,,,,
+2024,15,3,ferrari,Ferrari,Italian,370.0,2,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2024-08-25,,,,,
+2024,15,4,mercedes,Mercedes,German,276.0,3,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2024-08-25,,,,,
+2024,15,5,aston_martin,Aston Martin,British,74.0,0,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2024-08-25,,,,,
+2024,15,6,rb,RB F1 Team,Italian,34.0,0,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2024-08-25,,,,,
+2024,15,7,haas,Haas F1 Team,American,27.0,0,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2024-08-25,,,,,
+2024,15,8,alpine,Alpine F1 Team,French,13.0,0,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2024-08-25,,,,,
+2024,15,9,williams,Williams,British,4.0,0,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2024-08-25,,,,,
+2024,15,10,sauber,Sauber,Swiss,0.0,0,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2024-08-25,,,,,
+2024,16,1,red_bull,Red Bull,Austrian,446.0,7,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2024-09-01,,,,,
+2024,16,2,mclaren,McLaren,British,438.0,3,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2024-09-01,,,,,
+2024,16,3,ferrari,Ferrari,Italian,407.0,3,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2024-09-01,,,,,
+2024,16,4,mercedes,Mercedes,German,292.0,3,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2024-09-01,,,,,
+2024,16,5,aston_martin,Aston Martin,British,74.0,0,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2024-09-01,,,,,
+2024,16,6,rb,RB F1 Team,Italian,34.0,0,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2024-09-01,,,,,
+2024,16,7,haas,Haas F1 Team,American,28.0,0,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2024-09-01,,,,,
+2024,16,8,alpine,Alpine F1 Team,French,13.0,0,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2024-09-01,,,,,
+2024,16,9,williams,Williams,British,6.0,0,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2024-09-01,,,,,
+2024,16,10,sauber,Sauber,Swiss,0.0,0,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2024-09-01,,,,,
+2024,17,1,mclaren,McLaren,British,476.0,4,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2024-09-15,,,,,
+2024,17,2,red_bull,Red Bull,Austrian,456.0,7,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2024-09-15,,,,,
+2024,17,3,ferrari,Ferrari,Italian,425.0,3,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2024-09-15,,,,,
+2024,17,4,mercedes,Mercedes,German,309.0,3,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2024-09-15,,,,,
+2024,17,5,aston_martin,Aston Martin,British,82.0,0,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2024-09-15,,,,,
+2024,17,6,rb,RB F1 Team,Italian,34.0,0,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2024-09-15,,,,,
+2024,17,7,haas,Haas F1 Team,American,29.0,0,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2024-09-15,,,,,
+2024,17,8,williams,Williams,British,16.0,0,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2024-09-15,,,,,
+2024,17,9,alpine,Alpine F1 Team,French,13.0,0,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2024-09-15,,,,,
+2024,17,10,sauber,Sauber,Swiss,0.0,0,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2024-09-15,,,,,
+2024,18,1,mclaren,McLaren,British,516.0,5,Singapore Grand Prix,Marina Bay Street Circuit,Singapore,2024-09-22,,,,,
+2024,18,2,red_bull,Red Bull,Austrian,475.0,7,Singapore Grand Prix,Marina Bay Street Circuit,Singapore,2024-09-22,,,,,
+2024,18,3,ferrari,Ferrari,Italian,441.0,3,Singapore Grand Prix,Marina Bay Street Circuit,Singapore,2024-09-22,,,,,
+2024,18,4,mercedes,Mercedes,German,329.0,3,Singapore Grand Prix,Marina Bay Street Circuit,Singapore,2024-09-22,,,,,
+2024,18,5,aston_martin,Aston Martin,British,86.0,0,Singapore Grand Prix,Marina Bay Street Circuit,Singapore,2024-09-22,,,,,
+2024,18,6,rb,RB F1 Team,Italian,34.0,0,Singapore Grand Prix,Marina Bay Street Circuit,Singapore,2024-09-22,,,,,
+2024,18,7,haas,Haas F1 Team,American,31.0,0,Singapore Grand Prix,Marina Bay Street Circuit,Singapore,2024-09-22,,,,,
+2024,18,8,williams,Williams,British,16.0,0,Singapore Grand Prix,Marina Bay Street Circuit,Singapore,2024-09-22,,,,,
+2024,18,9,alpine,Alpine F1 Team,French,13.0,0,Singapore Grand Prix,Marina Bay Street Circuit,Singapore,2024-09-22,,,,,
+2024,18,10,sauber,Sauber,Swiss,0.0,0,Singapore Grand Prix,Marina Bay Street Circuit,Singapore,2024-09-22,,,,,
+2024,19,1,mclaren,McLaren,British,544.0,5,United States Grand Prix,Circuit of the Americas,USA,2024-10-20,,,,,
+2024,19,2,red_bull,Red Bull,Austrian,504.0,7,United States Grand Prix,Circuit of the Americas,USA,2024-10-20,,,,,
+2024,19,3,ferrari,Ferrari,Italian,496.0,4,United States Grand Prix,Circuit of the Americas,USA,2024-10-20,,,,,
+2024,19,4,mercedes,Mercedes,German,344.0,3,United States Grand Prix,Circuit of the Americas,USA,2024-10-20,,,,,
+2024,19,5,aston_martin,Aston Martin,British,86.0,0,United States Grand Prix,Circuit of the Americas,USA,2024-10-20,,,,,
+2024,19,6,haas,Haas F1 Team,American,38.0,0,United States Grand Prix,Circuit of the Americas,USA,2024-10-20,,,,,
+2024,19,7,rb,RB F1 Team,Italian,36.0,0,United States Grand Prix,Circuit of the Americas,USA,2024-10-20,,,,,
+2024,19,8,williams,Williams,British,17.0,0,United States Grand Prix,Circuit of the Americas,USA,2024-10-20,,,,,
+2024,19,9,alpine,Alpine F1 Team,French,13.0,0,United States Grand Prix,Circuit of the Americas,USA,2024-10-20,,,,,
+2024,19,10,sauber,Sauber,Swiss,0.0,0,United States Grand Prix,Circuit of the Americas,USA,2024-10-20,,,,,
+2024,20,1,mclaren,McLaren,British,566.0,5,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2024-10-27,,,,,
+2024,20,2,ferrari,Ferrari,Italian,537.0,5,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2024-10-27,,,,,
+2024,20,3,red_bull,Red Bull,Austrian,512.0,7,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2024-10-27,,,,,
+2024,20,4,mercedes,Mercedes,German,366.0,3,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2024-10-27,,,,,
+2024,20,5,aston_martin,Aston Martin,British,86.0,0,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2024-10-27,,,,,
+2024,20,6,haas,Haas F1 Team,American,46.0,0,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2024-10-27,,,,,
+2024,20,7,rb,RB F1 Team,Italian,36.0,0,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2024-10-27,,,,,
+2024,20,8,williams,Williams,British,17.0,0,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2024-10-27,,,,,
+2024,20,9,alpine,Alpine F1 Team,French,14.0,0,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2024-10-27,,,,,
+2024,20,10,sauber,Sauber,Swiss,0.0,0,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2024-10-27,,,,,
+2024,21,1,mclaren,McLaren,British,593.0,5,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2024-11-03,,,,,
+2024,21,2,ferrari,Ferrari,Italian,557.0,5,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2024-11-03,,,,,
+2024,21,3,red_bull,Red Bull,Austrian,544.0,8,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2024-11-03,,,,,
+2024,21,4,mercedes,Mercedes,German,382.0,3,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2024-11-03,,,,,
+2024,21,5,aston_martin,Aston Martin,British,86.0,0,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2024-11-03,,,,,
+2024,21,6,alpine,Alpine F1 Team,French,49.0,0,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2024-11-03,,,,,
+2024,21,7,haas,Haas F1 Team,American,46.0,0,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2024-11-03,,,,,
+2024,21,8,rb,RB F1 Team,Italian,44.0,0,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2024-11-03,,,,,
+2024,21,9,williams,Williams,British,17.0,0,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2024-11-03,,,,,
+2024,21,10,sauber,Sauber,Swiss,0.0,0,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2024-11-03,,,,,
+2024,22,1,mclaren,McLaren,British,608.0,5,Las Vegas Grand Prix,Las Vegas Strip Street Circuit,USA,2024-11-23,,,,,
+2024,22,2,ferrari,Ferrari,Italian,584.0,5,Las Vegas Grand Prix,Las Vegas Strip Street Circuit,USA,2024-11-23,,,,,
+2024,22,3,red_bull,Red Bull,Austrian,555.0,8,Las Vegas Grand Prix,Las Vegas Strip Street Circuit,USA,2024-11-23,,,,,
+2024,22,4,mercedes,Mercedes,German,425.0,4,Las Vegas Grand Prix,Las Vegas Strip Street Circuit,USA,2024-11-23,,,,,
+2024,22,5,aston_martin,Aston Martin,British,86.0,0,Las Vegas Grand Prix,Las Vegas Strip Street Circuit,USA,2024-11-23,,,,,
+2024,22,6,haas,Haas F1 Team,American,50.0,0,Las Vegas Grand Prix,Las Vegas Strip Street Circuit,USA,2024-11-23,,,,,
+2024,22,7,alpine,Alpine F1 Team,French,49.0,0,Las Vegas Grand Prix,Las Vegas Strip Street Circuit,USA,2024-11-23,,,,,
+2024,22,8,rb,RB F1 Team,Italian,46.0,0,Las Vegas Grand Prix,Las Vegas Strip Street Circuit,USA,2024-11-23,,,,,
+2024,22,9,williams,Williams,British,17.0,0,Las Vegas Grand Prix,Las Vegas Strip Street Circuit,USA,2024-11-23,,,,,
+2024,22,10,sauber,Sauber,Swiss,0.0,0,Las Vegas Grand Prix,Las Vegas Strip Street Circuit,USA,2024-11-23,,,,,
+2024,23,1,mclaren,McLaren,British,640.0,5,Qatar Grand Prix,Losail International Circuit,Qatar,2024-12-01,,,,,
+2024,23,2,ferrari,Ferrari,Italian,619.0,5,Qatar Grand Prix,Losail International Circuit,Qatar,2024-12-01,,,,,
+2024,23,3,red_bull,Red Bull,Austrian,581.0,9,Qatar Grand Prix,Losail International Circuit,Qatar,2024-12-01,,,,,
+2024,23,4,mercedes,Mercedes,German,446.0,4,Qatar Grand Prix,Losail International Circuit,Qatar,2024-12-01,,,,,
+2024,23,5,aston_martin,Aston Martin,British,92.0,0,Qatar Grand Prix,Losail International Circuit,Qatar,2024-12-01,,,,,
+2024,23,6,alpine,Alpine F1 Team,French,59.0,0,Qatar Grand Prix,Losail International Circuit,Qatar,2024-12-01,,,,,
+2024,23,7,haas,Haas F1 Team,American,54.0,0,Qatar Grand Prix,Losail International Circuit,Qatar,2024-12-01,,,,,
+2024,23,8,rb,RB F1 Team,Italian,46.0,0,Qatar Grand Prix,Losail International Circuit,Qatar,2024-12-01,,,,,
+2024,23,9,williams,Williams,British,17.0,0,Qatar Grand Prix,Losail International Circuit,Qatar,2024-12-01,,,,,
+2024,23,10,sauber,Sauber,Swiss,4.0,0,Qatar Grand Prix,Losail International Circuit,Qatar,2024-12-01,,,,,
+2024,24,1,mclaren,McLaren,British,666.0,6,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2024-12-08,,,,,
+2024,24,2,ferrari,Ferrari,Italian,652.0,5,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2024-12-08,,,,,
+2024,24,3,red_bull,Red Bull,Austrian,589.0,9,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2024-12-08,,,,,
+2024,24,4,mercedes,Mercedes,German,468.0,4,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2024-12-08,,,,,
+2024,24,5,aston_martin,Aston Martin,British,94.0,0,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2024-12-08,,,,,
+2024,24,6,alpine,Alpine F1 Team,French,65.0,0,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2024-12-08,,,,,
+2024,24,7,haas,Haas F1 Team,American,58.0,0,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2024-12-08,,,,,
+2024,24,8,rb,RB F1 Team,Italian,46.0,0,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2024-12-08,,,,,
+2024,24,9,williams,Williams,British,17.0,0,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2024-12-08,,,,,
+2024,24,10,sauber,Sauber,Swiss,4.0,0,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2024-12-08,,,,,
+2025,1,1,mclaren,McLaren,British,27.0,1,Australian Grand Prix,Albert Park Grand Prix Circuit,Australia,2025-03-16,,,,,
+2025,1,2,mercedes,Mercedes,German,27.0,0,Australian Grand Prix,Albert Park Grand Prix Circuit,Australia,2025-03-16,,,,,
+2025,1,3,red_bull,Red Bull,Austrian,18.0,0,Australian Grand Prix,Albert Park Grand Prix Circuit,Australia,2025-03-16,,,,,
+2025,1,4,williams,Williams,British,10.0,0,Australian Grand Prix,Albert Park Grand Prix Circuit,Australia,2025-03-16,,,,,
+2025,1,5,aston_martin,Aston Martin,British,8.0,0,Australian Grand Prix,Albert Park Grand Prix Circuit,Australia,2025-03-16,,,,,
+2025,1,6,sauber,Sauber,Swiss,6.0,0,Australian Grand Prix,Albert Park Grand Prix Circuit,Australia,2025-03-16,,,,,
+2025,1,7,ferrari,Ferrari,Italian,5.0,0,Australian Grand Prix,Albert Park Grand Prix Circuit,Australia,2025-03-16,,,,,
+2025,1,8,alpine,Alpine F1 Team,French,0.0,0,Australian Grand Prix,Albert Park Grand Prix Circuit,Australia,2025-03-16,,,,,
+2025,1,9,rb,RB F1 Team,Italian,0.0,0,Australian Grand Prix,Albert Park Grand Prix Circuit,Australia,2025-03-16,,,,,
+2025,1,10,haas,Haas F1 Team,American,0.0,0,Australian Grand Prix,Albert Park Grand Prix Circuit,Australia,2025-03-16,,,,,
+2025,2,1,mclaren,McLaren,British,78.0,2,Chinese Grand Prix,Shanghai International Circuit,China,2025-03-23,,,,,
+2025,2,2,mercedes,Mercedes,German,57.0,0,Chinese Grand Prix,Shanghai International Circuit,China,2025-03-23,,,,,
+2025,2,3,red_bull,Red Bull,Austrian,36.0,0,Chinese Grand Prix,Shanghai International Circuit,China,2025-03-23,,,,,
+2025,2,4,williams,Williams,British,17.0,0,Chinese Grand Prix,Shanghai International Circuit,China,2025-03-23,,,,,
+2025,2,5,ferrari,Ferrari,Italian,17.0,0,Chinese Grand Prix,Shanghai International Circuit,China,2025-03-23,,,,,
+2025,2,6,haas,Haas F1 Team,American,14.0,0,Chinese Grand Prix,Shanghai International Circuit,China,2025-03-23,,,,,
+2025,2,7,aston_martin,Aston Martin,British,10.0,0,Chinese Grand Prix,Shanghai International Circuit,China,2025-03-23,,,,,
+2025,2,8,sauber,Sauber,Swiss,6.0,0,Chinese Grand Prix,Shanghai International Circuit,China,2025-03-23,,,,,
+2025,2,9,rb,RB F1 Team,Italian,3.0,0,Chinese Grand Prix,Shanghai International Circuit,China,2025-03-23,,,,,
+2025,2,10,alpine,Alpine F1 Team,French,0.0,0,Chinese Grand Prix,Shanghai International Circuit,China,2025-03-23,,,,,
+2025,3,1,mclaren,McLaren,British,111.0,2,Japanese Grand Prix,Suzuka Circuit,Japan,2025-04-06,,,,,
+2025,3,2,mercedes,Mercedes,German,75.0,0,Japanese Grand Prix,Suzuka Circuit,Japan,2025-04-06,,,,,
+2025,3,3,red_bull,Red Bull,Austrian,61.0,1,Japanese Grand Prix,Suzuka Circuit,Japan,2025-04-06,,,,,
+2025,3,4,ferrari,Ferrari,Italian,35.0,0,Japanese Grand Prix,Suzuka Circuit,Japan,2025-04-06,,,,,
+2025,3,5,williams,Williams,British,19.0,0,Japanese Grand Prix,Suzuka Circuit,Japan,2025-04-06,,,,,
+2025,3,6,haas,Haas F1 Team,American,15.0,0,Japanese Grand Prix,Suzuka Circuit,Japan,2025-04-06,,,,,
+2025,3,7,aston_martin,Aston Martin,British,10.0,0,Japanese Grand Prix,Suzuka Circuit,Japan,2025-04-06,,,,,
+2025,3,8,rb,RB F1 Team,Italian,7.0,0,Japanese Grand Prix,Suzuka Circuit,Japan,2025-04-06,,,,,
+2025,3,9,sauber,Sauber,Swiss,6.0,0,Japanese Grand Prix,Suzuka Circuit,Japan,2025-04-06,,,,,
+2025,3,10,alpine,Alpine F1 Team,French,0.0,0,Japanese Grand Prix,Suzuka Circuit,Japan,2025-04-06,,,,,
+2025,4,1,mclaren,McLaren,British,151.0,3,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2025-04-13,,,,,
+2025,4,2,mercedes,Mercedes,German,93.0,0,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2025-04-13,,,,,
+2025,4,3,red_bull,Red Bull,Austrian,71.0,1,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2025-04-13,,,,,
+2025,4,4,ferrari,Ferrari,Italian,57.0,0,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2025-04-13,,,,,
+2025,4,5,haas,Haas F1 Team,American,20.0,0,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2025-04-13,,,,,
+2025,4,6,williams,Williams,British,19.0,0,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2025-04-13,,,,,
+2025,4,7,aston_martin,Aston Martin,British,10.0,0,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2025-04-13,,,,,
+2025,4,8,rb,RB F1 Team,Italian,7.0,0,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2025-04-13,,,,,
+2025,4,9,alpine,Alpine F1 Team,French,6.0,0,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2025-04-13,,,,,
+2025,4,10,sauber,Sauber,Swiss,6.0,0,Bahrain Grand Prix,Bahrain International Circuit,Bahrain,2025-04-13,,,,,
+2025,5,1,mclaren,McLaren,British,188.0,4,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2025-04-20,,,,,
+2025,5,2,mercedes,Mercedes,German,111.0,0,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2025-04-20,,,,,
+2025,5,3,red_bull,Red Bull,Austrian,89.0,1,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2025-04-20,,,,,
+2025,5,4,ferrari,Ferrari,Italian,78.0,0,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2025-04-20,,,,,
+2025,5,5,williams,Williams,British,25.0,0,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2025-04-20,,,,,
+2025,5,6,haas,Haas F1 Team,American,20.0,0,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2025-04-20,,,,,
+2025,5,7,aston_martin,Aston Martin,British,10.0,0,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2025-04-20,,,,,
+2025,5,8,rb,RB F1 Team,Italian,8.0,0,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2025-04-20,,,,,
+2025,5,9,alpine,Alpine F1 Team,French,6.0,0,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2025-04-20,,,,,
+2025,5,10,sauber,Sauber,Swiss,6.0,0,Saudi Arabian Grand Prix,Jeddah Corniche Circuit,Saudi Arabia,2025-04-20,,,,,
+2025,6,1,mclaren,McLaren,British,246.0,5,Miami Grand Prix,Miami International Autodrome,USA,2025-05-04,,,,,
+2025,6,2,mercedes,Mercedes,German,141.0,0,Miami Grand Prix,Miami International Autodrome,USA,2025-05-04,,,,,
+2025,6,3,red_bull,Red Bull,Austrian,105.0,1,Miami Grand Prix,Miami International Autodrome,USA,2025-05-04,,,,,
+2025,6,4,ferrari,Ferrari,Italian,94.0,0,Miami Grand Prix,Miami International Autodrome,USA,2025-05-04,,,,,
+2025,6,5,williams,Williams,British,37.0,0,Miami Grand Prix,Miami International Autodrome,USA,2025-05-04,,,,,
+2025,6,6,haas,Haas F1 Team,American,20.0,0,Miami Grand Prix,Miami International Autodrome,USA,2025-05-04,,,,,
+2025,6,7,aston_martin,Aston Martin,British,14.0,0,Miami Grand Prix,Miami International Autodrome,USA,2025-05-04,,,,,
+2025,6,8,rb,RB F1 Team,Italian,8.0,0,Miami Grand Prix,Miami International Autodrome,USA,2025-05-04,,,,,
+2025,6,9,alpine,Alpine F1 Team,French,7.0,0,Miami Grand Prix,Miami International Autodrome,USA,2025-05-04,,,,,
+2025,6,10,sauber,Sauber,Swiss,6.0,0,Miami Grand Prix,Miami International Autodrome,USA,2025-05-04,,,,,
+2025,7,1,mclaren,McLaren,British,279.0,5,Emilia Romagna Grand Prix,Autodromo Enzo e Dino Ferrari,Italy,2025-05-18,,,,,
+2025,7,2,mercedes,Mercedes,German,147.0,0,Emilia Romagna Grand Prix,Autodromo Enzo e Dino Ferrari,Italy,2025-05-18,,,,,
+2025,7,3,red_bull,Red Bull,Austrian,131.0,2,Emilia Romagna Grand Prix,Autodromo Enzo e Dino Ferrari,Italy,2025-05-18,,,,,
+2025,7,4,ferrari,Ferrari,Italian,114.0,0,Emilia Romagna Grand Prix,Autodromo Enzo e Dino Ferrari,Italy,2025-05-18,,,,,
+2025,7,5,williams,Williams,British,51.0,0,Emilia Romagna Grand Prix,Autodromo Enzo e Dino Ferrari,Italy,2025-05-18,,,,,
+2025,7,6,haas,Haas F1 Team,American,20.0,0,Emilia Romagna Grand Prix,Autodromo Enzo e Dino Ferrari,Italy,2025-05-18,,,,,
+2025,7,7,aston_martin,Aston Martin,British,14.0,0,Emilia Romagna Grand Prix,Autodromo Enzo e Dino Ferrari,Italy,2025-05-18,,,,,
+2025,7,8,rb,RB F1 Team,Italian,10.0,0,Emilia Romagna Grand Prix,Autodromo Enzo e Dino Ferrari,Italy,2025-05-18,,,,,
+2025,7,9,alpine,Alpine F1 Team,French,7.0,0,Emilia Romagna Grand Prix,Autodromo Enzo e Dino Ferrari,Italy,2025-05-18,,,,,
+2025,7,10,sauber,Sauber,Swiss,6.0,0,Emilia Romagna Grand Prix,Autodromo Enzo e Dino Ferrari,Italy,2025-05-18,,,,,
+2025,8,1,mclaren,McLaren,British,319.0,6,Monaco Grand Prix,Circuit de Monaco,Monaco,2025-05-25,,,,,
+2025,8,2,mercedes,Mercedes,German,147.0,0,Monaco Grand Prix,Circuit de Monaco,Monaco,2025-05-25,,,,,
+2025,8,3,red_bull,Red Bull,Austrian,143.0,2,Monaco Grand Prix,Circuit de Monaco,Monaco,2025-05-25,,,,,
+2025,8,4,ferrari,Ferrari,Italian,142.0,0,Monaco Grand Prix,Circuit de Monaco,Monaco,2025-05-25,,,,,
+2025,8,5,williams,Williams,British,54.0,0,Monaco Grand Prix,Circuit de Monaco,Monaco,2025-05-25,,,,,
+2025,8,6,haas,Haas F1 Team,American,26.0,0,Monaco Grand Prix,Circuit de Monaco,Monaco,2025-05-25,,,,,
+2025,8,7,rb,RB F1 Team,Italian,22.0,0,Monaco Grand Prix,Circuit de Monaco,Monaco,2025-05-25,,,,,
+2025,8,8,aston_martin,Aston Martin,British,14.0,0,Monaco Grand Prix,Circuit de Monaco,Monaco,2025-05-25,,,,,
+2025,8,9,alpine,Alpine F1 Team,French,7.0,0,Monaco Grand Prix,Circuit de Monaco,Monaco,2025-05-25,,,,,
+2025,8,10,sauber,Sauber,Swiss,6.0,0,Monaco Grand Prix,Circuit de Monaco,Monaco,2025-05-25,,,,,
+2025,9,1,mclaren,McLaren,British,362.0,7,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2025-06-01,,,,,
+2025,9,2,ferrari,Ferrari,Italian,165.0,0,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2025-06-01,,,,,
+2025,9,3,mercedes,Mercedes,German,159.0,0,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2025-06-01,,,,,
+2025,9,4,red_bull,Red Bull,Austrian,144.0,2,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2025-06-01,,,,,
+2025,9,5,williams,Williams,British,54.0,0,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2025-06-01,,,,,
+2025,9,6,rb,RB F1 Team,Italian,28.0,0,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2025-06-01,,,,,
+2025,9,7,haas,Haas F1 Team,American,26.0,0,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2025-06-01,,,,,
+2025,9,8,sauber,Sauber,Swiss,16.0,0,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2025-06-01,,,,,
+2025,9,9,aston_martin,Aston Martin,British,16.0,0,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2025-06-01,,,,,
+2025,9,10,alpine,Alpine F1 Team,French,11.0,0,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Spain,2025-06-01,,,,,
+2025,10,1,mclaren,McLaren,British,374.0,7,Canadian Grand Prix,Circuit Gilles Villeneuve,Canada,2025-06-15,,,,,
+2025,10,2,mercedes,Mercedes,German,199.0,1,Canadian Grand Prix,Circuit Gilles Villeneuve,Canada,2025-06-15,,,,,
+2025,10,3,ferrari,Ferrari,Italian,183.0,0,Canadian Grand Prix,Circuit Gilles Villeneuve,Canada,2025-06-15,,,,,
+2025,10,4,red_bull,Red Bull,Austrian,162.0,2,Canadian Grand Prix,Circuit Gilles Villeneuve,Canada,2025-06-15,,,,,
+2025,10,5,williams,Williams,British,55.0,0,Canadian Grand Prix,Circuit Gilles Villeneuve,Canada,2025-06-15,,,,,
+2025,10,6,haas,Haas F1 Team,American,28.0,0,Canadian Grand Prix,Circuit Gilles Villeneuve,Canada,2025-06-15,,,,,
+2025,10,7,rb,RB F1 Team,Italian,28.0,0,Canadian Grand Prix,Circuit Gilles Villeneuve,Canada,2025-06-15,,,,,
+2025,10,8,aston_martin,Aston Martin,British,22.0,0,Canadian Grand Prix,Circuit Gilles Villeneuve,Canada,2025-06-15,,,,,
+2025,10,9,sauber,Sauber,Swiss,20.0,0,Canadian Grand Prix,Circuit Gilles Villeneuve,Canada,2025-06-15,,,,,
+2025,10,10,alpine,Alpine F1 Team,French,11.0,0,Canadian Grand Prix,Circuit Gilles Villeneuve,Canada,2025-06-15,,,,,
+2025,11,1,mclaren,McLaren,British,417.0,8,Austrian Grand Prix,Red Bull Ring,Austria,2025-06-29,,,,,
+2025,11,2,ferrari,Ferrari,Italian,210.0,0,Austrian Grand Prix,Red Bull Ring,Austria,2025-06-29,,,,,
+2025,11,3,mercedes,Mercedes,German,209.0,1,Austrian Grand Prix,Red Bull Ring,Austria,2025-06-29,,,,,
+2025,11,4,red_bull,Red Bull,Austrian,162.0,2,Austrian Grand Prix,Red Bull Ring,Austria,2025-06-29,,,,,
+2025,11,5,williams,Williams,British,55.0,0,Austrian Grand Prix,Red Bull Ring,Austria,2025-06-29,,,,,
+2025,11,6,rb,RB F1 Team,Italian,36.0,0,Austrian Grand Prix,Red Bull Ring,Austria,2025-06-29,,,,,
+2025,11,7,haas,Haas F1 Team,American,29.0,0,Austrian Grand Prix,Red Bull Ring,Austria,2025-06-29,,,,,
+2025,11,8,aston_martin,Aston Martin,British,28.0,0,Austrian Grand Prix,Red Bull Ring,Austria,2025-06-29,,,,,
+2025,11,9,sauber,Sauber,Swiss,26.0,0,Austrian Grand Prix,Red Bull Ring,Austria,2025-06-29,,,,,
+2025,11,10,alpine,Alpine F1 Team,French,11.0,0,Austrian Grand Prix,Red Bull Ring,Austria,2025-06-29,,,,,
+2025,12,1,mclaren,McLaren,British,460.0,9,British Grand Prix,Silverstone Circuit,UK,2025-07-06,,,,,
+2025,12,2,ferrari,Ferrari,Italian,222.0,0,British Grand Prix,Silverstone Circuit,UK,2025-07-06,,,,,
+2025,12,3,mercedes,Mercedes,German,210.0,1,British Grand Prix,Silverstone Circuit,UK,2025-07-06,,,,,
+2025,12,4,red_bull,Red Bull,Austrian,172.0,2,British Grand Prix,Silverstone Circuit,UK,2025-07-06,,,,,
+2025,12,5,williams,Williams,British,59.0,0,British Grand Prix,Silverstone Circuit,UK,2025-07-06,,,,,
+2025,12,6,sauber,Sauber,Swiss,41.0,0,British Grand Prix,Silverstone Circuit,UK,2025-07-06,,,,,
+2025,12,7,rb,RB F1 Team,Italian,36.0,0,British Grand Prix,Silverstone Circuit,UK,2025-07-06,,,,,
+2025,12,8,aston_martin,Aston Martin,British,36.0,0,British Grand Prix,Silverstone Circuit,UK,2025-07-06,,,,,
+2025,12,9,haas,Haas F1 Team,American,29.0,0,British Grand Prix,Silverstone Circuit,UK,2025-07-06,,,,,
+2025,12,10,alpine,Alpine F1 Team,French,19.0,0,British Grand Prix,Silverstone Circuit,UK,2025-07-06,,,,,
+2025,13,1,mclaren,McLaren,British,516.0,10,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2025-07-27,,,,,
+2025,13,2,ferrari,Ferrari,Italian,248.0,0,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2025-07-27,,,,,
+2025,13,3,mercedes,Mercedes,German,220.0,1,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2025-07-27,,,,,
+2025,13,4,red_bull,Red Bull,Austrian,192.0,2,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2025-07-27,,,,,
+2025,13,5,williams,Williams,British,70.0,0,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2025-07-27,,,,,
+2025,13,6,sauber,Sauber,Swiss,43.0,0,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2025-07-27,,,,,
+2025,13,7,rb,RB F1 Team,Italian,41.0,0,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2025-07-27,,,,,
+2025,13,8,aston_martin,Aston Martin,British,36.0,0,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2025-07-27,,,,,
+2025,13,9,haas,Haas F1 Team,American,35.0,0,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2025-07-27,,,,,
+2025,13,10,alpine,Alpine F1 Team,French,20.0,0,Belgian Grand Prix,Circuit de Spa-Francorchamps,Belgium,2025-07-27,,,,,
+2025,14,1,mclaren,McLaren,British,559.0,11,Hungarian Grand Prix,Hungaroring,Hungary,2025-08-03,,,,,
+2025,14,2,ferrari,Ferrari,Italian,260.0,0,Hungarian Grand Prix,Hungaroring,Hungary,2025-08-03,,,,,
+2025,14,3,mercedes,Mercedes,German,236.0,1,Hungarian Grand Prix,Hungaroring,Hungary,2025-08-03,,,,,
+2025,14,4,red_bull,Red Bull,Austrian,194.0,2,Hungarian Grand Prix,Hungaroring,Hungary,2025-08-03,,,,,
+2025,14,5,williams,Williams,British,70.0,0,Hungarian Grand Prix,Hungaroring,Hungary,2025-08-03,,,,,
+2025,14,6,aston_martin,Aston Martin,British,52.0,0,Hungarian Grand Prix,Hungaroring,Hungary,2025-08-03,,,,,
+2025,14,7,sauber,Sauber,Swiss,51.0,0,Hungarian Grand Prix,Hungaroring,Hungary,2025-08-03,,,,,
+2025,14,8,rb,RB F1 Team,Italian,45.0,0,Hungarian Grand Prix,Hungaroring,Hungary,2025-08-03,,,,,
+2025,14,9,haas,Haas F1 Team,American,35.0,0,Hungarian Grand Prix,Hungaroring,Hungary,2025-08-03,,,,,
+2025,14,10,alpine,Alpine F1 Team,French,20.0,0,Hungarian Grand Prix,Hungaroring,Hungary,2025-08-03,,,,,
+2025,15,1,mclaren,McLaren,British,584.0,12,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2025-08-31,,,,,
+2025,15,2,ferrari,Ferrari,Italian,260.0,0,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2025-08-31,,,,,
+2025,15,3,mercedes,Mercedes,German,248.0,1,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2025-08-31,,,,,
+2025,15,4,red_bull,Red Bull,Austrian,214.0,2,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2025-08-31,,,,,
+2025,15,5,williams,Williams,British,80.0,0,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2025-08-31,,,,,
+2025,15,6,aston_martin,Aston Martin,British,62.0,0,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2025-08-31,,,,,
+2025,15,7,rb,RB F1 Team,Italian,60.0,0,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2025-08-31,,,,,
+2025,15,8,sauber,Sauber,Swiss,51.0,0,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2025-08-31,,,,,
+2025,15,9,haas,Haas F1 Team,American,44.0,0,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2025-08-31,,,,,
+2025,15,10,alpine,Alpine F1 Team,French,20.0,0,Dutch Grand Prix,Circuit Park Zandvoort,Netherlands,2025-08-31,,,,,
+2025,16,1,mclaren,McLaren,British,617.0,12,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2025-09-07,,,,,
+2025,16,2,ferrari,Ferrari,Italian,280.0,0,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2025-09-07,,,,,
+2025,16,3,mercedes,Mercedes,German,260.0,1,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2025-09-07,,,,,
+2025,16,4,red_bull,Red Bull,Austrian,239.0,3,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2025-09-07,,,,,
+2025,16,5,williams,Williams,British,86.0,0,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2025-09-07,,,,,
+2025,16,6,aston_martin,Aston Martin,British,62.0,0,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2025-09-07,,,,,
+2025,16,7,rb,RB F1 Team,Italian,61.0,0,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2025-09-07,,,,,
+2025,16,8,sauber,Sauber,Swiss,55.0,0,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2025-09-07,,,,,
+2025,16,9,haas,Haas F1 Team,American,44.0,0,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2025-09-07,,,,,
+2025,16,10,alpine,Alpine F1 Team,French,20.0,0,Italian Grand Prix,Autodromo Nazionale di Monza,Italy,2025-09-07,,,,,
+2025,17,1,mclaren,McLaren,British,623.0,12,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2025-09-21,,,,,
+2025,17,2,mercedes,Mercedes,German,290.0,1,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2025-09-21,,,,,
+2025,17,3,ferrari,Ferrari,Italian,286.0,0,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2025-09-21,,,,,
+2025,17,4,red_bull,Red Bull,Austrian,272.0,4,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2025-09-21,,,,,
+2025,17,5,williams,Williams,British,101.0,0,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2025-09-21,,,,,
+2025,17,6,rb,RB F1 Team,Italian,72.0,0,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2025-09-21,,,,,
+2025,17,7,aston_martin,Aston Martin,British,62.0,0,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2025-09-21,,,,,
+2025,17,8,sauber,Sauber,Swiss,55.0,0,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2025-09-21,,,,,
+2025,17,9,haas,Haas F1 Team,American,44.0,0,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2025-09-21,,,,,
+2025,17,10,alpine,Alpine F1 Team,French,20.0,0,Azerbaijan Grand Prix,Baku City Circuit,Azerbaijan,2025-09-21,,,,,
+2025,18,1,mclaren,McLaren,British,650.0,12,Singapore Grand Prix,Marina Bay Street Circuit,Singapore,2025-10-05,,,,,
+2025,18,2,mercedes,Mercedes,German,325.0,2,Singapore Grand Prix,Marina Bay Street Circuit,Singapore,2025-10-05,,,,,
+2025,18,3,ferrari,Ferrari,Italian,298.0,0,Singapore Grand Prix,Marina Bay Street Circuit,Singapore,2025-10-05,,,,,
+2025,18,4,red_bull,Red Bull,Austrian,290.0,4,Singapore Grand Prix,Marina Bay Street Circuit,Singapore,2025-10-05,,,,,
+2025,18,5,williams,Williams,British,102.0,0,Singapore Grand Prix,Marina Bay Street Circuit,Singapore,2025-10-05,,,,,
+2025,18,6,rb,RB F1 Team,Italian,72.0,0,Singapore Grand Prix,Marina Bay Street Circuit,Singapore,2025-10-05,,,,,
+2025,18,7,aston_martin,Aston Martin,British,68.0,0,Singapore Grand Prix,Marina Bay Street Circuit,Singapore,2025-10-05,,,,,
+2025,18,8,sauber,Sauber,Swiss,55.0,0,Singapore Grand Prix,Marina Bay Street Circuit,Singapore,2025-10-05,,,,,
+2025,18,9,haas,Haas F1 Team,American,46.0,0,Singapore Grand Prix,Marina Bay Street Circuit,Singapore,2025-10-05,,,,,
+2025,18,10,alpine,Alpine F1 Team,French,20.0,0,Singapore Grand Prix,Marina Bay Street Circuit,Singapore,2025-10-05,,,,,
+2025,19,1,mclaren,McLaren,British,678.0,12,United States Grand Prix,Circuit of the Americas,USA,2025-10-19,,,,,
+2025,19,2,mercedes,Mercedes,German,341.0,2,United States Grand Prix,Circuit of the Americas,USA,2025-10-19,,,,,
+2025,19,3,ferrari,Ferrari,Italian,334.0,0,United States Grand Prix,Circuit of the Americas,USA,2025-10-19,,,,,
+2025,19,4,red_bull,Red Bull,Austrian,331.0,5,United States Grand Prix,Circuit of the Americas,USA,2025-10-19,,,,,
+2025,19,5,williams,Williams,British,111.0,0,United States Grand Prix,Circuit of the Americas,USA,2025-10-19,,,,,
+2025,19,6,rb,RB F1 Team,Italian,72.0,0,United States Grand Prix,Circuit of the Americas,USA,2025-10-19,,,,,
+2025,19,7,aston_martin,Aston Martin,British,69.0,0,United States Grand Prix,Circuit of the Americas,USA,2025-10-19,,,,,
+2025,19,8,sauber,Sauber,Swiss,59.0,0,United States Grand Prix,Circuit of the Americas,USA,2025-10-19,,,,,
+2025,19,9,haas,Haas F1 Team,American,48.0,0,United States Grand Prix,Circuit of the Americas,USA,2025-10-19,,,,,
+2025,19,10,alpine,Alpine F1 Team,French,20.0,0,United States Grand Prix,Circuit of the Americas,USA,2025-10-19,,,,,
+2025,20,1,mclaren,McLaren,British,713.0,13,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2025-10-26,,,,,
+2025,20,2,ferrari,Ferrari,Italian,356.0,0,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2025-10-26,,,,,
+2025,20,3,mercedes,Mercedes,German,355.0,2,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2025-10-26,,,,,
+2025,20,4,red_bull,Red Bull,Austrian,346.0,5,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2025-10-26,,,,,
+2025,20,5,williams,Williams,British,111.0,0,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2025-10-26,,,,,
+2025,20,6,rb,RB F1 Team,Italian,72.0,0,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2025-10-26,,,,,
+2025,20,7,aston_martin,Aston Martin,British,69.0,0,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2025-10-26,,,,,
+2025,20,8,haas,Haas F1 Team,American,62.0,0,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2025-10-26,,,,,
+2025,20,9,sauber,Sauber,Swiss,60.0,0,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2025-10-26,,,,,
+2025,20,10,alpine,Alpine F1 Team,French,20.0,0,Mexico City Grand Prix,Autódromo Hermanos Rodríguez,Mexico,2025-10-26,,,,,
+2025,21,1,mclaren,McLaren,British,756.0,14,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2025-11-09,,,,,
+2025,21,2,mercedes,Mercedes,German,398.0,2,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2025-11-09,,,,,
+2025,21,3,red_bull,Red Bull,Austrian,366.0,5,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2025-11-09,,,,,
+2025,21,4,ferrari,Ferrari,Italian,362.0,0,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2025-11-09,,,,,
+2025,21,5,williams,Williams,British,111.0,0,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2025-11-09,,,,,
+2025,21,6,rb,RB F1 Team,Italian,82.0,0,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2025-11-09,,,,,
+2025,21,7,aston_martin,Aston Martin,British,72.0,0,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2025-11-09,,,,,
+2025,21,8,haas,Haas F1 Team,American,70.0,0,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2025-11-09,,,,,
+2025,21,9,sauber,Sauber,Swiss,62.0,0,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2025-11-09,,,,,
+2025,21,10,alpine,Alpine F1 Team,French,22.0,0,São Paulo Grand Prix,Autódromo José Carlos Pace,Brazil,2025-11-09,,,,,
+2025,22,1,mclaren,McLaren,British,756.0,14,Las Vegas Grand Prix,Las Vegas Strip Street Circuit,USA,2025-11-23,,,,,
+2025,22,2,mercedes,Mercedes,German,431.0,2,Las Vegas Grand Prix,Las Vegas Strip Street Circuit,USA,2025-11-23,,,,,
+2025,22,3,red_bull,Red Bull,Austrian,391.0,6,Las Vegas Grand Prix,Las Vegas Strip Street Circuit,USA,2025-11-23,,,,,
+2025,22,4,ferrari,Ferrari,Italian,378.0,0,Las Vegas Grand Prix,Las Vegas Strip Street Circuit,USA,2025-11-23,,,,,
+2025,22,5,williams,Williams,British,121.0,0,Las Vegas Grand Prix,Las Vegas Strip Street Circuit,USA,2025-11-23,,,,,
+2025,22,6,rb,RB F1 Team,Italian,90.0,0,Las Vegas Grand Prix,Las Vegas Strip Street Circuit,USA,2025-11-23,,,,,
+2025,22,7,haas,Haas F1 Team,American,73.0,0,Las Vegas Grand Prix,Las Vegas Strip Street Circuit,USA,2025-11-23,,,,,
+2025,22,8,aston_martin,Aston Martin,British,72.0,0,Las Vegas Grand Prix,Las Vegas Strip Street Circuit,USA,2025-11-23,,,,,
+2025,22,9,sauber,Sauber,Swiss,68.0,0,Las Vegas Grand Prix,Las Vegas Strip Street Circuit,USA,2025-11-23,,,,,
+2025,22,10,alpine,Alpine F1 Team,French,22.0,0,Las Vegas Grand Prix,Las Vegas Strip Street Circuit,USA,2025-11-23,,,,,
+2025,23,1,mclaren,McLaren,British,800.0,14,Qatar Grand Prix,Losail International Circuit,Qatar,2025-11-30,,,,,
+2025,23,2,mercedes,Mercedes,German,459.0,2,Qatar Grand Prix,Losail International Circuit,Qatar,2025-11-30,,,,,
+2025,23,3,red_bull,Red Bull,Austrian,426.0,7,Qatar Grand Prix,Losail International Circuit,Qatar,2025-11-30,,,,,
+2025,23,4,ferrari,Ferrari,Italian,382.0,0,Qatar Grand Prix,Losail International Circuit,Qatar,2025-11-30,,,,,
+2025,23,5,williams,Williams,British,137.0,0,Qatar Grand Prix,Losail International Circuit,Qatar,2025-11-30,,,,,
+2025,23,6,rb,RB F1 Team,Italian,92.0,0,Qatar Grand Prix,Losail International Circuit,Qatar,2025-11-30,,,,,
+2025,23,7,aston_martin,Aston Martin,British,80.0,0,Qatar Grand Prix,Losail International Circuit,Qatar,2025-11-30,,,,,
+2025,23,8,haas,Haas F1 Team,American,73.0,0,Qatar Grand Prix,Losail International Circuit,Qatar,2025-11-30,,,,,
+2025,23,9,sauber,Sauber,Swiss,68.0,0,Qatar Grand Prix,Losail International Circuit,Qatar,2025-11-30,,,,,
+2025,23,10,alpine,Alpine F1 Team,French,22.0,0,Qatar Grand Prix,Losail International Circuit,Qatar,2025-11-30,,,,,
+2025,24,1,mclaren,McLaren,British,833.0,14,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2025-12-07,,,,,
+2025,24,2,mercedes,Mercedes,German,469.0,2,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2025-12-07,,,,,
+2025,24,3,red_bull,Red Bull,Austrian,451.0,8,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2025-12-07,,,,,
+2025,24,4,ferrari,Ferrari,Italian,398.0,0,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2025-12-07,,,,,
+2025,24,5,williams,Williams,British,137.0,0,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2025-12-07,,,,,
+2025,24,6,rb,RB F1 Team,Italian,92.0,0,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2025-12-07,,,,,
+2025,24,7,aston_martin,Aston Martin,British,89.0,0,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2025-12-07,,,,,
+2025,24,8,haas,Haas F1 Team,American,79.0,0,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2025-12-07,,,,,
+2025,24,9,sauber,Sauber,Swiss,70.0,0,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2025-12-07,,,,,
+2025,24,10,alpine,Alpine F1 Team,French,22.0,0,Abu Dhabi Grand Prix,Yas Marina Circuit,UAE,2025-12-07,,,,,
