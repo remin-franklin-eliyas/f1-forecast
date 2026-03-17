@@ -10,6 +10,9 @@ WHAT THIS SCRIPT DOES:
 - Exports charts to the /visuals folder
 
 HOW TO RUN (after fetch_data.py):
+    # from repo root:
+    python data/explore.py
+    # or from inside data/:
     python explore.py
 
 REQUIREMENTS:
@@ -23,8 +26,9 @@ import seaborn as sns
 import os
 
 # ── CONFIG ────────────────────────────────────────────────
-DATA_PATH   = "data/constructor_standings.csv"
-VISUALS_DIR = "/workspaces/f1-forecast/visuals"
+_HERE       = os.path.dirname(os.path.abspath(__file__))  # .../data/
+DATA_PATH   = os.path.join(_HERE, "constructor_standings.csv")
+VISUALS_DIR = os.path.join(_HERE, "..", "visuals")
 
 # F1 team brand colours (2021–2024 era)
 TEAM_COLOURS = {
@@ -101,7 +105,7 @@ def plot_season_progression(df: pd.DataFrame, season: int):
             color=colour, fontsize=9, va="center", fontweight="bold"
         )
 
-    ax.set_title(f"🏎  {season} Constructors Championship — Points Progression",
+    ax.set_title(f"{season} Constructors Championship — Points Progression",
                  fontsize=15, fontweight="bold", pad=20)
     ax.set_xlabel("Race Round", fontsize=12)
     ax.set_ylabel("Championship Points", fontsize=12)
@@ -146,7 +150,7 @@ def plot_points_heatmap(df: pd.DataFrame, season: int):
         cbar_kws={"label": "Points Scored"},
     )
 
-    ax.set_title(f"🔥  {season} — Points Scored Per Round (by Constructor)",
+    ax.set_title(f"{season} — Points Scored Per Round (by Constructor)",
                  fontsize=14, fontweight="bold", pad=15)
     ax.set_xlabel("Race Round", fontsize=11)
     ax.set_ylabel("")
@@ -185,7 +189,7 @@ def plot_championship_gap(df: pd.DataFrame, season: int):
                 marker="o", markersize=3.5, label=team)
 
     ax.axhline(0, color="white", linewidth=1, linestyle="--", alpha=0.4, label="Leader")
-    ax.set_title(f"📉  {season} — Championship Gap to Leader",
+    ax.set_title(f"{season} — Championship Gap to Leader",
                  fontsize=14, fontweight="bold", pad=15)
     ax.set_xlabel("Race Round", fontsize=12)
     ax.set_ylabel("Points from Leader (negative = trailing)", fontsize=11)
@@ -204,19 +208,20 @@ def print_summary_stats(df: pd.DataFrame):
     print("\n" + "=" * 55)
     print("  📊 Dataset Summary")
     print("=" * 55)
-    print(f"  Seasons   : {sorted(df['season'].unique().tolist())}")
+    print(f"  Seasons   : {sorted(int(s) for s in df['season'].unique())}")
     print(f"  Total rows: {len(df):,}")
     print(f"  Teams     : {df['constructor_name'].nunique()}")
     print(f"  Rounds    : {df['round'].max()} max per season")
 
     print("\n  🏆 Championship Winners by Season:")
     winners = (
-        df.sort_values(["season", "round"])
+        df[df["position"] == 1]
+          .sort_values(["season", "round"])
           .groupby("season")
           .last()
           .reset_index()
     )
-    champs = winners[winners["position"] == 1][["season", "constructor_name", "points"]]
+    champs = winners[["season", "constructor_name", "points"]]
     for _, row in champs.iterrows():
         print(f"     {int(row['season'])}  →  {row['constructor_name']}  ({int(row['points'])} pts)")
 
