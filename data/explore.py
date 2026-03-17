@@ -23,8 +23,8 @@ import seaborn as sns
 import os
 
 # ── CONFIG ────────────────────────────────────────────────
-DATA_PATH   = "constructor_standings.csv"
-VISUALS_DIR = "../visuals"
+DATA_PATH   = "data/constructor_standings.csv"
+VISUALS_DIR = "/workspaces/f1-forecast/visuals"
 
 # F1 team brand colours (2021–2024 era)
 TEAM_COLOURS = {
