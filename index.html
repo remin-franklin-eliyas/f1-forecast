@@ -4785,269 +4785,261 @@
         gapEl.style.border = `1px solid ${gapWin ? 'rgba(52,211,153,0.3)' : 'rgba(248,113,113,0.25)'}`;
         // Hide challenge button in modal when already responding to a challenge
         const modalChalBtn = document.getElementById('modal-btn-challenge');
-        if (mName = currentTrack.name;
-        const text = wins
-          ? `🏆 ${name} beat Remin at ${tName} GP!\nGap: +${gap}s · IQ: ${score}/${grade}\n${stratLine}\n\n"${snippet}"\n\nCan you top it? #F1Strategy #F1`
-          : `🤖 Remin edged me at ${tName} GP (−${gap}s · IQ: ${score}/${grade})\n${stratLine}\n\n"${snippet}"\n\nThink you can do better? #F1Strategy #F1`;
+        if (modalChalBtn) { modalChalBtn.style.display = challengeMode ? 'none' : ''; }
 
-        const tweetUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(text + '\n' + url)}`;
-        if (navigator.share) {
-          navigator.share({
-            title: `F1 Strategy Battle — ${tName} GP`grade')?.textContent || ''}`
-          : '';
+        // ── RIGHT PANEL: accent colour, typewriter verdict, moments, leaderboard CTA ──
+        const celebrateRight = h2h ? h2h.iWin : userWins;
+        const accent = celebrateRight ? '#FFB700' : '#f87171';
+        const rightPanel = document.getElementById('modal-right');
+        if (rightPanel) {
+          rightPanel.style.setProperty('--modal-accent', accent);
+          // Label
+          const labelEl = document.getElementById('modal-analysis-label');
+          if (labelEl) labelEl.textContent = celebrateRight ? '🏁 RACE ANALYSIS' : '📋 POST-RACE DEBRIEF';
 
-            // ── RIGHT PANEL: accent colour, typewriter verdict, moments, leaderboard CTA ──
-            const celebrateRight = h2h ? h2h.iWin : userWins;
-            const accent = celebrateRight ? '#FFB700' : '#f87171';
-            const rightPanel = document.getElementById('modal-right');
-            if(rightPanel) {
-              rightPanel.style.setProperty('--modal-accent', accent);
-              // Label
-              const labelEl = document.getElementById('modal-analysis-label');
-              if (labelEl) labelEl.textContent = celebrateRight ? '🏁 RACE ANALYSIS' : '📋 POST-RACE DEBRIEF';
+          // Typewriter verdict
+          const analysis = simState.analysis;
+          if (analysis) {
+            const textEl = document.getElementById('modal-analysis-text');
+            if (textEl) typewriterEl(textEl, analysis.verdict, 18);
 
-              // Typewriter verdict
-              const analysis = simState.analysis;
-              if (analysis) {
-                const textEl = document.getElementById('modal-analysis-text');
-                if (textEl) typewriterEl(textEl, analysis.verdict, 18);
-
-                // Key moments pills
-                const momentsEl = document.getElementById('modal-analysis-moments');
-                if (momentsEl && analysis.keyMoments.length > 0) {
-                  const pillColors = {
-                    pit: { border: 'rgba(255,107,53,0.5)', bg: 'rgba(255,107,53,0.07)', color: '#FF6B35' },
-                    event: { border: 'rgba(96,165,250,0.5)', bg: 'rgba(96,165,250,0.07)', color: '#60a5fa' },
-                    cliff: { border: 'rgba(255,215,0,0.5)', bg: 'rgba(255,215,0,0.07)', color: '#FFD700' },
-                    close: { border: 'rgba(167,139,250,0.4)', bg: 'rgba(167,139,250,0.07)', color: '#a78bfa' }
-                  };
-                  function getMomentTypeModal(text) {
-                    if (/pit|stop/i.test(text)) return 'pit';
-                    if (/sc|rain|safety|shower|vsc/i.test(text)) return 'event';
-                    if (/cliff|advantage|pace/i.test(text)) return 'cliff';
-                    ret`F1 STRATEGY BATTLE  ·  ${(currentTrack.name).toUpperCase()} 2026`
-                  }
-                  momentsEl.innerHTML = analysis.keyMoments.map(m => {
-                    const t = getMomentTypeModal(m.text);
-                    const c = pillColors[t];
-                    return `<span class="modal-moment-pill" style="border-color:${c.border};background:${c.bg};color:${c.color}">Lap ${m.lap} — ${m.text}</span>`;
-                  }).join('');
-                }
+            // Key moments pills
+            const momentsEl = document.getElementById('modal-analysis-moments');
+            if (momentsEl && analysis.keyMoments.length > 0) {
+              const pillColors = {
+                pit: { border: 'rgba(255,107,53,0.5)', bg: 'rgba(255,107,53,0.07)', color: '#FF6B35' },
+                event: { border: 'rgba(96,165,250,0.5)', bg: 'rgba(96,165,250,0.07)', color: '#60a5fa' },
+                cliff: { border: 'rgba(255,215,0,0.5)', bg: 'rgba(255,215,0,0.07)', color: '#FFD700' },
+                close: { border: 'rgba(167,139,250,0.4)', bg: 'rgba(167,139,250,0.07)', color: '#a78bfa' }
+              };
+              function getMomentTypeModal(text) {
+                if (/pit|stop/i.test(text)) return 'pit';
+                if (/sc|rain|safety|shower|vsc/i.test(text)) return 'event';
+                if (/cliff|advantage|pace/i.test(text)) return 'cliff';
+                return 'close';
               }
-
-              // Leaderboard CTA
-              const ctaEl = document.getElementById('modal-leaderboard-cta');
-              if (ctaEl && SUPABASE_URL && SUPABASE_URL !== 'YOUR_SUPABASE_URL') {
-                ctaEl.innerHTML = '<span style="color:var(--muted);font-size:11px">Loading global leaderboard…</span>';
-                fetch(`${SUPABASE_URL}/rest/v1/forecasts?result=eq.win&order=gap_seconds.asc&limit=1`, {
-                  headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` }
-                })
-                  .then(r => r.json())
-                  .then(data => {
-                    const playerGap = simState.finalGap;
-                    if (Array.isArray(data) && data.length > 0) {
-                      const leader = data[0];
-                      const leaderGap = parseFloat(leader.gap_seconds);
-                      const leaderName = leader.name || 'Anonymous';
-                      if (playerGap <= leaderGap && userWins) {
-                        ctaEl.innerHTML = `<span class="cta-highlight">🏆 You're #1 on the global board!</span><br>Gap: <strong>${playerGap.toFixed(3)}s</strong> — the best strategy run in the world. Defend it.`;
-                      } else if (userWins) {
-                        const diff = (playerGap - leaderGap).toFixed(3);
-                        ctaEl.innerHTML = `Global leader is <strong>${leaderName}</strong> — beat Remin by <strong>${leaderGap.toFixed(3)}s</strong>.<br>You're <span class="cta-highlight">${diff}s off the top</span>. Race again and take that #1 spot.`;
-                      } else {
-                        const playerBest = playerGap;
-                        ctaEl.innerHTML = `Global leader <strong>${leaderName}</strong> won by <strong>${leaderGap.toFixed(3)}s</strong>.<br>You lost by <span class="cta-highlight">${playerBest.toFixed(3)}s</span> this run. Study the key moments above and go again — the board is wide open.`;
-                      }
-                    } else {
-                      if (userWins) {
-                        ctaEl.innerHTML = `<span class="cta-highlight">You won with a ${playerGap.toFixed(3)}s gap.</span> No one else on the board yet — you could be #1. Share the challenge and see who can beat you.`;
-                      } else {
-                        ctaEl.innerHTML = `Remin edged you by <span class="cta-highlight">${playerGap.toFixed(3)}s</span>. The global board is empty — win once and claim the top spot.`;
-                      }
-                    }
-                  })
-                  .catch(() => {
-                    if (ctaEl) ctaEl.innerHTML = '';
-                  });
-              } else if (ctaEl) {
-                if (userWins) {
-                  ctaEl.innerHTML = `You beat Remin by <span class="cta-highlight">${simState.finalGap.toFixed(3)}s</span>. Share the challenge link and see if anyone can top it.`;
-                } else {
-                  ctaEl.innerHTML = `Remin edged you by <span class="cta-highlight">${simState.finalGap.toFixed(3)}s</span>. Review the key moments and come back with a sharper strategy.`;
-                }
-              }
+              momentsEl.innerHTML = analysis.keyMoments.map(m => {
+                const t = getMomentTypeModal(m.text);
+                const c = pillColors[t];
+                return `<span class="modal-moment-pill" style="border-color:${c.border};background:${c.bg};color:${c.color}">Lap ${m.lap} — ${m.text}</span>`;
+              }).join('');
             }
+          }
+
+          // Leaderboard CTA
+          const ctaEl = document.getElementById('modal-leaderboard-cta');
+          if (ctaEl && SUPABASE_URL && SUPABASE_URL !== 'YOUR_SUPABASE_URL') {
+            ctaEl.innerHTML = '<span style="color:var(--muted);font-size:11px">Loading global leaderboard…</span>';
+            fetch(`${SUPABASE_URL}/rest/v1/forecasts?result=eq.win&order=gap_seconds.asc&limit=1`, {
+              headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` }
+            })
+              .then(r => r.json())
+              .then(data => {
+                const playerGap = simState.finalGap;
+                if (Array.isArray(data) && data.length > 0) {
+                  const leader = data[0];
+                  const leaderGap = parseFloat(leader.gap_seconds);
+                  const leaderName = leader.name || 'Anonymous';
+                  if (playerGap <= leaderGap && userWins) {
+                    ctaEl.innerHTML = `<span class="cta-highlight">🏆 You're #1 on the global board!</span><br>Gap: <strong>${playerGap.toFixed(3)}s</strong> — the best strategy run in the world. Defend it.`;
+                  } else if (userWins) {
+                    const diff = (playerGap - leaderGap).toFixed(3);
+                    ctaEl.innerHTML = `Global leader is <strong>${leaderName}</strong> — beat Remin by <strong>${leaderGap.toFixed(3)}s</strong>.<br>You're <span class="cta-highlight">${diff}s off the top</span>. Race again and take that #1 spot.`;
+                  } else {
+                    const playerBest = playerGap;
+                    ctaEl.innerHTML = `Global leader <strong>${leaderName}</strong> won by <strong>${leaderGap.toFixed(3)}s</strong>.<br>You lost by <span class="cta-highlight">${playerBest.toFixed(3)}s</span> this run. Study the key moments above and go again — the board is wide open.`;
+                  }
+                } else {
+                  if (userWins) {
+                    ctaEl.innerHTML = `<span class="cta-highlight">You won with a ${playerGap.toFixed(3)}s gap.</span> No one else on the board yet — you could be #1. Share the challenge and see who can beat you.`;
+                  } else {
+                    ctaEl.innerHTML = `Remin edged you by <span class="cta-highlight">${playerGap.toFixed(3)}s</span>. The global board is empty — win once and claim the top spot.`;
+                  }
+                }
+              })
+              .catch(() => {
+                if (ctaEl) ctaEl.innerHTML = '';
+              });
+          } else if (ctaEl) {
+            if (userWins) {
+              ctaEl.innerHTML = `You beat Remin by <span class="cta-highlight">${simState.finalGap.toFixed(3)}s</span>. Share the challenge link and see if anyone can top it.`;
+            } else {
+              ctaEl.innerHTML = `Remin edged you by <span class="cta-highlight">${simState.finalGap.toFixed(3)}s</span>. Review the key moments and come back with a sharper strategy.`;
+            }
+          }
+        }
 
         overlay.classList.add('show');
-            // Close on backdrop click
-            overlay.onclick = (e) => { if (e.target === overlay) closeRaceModal(); };
-          }, lights.length * 420 + 600);
+        // Close on backdrop click
+        overlay.onclick = (e) => { if (e.target === overlay) closeRaceModal(); };
+      }, lights.length * 420 + 600);
+    }
+
+    function closeRaceModal() {
+      document.getElementById('race-modal-overlay').classList.remove('show');
+    }
+
+    /* ── SHARE RESULT ── */
+    function shareResult() {
+      const wins = simState.userWins;
+      const gap = (simState.finalGap || 0).toFixed(3);
+      const score = document.getElementById('score-num')?.textContent || '—';
+      const grade = document.getElementById('score-grade')?.textContent || '';
+      const name = (simState.userName || 'I').toUpperCase();
+      const url = window.location.origin + window.location.pathname;
+
+      // Strategy compounds: "S(17)→M(18)→H(17)"
+      const fmt = stints => stints.map(s => `${COMPOUND[s.compound].name[0]}(${s.laps})`).join('→');
+      const userStratStr = simState.userStints?.length ? fmt(simState.userStints) : '';
+      const remStratStr = simState.remStints?.length ? fmt(simState.remStints) : '';
+      const stratLine = userStratStr ? `📋 ${userStratStr}  vs  Remin: ${remStratStr}` : '';
+
+      // Verdict snippet — first sentence, max 120 chars
+      const verdict = simState.analysis?.verdict || '';
+      const dotAt = verdict.indexOf('. ');
+      const firstSentence = dotAt > 0 ? verdict.slice(0, dotAt + 1) : verdict;
+      const snippet = firstSentence.length <= 120 ? firstSentence : firstSentence.slice(0, 117) + '…';
+      const tName = currentTrack.name;
+
+      const text = wins
+        ? `🏆 ${name} beat Remin at ${tName} GP!\nGap: +${gap}s · IQ: ${score}/${grade}\n${stratLine}\n\n"${snippet}"\n\nCan you top it? #F1Strategy #F1`
+        : `🤖 Remin edged me at ${tName} GP (−${gap}s · IQ: ${score}/${grade})\n${stratLine}\n\n"${snippet}"\n\nThink you can do better? #F1Strategy #F1`;
+
+      const tweetUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(text + '\n' + url)}`;
+      if (navigator.share) {
+        navigator.share({ title: `F1 Strategy Battle — ${tName} GP`, text, url }).catch(() => { });
+      } else {
+        window.open(tweetUrl, '_blank', 'noopener,noreferrer,width=550,height=420');
+      }
+    }
+    function typewriterEl(el, text, speed = 30) {
+      el.textContent = '';
+      el.classList.remove('done');
+      let i = 0;
+      const t = setInterval(() => {
+        el.textContent += text[i++];
+        if (i >= text.length) { clearInterval(t); el.classList.add('done'); }
+      }, speed);
+    }
+
+    /* ── DOWNLOAD RESULT CARD ── */
+    function downloadResultCard() {
+      const CW = 600, CH = 315;
+      const c = document.createElement('canvas');
+      c.width = CW; c.height = CH;
+      const ctx = c.getContext('2d');
+      // Background + grid
+      ctx.fillStyle = '#080810'; ctx.fillRect(0, 0, CW, CH);
+      ctx.strokeStyle = 'rgba(167,139,250,0.05)'; ctx.lineWidth = 1;
+      for (let x = 0; x < CW; x += 40) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, CH); ctx.stroke(); }
+      for (let y = 0; y < CH; y += 40) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(CW, y); ctx.stroke(); }
+      // Top bar
+      const barG = ctx.createLinearGradient(0, 0, CW, 0);
+      barG.addColorStop(0, '#7c3aed'); barG.addColorStop(1, '#a78bfa');
+      ctx.fillStyle = barG; ctx.fillRect(0, 0, CW, 4);
+      // Logo
+      ctx.font = '11px sans-serif'; ctx.fillStyle = '#6b6b8a';
+      ctx.fillText(`F1 STRATEGY BATTLE  ·  ${currentTrack.name.toUpperCase()} 2026`, 24, 30);
+      // Result label
+      const uWins = simState.userWins;
+      ctx.font = 'bold 12px sans-serif';
+      ctx.fillStyle = uWins ? '#a78bfa' : '#FF6B35';
+      ctx.fillText(uWins ? 'STRATEGY VICTORY' : 'REMIN WINS THIS TIME', 24, 55);
+      // Name
+      const displayName = (simState.userName || 'RACER').toUpperCase().slice(0, 16);
+      ctx.font = 'bold 50px sans-serif'; ctx.fillStyle = '#f0f0f0';
+      ctx.fillText(displayName, 24, 115);
+      // Driver
+      if (userDriver) {
+        const drv = DRIVERS[userDriver];
+        const drvColor = getComputedStyle(document.documentElement).getPropertyValue(drv.colorVar).trim();
+        ctx.font = '15px sans-serif'; ctx.fillStyle = drvColor || '#a78bfa';
+        ctx.fillText(`${drv.name.toUpperCase()}  ·  ${drv.team.toUpperCase()}`, 24, 142);
+      }
+      // Strategy
+      const userStr = userStints.map(s => `${COMPOUND[s.compound].name}(${s.laps}L)`).join(' → ');
+      ctx.font = '12px sans-serif'; ctx.fillStyle = '#6b6b8a';
+      ctx.fillText('STRATEGY: ' + userStr, 24, 170);
+      // Gap
+      const gapText = document.getElementById('gap-disp')?.textContent || '';
+      ctx.font = 'bold 20px sans-serif'; ctx.fillStyle = '#a78bfa';
+      ctx.fillText(gapText, 24, 204);
+      // Score (right side)
+      const score = document.getElementById('score-num')?.textContent || '—';
+      const grade = document.getElementById('score-grade')?.textContent || '';
+      ctx.textAlign = 'right';
+      ctx.font = 'bold 56px sans-serif'; ctx.fillStyle = '#a78bfa';
+      ctx.fillText(score, CW - 28, 148);
+      ctx.font = '10px sans-serif'; ctx.fillStyle = '#6b6b8a';
+      ctx.fillText('STRATEGY IQ', CW - 28, 164);
+      ctx.font = 'bold 12px sans-serif'; ctx.fillStyle = '#f0f0f0';
+      ctx.fillText(grade.toUpperCase(), CW - 28, 182);
+      ctx.textAlign = 'left';
+      // Bottom strip
+      ctx.fillStyle = 'rgba(255,255,255,0.04)'; ctx.fillRect(0, CH - 34, CW, 34);
+      ctx.font = '10px sans-serif'; ctx.fillStyle = '#6b6b8a';
+      ctx.fillText('remin-franklin-eliyas.github.io/f1-forecast  ·  Built by Remin Franklin  ·  2026', 24, CH - 12);
+      // Download
+      const a = document.createElement('a');
+      a.download = `f1-result-${(simState.userName || 'race').replace(/\s+/g, '-').toLowerCase()}.png`;
+      a.href = c.toDataURL('image/png');
+      a.click();
+    }
+
+    /* ── GLOBAL LEADERBOARD ── */
+    let lbCurrentTab = 'wins';
+
+    const DRIVER_COLORS = { VER: '#3671C6', LEC: '#E8002D', RUS: '#00D2BE' };
+
+    async function loadGlobalLeaderboard(tab) {
+      if (!SUPABASE_URL || SUPABASE_URL === 'YOUR_SUPABASE_URL') {
+        document.getElementById('global-lb-table').innerHTML =
+          '<div class="glb-empty">Configure Supabase to see the live leaderboard.</div>';
+        return;
+      }
+      const tableEl = document.getElementById('global-lb-table');
+      tableEl.innerHTML = '<div class="glb-empty" id="glb-loading">Loading\u2026</div>';
+
+      try {
+        const isWins = tab === 'wins';
+        const filter = isWins ? '?result=eq.win&order=gap_seconds.asc&limit=10'
+          : '?order=created_at.desc&limit=10';
+        const res = await fetch(
+          `${SUPABASE_URL}/rest/v1/forecasts${filter}`,
+          { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } }
+        );
+        const rows = await res.json();
+        if (!res.ok) {
+          tableEl.innerHTML = `<div class="glb-empty">DB error: ${rows?.message || rows?.error || JSON.stringify(rows)}</div>`;
+          return;
+        }
+        if (!Array.isArray(rows) || rows.length === 0) {
+          tableEl.innerHTML = '<div class="glb-empty">No races recorded yet — play a race to be the first on the board!</div>';
+          return;
         }
 
-        function closeRaceModal() {
-          document.getElementById('race-modal-overlay').classList.remove('show');
-        }
+        const posClass = i => i === 0 ? 'p1' : i === 1 ? 'p2' : i === 2 ? 'p3' : '';
+        const posIcon = i => i === 0 ? '\uD83E\uDD47' : i === 1 ? '\uD83E\uDD48' : i === 2 ? '\uD83E\uDD49' : String(i + 1);
+        const drvColor = d => DRIVER_COLORS[d] || '#a78bfa';
+        const timeSince = iso => {
+          if (!iso) return '';
+          const s = Math.floor((Date.now() - new Date(iso)) / 1000);
+          if (s < 60) return `${s}s ago`;
+          if (s < 3600) return `${Math.floor(s / 60)}m ago`;
+          if (s < 86400) return `${Math.floor(s / 3600)}h ago`;
+          return `${Math.floor(s / 86400)}d ago`;
+        };
 
-        /* ── SHARE RESULT ── */
-        function shareResult() {
-          const wins = simState.userWins;
-          const gap = (simState.finalGap || 0).toFixed(3);
-          const score = document.getElementById('score-num')?.textContent || '—';
-          const grade = document.getElementById('score-grade')?.textContent || '';
-          const name = (simState.userName || 'I').toUpperCase();
-          const url = window.location.origin + window.location.pathname;
-
-          // Strategy compounds: "S(17)→M(18)→H(17)"
-          const fmt = stints => stints.map(s => `${COMPOUND[s.compound].name[0]}(${s.laps})`).join('→');
-          const userStratStr = simState.userStints?.length ? fmt(simState.userStints) : '';
-          const remStratStr = simState.remStints?.length ? fmt(simState.remStints) : '';
-          const stratLine = userStratStr ? `📋 ${userStratStr}  vs  Remin: ${remStratStr}` : '';
-
-          // Verdict snippet — first sentence, max 120 chars
-          const verdict = simState.analysis?.verdict || '';
-          const dotAt = verdict.indexOf('. ');
-          const firstSentence = dotAt > 0 ? verdict.slice(0, dotAt + 1) : verdict;
-          const snippet = firstSentence.length <= 120 ? firstSentence : firstSentence.slice(0, 117) + '…';
-
-          const text = wins
-            ? `🏆 ${name} beat Remin at Silverstone GP!\nGap: +${gap}s · IQ: ${score}/${grade}\n${stratLine}\n\n"${snippet}"\n\nCan you top it? #F1Strategy #F1`
-            : `🤖 Remin edged me at Silverstone GP (−${gap}s · IQ: ${score}/${grade})\n${stratLine}\n\n"${snippet}"\n\nThink you can do better? #F1Strategy #F1`;
-
-          const tweetUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(text + '\n' + url)}`;
-          if (navigator.share) {
-            navigator.share({ title: 'F1 Strategy Battle — Silverstone GP', text, url }).catch(() => { });
-          } else {
-            window.open(tweetUrl, '_blank', 'noopener,noreferrer,width=550,height=420');
-          }
-        }
-        function typewriterEl(el, text, speed = 30) {
-          el.textContent = '';
-          el.classList.remove('done');
-          let i = 0;
-          const t = setInterval(() => {
-            el.textContent += text[i++];
-            if (i >= text.length) { clearInterval(t); el.classList.add('done'); }
-          }, speed);
-        }
-
-        /* ── DOWNLOAD RESULT CARD ── */
-        function downloadResultCard() {
-          const CW = 600, CH = 315;
-          const c = document.createElement('canvas');
-          c.width = CW; c.height = CH;
-          const ctx = c.getContext('2d');
-          // Background + grid
-          ctx.fillStyle = '#080810'; ctx.fillRect(0, 0, CW, CH);
-          ctx.strokeStyle = 'rgba(167,139,250,0.05)'; ctx.lineWidth = 1;
-          for (let x = 0; x < CW; x += 40) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, CH); ctx.stroke(); }
-          for (let y = 0; y < CH; y += 40) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(CW, y); ctx.stroke(); }
-          // Top bar
-          const barG = ctx.createLinearGradient(0, 0, CW, 0);
-          barG.addColorStop(0, '#7c3aed'); barG.addColorStop(1, '#a78bfa');
-          ctx.fillStyle = barG; ctx.fillRect(0, 0, CW, 4);
-          // Logo
-          ctx.font = '11px sans-serif'; ctx.fillStyle = '#6b6b8a';
-          ctx.fillText('F1 STRATEGY BATTLE  ·  SILVERSTONE 2026', 24, 30);
-          // Result label
-          const uWins = simState.userWins;
-          ctx.font = 'bold 12px sans-serif';
-          ctx.fillStyle = uWins ? '#a78bfa' : '#FF6B35';
-          ctx.fillText(uWins ? 'STRATEGY VICTORY' : 'REMIN WINS THIS TIME', 24, 55);
-          // Name
-          const displayName = (simState.userName || 'RACER').toUpperCase().slice(0, 16);
-          ctx.font = 'bold 50px sans-serif'; ctx.fillStyle = '#f0f0f0';
-          ctx.fillText(displayName, 24, 115);
-          // Driver
-          if (userDriver) {
-            const drv = DRIVERS[userDriver];
-            const drvColor = getComputedStyle(document.documentElement).getPropertyValue(drv.colorVar).trim();
-            ctx.font = '15px sans-serif'; ctx.fillStyle = drvColor || '#a78bfa';
-            ctx.fillText(`${drv.name.toUpperCase()}  ·  ${drv.team.toUpperCase()}`, 24, 142);
-          }
-          // Strategy
-          const userStr = userStints.map(s => `${COMPOUND[s.compound].name}(${s.laps}L)`).join(' → ');
-          ctx.font = '12px sans-serif'; ctx.fillStyle = '#6b6b8a';
-          ctx.fillText('STRATEGY: ' + userStr, 24, 170);
-          // Gap
-          const gapText = document.getElementById('gap-disp')?.textContent || '';
-          ctx.font = 'bold 20px sans-serif'; ctx.fillStyle = '#a78bfa';
-          ctx.fillText(gapText, 24, 204);
-          // Score (right side)
-          const score = document.getElementById('score-num')?.textContent || '—';
-          const grade = document.getElementById('score-grade')?.textContent || '';
-          ctx.textAlign = 'right';
-          ctx.font = 'bold 56px sans-serif'; ctx.fillStyle = '#a78bfa';
-          ctx.fillText(score, CW - 28, 148);
-          ctx.font = '10px sans-serif'; ctx.fillStyle = '#6b6b8a';
-          ctx.fillText('STRATEGY IQ', CW - 28, 164);
-          ctx.font = 'bold 12px sans-serif'; ctx.fillStyle = '#f0f0f0';
-          ctx.fillText(grade.toUpperCase(), CW - 28, 182);
-          ctx.textAlign = 'left';
-          // Bottom strip
-          ctx.fillStyle = 'rgba(255,255,255,0.04)'; ctx.fillRect(0, CH - 34, CW, 34);
-          ctx.font = '10px sans-serif'; ctx.fillStyle = '#6b6b8a';
-          ctx.fillText('remin-franklin-eliyas.github.io/f1-forecast  ·  Built by Remin Franklin  ·  2026', 24, CH - 12);
-          // Download
-          const a = document.createElement('a');
-          a.download = `f1-result-${(simState.userName || 'race').replace(/\s+/g, '-').toLowerCase()}.png`;
-          a.href = c.toDataURL('image/png');
-          a.click();
-        }
-
-        /* ── GLOBAL LEADERBOARD ── */
-        let lbCurrentTab = 'wins';
-
-        const DRIVER_COLORS = { VER: '#3671C6', LEC: '#E8002D', RUS: '#00D2BE' };
-
-        async function loadGlobalLeaderboard(tab) {
-          if (!SUPABASE_URL || SUPABASE_URL === 'YOUR_SUPABASE_URL') {
-            document.getElementById('global-lb-table').innerHTML =
-              '<div class="glb-empty">Configure Supabase to see the live leaderboard.</div>';
-            return;
-          }
-          const tableEl = document.getElementById('global-lb-table');
-          tableEl.innerHTML = '<div class="glb-empty" id="glb-loading">Loading\u2026</div>';
-
-          try {
-            const isWins = tab === 'wins';
-            const filter = isWins ? '?result=eq.win&order=gap_seconds.asc&limit=10'
-              : '?order=created_at.desc&limit=10';
-            const res = await fetch(
-              `${SUPABASE_URL}/rest/v1/forecasts${filter}`,
-              { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } }
-            );
-            const rows = await res.json();
-            if (!res.ok) {
-              tableEl.innerHTML = `<div class="glb-empty">DB error: ${rows?.message || rows?.error || JSON.stringify(rows)}</div>`;
-              return;
-            }
-            if (!Array.isArray(rows) || rows.length === 0) {
-              tableEl.innerHTML = '<div class="glb-empty">No races recorded yet — play a race to be the first on the board!</div>';
-              return;
-            }
-
-            const posClass = i => i === 0 ? 'p1' : i === 1 ? 'p2' : i === 2 ? 'p3' : '';
-            const posIcon = i => i === 0 ? '\uD83E\uDD47' : i === 1 ? '\uD83E\uDD48' : i === 2 ? '\uD83E\uDD49' : String(i + 1);
-            const drvColor = d => DRIVER_COLORS[d] || '#a78bfa';
-            const timeSince = iso => {
-              if (!iso) return '';
-              const s = Math.floor((Date.now() - new Date(iso)) / 1000);
-              if (s < 60) return `${s}s ago`;
-              if (s < 3600) return `${Math.floor(s / 60)}m ago`;
-              if (s < 86400) return `${Math.floor(s / 3600)}h ago`;
-              return `${Math.floor(s / 86400)}d ago`;
-            };
-
-            let html = `<div class="glb-row glb-head">
+        let html = `<div class="glb-row glb-head">
           <div>\u00a0</div>
           <div>Racer</div>
           <div style="text-align:right">${isWins ? 'Gap' : 'Gap'}</div>
           <div style="text-align:center">Result</div>
         </div>`;
 
-            rows.forEach((r, i) => {
-              const strat = (r.user_strategy || '').slice(0, 30);
-              html += `<div class="glb-row">
+        rows.forEach((r, i) => {
+          const strat = (r.user_strategy || '').slice(0, 30);
+          html += `<div class="glb-row">
             <div class="glb-pos ${posClass(i)}">${posIcon(i)}</div>
             <div>
               <div class="glb-name">${(r.name || 'Anon').slice(0, 20)}</div>
@@ -5060,97 +5052,97 @@
             <div class="glb-gap">${parseFloat(r.gap_seconds || 0).toFixed(3)}s</div>
             <div><span class="glb-badge ${r.result}">${r.result === 'win' ? 'Win' : 'Loss'}</span></div>
           </div>`;
-            });
+        });
 
-            tableEl.innerHTML = html;
-            const now = new Date();
-            document.getElementById('glb-refresh').textContent =
-              `Last updated ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`;
-          } catch (e) {
-            tableEl.innerHTML = '<div class="glb-empty">Could not load leaderboard.</div>';
-          }
+        tableEl.innerHTML = html;
+        const now = new Date();
+        document.getElementById('glb-refresh').textContent =
+          `Last updated ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`;
+      } catch (e) {
+        tableEl.innerHTML = '<div class="glb-empty">Could not load leaderboard.</div>';
+      }
+    }
+
+    function switchTab(tab) {
+      lbCurrentTab = tab;
+      document.getElementById('tab-wins').classList.toggle('active', tab === 'wins');
+      document.getElementById('tab-all').classList.toggle('active', tab === 'all');
+      loadGlobalLeaderboard(tab);
+    }
+
+    /* ── CHALLENGE SYSTEM ── */
+    let challengeMode = false;
+    let challengeData = null;
+
+    async function checkChallengeParam() {
+      const params = new URLSearchParams(window.location.search);
+      const cid = params.get('challenge');
+      if (!cid || !SUPABASE_URL || SUPABASE_URL === 'YOUR_SUPABASE_URL') return;
+      try {
+        const res = await fetch(
+          `${SUPABASE_URL}/rest/v1/challenges?id=eq.${encodeURIComponent(cid)}&limit=1`,
+          { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } }
+        );
+        const rows = await res.json();
+        if (Array.isArray(rows) && rows[0]) {
+          challengeMode = true;
+          challengeData = rows[0];
+          showChallengeBanner(challengeData);
         }
+      } catch (e) { /* silent */ }
+    }
 
-        function switchTab(tab) {
-          lbCurrentTab = tab;
-          document.getElementById('tab-wins').classList.toggle('active', tab === 'wins');
-          document.getElementById('tab-all').classList.toggle('active', tab === 'all');
-          loadGlobalLeaderboard(tab);
-        }
+    function showChallengeBanner(data) {
+      const DNAMES = { VER: 'Verstappen', LEC: 'Leclerc', RUS: 'Russell', NOR: 'Norris', ALB: 'Albon' };
+      const chalName = (data.name || 'Someone').slice(0, 24);
+      document.getElementById('cb-headline').textContent = `${chalName} challenged you!`;
+      document.getElementById('cb-meta').textContent =
+        `${DNAMES[data.driver] || data.driver || ''} · ${data.user_strategy || ''} — beat Remin faster`;
+      const gapEl = document.getElementById('cb-gap');
+      if (data.result === 'win') {
+        gapEl.textContent = `Their gap vs Remin: ${parseFloat(data.gap_seconds).toFixed(3)}s — can you beat it?`;
+        gapEl.style.cssText = 'background:rgba(52,211,153,0.12);color:#34d399;border:1px solid rgba(52,211,153,0.3)';
+      } else {
+        gapEl.textContent = 'They lost to Remin — can you do better?';
+        gapEl.style.cssText = 'background:rgba(248,113,113,0.1);color:#f87171;border:1px solid rgba(248,113,113,0.25)';
+      }
+      document.getElementById('challenge-banner').classList.add('visible');
+    }
 
-        /* ── CHALLENGE SYSTEM ── */
-        let challengeMode = false;
-        let challengeData = null;
+    function showH2H(myName, myResult, myGap) {
+      if (!challengeMode || !challengeData) return;
+      const DNAMES = { VER: 'Verstappen', LEC: 'Leclerc', RUS: 'Russell', NOR: 'Norris', ALB: 'Albon' };
+      const cd = challengeData;
+      const chalGap = parseFloat(cd.gap_seconds);
+      const chalWon = cd.result === 'win';
+      const myWon = myResult === 'win';
 
-        async function checkChallengeParam() {
-          const params = new URLSearchParams(window.location.search);
-          const cid = params.get('challenge');
-          if (!cid || !SUPABASE_URL || SUPABASE_URL === 'YOUR_SUPABASE_URL') return;
-          try {
-            const res = await fetch(
-              `${SUPABASE_URL}/rest/v1/challenges?id=eq.${encodeURIComponent(cid)}&limit=1`,
-              { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } }
-            );
-            const rows = await res.json();
-            if (Array.isArray(rows) && rows[0]) {
-              challengeMode = true;
-              challengeData = rows[0];
-              showChallengeBanner(challengeData);
-            }
-          } catch (e) { /* silent */ }
-        }
+      // Determine h2h winner: wins beat losses; if same, smaller gap wins
+      let iWin;
+      if (myWon && !chalWon) iWin = true;
+      else if (!myWon && chalWon) iWin = false;
+      else if (myWon && chalWon) iWin = myGap < chalGap;
+      else iWin = myGap < chalGap; // both lost, closer gap is "better"
 
-        function showChallengeBanner(data) {
-          const DNAMES = { VER: 'Verstappen', LEC: 'Leclerc', RUS: 'Russell', NOR: 'Norris', ALB: 'Albon' };
-          const chalName = (data.name || 'Someone').slice(0, 24);
-          document.getElementById('cb-headline').textContent = `${chalName} challenged you!`;
-          document.getElementById('cb-meta').textContent =
-            `${DNAMES[data.driver] || data.driver || ''} · ${data.user_strategy || ''} — beat Remin faster`;
-          const gapEl = document.getElementById('cb-gap');
-          if (data.result === 'win') {
-            gapEl.textContent = `Their gap vs Remin: ${parseFloat(data.gap_seconds).toFixed(3)}s — can you beat it?`;
-            gapEl.style.cssText = 'background:rgba(52,211,153,0.12);color:#34d399;border:1px solid rgba(52,211,153,0.3)';
-          } else {
-            gapEl.textContent = 'They lost to Remin — can you do better?';
-            gapEl.style.cssText = 'background:rgba(248,113,113,0.1);color:#f87171;border:1px solid rgba(248,113,113,0.25)';
-          }
-          document.getElementById('challenge-banner').classList.add('visible');
-        }
+      const myEntry = {
+        name: (myName || simState.driverKey || 'You').slice(0, 20).toUpperCase(),
+        strategy: simState.userStints.map(s => `${COMPOUND[s.compound].name}(${s.laps}L)`).join(' → '),
+        driver: DNAMES[simState.driverKey] || simState.driverKey || '',
+        result: myResult, gap: myGap
+      };
+      const chalEntry = {
+        name: (cd.name || 'Challenger').slice(0, 20).toUpperCase(),
+        strategy: cd.user_strategy || '',
+        driver: DNAMES[cd.driver] || cd.driver || '',
+        result: cd.result, gap: chalGap
+      };
 
-        function showH2H(myName, myResult, myGap) {
-          if (!challengeMode || !challengeData) return;
-          const DNAMES = { VER: 'Verstappen', LEC: 'Leclerc', RUS: 'Russell', NOR: 'Norris', ALB: 'Albon' };
-          const cd = challengeData;
-          const chalGap = parseFloat(cd.gap_seconds);
-          const chalWon = cd.result === 'win';
-          const myWon = myResult === 'win';
+      const p1 = iWin ? myEntry : chalEntry;
+      const p2 = iWin ? chalEntry : myEntry;
+      const p1c = iWin ? '#34d399' : '#FF6B35';
+      const p2c = iWin ? '#FF6B35' : '#34d399';
 
-          // Determine h2h winner: wins beat losses; if same, smaller gap wins
-          let iWin;
-          if (myWon && !chalWon) iWin = true;
-          else if (!myWon && chalWon) iWin = false;
-          else if (myWon && chalWon) iWin = myGap < chalGap;
-          else iWin = myGap < chalGap; // both lost, closer gap is "better"
-
-          const myEntry = {
-            name: (myName || simState.driverKey || 'You').slice(0, 20).toUpperCase(),
-            strategy: simState.userStints.map(s => `${COMPOUND[s.compound].name}(${s.laps}L)`).join(' → '),
-            driver: DNAMES[simState.driverKey] || simState.driverKey || '',
-            result: myResult, gap: myGap
-          };
-          const chalEntry = {
-            name: (cd.name || 'Challenger').slice(0, 20).toUpperCase(),
-            strategy: cd.user_strategy || '',
-            driver: DNAMES[cd.driver] || cd.driver || '',
-            result: cd.result, gap: chalGap
-          };
-
-          const p1 = iWin ? myEntry : chalEntry;
-          const p2 = iWin ? chalEntry : myEntry;
-          const p1c = iWin ? '#34d399' : '#FF6B35';
-          const p2c = iWin ? '#FF6B35' : '#34d399';
-
-          const row = (pos, col, e) => `
+      const row = (pos, col, e) => `
         <div class="h2h-row${pos === 1 ? ' winner' : ''}">
           <div class="h2h-pos" style="color:${col}">${pos}</div>
           <div class="h2h-info">
@@ -5161,108 +5153,108 @@
           <span class="h2h-badge ${e.result}">${e.result === 'win' ? 'Win' : 'Loss'}</span>
         </div>`;
 
-          // Verdict copy for all 4 scenarios
-          let verdictText, verdictColor, verdictBg;
-          const chalName = (cd.name || 'Challenger').slice(0, 20);
-          if (myWon && iWin) { verdictText = `🏆 You win the challenge! You beat Remin AND ${chalName}.`; verdictColor = '#34d399'; verdictBg = 'rgba(52,211,153,0.08)'; }
-          else if (myWon && !iWin) { verdictText = `🥈 So close — you beat Remin, but ${chalName} had a faster gap.`; verdictColor = '#FFD700'; verdictBg = 'rgba(255,215,0,0.07)'; }
-          else if (!myWon && iWin) { verdictText = `🤝 You win the challenge — but Remin got you both. You were closer.`; verdictColor = '#a78bfa'; verdictBg = 'rgba(167,139,250,0.08)'; }
-          else { verdictText = `❌ ${chalName} wins this one. Try a different strategy!`; verdictColor = '#f87171'; verdictBg = 'rgba(248,113,113,0.08)'; }
+      // Verdict copy for all 4 scenarios
+      let verdictText, verdictColor, verdictBg;
+      const chalName = (cd.name || 'Challenger').slice(0, 20);
+      if (myWon && iWin) { verdictText = `🏆 You win the challenge! You beat Remin AND ${chalName}.`; verdictColor = '#34d399'; verdictBg = 'rgba(52,211,153,0.08)'; }
+      else if (myWon && !iWin) { verdictText = `🥈 So close — you beat Remin, but ${chalName} had a faster gap.`; verdictColor = '#FFD700'; verdictBg = 'rgba(255,215,0,0.07)'; }
+      else if (!myWon && iWin) { verdictText = `🤝 You win the challenge — but Remin got you both. You were closer.`; verdictColor = '#a78bfa'; verdictBg = 'rgba(167,139,250,0.08)'; }
+      else { verdictText = `❌ ${chalName} wins this one. Try a different strategy!`; verdictColor = '#f87171'; verdictBg = 'rgba(248,113,113,0.08)'; }
 
-          const h2h = document.getElementById('h2h-section');
-          h2h.innerHTML = `<div class="h2h-label">⚔️ HEAD TO HEAD</div>${row(1, p1c, p1)}${row(2, p2c, p2)}
+      const h2h = document.getElementById('h2h-section');
+      h2h.innerHTML = `<div class="h2h-label">⚔️ HEAD TO HEAD</div>${row(1, p1c, p1)}${row(2, p2c, p2)}
         <div style="margin-top:10px;padding:10px 12px;border-radius:8px;font-size:13px;font-weight:600;background:${verdictBg};color:${verdictColor};border:1px solid ${verdictColor}33">${verdictText}</div>`;
-          h2h.classList.add('visible');
-          return { iWin, myWon, chalWon, chalName };
-        }
+      h2h.classList.add('visible');
+      return { iWin, myWon, chalWon, chalName };
+    }
 
-        async function createChallenge(btn) {
-          if (!SUPABASE_URL || SUPABASE_URL === 'YOUR_SUPABASE_URL') return;
-          btn.disabled = true;
-          btn.textContent = 'Saving\u2026';
-          const userStr = simState.userStints.map(s => `${COMPOUND[s.compound].name} (${s.laps}L)`).join(' → ');
-          const payload = {
-            name: simState.userName || 'Anonymous',
-            driver: simState.driverKey,
-            user_strategy: userStr,
-            result: simState.userWins ? 'win' : 'lose',
-            gap_seconds: simState.finalGap || 0
-          };
-          try {
-            const res = await fetch(`${SUPABASE_URL}/rest/v1/challenges`, {
-              method: 'POST',
-              headers: {
-                'apikey': SUPABASE_ANON_KEY,
-                'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-                'Content-Type': 'application/json',
-                'Prefer': 'return=representation'
-              },
-              body: JSON.stringify(payload)
-            });
-            const rows = await res.json();
-            const id = rows?.[0]?.id;
-            if (id) {
-              const url = `${window.location.origin}${window.location.pathname}?challenge=${id}`;
-              document.getElementById('challenge-url-text').value = url;
-              document.getElementById('challenge-url-wrap').classList.add('visible');
-              btn.textContent = '\u2705 Link Ready';
-            } else {
-              btn.disabled = false;
-              btn.textContent = '\u2694\ufe0f Challenge a Friend';
-            }
-          } catch (e) {
-            btn.disabled = false;
-            btn.textContent = '\u2694\ufe0f Challenge a Friend';
+    async function createChallenge(btn) {
+      if (!SUPABASE_URL || SUPABASE_URL === 'YOUR_SUPABASE_URL') return;
+      btn.disabled = true;
+      btn.textContent = 'Saving\u2026';
+      const userStr = simState.userStints.map(s => `${COMPOUND[s.compound].name} (${s.laps}L)`).join(' → ');
+      const payload = {
+        name: simState.userName || 'Anonymous',
+        driver: simState.driverKey,
+        user_strategy: userStr,
+        result: simState.userWins ? 'win' : 'lose',
+        gap_seconds: simState.finalGap || 0
+      };
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/challenges`, {
+          method: 'POST',
+          headers: {
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+            'Content-Type': 'application/json',
+            'Prefer': 'return=representation'
+          },
+          body: JSON.stringify(payload)
+        });
+        const rows = await res.json();
+        const id = rows?.[0]?.id;
+        if (id) {
+          const url = `${window.location.origin}${window.location.pathname}?challenge=${id}`;
+          document.getElementById('challenge-url-text').value = url;
+          document.getElementById('challenge-url-wrap').classList.add('visible');
+          btn.textContent = '\u2705 Link Ready';
+        } else {
+          btn.disabled = false;
+          btn.textContent = '\u2694\ufe0f Challenge a Friend';
+        }
+      } catch (e) {
+        btn.disabled = false;
+        btn.textContent = '\u2694\ufe0f Challenge a Friend';
+      }
+    }
+
+    function copyChallenge() {
+      const inp = document.getElementById('challenge-url-text');
+      inp.select();
+      navigator.clipboard.writeText(inp.value).catch(() => document.execCommand('copy'));
+      const btn = inp.parentElement.querySelector('.btn-copy');
+      btn.textContent = 'Copied!';
+      setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+    }
+
+    resetStints();
+    renderPBBar(loadPB());
+
+    // Daily eyebrow: "Today's Race · Mar 24 · Silverstone"
+    (function setHeroEyebrow() {
+      const now = new Date();
+      const dateStr = now.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+      const el = document.getElementById('hero-eyebrow');
+      if (el) el.textContent = `Today's Race · ${dateStr} · ${currentTrack.name}`;
+    })();
+
+    // Race counter social proof — fetched asynchronously
+    (async function fetchRaceCount() {
+      if (!SUPABASE_URL || SUPABASE_URL === 'YOUR_SUPABASE_URL') return;
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/forecasts?select=id`, {
+          headers: {
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+            'Prefer': 'count=exact',
+            'Range': '0-0'
+          }
+        });
+        const countHeader = res.headers.get('content-range');
+        const total = countHeader ? parseInt(countHeader.split('/')[1]) : NaN;
+        if (!isNaN(total) && total > 0) {
+          const el = document.getElementById('hero-race-count');
+          if (el) {
+            el.textContent = `${total.toLocaleString()} races played worldwide`;
+            el.style.display = 'block';
           }
         }
+      } catch { }
+    })();
 
-        function copyChallenge() {
-          const inp = document.getElementById('challenge-url-text');
-          inp.select();
-          navigator.clipboard.writeText(inp.value).catch(() => document.execCommand('copy'));
-          const btn = inp.parentElement.querySelector('.btn-copy');
-          btn.textContent = 'Copied!';
-          setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
-        }
-
-        resetStints();
-        renderPBBar(loadPB());
-
-        // Daily eyebrow: "Today's Race · Mar 24 · Silverstone"
-        (function setHeroEyebrow() {
-          const now = new Date();
-          const dateStr = now.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
-          const el = document.getElementById('hero-eyebrow');
-          if (el) el.textContent = `Today's Race · ${dateStr} · ${currentTrack.name}`;
-        })();
-
-        // Race counter social proof — fetched asynchronously
-        (async function fetchRaceCount() {
-          if (!SUPABASE_URL || SUPABASE_URL === 'YOUR_SUPABASE_URL') return;
-          try {
-            const res = await fetch(`${SUPABASE_URL}/rest/v1/forecasts?select=id`, {
-              headers: {
-                'apikey': SUPABASE_ANON_KEY,
-                'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-                'Prefer': 'count=exact',
-                'Range': '0-0'
-              }
-            });
-            const countHeader = res.headers.get('content-range');
-            const total = countHeader ? parseInt(countHeader.split('/')[1]) : NaN;
-            if (!isNaN(total) && total > 0) {
-              const el = document.getElementById('hero-race-count');
-              if (el) {
-                el.textContent = `${total.toLocaleString()} races played worldwide`;
-                el.style.display = 'block';
-              }
-            }
-          } catch { }
-        })();
-
-        checkChallengeParam();
-        loadGlobalLeaderboard('wins');
-        setInterval(() => loadGlobalLeaderboard(lbCurrentTab), 30000);
+    checkChallengeParam();
+    loadGlobalLeaderboard('wins');
+    setInterval(() => loadGlobalLeaderboard(lbCurrentTab), 30000);
   </script>
 
   <!-- FIXED EVENT FLASH BANNER -->
