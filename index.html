@@ -876,6 +876,39 @@
       line-height: 1.7;
     }
 
+    .key-moments {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .moment-pill {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 4px 10px;
+      font-size: 11px;
+      color: var(--muted);
+      font-family: var(--font-display);
+      letter-spacing: 0.01em;
+    }
+
+    .tyre-dot.tyre-warn {
+      box-shadow: 0 0 8px 2px #E8002D;
+      animation: tyreWarnPulse 0.9s ease-in-out infinite alternate;
+    }
+
+    @keyframes tyreWarnPulse {
+      from {
+        box-shadow: 0 0 4px 1px #E8002D88;
+      }
+
+      to {
+        box-shadow: 0 0 12px 4px #E8002Dcc;
+      }
+    }
+
     .btn-again {
       margin-top: 16px;
       font-family: var(--font-display);
@@ -2352,6 +2385,7 @@
             </div>
           </div>
           <div class="analysis" id="result-analysis"></div>
+          <div class="key-moments" id="key-moments"></div>
           <div class="lb-section" id="lb-section" style="display:none">
             <div class="lb-heading">🏆 Closest Wins · Global Board</div>
             <div id="lb-rows"></div>
@@ -2431,12 +2465,12 @@
       LEC: { name: 'Leclerc', team: 'Ferrari', colorVar: '--lec', deg: 0.070, pace: 0.08, mom: 'balanced' },
       RUS: { name: 'Russell', team: 'Mercedes', colorVar: '--rus', deg: 0.060, pace: 0.22, mom: 'hi-drag' }
     };
-    const REMIN_STATS = { name: 'Remin', deg: 0.065, pace: 0.14, mom: 'adaptive' };
+    const REMIN_STATS = { name: 'Remin', deg: 0.065, pace: 0.14, mom: 'adaptive', aggression: 0.7, tyreManagement: 0.6, adaptability: 0.9 };
 
     const COMPOUND = {
-      soft: { name: 'Soft', color: '#E8002D', text: '#fff', off: -1.3, degMul: 1.4 },
-      med: { name: 'Med', color: '#FFD700', text: '#111', off: -0.6, degMul: 1.0 },
-      hard: { name: 'Hard', color: '#888888', text: '#eee', off: 0.1, degMul: 0.7 }
+      soft: { name: 'Soft', color: '#E8002D', text: '#fff', off: -1.3, degMul: 1.4, degRate: 0.058, cliff: 18, cliffMul: 2.2 },
+      med: { name: 'Med', color: '#FFD700', text: '#111', off: -0.6, degMul: 1.0, degRate: 0.038, cliff: 26, cliffMul: 1.8 },
+      hard: { name: 'Hard', color: '#888888', text: '#eee', off: 0.1, degMul: 0.7, degRate: 0.022, cliff: 35, cliffMul: 1.5 }
     };
 
     let userDriver = null;
@@ -2610,6 +2644,239 @@
       return total;
     }
 
+    /* ── V2 SIMULATION ENGINE ── */
+
+    // Mulberry32 seeded PRNG — deterministic per race
+    function seededNoise(seed, lap) {
+      let t = (seed * 1000 + lap * 6364136223846793005) >>> 0;
+      t ^= t >>> 15; t = Math.imul(t, 0x2c1b3c6d);
+      t ^= t >>> 12; t = Math.imul(t, 0x297a2d39);
+      t ^= t >>> 15;
+      return ((t >>> 0) / 4294967296) * 0.10 - 0.05; // ±0.05s
+    }
+
+    // Per-lap time with fuel effect, tyre warmup, cliff zones, and noise
+    function getLapTime(raceLap, stintLap, compoundKey, driverStats, ev, seed) {
+      const c = COMPOUND[compoundKey];
+      const deg = driverStats.deg;
+      const tmMgmt = driverStats.tyreManagement !== undefined ? driverStats.tyreManagement : 0.5;
+
+      // Base + compound offset + driver pace
+      let lapTime = BASE_LAP + c.off + driverStats.pace;
+
+      // Tyre warmup: +0.4s on first lap of stint, +0.2s on second
+      if (stintLap === 1) lapTime += 0.4;
+      else if (stintLap === 2) lapTime += 0.2;
+
+      // Tyre degradation with cliff
+      const isOverCliff = stintLap > c.cliff;
+      const precliffLaps = Math.min(stintLap - 1, c.cliff);
+      const cliffLaps = isOverCliff ? stintLap - 1 - c.cliff : 0;
+      const cliffPenalty = isOverCliff
+        ? (c.degRate * precliffLaps + c.degRate * c.cliffMul * cliffLaps) * (1 - tmMgmt * 0.3)
+        : c.degRate * precliffLaps;
+      lapTime += cliffPenalty;
+
+      // Fuel effect: heavier fuel = slower. Burns off as race progresses.
+      lapTime += (LAPS - raceLap) * 0.035;
+
+      // Seeded noise ±0.05s
+      lapTime += seededNoise(seed, raceLap);
+
+      // Wildcard event modifiers
+      const RAIN_PEN = { soft: 1.8, med: 1.0, hard: 0.5 };
+      if (ev && ev.type !== 'none' && raceLap >= ev.startLap && raceLap <= ev.endLap) {
+        if (ev.type === 'sc' || ev.type === 'vsc') lapTime += ev.lapDelta;
+        else if (ev.type === 'rain') lapTime += (RAIN_PEN[compoundKey] || 1.0);
+      }
+
+      return lapTime;
+    }
+
+    // Simulate total race time for a strategy (used for candidate brute-force)
+    function simulateRaceTime(stints, driverStats, event, seed) {
+      let total = 0;
+      let cum = 0;
+      const pitLaps = getPitLaps(stints);
+      for (const s of stints) {
+        for (let sl = 1; sl <= s.laps; sl++) {
+          total += getLapTime(cum + sl, sl, s.compound, driverStats, event, seed);
+        }
+        cum += s.laps;
+        if (pitLaps.includes(cum) && cum < LAPS) {
+          let pit = PIT_LOSS;
+          if (event && (event.type === 'sc' || event.type === 'vsc') && cum >= event.startLap && cum <= event.endLap)
+            pit = Math.max(5, PIT_LOSS - event.scPitSaving);
+          total += pit;
+        }
+      }
+      return total;
+    }
+
+    // AI candidate strategies — realistic Silverstone 2026 options
+    const AI_CANDIDATES = [
+      [{ compound: 'soft', laps: 16 }, { compound: 'med', laps: 18 }, { compound: 'hard', laps: 18 }],
+      [{ compound: 'med', laps: 22 }, { compound: 'hard', laps: 30 }],
+      [{ compound: 'soft', laps: 13 }, { compound: 'med', laps: 18 }, { compound: 'hard', laps: 21 }],
+      [{ compound: 'soft', laps: 15 }, { compound: 'hard', laps: 37 }],
+      [{ compound: 'med', laps: 18 }, { compound: 'soft', laps: 16 }, { compound: 'hard', laps: 18 }],
+      [{ compound: 'hard', laps: 20 }, { compound: 'soft', laps: 17 }, { compound: 'med', laps: 15 }],
+      [{ compound: 'soft', laps: 20 }, { compound: 'hard', laps: 32 }],
+      [{ compound: 'med', laps: 26 }, { compound: 'soft', laps: 14 }, { compound: 'hard', laps: 12 }],
+      [{ compound: 'soft', laps: 17 }, { compound: 'med', laps: 19 }, { compound: 'hard', laps: 16 }],
+      [{ compound: 'hard', laps: 25 }, { compound: 'med', laps: 18 }, { compound: 'soft', laps: 9 }],
+      [{ compound: 'soft', laps: 12 }, { compound: 'soft', laps: 12 }, { compound: 'hard', laps: 28 }],
+      [{ compound: 'med', laps: 30 }, { compound: 'soft', laps: 22 }],
+    ];
+
+    // Brute-force best AI counter-strategy against player's stints
+    function buildAdaptiveStrategy(playerStints, playerDrvKey, event, seed) {
+      const playerTime = simulateRaceTime(playerStints, DRIVERS[playerDrvKey], event, seed);
+      let bestCandidate = AI_CANDIDATES[0];
+      let bestGap = Infinity;
+      for (const cand of AI_CANDIDATES) {
+        const aiTime = simulateRaceTime(cand, REMIN_STATS, event, seed);
+        // Aggression bias: prefer strategies that undercut (earlier first pit)
+        const firstPitAI = cand[0].laps;
+        const firstPitPlayer = playerStints[0].laps;
+        const undercutBonus = firstPitAI < firstPitPlayer ? REMIN_STATS.aggression * 0.5 : 0;
+        const adjustedTime = aiTime - undercutBonus;
+        const gap = Math.abs(adjustedTime - playerTime);
+        if (gap < bestGap) { bestGap = gap; bestCandidate = cand; }
+      }
+      return bestCandidate;
+    }
+
+    // Pre-compute full 52-lap race, returns laps array + totals
+    function simulateRaceFull(playerStints, playerDrvKey, aiStints, event, seed) {
+      const playerDrv = DRIVERS[playerDrvKey];
+      const playerPitLaps = getPitLaps(playerStints);
+      const aiPitLaps = getPitLaps(aiStints);
+      const laps = [];
+      let playerTotal = 0, aiTotal = 0;
+
+      for (let lap = 1; lap <= LAPS; lap++) {
+        const ps = getStintAt(playerStints, lap);
+        const as = getStintAt(aiStints, lap);
+        const pTime = getLapTime(lap, ps.age, ps.compound, playerDrv, event, seed);
+        const aTime = getLapTime(lap, as.age, as.compound, REMIN_STATS, event, seed);
+
+        // Pit loss added on the transition lap
+        let pPit = 0, aPit = 0;
+        if (playerPitLaps.includes(lap)) {
+          pPit = (event && (event.type === 'sc' || event.type === 'vsc') && lap >= event.startLap && lap <= event.endLap)
+            ? Math.max(5, PIT_LOSS - event.scPitSaving) : PIT_LOSS;
+        }
+        if (aiPitLaps.includes(lap)) {
+          aPit = (event && (event.type === 'sc' || event.type === 'vsc') && lap >= event.startLap && lap <= event.endLap)
+            ? Math.max(5, PIT_LOSS - event.scPitSaving) : PIT_LOSS;
+        }
+
+        playerTotal += pTime + pPit;
+        aiTotal += aTime + aPit;
+
+        laps.push({
+          lap,
+          playerTime: playerTotal,
+          aiTime: aiTotal,
+          gap: aiTotal - playerTotal,          // positive = player leads
+          playerLapTime: pTime,
+          aiLapTime: aTime,
+          playerCompound: ps.compound,
+          aiCompound: as.compound,
+          playerStintLap: ps.age,
+          aiStintLap: as.age,
+          playerPitted: pPit > 0,
+          aiPitted: aPit > 0
+        });
+      }
+      return { laps, totalPlayer: playerTotal, totalAI: aiTotal };
+    }
+
+    // Dynamic analysis — key moments + verdict
+    function generateAnalysis(raceData, playerStints, aiStints, event, playerDrvKey, userWins, gapSecs) {
+      const keyMoments = [];
+      const laps = raceData.laps;
+
+      // Pit delta swings (gap changes > 5s in one lap)
+      for (let i = 1; i < laps.length; i++) {
+        const swing = laps[i].gap - laps[i - 1].gap;
+        if (Math.abs(swing) > 5) {
+          const who = swing > 0 ? 'You gained' : 'Remin gained';
+          const whose = laps[i].playerPitted ? 'your pit' : laps[i].aiPitted ? "Remin's pit" : 'a stint shift';
+          keyMoments.push({ lap: laps[i].lap, text: `${who} ${Math.abs(swing).toFixed(1)}s on lap ${laps[i].lap} — ${whose}` });
+        }
+      }
+
+      // Tyre cliff detection: gap trend reversal sustained over 3 laps
+      for (let i = 3; i < laps.length - 1; i++) {
+        const trend1 = laps[i].gap - laps[i - 3].gap;
+        const trend2 = laps[i + 1].gap - laps[i - 2].gap;
+        if (Math.sign(trend1) !== Math.sign(trend2) && Math.abs(trend1) > 1.5) {
+          const beneficiary = trend2 > 0 ? 'You' : 'Remin';
+          if (!keyMoments.some(m => Math.abs(m.lap - laps[i].lap) < 5)) {
+            keyMoments.push({ lap: laps[i].lap, text: `${beneficiary} gained the pace advantage around lap ${laps[i].lap} — likely a cliff zone` });
+          }
+        }
+      }
+
+      // Event impact moment
+      if (event && event.type !== 'none') {
+        const evLap = laps.find(l => l.lap === event.startLap);
+        const after = laps.find(l => l.lap === (event.startLap + 2));
+        if (evLap && after) {
+          const swing = after.gap - evLap.gap;
+          const impactWho = swing > 0 ? 'helped you' : 'helped Remin';
+          keyMoments.push({ lap: event.startLap, text: `${event.label} (lap ${event.startLap}) ${impactWho} by ${Math.abs(swing).toFixed(1)}s` });
+        }
+      }
+
+      // Closing stint (last 15 laps) momentum
+      const closingStart = laps[LAPS - 16] || laps[0];
+      const closingEnd = laps[LAPS - 1];
+      const closingSwing = closingEnd.gap - closingStart.gap;
+      if (Math.abs(closingSwing) > 2) {
+        const closer = closingSwing > 0 ? 'You closed' : 'Remin closed';
+        keyMoments.push({ lap: closingStart.lap, text: `${closer} ${Math.abs(closingSwing).toFixed(1)}s in the final 15 laps` });
+      }
+
+      // Sort by lap, limit to 3 best
+      keyMoments.sort((a, b) => Math.abs(b.lap - LAPS / 2) - Math.abs(a.lap - LAPS / 2));
+      const top = keyMoments.slice(0, 3);
+
+      // Overall verdict text
+      const userStr = playerStints.map(s => `${COMPOUND[s.compound].name} (${s.laps}L)`).join(' → ');
+      const remStr = aiStints.map(s => `${COMPOUND[s.compound].name} (${s.laps}L)`).join(' → ');
+      const ev = event;
+      const evNote = (() => {
+        if (!ev || ev.type === 'none') return '';
+        const userPitInWindow = getPitLaps(playerStints).some(l => l >= ev.startLap && l <= ev.endLap);
+        const remPitInWindow = getPitLaps(aiStints).some(l => l >= ev.startLap && l <= ev.endLap);
+        if (ev.type === 'sc' || ev.type === 'vsc') {
+          if (userPitInWindow && !remPitInWindow) return ` The ${ev.label} on lap ${ev.startLap} handed you a free pit — saved ~${ev.scPitSaving}s.`;
+          if (!userPitInWindow && remPitInWindow) return ` The ${ev.label} on lap ${ev.startLap} let Remin pit for free — cost you ~${ev.scPitSaving}s.`;
+          if (userPitInWindow && remPitInWindow) return ` Both pitted under the ${ev.label} — equal benefit.`;
+          return ` The ${ev.label} hit lap ${ev.startLap} but neither car was in the pit window.`;
+        }
+        if (ev.type === 'rain') {
+          const userCompoundAtRain = getStintAt(playerStints, ev.startLap).compound;
+          const remCompoundAtRain = getStintAt(aiStints, ev.startLap).compound;
+          if (userCompoundAtRain === 'soft' && remCompoundAtRain !== 'soft')
+            return ` Rain on laps ${ev.startLap}–${ev.endLap} hurt your softs while Remin's compound held better.`;
+          if (userCompoundAtRain !== 'soft' && remCompoundAtRain === 'soft')
+            return ` Rain on laps ${ev.startLap}–${ev.endLap} punished Remin's softs — your compound was better suited.`;
+          return ` Rain on laps ${ev.startLap}–${ev.endLap} affected both cars on similar compounds.`;
+        }
+        return '';
+      })();
+
+      const verdict = userWins
+        ? `Your strategy (${userStr}) beat Remin's adaptive counter (${remStr}) by ${gapSecs.toFixed(3)}s. You read the tyre window correctly — at Silverstone in 2026, track position in the final 15 laps is everything.${evNote} Well played.`
+        : `Remin adapted and won. After seeing your opening stint, Remin countered with ${remStr} — a better tyre delta in the closing laps sealed it. The gap was ${gapSecs.toFixed(3)}s.${evNote} Adjust your pit window and race again.`;
+
+      return { keyMoments: top, verdict };
+    }
+
     /* ── CONFETTI ENGINE ── */
     const confettiCanvas = document.getElementById('confetti-canvas');
     const confettiCtx = confettiCanvas.getContext('2d');
@@ -2752,6 +3019,24 @@
         "Adapt or get lapped. Basic F1.",
         "My counter was perfect. Your timing wasn't.",
         "Better luck next race. Study the stint lengths.",
+      ],
+      sc_react: [
+        "Free pit stop. Taking it.",
+        "Safety car — perfect pit window. Pitting.",
+        "This is the moment. Pitting under yellow.",
+        "Neutralised. Boxes this lap.",
+      ],
+      cliff_warning: [
+        "Your tyres are going. I can feel it from here.",
+        "Degradation cliff incoming. Pitting soon?",
+        "Compound going off — this is where races are won.",
+        "Your pace is dropping. I'm pushing now.",
+      ],
+      pushing: [
+        "Purple sectors. You can't match this.",
+        "I've found the tyre sweet spot. Pulling away.",
+        "Fresh tyres, open track. This is my window.",
+        "This stint decides it. I'm not lifting.",
       ]
     };
 
@@ -2784,9 +3069,13 @@
 
       userName = (document.getElementById('user-name-input').value || '').trim().slice(0, 40);
 
-      remStints = buildRemStrategy(userStints);
+      const raceSeed = Math.random();
+      const raceEvent = pickEvent();
+      remStints = buildAdaptiveStrategy(userStints, userDriver, raceEvent, raceSeed);
       const drv = DRIVERS[userDriver];
       const drvColor = getComputedStyle(document.documentElement).getPropertyValue(drv.colorVar).trim();
+
+      const raceData = simulateRaceFull(userStints, userDriver, remStints, raceEvent, raceSeed);
 
       simState = {
         lap: 0,
@@ -2797,7 +3086,9 @@
         userPitLaps: getPitLaps(userStints),
         remPitLaps: getPitLaps(remStints),
         lastGap: 0,
-        event: pickEvent()
+        event: raceEvent,
+        seed: raceSeed,
+        raceData
       };
 
       const displayName = userName || 'YOU';
@@ -2851,12 +3142,12 @@
       lapEl.classList.add('lap-pulse');
       lapEl.textContent = lap;
 
+      // Read from pre-computed race data
+      const frame = simState.raceData.laps[lap - 1];
       const ev = simState.event;
-      const uTime = calcTime(simState.userStints, simState.driverKey, false, lap, ev);
-      const rTime = calcTime(simState.remStints, null, true, lap, ev);
-      const gap = uTime - rTime;
-      const userLeads = gap < 0;
-      const absGap = Math.abs(gap);
+      const gap = -(frame.gap);         // frame.gap = aiTotal - playerTotal; positive = player leads
+      const userLeads = frame.gap > 0;
+      const absGap = Math.abs(frame.gap);
 
       const gapEl = document.getElementById('gap-disp');
       const prevGap = simState.lastGap || 0;
@@ -2868,12 +3159,12 @@
       if (userGainingGround) gapEl.classList.add('gap-gain');
       else if (userLosingGround) gapEl.classList.add('gap-lose');
       simState.lastGap = gap;
-      gapHistory.push({ lap, gap: rTime - uTime });
+      gapHistory.push({ lap, gap: frame.gap });
       drawGapChart();
 
       document.getElementById('s-user-pos').textContent = userLeads ? 'P1' : 'P2';
       document.getElementById('s-rem-pos').textContent = userLeads ? 'P2' : 'P1';
-      document.getElementById('s-user-gap').textContent = userLeads ? 'LEADER' : `+${gap.toFixed(3)}s`;
+      document.getElementById('s-user-gap').textContent = userLeads ? 'LEADER' : `+${absGap.toFixed(3)}s`;
       document.getElementById('s-rem-gap').textContent = userLeads ? `+${absGap.toFixed(3)}s` : 'LEADER';
       document.getElementById('card-user').classList.toggle('leading', userLeads);
       document.getElementById('card-rem').classList.toggle('leading', !userLeads);
@@ -2883,7 +3174,9 @@
       const uc = COMPOUND[us.compound];
       const rc = COMPOUND[rs.compound];
 
-      document.getElementById('s-user-tyre').innerHTML = `<span class="tyre-dot" style="background:${uc.color}"></span>${uc.name}`;
+      // Tyre cliff warning: glow red when within 3 laps of cliff
+      const cliffWarning = us.age >= (uc.cliff - 3);
+      document.getElementById('s-user-tyre').innerHTML = `<span class="tyre-dot${cliffWarning ? ' tyre-warn' : ''}" style="background:${uc.color}"></span>${uc.name}${cliffWarning ? ' ⚠' : ''}`;
       document.getElementById('s-user-age').textContent = `Lap ${us.age}`;
       document.getElementById('s-rem-tyre').innerHTML = `<span class="tyre-dot" style="background:${rc.color}"></span>${rc.name}`;
       document.getElementById('s-rem-age').textContent = `Lap ${rs.age}`;
@@ -2919,7 +3212,11 @@
         setReminSpeech(remLeading ? 'leading' : 'trailing');
       }
       if (lap === Math.floor(LAPS * 0.3) || lap === Math.floor(LAPS * 0.65)) {
-        setReminSpeech(remLeading ? 'leading' : 'trailing');
+        // Cliff warning speech: if user is within 3 laps of cliff, Remin taunts
+        const usNow = getStintAt(simState.userStints, lap);
+        const ucNow = COMPOUND[usNow.compound];
+        const nearCliff = usNow.age >= ucNow.cliff - 4 && usNow.age < ucNow.cliff + 3;
+        setReminSpeech(nearCliff ? 'cliff_warning' : (remLeading ? 'leading' : 'trailing'));
       }
 
       // ── WILDCARD EVENT trigger ──
@@ -2939,8 +3236,14 @@
           document.getElementById('ef-lap').textContent = `LAP ${lap}`;
           flash.classList.add('show');
           setTimeout(() => flash.classList.remove('show'), 4000);
-          // Remin reacts
-          setReminSpeech(remLeading ? 'leading' : 'trailing');
+          // Remin reacts — SC/VSC → free pit speech if applicable
+          if (isSC) {
+            const aiNextPit = simState.remPitLaps.find(l => l > lap);
+            const aiPitsUnderSC = aiNextPit && aiNextPit <= ev.endLap;
+            setReminSpeech(aiPitsUnderSC ? 'sc_react' : (remLeading ? 'leading' : 'trailing'));
+          } else {
+            setReminSpeech(remLeading ? 'leading' : 'trailing');
+          }
         }
         if (lap === ev.endLap + 1) {
           const endLabel = isSC ? 'RACE RESUMED' : 'TRACK DRYING';
@@ -2980,8 +3283,7 @@
     }
 
     function showResult() {
-      const uTime = calcTime(simState.userStints, simState.driverKey, false, LAPS, simState.event);
-      const rTime = calcTime(simState.remStints, null, true, LAPS, simState.event);
+      const { totalPlayer: uTime, totalAI: rTime } = simState.raceData;
       const gap = Math.abs(uTime - rTime).toFixed(3);
       const userWins = uTime < rTime;
       const drv = DRIVERS[simState.driverKey];
@@ -3021,32 +3323,18 @@
       <div class="result-time">${p2.time}</div>
     </div>`;
 
-      const remStr = remStints.map(s => `${COMPOUND[s.compound].name} (${s.laps}L)`).join(' → ');
-      const userStr = userStints.map(s => `${COMPOUND[s.compound].name} (${s.laps}L)`).join(' → ');
-      const ev = simState.event;
-      const evNote = (() => {
-        if (!ev || ev.type === 'none') return '';
-        const userPitInWindow = simState.userPitLaps.some(l => l >= ev.startLap && l <= ev.endLap);
-        const remPitInWindow = simState.remPitLaps.some(l => l >= ev.startLap && l <= ev.endLap);
-        if (ev.type === 'sc' || ev.type === 'vsc') {
-          if (userPitInWindow && !remPitInWindow) return ` The ${ev.label} on lap ${ev.startLap} handed you a free pit — you saved ~${ev.scPitSaving}s on your stop while Remin pitted at full cost.`;
-          if (!userPitInWindow && remPitInWindow) return ` The ${ev.label} on lap ${ev.startLap} worked against you — Remin pitted under the flag and saved ~${ev.scPitSaving}s.`;
-          if (userPitInWindow && remPitInWindow) return ` Both pitted under the ${ev.label} on lap ${ev.startLap} — equal benefit, no margin gained.`;
-          return ` The ${ev.label} on lap ${ev.startLap} didn't align with either pit window — a neutral event.`;
-        }
-        if (ev.type === 'rain') {
-          const userOnSoft = simState.userStints.some(s => {
-            let cum = 0;
-            for (const t of simState.userStints) { if (t === s) break; cum += t.laps; }
-            return s.compound === 'soft' && cum < ev.endLap && cum + s.laps >= ev.startLap;
-          });
-          return ` Rain fell on laps ${ev.startLap}–${ev.endLap}${userOnSoft ? ' — your soft tyres took a hit during the shower' : ' — your compound handled the conditions well'}.`;
-        }
-        return '';
-      })();
-      document.getElementById('result-analysis').textContent = userWins
-        ? `Your strategy (${userStr}) beat Remin's adaptive counter (${remStr}) by ${gap}s. You read the tyre window correctly — at Silverstone in 2026 without DRS, track position in the final 15 laps is everything.${evNote} Well played.`
-        : `Remin adapted and won. After seeing your opening stint, Remin countered with ${remStr} — a better tyre delta in the closing laps sealed it. The gap was ${gap}s.${evNote} Adjust your pit window and race again.`;
+      const remStr = simState.remStints.map(s => `${COMPOUND[s.compound].name} (${s.laps}L)`).join(' → ');
+      const userStr = simState.userStints.map(s => `${COMPOUND[s.compound].name} (${s.laps}L)`).join(' → ');
+
+      const analysis = generateAnalysis(simState.raceData, simState.userStints, simState.remStints, simState.event, simState.driverKey, userWins, parseFloat(gap));
+      document.getElementById('result-analysis').textContent = analysis.verdict;
+
+      const momentsEl = document.getElementById('key-moments');
+      if (momentsEl) {
+        momentsEl.innerHTML = analysis.keyMoments.length > 0
+          ? analysis.keyMoments.map(m => `<span class="moment-pill">Lap ${m.lap} — ${m.text}</span>`).join('')
+          : '';
+      }
 
       saveToDatabase({
         name: simState.userName || 'Anonymous',
