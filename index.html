@@ -1389,6 +1389,32 @@
     <canvas id="confetti-canvas"></canvas>
     <canvas id="rain-canvas"></canvas>
 
+    <!-- END RACE MODAL -->
+    <div id="race-modal-overlay">
+      <div class="race-modal">
+        <button class="btn-modal-close" onclick="closeRaceModal()" title="Close">×</button>
+        <div class="modal-lights" id="modal-lights">
+          <div class="modal-light" id="ml1"></div>
+          <div class="modal-light" id="ml2"></div>
+          <div class="modal-light" id="ml3"></div>
+          <div class="modal-light" id="ml4"></div>
+          <div class="modal-light" id="ml5"></div>
+        </div>
+        <div class="modal-trophy" id="modal-trophy">🏆</div>
+        <div class="modal-eyebrow" id="modal-eyebrow">Silverstone GP · 2026</div>
+        <div class="modal-headline" id="modal-headline">You Win!</div>
+        <div class="modal-sub" id="modal-sub">Strategy locked in.</div>
+        <div class="modal-gap" id="modal-gap">+0.000s</div>
+        <div class="modal-actions">
+          <button class="btn-modal-primary" id="modal-btn-again" onclick="closeRaceModal();goSetup()">🔄 Race
+            Again</button>
+          <button class="btn-modal-secondary" onclick="closeRaceModal();downloadResultCard()">↓ Save Result
+            Card</button>
+        </div>
+        <div class="modal-ticker" id="modal-ticker"></div>
+      </div>
+    </div>
+
     <!-- RACE SCREEN -->
     <div class="screen" id="screen-race">
 
@@ -2094,6 +2120,8 @@
       rs.classList.add('result-animate');
       setTimeout(() => { document.getElementById('rrow1')?.classList.add('visible'); }, 200);
       setTimeout(() => { document.getElementById('rrow2')?.classList.add('visible'); }, 400);
+
+      setTimeout(() => showRaceModal(userWins, gap, simState.userName, drv), 700);
     }
 
     function togglePause() {
@@ -2112,6 +2140,7 @@
       paused = false;
       rainActive = false;
       gapHistory = [];
+      closeRaceModal();
       cancelAnimationFrame(rainRaf);
       cancelAnimationFrame(confettiRaf);
       confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
@@ -2266,6 +2295,61 @@
         });
         document.getElementById('lb-section').style.display = 'block';
       } catch (e) { /* silent */ }
+    }
+
+    /* ── END RACE MODAL ── */
+    function showRaceModal(userWins, gap, name, drv) {
+      const overlay = document.getElementById('race-modal-overlay');
+      const displayName = (name || drv.name).toUpperCase();
+
+      // Lights out sequence: red x5 then flash green (win) or stay red (lose)
+      const lights = ['ml1', 'ml2', 'ml3', 'ml4', 'ml5'];
+      lights.forEach(id => { const el = document.getElementById(id); if (el) { el.className = 'modal-light'; } });
+      lights.forEach((id, i) => {
+        setTimeout(() => {
+          const el = document.getElementById(id);
+          if (el) el.classList.add('on-red');
+        }, i * 220);
+      });
+
+      setTimeout(() => {
+        if (userWins) {
+          lights.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) { el.classList.remove('on-red'); el.classList.add('on-green'); }
+          });
+        }
+        // Set copy
+        document.getElementById('modal-trophy').textContent = userWins ? '🏆' : '🤖';
+        document.getElementById('modal-eyebrow').textContent = `Silverstone GP · 2026`;
+        document.getElementById('modal-headline').textContent = userWins
+          ? `${displayName} WINS!`
+          : 'Remin Wins';
+        document.getElementById('modal-headline').style.color = userWins ? '#f0f0f0' : '#FF6B35';
+        document.getElementById('modal-sub').textContent = userWins
+          ? 'Strategy victory. Podium secured.'
+          : 'Remin out-adapted you this time.';
+        const gapEl = document.getElementById('modal-gap');
+        gapEl.textContent = `Gap: ${gap}s`;
+        gapEl.style.background = userWins ? 'rgba(52,211,153,0.12)' : 'rgba(248,113,113,0.1)';
+        gapEl.style.color = userWins ? '#34d399' : '#f87171';
+        gapEl.style.border = `1px solid ${userWins ? 'rgba(52,211,153,0.3)' : 'rgba(248,113,113,0.25)'}`;
+        const againBtn = document.getElementById('modal-btn-again');
+        againBtn.style.background = userWins ? 'linear-gradient(135deg,#7c3aed,#a78bfa)' : 'linear-gradient(135deg,#7c3aed,#a78bfa)';
+        againBtn.style.color = '#fff';
+        const score = document.getElementById('score-num')?.textContent;
+        document.getElementById('modal-ticker').textContent = score && score !== '—'
+          ? `Strategy IQ: ${score} · ${document.getElementById('score-grade')?.textContent || ''}`
+          : '';
+
+        overlay.classList.add('show');
+        // Close on backdrop click
+        overlay.onclick = (e) => { if (e.target === overlay) closeRaceModal(); };
+      }, lights.length * 220 + 200);
+    }
+
+    function closeRaceModal() {
+      document.getElementById('race-modal-overlay').classList.remove('show');
     }
 
     /* ── DOWNLOAD RESULT CARD ── */
