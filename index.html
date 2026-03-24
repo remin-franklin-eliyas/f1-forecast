@@ -1094,6 +1094,188 @@
     .result-row.visible {
       animation: resultSlideIn .4s ease forwards;
     }
+
+    /* ── GAP CHART ── */
+    .gap-chart-wrap {
+      margin-bottom: 16px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px 6px;
+    }
+
+    .gap-chart-label {
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    #gap-chart {
+      width: 100%;
+      display: block;
+      border-radius: 4px;
+    }
+
+    /* ── STRATEGY SCORE ── */
+    .score-wrap {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 14px 0;
+      padding: 12px 16px;
+      background: var(--bg3);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .score-num {
+      font-family: var(--font-display);
+      font-size: 52px;
+      font-weight: 900;
+      line-height: 1;
+      color: var(--accent);
+    }
+
+    .score-label {
+      font-family: var(--font-display);
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2px;
+    }
+
+    .score-grade {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── LEADERBOARD ── */
+    .lb-section {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+
+    .lb-heading {
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .lb-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 11px;
+    }
+
+    .lb-row:last-child {
+      border-bottom: none;
+    }
+
+    .lb-pos {
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 700;
+      width: 20px;
+      color: var(--muted);
+    }
+
+    .lb-name {
+      flex: 1;
+      color: var(--text);
+      text-transform: uppercase;
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .lb-driver {
+      color: var(--muted);
+      font-size: 10px;
+      letter-spacing: 0.5px;
+      font-family: var(--font-body);
+      text-transform: none;
+      font-weight: 400;
+      margin-top: 1px;
+    }
+
+    .lb-gap {
+      color: var(--accent);
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .lb-you {
+      border-left: 2px solid var(--accent);
+      padding-left: 6px;
+    }
+
+    /* ── SHARE / DOWNLOAD BUTTON ── */
+    .btn-share {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 12px 28px;
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid rgba(167, 139, 250, 0.4);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all .15s;
+    }
+
+    .btn-share:hover {
+      background: rgba(167, 139, 250, 0.1);
+      border-color: var(--accent);
+    }
+
+    /* ── SPEED CONTROL ── */
+    .speed-btns {
+      display: flex;
+      gap: 4px;
+      justify-content: flex-end;
+    }
+
+    .btn-speed {
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      padding: 4px 10px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      background: var(--bg2);
+      color: var(--muted);
+      cursor: pointer;
+      transition: all .15s;
+    }
+
+    .btn-speed.active {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(167, 139, 250, 0.1);
+    }
+
+    .btn-speed:hover {
+      border-color: var(--border2);
+      color: var(--text);
+    }
   </style>
 </head>
 
@@ -1226,6 +1408,11 @@
             <button class="btn-ctrl" id="btn-pause" onclick="togglePause()">Pause</button>
             <button class="btn-ctrl" onclick="goSetup()">Restart</button>
           </div>
+          <div class="speed-btns">
+            <button class="btn-speed active" id="spd1" onclick="setSpeed(1)">1×</button>
+            <button class="btn-speed" id="spd2" onclick="setSpeed(2)">2×</button>
+            <button class="btn-speed" id="spd5" onclick="setSpeed(5)">5×</button>
+          </div>
         </div>
       </div>
 
@@ -1254,6 +1441,12 @@
         </div>
       </div>
 
+      <div class="gap-chart-wrap">
+        <div class="gap-chart-label">Live Gap Chart &nbsp;·&nbsp; <span style="color:#a78bfa">▪ You lead</span>
+          &nbsp;<span style="color:#FF6B35">▪ Remin leads</span></div>
+        <canvas id="gap-chart" height="110"></canvas>
+      </div>
+
       <div class="timeline-section">
         <div class="tl-label" id="tl-user-lbl">You</div>
         <div class="tl-bg">
@@ -1274,9 +1467,24 @@
         <div class="result-box">
           <div class="result-heading">Race Result — Silverstone GP 2026</div>
           <div id="result-body"></div>
+          <div class="score-wrap">
+            <div class="score-num" id="score-num">—</div>
+            <div>
+              <div class="score-label">Strategy IQ</div>
+              <div class="score-grade" id="score-grade">—</div>
+              <div id="score-sub" style="font-size:11px;color:var(--muted);margin-top:3px">—</div>
+            </div>
+          </div>
           <div class="analysis" id="result-analysis"></div>
+          <div class="lb-section" id="lb-section" style="display:none">
+            <div class="lb-heading">🏆 Closest Wins · Global Board</div>
+            <div id="lb-rows"></div>
+          </div>
         </div>
-        <button class="btn-again" onclick="goSetup()">Race Again</button>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px">
+          <button class="btn-again" onclick="goSetup()">Race Again</button>
+          <button class="btn-share" onclick="downloadResultCard()">↓ Save&nbsp;Card</button>
+        </div>
       </div>
     </div>
 
@@ -1332,6 +1540,8 @@
     let simState = {};
     let simInterval = null;
     let paused = false;
+    let gapHistory = [];
+    let simSpeed = 1;
 
     function getColor(driver) {
       return getComputedStyle(document.documentElement).getPropertyValue('--' + driver.toLowerCase()).trim() || '#fff';
@@ -1462,6 +1672,11 @@
       confettiCanvas.height = window.innerHeight;
       document.getElementById('rain-canvas').width = window.innerWidth;
       document.getElementById('rain-canvas').height = window.innerHeight;
+      const gc = document.getElementById('gap-chart');
+      if (gc && gc.parentElement?.clientWidth > 0) {
+        gc.width = gc.parentElement.clientWidth;
+        drawGapChart();
+      }
     }
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
@@ -1660,11 +1875,18 @@
 
       document.getElementById('result-section').style.display = 'none';
       lastRemLeading = null;
+      gapHistory = [];
+      simSpeed = 1;
+      [1, 2, 5].forEach(n => document.getElementById(`spd${n}`)?.classList.toggle('active', n === 1));
       setReminMood('idle');
       setReminSpeech('idle');
       showScreen('screen-race');
       paused = false;
       document.getElementById('btn-pause').textContent = 'Pause';
+      setTimeout(() => {
+        const gc = document.getElementById('gap-chart');
+        if (gc && gc.parentElement?.clientWidth > 0) { gc.width = gc.parentElement.clientWidth; drawGapChart(); }
+      }, 60);
       simInterval = setInterval(tick, 200);
     }
 
@@ -1695,6 +1917,8 @@
       if (userGainingGround) gapEl.classList.add('gap-gain');
       else if (userLosingGround) gapEl.classList.add('gap-lose');
       simState.lastGap = gap;
+      gapHistory.push({ lap, gap: rTime - uTime });
+      drawGapChart();
 
       document.getElementById('s-user-pos').textContent = userLeads ? 'P1' : 'P2';
       document.getElementById('s-rem-pos').textContent = userLeads ? 'P2' : 'P1';
@@ -1823,6 +2047,17 @@
         gap_seconds: parseFloat(gap)
       });
 
+      simState.userWins = userWins;
+      const score = calcStrategyScore(simState.userStints, simState.userPitLaps, userWins, parseFloat(gap));
+      const { grade, color: gradeColor, sub } = getScoreGrade(score);
+      document.getElementById('score-num').textContent = score;
+      document.getElementById('score-num').style.color = gradeColor;
+      document.getElementById('score-grade').textContent = grade;
+      document.getElementById('score-grade').style.color = gradeColor;
+      document.getElementById('score-sub').textContent = sub;
+
+      fetchLeaderboard(simState.userName, parseFloat(gap), userWins);
+
       const rs = document.getElementById('result-section');
       rs.style.display = 'block';
       rs.classList.add('result-animate');
@@ -1833,7 +2068,7 @@
     function togglePause() {
       paused = !paused;
       if (paused) { clearInterval(simInterval); document.getElementById('btn-pause').textContent = 'Resume'; }
-      else { simInterval = setInterval(tick, 200); document.getElementById('btn-pause').textContent = 'Pause'; }
+      else { simInterval = setInterval(tick, Math.round(200 / simSpeed)); document.getElementById('btn-pause').textContent = 'Pause'; }
     }
 
     function showScreen(id) {
@@ -1845,6 +2080,7 @@
       clearInterval(simInterval);
       paused = false;
       rainActive = false;
+      gapHistory = [];
       cancelAnimationFrame(rainRaf);
       cancelAnimationFrame(confettiRaf);
       confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
@@ -1867,6 +2103,202 @@
           body: JSON.stringify(data)
         });
       } catch (e) { /* silent — never affect gameplay */ }
+    }
+
+    /* ── GAP CHART ── */
+    function drawGapChart() {
+      const canvas = document.getElementById('gap-chart');
+      if (!canvas) return;
+      const parentW = canvas.parentElement?.clientWidth;
+      if (parentW && parentW > 0) canvas.width = parentW;
+      else if (!canvas.width || canvas.width < 10) return;
+      const ctx = canvas.getContext('2d');
+      const w = canvas.width, h = canvas.height;
+      ctx.clearRect(0, 0, w, h);
+      ctx.fillStyle = '#0a0a12';
+      ctx.fillRect(0, 0, w, h);
+      const midY = h / 2;
+      // Zero line
+      ctx.beginPath();
+      ctx.strokeStyle = 'rgba(255,255,255,0.12)';
+      ctx.lineWidth = 1;
+      ctx.setLineDash([4, 6]);
+      ctx.moveTo(0, midY); ctx.lineTo(w, midY);
+      ctx.stroke(); ctx.setLineDash([]);
+      // Lap markers
+      for (let l = 10; l < LAPS; l += 10) {
+        const x = l / LAPS * w;
+        ctx.beginPath(); ctx.strokeStyle = 'rgba(255,255,255,0.04)';
+        ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
+        ctx.font = '8px sans-serif'; ctx.fillStyle = 'rgba(255,255,255,0.18)';
+        ctx.fillText(`L${l}`, x + 2, h - 4);
+      }
+      if (gapHistory.length < 2) {
+        ctx.font = '10px sans-serif'; ctx.fillStyle = 'rgba(255,255,255,0.2)';
+        ctx.textAlign = 'center';
+        ctx.fillText('Gap chart appears when the race starts', w / 2, midY + 4);
+        ctx.textAlign = 'left'; return;
+      }
+      const maxAbs = Math.max(...gapHistory.map(g => Math.abs(g.gap)), 2);
+      const scaleY = (midY - 10) / maxAbs;
+      const scaleX = w / LAPS;
+      const last = gapHistory[gapHistory.length - 1];
+      // Shaded fill
+      ctx.beginPath();
+      gapHistory.forEach((g, i) => {
+        const x = g.lap * scaleX, y = midY - g.gap * scaleY;
+        i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      });
+      ctx.lineTo(last.lap * scaleX, midY);
+      ctx.lineTo(gapHistory[0].lap * scaleX, midY);
+      ctx.closePath();
+      const lGrad = ctx.createLinearGradient(0, 0, 0, h);
+      if (last.gap >= 0) { lGrad.addColorStop(0, 'rgba(167,139,250,0.2)'); lGrad.addColorStop(1, 'rgba(167,139,250,0)'); }
+      else { lGrad.addColorStop(0, 'rgba(255,107,53,0)'); lGrad.addColorStop(1, 'rgba(255,107,53,0.2)'); }
+      ctx.fillStyle = lGrad; ctx.fill();
+      // Line segments colored by leader
+      for (let i = 1; i < gapHistory.length; i++) {
+        const p = gapHistory[i - 1], c = gapHistory[i];
+        ctx.beginPath();
+        ctx.strokeStyle = c.gap >= 0 ? '#a78bfa' : '#FF6B35';
+        ctx.lineWidth = 2; ctx.lineJoin = 'round';
+        ctx.moveTo(p.lap * scaleX, midY - p.gap * scaleY);
+        ctx.lineTo(c.lap * scaleX, midY - c.gap * scaleY);
+        ctx.stroke();
+      }
+      // Current position dot
+      ctx.beginPath();
+      ctx.fillStyle = last.gap >= 0 ? '#a78bfa' : '#FF6B35';
+      ctx.arc(last.lap * scaleX, midY - last.gap * scaleY, 4, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    /* ── STRATEGY SCORE ── */
+    function calcStrategyScore(stints, pitLaps, userWins, gapSec) {
+      let score = 42;
+      if (stints.length === 2) score += 15;
+      else if (stints.length === 3) score += 10;
+      else if (stints.length === 1) score -= 20;
+      const compounds = new Set(stints.map(s => s.compound));
+      if (compounds.size >= 2) score += 10;
+      if (compounds.size === 3) score += 5;
+      pitLaps.forEach((_, i) => {
+        const len = stints[i].laps;
+        if (len >= 12 && len <= 22) score += 8;
+        else if (len >= 23 && len <= 28) score += 4;
+        else score -= 4;
+      });
+      if (userWins) score += 20;
+      if (userWins && gapSec < 5) score += 5;
+      return Math.max(0, Math.min(100, Math.round(score)));
+    }
+
+    function getScoreGrade(score) {
+      if (score >= 90) return { grade: 'Race Engineer', color: '#34d399', sub: 'Textbook strategy. Silverstone mastered.' };
+      if (score >= 75) return { grade: 'Strategy Chief', color: '#a78bfa', sub: 'Strong call. Pit timing was the key.' };
+      if (score >= 58) return { grade: 'Analyst', color: '#FFD700', sub: "Decent read — there's a faster window though." };
+      if (score >= 40) return { grade: 'Junior Engineer', color: '#f87171', sub: 'Tyre management cost you critical seconds.' };
+      return { grade: 'Backmarker', color: '#6b6b8a', sub: 'Rethink the opening stint entirely.' };
+    }
+
+    /* ── SPEED CONTROL ── */
+    function setSpeed(x) {
+      simSpeed = x;
+      [1, 2, 5].forEach(n => document.getElementById(`spd${n}`)?.classList.toggle('active', n === x));
+      if (!paused && simInterval) {
+        clearInterval(simInterval);
+        simInterval = setInterval(tick, Math.round(200 / x));
+      }
+    }
+
+    /* ── GLOBAL LEADERBOARD ── */
+    async function fetchLeaderboard(currentName, currentGap, currentWon) {
+      if (!SUPABASE_URL || SUPABASE_URL === 'YOUR_SUPABASE_URL') return;
+      try {
+        const res = await fetch(
+          `${SUPABASE_URL}/rest/v1/forecasts?result=eq.win&order=gap_seconds.asc&limit=5`,
+          { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } }
+        );
+        const rows = await res.json();
+        if (!Array.isArray(rows) || rows.length === 0) return;
+        const lbRows = document.getElementById('lb-rows');
+        lbRows.innerHTML = '';
+        rows.forEach((r, i) => {
+          const isYou = currentWon && r.name === (currentName || 'Anonymous') && Math.abs(r.gap_seconds - currentGap) < 0.01;
+          lbRows.innerHTML += `<div class="lb-row${isYou ? ' lb-you' : ''}">
+            <div class="lb-pos">${i + 1}</div>
+            <div class="lb-name">${(r.name || 'Anon').slice(0, 18).toUpperCase()}
+              <div class="lb-driver">${r.driver} · ${(r.user_strategy || '').slice(0, 32)}</div>
+            </div>
+            <div class="lb-gap">+${parseFloat(r.gap_seconds).toFixed(3)}s</div>
+          </div>`;
+        });
+        document.getElementById('lb-section').style.display = 'block';
+      } catch (e) { /* silent */ }
+    }
+
+    /* ── DOWNLOAD RESULT CARD ── */
+    function downloadResultCard() {
+      const CW = 600, CH = 315;
+      const c = document.createElement('canvas');
+      c.width = CW; c.height = CH;
+      const ctx = c.getContext('2d');
+      // Background + grid
+      ctx.fillStyle = '#080810'; ctx.fillRect(0, 0, CW, CH);
+      ctx.strokeStyle = 'rgba(167,139,250,0.05)'; ctx.lineWidth = 1;
+      for (let x = 0; x < CW; x += 40) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, CH); ctx.stroke(); }
+      for (let y = 0; y < CH; y += 40) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(CW, y); ctx.stroke(); }
+      // Top bar
+      const barG = ctx.createLinearGradient(0, 0, CW, 0);
+      barG.addColorStop(0, '#7c3aed'); barG.addColorStop(1, '#a78bfa');
+      ctx.fillStyle = barG; ctx.fillRect(0, 0, CW, 4);
+      // Logo
+      ctx.font = '11px sans-serif'; ctx.fillStyle = '#6b6b8a';
+      ctx.fillText('F1 STRATEGY BATTLE  ·  SILVERSTONE 2026', 24, 30);
+      // Result label
+      const uWins = simState.userWins;
+      ctx.font = 'bold 12px sans-serif';
+      ctx.fillStyle = uWins ? '#a78bfa' : '#FF6B35';
+      ctx.fillText(uWins ? 'STRATEGY VICTORY' : 'REMIN WINS THIS TIME', 24, 55);
+      // Name
+      const displayName = (simState.userName || 'RACER').toUpperCase().slice(0, 16);
+      ctx.font = 'bold 50px sans-serif'; ctx.fillStyle = '#f0f0f0';
+      ctx.fillText(displayName, 24, 115);
+      // Driver
+      if (userDriver) {
+        const drv = DRIVERS[userDriver];
+        const drvColor = getComputedStyle(document.documentElement).getPropertyValue(drv.colorVar).trim();
+        ctx.font = '15px sans-serif'; ctx.fillStyle = drvColor || '#a78bfa';
+        ctx.fillText(`${drv.name.toUpperCase()}  ·  ${drv.team.toUpperCase()}`, 24, 142);
+      }
+      // Strategy
+      const userStr = userStints.map(s => `${COMPOUND[s.compound].name}(${s.laps}L)`).join(' → ');
+      ctx.font = '12px sans-serif'; ctx.fillStyle = '#6b6b8a';
+      ctx.fillText('STRATEGY: ' + userStr, 24, 170);
+      // Gap
+      const gapText = document.getElementById('gap-disp')?.textContent || '';
+      ctx.font = 'bold 20px sans-serif'; ctx.fillStyle = '#a78bfa';
+      ctx.fillText(gapText, 24, 204);
+      // Score (right side)
+      const score = document.getElementById('score-num')?.textContent || '—';
+      const grade = document.getElementById('score-grade')?.textContent || '';
+      ctx.textAlign = 'right';
+      ctx.font = 'bold 56px sans-serif'; ctx.fillStyle = '#a78bfa';
+      ctx.fillText(score, CW - 28, 148);
+      ctx.font = '10px sans-serif'; ctx.fillStyle = '#6b6b8a';
+      ctx.fillText('STRATEGY IQ', CW - 28, 164);
+      ctx.font = 'bold 12px sans-serif'; ctx.fillStyle = '#f0f0f0';
+      ctx.fillText(grade.toUpperCase(), CW - 28, 182);
+      ctx.textAlign = 'left';
+      // Bottom strip
+      ctx.fillStyle = 'rgba(255,255,255,0.04)'; ctx.fillRect(0, CH - 34, CW, 34);
+      ctx.font = '10px sans-serif'; ctx.fillStyle = '#6b6b8a';
+      ctx.fillText('remin-franklin-eliyas.github.io/f1-forecast  ·  Built by Remin Franklin  ·  2026', 24, CH - 12);
+      // Download
+      const a = document.createElement('a');
+      a.download = `f1-result-${(simState.userName || 'race').replace(/\s+/g, '-').toLowerCase()}.png`;
+      a.href = c.toDataURL('image/png');
+      a.click();
     }
 
     addStint('soft', 17);
