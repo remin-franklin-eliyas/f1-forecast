@@ -2460,16 +2460,16 @@
 
     .btn-modal-primary {
       font-family: var(--font-display);
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 800;
-      letter-spacing: 2px;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
-      padding: 14px 24px;
+      padding: 12px 24px;
       border: none;
       border-radius: 10px;
       cursor: pointer;
       width: 100%;
-      background: linear-gradient(135deg, #7c3aed, #a78bfa);
+      background: linear-gradient(135deg, var(--track-accent2, #7c3aed), var(--track-accent, #a78bfa));
       color: #fff;
       transition: filter .15s, transform .1s;
     }
@@ -2575,6 +2575,37 @@
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
+    }
+
+    .modal-heatmap-section {
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .modal-heatmap-label {
+      font-family: var(--font-display);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .modal-heatmap-section .heatmap-row-label {
+      margin-bottom: 2px;
+    }
+
+    .modal-heatmap-section .heatmap-cell {
+      width: 7px;
+      height: 13px;
+      border-radius: 1px;
+    }
+
+    .modal-heatmap-section .heatmap-grid {
+      gap: 1px;
+      margin-bottom: 5px;
     }
 
     .modal-moment-pill {
@@ -3322,6 +3353,11 @@
             <div class="modal-analysis-label" id="modal-analysis-label">RACE ANALYSIS</div>
             <div class="modal-analysis-text" id="modal-analysis-text"></div>
             <div class="modal-analysis-moments" id="modal-analysis-moments"></div>
+            <div class="modal-heatmap-section" id="modal-heatmap-section" style="display:none">
+              <div class="modal-heatmap-label">⬛ LAP-BY-LAP PACE MAP</div>
+              <div id="modal-heatmap-grid-user"></div>
+              <div id="modal-heatmap-grid-rem"></div>
+            </div>
             <div class="modal-leaderboard-cta" id="modal-leaderboard-cta"></div>
             <button class="modal-tweet-btn" id="modal-btn-tweet" onclick="shareResult()">𝕏 Post your result</button>
           </div>
@@ -4412,18 +4448,19 @@
     }
 
     /* ── v2.1: TYRE HEATMAP ── */
-    function renderHeatmap(raceData) {
-      const wrap = document.getElementById('heatmap-wrap');
-      if (!wrap) return;
-      wrap.style.display = 'block';
+    function renderHeatmap(raceData, userGridId = 'heatmap-grid-user', remGridId = 'heatmap-grid-rem', wrapId = 'heatmap-wrap', userLabelColor = null) {
+      const wrap = wrapId ? document.getElementById(wrapId) : null;
+      if (wrap) wrap.style.display = 'block';
       const laps = raceData.laps;
       const TYRE_COLORS = { soft: '#E8002D', med: '#FFD700', hard: '#888' };
-      function buildRow(labelText, lapGetter, compoundGetter, pitGetter, gridId) {
+      function buildRow(labelText, lapGetter, compoundGetter, pitGetter, gridId, labelColor) {
+        const grid = document.getElementById(gridId);
+        if (!grid) return;
+        grid.innerHTML = '';
         const labelEl = document.createElement('div');
         labelEl.className = 'heatmap-row-label';
         labelEl.textContent = labelText;
-        const grid = document.getElementById(gridId);
-        grid.innerHTML = '';
+        if (labelColor) labelEl.style.color = labelColor;
         grid.appendChild(labelEl);
         const gridRow = document.createElement('div');
         gridRow.className = 'heatmap-grid';
@@ -4433,7 +4470,6 @@
           const lapT = lapGetter(f);
           const compound = compoundGetter(f);
           const isPit = pitGetter(f);
-          // Heat: compare lap time to median — green = fast, red = slow
           const medianLap = BASE_LAP;
           const delta = lapT - medianLap;
           let heat;
@@ -4448,8 +4484,8 @@
         });
         grid.appendChild(gridRow);
       }
-      buildRow('YOU', f => f.playerLapTime, f => f.playerCompound, f => f.playerPitted, 'heatmap-grid-user');
-      buildRow('REMIN', f => f.aiLapTime, f => f.aiCompound, f => f.aiPitted, 'heatmap-grid-rem');
+      buildRow('YOU', f => f.playerLapTime, f => f.playerCompound, f => f.playerPitted, userGridId, userLabelColor);
+      buildRow('REMIN', f => f.aiLapTime, f => f.aiCompound, f => f.aiPitted, remGridId, '#FF6B35');
     }
 
     /* ── MAIN GAME LOGIC ── */
@@ -4477,6 +4513,7 @@
       simState = {
         lap: 0,
         driverKey: userDriver,
+        driverColor: drvColor,
         userName: userName,
         userStints: JSON.parse(JSON.stringify(userStints)),
         remStints: JSON.parse(JSON.stringify(remStints)),
@@ -4920,7 +4957,7 @@
       rs.classList.add('result-animate');
 
       // v2.1: tyre strategy heatmap
-      renderHeatmap(simState.raceData);
+      renderHeatmap(simState.raceData, 'heatmap-grid-user', 'heatmap-grid-rem', 'heatmap-wrap', simState.driverColor);
 
       // Win/lose visual state on result box
       const resultBox = rs.querySelector('.result-box');
@@ -5245,6 +5282,15 @@
                 return `<span class="modal-moment-pill" style="border-color:${c.border};background:${c.bg};color:${c.color}">Lap ${m.lap} — ${m.text}</span>`;
               }).join('');
             }
+
+            // v2.1: heatmap in modal
+            if (simState.raceData && simState.raceData.laps && simState.raceData.laps.length) {
+              const hmSection = document.getElementById('modal-heatmap-section');
+              if (hmSection) {
+                hmSection.style.display = 'block';
+                renderHeatmap(simState.raceData, 'modal-heatmap-grid-user', 'modal-heatmap-grid-rem', null, simState.driverColor);
+              }
+            }
           }
 
           // Leaderboard CTA
@@ -5345,62 +5391,158 @@
 
     /* ── DOWNLOAD RESULT CARD ── */
     function downloadResultCard() {
-      const CW = 600, CH = 315;
+      const CW = 620, CH = 360;
       const c = document.createElement('canvas');
       c.width = CW; c.height = CH;
       const ctx = c.getContext('2d');
-      // Background + grid
-      ctx.fillStyle = '#080810'; ctx.fillRect(0, 0, CW, CH);
-      ctx.strokeStyle = 'rgba(167,139,250,0.05)'; ctx.lineWidth = 1;
+
+      // Pull track accent from CSS vars
+      const style = getComputedStyle(document.documentElement);
+      const accentColor = style.getPropertyValue('--track-accent').trim() || '#a78bfa';
+      const accent2Color = style.getPropertyValue('--track-accent2').trim() || '#7c3aed';
+      const uWins = simState.userWins;
+
+      // ── Background ──
+      ctx.fillStyle = '#06060e'; ctx.fillRect(0, 0, CW, CH);
+      // Subtle grid
+      ctx.strokeStyle = accentColor + '10'; ctx.lineWidth = 1;
       for (let x = 0; x < CW; x += 40) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, CH); ctx.stroke(); }
       for (let y = 0; y < CH; y += 40) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(CW, y); ctx.stroke(); }
-      // Top bar
+      // Right-side glow behind IQ number
+      const glowG = ctx.createRadialGradient(CW - 90, 140, 0, CW - 90, 140, 140);
+      glowG.addColorStop(0, accentColor + '1a'); glowG.addColorStop(1, 'transparent');
+      ctx.fillStyle = glowG; ctx.fillRect(0, 0, CW, CH);
+
+      // ── Top accent bar ──
       const barG = ctx.createLinearGradient(0, 0, CW, 0);
-      barG.addColorStop(0, '#7c3aed'); barG.addColorStop(1, '#a78bfa');
-      ctx.fillStyle = barG; ctx.fillRect(0, 0, CW, 4);
-      // Logo
-      ctx.font = '11px sans-serif'; ctx.fillStyle = '#6b6b8a';
-      ctx.fillText(`F1 STRATEGY BATTLE  ·  ${currentTrack.name.toUpperCase()} 2026`, 24, 30);
-      // Result label
-      const uWins = simState.userWins;
-      ctx.font = 'bold 12px sans-serif';
-      ctx.fillStyle = uWins ? '#a78bfa' : '#FF6B35';
-      ctx.fillText(uWins ? 'STRATEGY VICTORY' : 'REMIN WINS THIS TIME', 24, 55);
-      // Name
-      const displayName = (simState.userName || 'RACER').toUpperCase().slice(0, 16);
-      ctx.font = 'bold 50px sans-serif'; ctx.fillStyle = '#f0f0f0';
-      ctx.fillText(displayName, 24, 115);
-      // Driver
+      barG.addColorStop(0, accent2Color); barG.addColorStop(1, accentColor);
+      ctx.fillStyle = barG; ctx.fillRect(0, 0, CW, 5);
+
+      // ── WIN/DEFEAT badge (top right) ──
+      const badgeText = uWins ? '🏆 WIN' : '⚡ DEFEAT';
+      const badgeBg = uWins ? 'rgba(34,197,94,0.18)' : 'rgba(239,68,68,0.18)';
+      const badgeBorder = uWins ? '#22c55e' : '#ef4444';
+      const badgeTextColor = uWins ? '#4ade80' : '#f87171';
+      const bmx = CW - 20, bmy = 20, bmw = 110, bmh = 28, bmr = 6;
+      ctx.beginPath();
+      ctx.moveTo(bmx - bmw + bmr, bmy);
+      ctx.lineTo(bmx - bmr, bmy); ctx.arcTo(bmx, bmy, bmx, bmy + bmr, bmr);
+      ctx.lineTo(bmx, bmy + bmh - bmr); ctx.arcTo(bmx, bmy + bmh, bmx - bmr, bmy + bmh, bmr);
+      ctx.lineTo(bmx - bmw + bmr, bmy + bmh); ctx.arcTo(bmx - bmw, bmy + bmh, bmx - bmw, bmy + bmh - bmr, bmr);
+      ctx.lineTo(bmx - bmw, bmy + bmr); ctx.arcTo(bmx - bmw, bmy, bmx - bmw + bmr, bmy, bmr);
+      ctx.closePath();
+      ctx.fillStyle = badgeBg; ctx.fill();
+      ctx.strokeStyle = badgeBorder; ctx.lineWidth = 1; ctx.stroke();
+      ctx.font = 'bold 12px sans-serif'; ctx.fillStyle = badgeTextColor; ctx.textAlign = 'center';
+      ctx.fillText(badgeText, bmx - bmw / 2, bmy + 19);
+      ctx.textAlign = 'left';
+
+      // ── Track name + date (top left) ──
+      ctx.font = '700 11px sans-serif'; ctx.fillStyle = accentColor;
+      ctx.fillText(`${currentTrack.name.toUpperCase()} GP · 2026`, 22, 30);
+      ctx.font = '10px sans-serif'; ctx.fillStyle = '#3a3a5a';
+      ctx.fillText('F1 STRATEGY BATTLE', 22, 44);
+
+      // ── Divider ──
+      ctx.fillStyle = accentColor + '30'; ctx.fillRect(22, 54, CW - 44, 1);
+
+      // ── Name ──
+      const displayName = (simState.userName || 'RACER').toUpperCase().slice(0, 14);
+      ctx.font = 'bold 58px sans-serif'; ctx.fillStyle = uWins ? '#f0f0f0' : '#b0b0c0';
+      ctx.fillText(displayName, 22, 122);
+
+      // ── Driver pill ──
       if (userDriver) {
         const drv = DRIVERS[userDriver];
-        const drvColor = getComputedStyle(document.documentElement).getPropertyValue(drv.colorVar).trim();
-        ctx.font = '15px sans-serif'; ctx.fillStyle = drvColor || '#a78bfa';
-        ctx.fillText(`${drv.name.toUpperCase()}  ·  ${drv.team.toUpperCase()}`, 24, 142);
+        const drvColor = style.getPropertyValue(drv.colorVar).trim() || accentColor;
+        ctx.font = '700 12px sans-serif'; ctx.fillStyle = drvColor;
+        ctx.fillText(`${drv.name.toUpperCase()}  ·  ${drv.team.toUpperCase()}`, 22, 145);
       }
-      // Strategy
-      const userStr = userStints.map(s => `${COMPOUND[s.compound].name}(${s.laps}L)`).join(' → ');
-      ctx.font = '12px sans-serif'; ctx.fillStyle = '#6b6b8a';
-      ctx.fillText('STRATEGY: ' + userStr, 24, 170);
-      // Gap
-      const gapText = document.getElementById('gap-disp')?.textContent || '';
-      ctx.font = 'bold 20px sans-serif'; ctx.fillStyle = '#a78bfa';
-      ctx.fillText(gapText, 24, 204);
-      // Score (right side)
+
+      // ── Tyre stint blocks ──
+      const CMPD = { soft: { c: '#E8002D', l: 'S' }, med: { c: '#FFD700', l: 'M' }, hard: { c: '#CCCCCC', l: 'H' } };
+      const stints = simState.userStints || [];
+      let sx = 22, sy = 165;
+      ctx.font = '700 10px sans-serif';
+      stints.forEach((stint, idx) => {
+        const ti = CMPD[stint.compound] || { c: '#888', l: '?' };
+        const bw = Math.max(32, stint.laps * 3.2);
+        const bh = 22, br = 4;
+        // Block background
+        ctx.fillStyle = ti.c + '22';
+        ctx.strokeStyle = ti.c + 'aa'; ctx.lineWidth = 1.5;
+        ctx.beginPath(); ctx.roundRect(sx, sy, bw, bh, br); ctx.fill(); ctx.stroke();
+        // Label
+        ctx.fillStyle = ti.c;
+        ctx.fillText(`${ti.l}  ${stint.laps}L`, sx + 7, sy + 15);
+        sx += bw + 6;
+        // Arrow between stints
+        if (idx < stints.length - 1) {
+          ctx.fillStyle = '#3a3a5a'; ctx.font = '10px sans-serif';
+          ctx.fillText('→', sx, sy + 15);
+          sx += 14;
+        }
+      });
+
+      // ── Remin strategy (small, below) ──
+      const remStints = simState.remStints || [];
+      if (remStints.length) {
+        ctx.font = '10px sans-serif'; ctx.fillStyle = '#3a3a5a';
+        ctx.fillText('REMIN: ' + remStints.map(s => `${(CMPD[s.compound] || { l: '?' }).l}(${s.laps}L)`).join(' → '), 22, 204);
+      }
+
+      // ── Gap result ──
+      const gapVal = (simState.finalGap || 0).toFixed(3);
+      ctx.font = 'bold 18px sans-serif';
+      ctx.fillStyle = uWins ? '#34d399' : '#f87171';
+      ctx.fillText(uWins ? `+${gapVal}s ahead of Remin` : `−${gapVal}s behind Remin`, 22, 232);
+
+      // ── Vertical divider ──
+      ctx.fillStyle = accentColor + '20'; ctx.fillRect(CW - 185, 62, 1, 200);
+
+      // ── IQ Score (right column) ──
       const score = document.getElementById('score-num')?.textContent || '—';
       const grade = document.getElementById('score-grade')?.textContent || '';
-      ctx.textAlign = 'right';
-      ctx.font = 'bold 56px sans-serif'; ctx.fillStyle = '#a78bfa';
-      ctx.fillText(score, CW - 28, 148);
-      ctx.font = '10px sans-serif'; ctx.fillStyle = '#6b6b8a';
-      ctx.fillText('STRATEGY IQ', CW - 28, 164);
-      ctx.font = 'bold 12px sans-serif'; ctx.fillStyle = '#f0f0f0';
-      ctx.fillText(grade.toUpperCase(), CW - 28, 182);
+      const gradeEl = document.getElementById('score-grade');
+      const gradeColor = gradeEl ? gradeEl.style.color || accentColor : accentColor;
+      ctx.textAlign = 'center';
+      ctx.font = 'bold 80px sans-serif'; ctx.fillStyle = gradeColor;
+      ctx.fillText(score, CW - 90, 165);
+      ctx.font = '700 10px sans-serif'; ctx.fillStyle = '#3a3a5a';
+      ctx.fillText('STRATEGY IQ', CW - 90, 183);
+      ctx.font = 'bold 14px sans-serif'; ctx.fillStyle = gradeColor;
+      ctx.fillText(grade.toUpperCase(), CW - 90, 202);
       ctx.textAlign = 'left';
-      // Bottom strip
-      ctx.fillStyle = 'rgba(255,255,255,0.04)'; ctx.fillRect(0, CH - 34, CW, 34);
-      ctx.font = '10px sans-serif'; ctx.fillStyle = '#6b6b8a';
-      ctx.fillText('remin-franklin-eliyas.github.io/f1-forecast  ·  Built by Remin Franklin  ·  2026', 24, CH - 12);
-      // Download
+
+      // ── Mini gap bar ──
+      const barY = CH - 68, barH = 8, barX = 22, barW = CW - 210;
+      const absGap = simState.finalGap || 0;
+      const maxGap = 20;
+      const bias = Math.min(absGap / maxGap * 50, 50);
+      const leftPct = uWins ? 50 + bias : 50 - bias;
+      ctx.fillStyle = '#1a1a2a'; ctx.beginPath(); ctx.roundRect(barX, barY, barW, barH, 4); ctx.fill();
+      ctx.fillStyle = uWins ? '#34d399' : '#3a3a5a';
+      ctx.beginPath(); ctx.roundRect(barX, barY, barW * leftPct / 100, barH, 4); ctx.fill();
+      ctx.fillStyle = uWins ? '#3a3a5a' : '#f87171';
+      ctx.beginPath(); ctx.roundRect(barX + barW * leftPct / 100, barY, barW * (1 - leftPct / 100), barH, [0, 4, 4, 0]); ctx.fill();
+      // Labels
+      ctx.font = '700 9px sans-serif'; ctx.fillStyle = uWins ? '#34d399' : '#6b6b8a';
+      ctx.fillText('YOU', barX, barY - 4);
+      ctx.textAlign = 'right';
+      ctx.fillStyle = uWins ? '#6b6b8a' : '#f87171';
+      ctx.fillText('REMIN', barX + barW, barY - 4);
+      ctx.textAlign = 'left';
+
+      // ── Bottom strip ──
+      ctx.fillStyle = 'rgba(255,255,255,0.03)'; ctx.fillRect(0, CH - 32, CW, 32);
+      ctx.fillStyle = barG; ctx.fillRect(0, CH - 32, CW, 1);
+      ctx.font = '9px sans-serif'; ctx.fillStyle = '#2a2a40';
+      ctx.fillText('remin-franklin-eliyas.github.io/f1-forecast  ·  Built by Remin Franklin  ·  2026', 22, CH - 11);
+      ctx.textAlign = 'right'; ctx.fillStyle = accentColor + 'aa';
+      ctx.fillText('#F1StrategyBattle', CW - 22, CH - 11);
+      ctx.textAlign = 'left';
+
+      // ── Download ──
       const a = document.createElement('a');
       a.download = `f1-result-${(simState.userName || 'race').replace(/\s+/g, '-').toLowerCase()}.png`;
       a.href = c.toDataURL('image/png');
