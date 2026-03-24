@@ -467,9 +467,39 @@
     }
 
     .track-flag {
-      font-size: 28px;
-      margin-bottom: 8px;
+      font-size: 22px;
       line-height: 1;
+    }
+
+    .track-layout {
+      display: block;
+      width: 100%;
+      max-width: 110px;
+      height: 62px;
+      margin: 6px 0 6px;
+    }
+
+    .track-layout .tc-line {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.18);
+      stroke-width: 3;
+      stroke-linejoin: round;
+      stroke-linecap: round;
+      transition: stroke .25s, filter .25s;
+    }
+
+    .track-layout .tc-sf {
+      fill: rgba(255, 255, 255, 0.35);
+      transition: fill .25s;
+    }
+
+    .track-card.selected .track-layout .tc-line {
+      stroke: var(--tc, var(--track-accent));
+      filter: drop-shadow(0 0 5px var(--tc, var(--track-accent)));
+    }
+
+    .track-card.selected .track-layout .tc-sf {
+      fill: var(--tc, var(--track-accent));
     }
 
     .track-name {
@@ -3143,6 +3173,163 @@
       z-index: -1;
       transition: background 0.6s;
     }
+
+    /* ── CHART + TRACK MAP ROW ── */
+    .chart-track-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 16px;
+      align-items: stretch;
+    }
+
+    .chart-track-row .gap-chart-wrap {
+      flex: 1 1 0;
+      min-width: 0;
+      margin-bottom: 0;
+    }
+
+    .track-map-tile {
+      flex: 0 0 168px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 8px 8px 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .track-map-label {
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      align-self: flex-start;
+      margin-bottom: 2px;
+    }
+
+    #track-map-canvas {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+      display: block;
+    }
+
+    .track-map-legend {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 9px;
+      color: var(--muted);
+      font-family: var(--font-display);
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      width: 100%;
+    }
+
+    .tm-car-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+      flex-shrink: 0;
+      background: var(--accent);
+    }
+
+    /* ── REPLAY MODE ── */
+    .replay-bar {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 7px 12px;
+      margin-bottom: 10px;
+      font-size: 11px;
+      font-family: var(--font-display);
+      letter-spacing: .5px;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .replay-bar.visible {
+      display: flex;
+    }
+
+    .replay-scrubber {
+      flex: 1;
+      -webkit-appearance: none;
+      appearance: none;
+      height: 4px;
+      border-radius: 2px;
+      background: var(--border);
+      cursor: pointer;
+      outline: none;
+    }
+
+    .replay-scrubber::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--track-accent, var(--accent));
+      cursor: pointer;
+    }
+
+    .replay-lap-display {
+      min-width: 40px;
+      text-align: center;
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .btn-replay-ctrl {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      color: var(--text);
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      cursor: pointer;
+    }
+
+    .btn-replay-ctrl:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    @media (max-width: 540px) {
+      .chart-track-row {
+        flex-direction: column;
+      }
+
+      .track-map-tile {
+        flex: none;
+        width: 100%;
+        flex-direction: row;
+        padding: 8px 10px;
+        align-items: center;
+      }
+
+      #track-map-canvas {
+        width: 100px;
+        height: auto;
+        flex-shrink: 0;
+      }
+
+      .track-map-label {
+        display: none;
+      }
+
+      .track-map-legend {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 3px;
+      }
+    }
   </style>
 </head>
 
@@ -3184,8 +3371,14 @@
 
       <div class="section-label">Choose your circuit</div>
       <div class="track-grid" id="track-grid">
-        <div class="track-card selected" data-track="silverstone" onclick="selectTrack('silverstone')">
+        <div class="track-card selected" data-track="silverstone" onclick="selectTrack('silverstone')"
+          style="--tc:#a78bfa">
           <div class="track-flag">🇬🇧</div>
+          <svg class="track-layout" viewBox="2 6 96 90" xmlns="http://www.w3.org/2000/svg">
+            <polyline class="tc-line"
+              points="50,10 65,9 78,11 88,20 90,30 85,40 88,52 87,63 80,72 70,75 62,79 55,88 50,92 44,88 38,82 28,78 20,72 14,63 12,52 15,40 12,30 14,20 24,11 36,9 50,10" />
+            <rect class="tc-sf" x="46" y="8" width="8" height="3" rx="1" />
+          </svg>
           <div class="track-name">Silverstone</div>
           <div class="track-meta">British Grand Prix · 52 laps</div>
           <div class="track-tags">
@@ -3194,8 +3387,13 @@
             <span class="track-tag">SC possible</span>
           </div>
         </div>
-        <div class="track-card" data-track="monaco" onclick="selectTrack('monaco')">
+        <div class="track-card" data-track="monaco" onclick="selectTrack('monaco')" style="--tc:#FFD700">
           <div class="track-flag">🇲🇨</div>
+          <svg class="track-layout" viewBox="18 5 65 84" xmlns="http://www.w3.org/2000/svg">
+            <polyline class="tc-line"
+              points="50,8 68,10 80,18 85,30 80,42 72,48 80,55 82,65 75,75 62,82 50,86 38,82 28,72 22,60 20,48 28,38 22,28 28,18 38,10 50,8" />
+            <rect class="tc-sf" x="46" y="6" width="8" height="3" rx="1" />
+          </svg>
           <div class="track-name">Monaco</div>
           <div class="track-meta">Monaco Grand Prix · 78 laps</div>
           <div class="track-tags">
@@ -3204,8 +3402,13 @@
             <span class="track-tag">SC 40% likely</span>
           </div>
         </div>
-        <div class="track-card" data-track="sao_paulo" onclick="selectTrack('sao_paulo')">
+        <div class="track-card" data-track="sao_paulo" onclick="selectTrack('sao_paulo')" style="--tc:#22c55e">
           <div class="track-flag">🇧🇷</div>
+          <svg class="track-layout" viewBox="20 5 62 86" xmlns="http://www.w3.org/2000/svg">
+            <polyline class="tc-line"
+              points="50,8 64,10 75,18 80,30 75,45 65,55 72,65 70,76 60,84 50,88 40,84 32,76 30,65 38,55 28,45 24,32 28,20 38,12 50,8" />
+            <rect class="tc-sf" x="46" y="6" width="8" height="3" rx="1" />
+          </svg>
           <div class="track-name">São Paulo</div>
           <div class="track-meta">São Paulo Grand Prix · 71 laps</div>
           <div class="track-tags">
@@ -3458,11 +3661,21 @@
         </div>
       </div>
 
-      <div class="gap-chart-wrap">
-        <div class="gap-chart-label">Live Gap Chart &nbsp;·&nbsp; <span id="gc-label-user" style="color:#a78bfa">▪ You
-            lead</span>
-          &nbsp;<span style="color:#FF6B35">▪ Remin leads</span></div>
-        <canvas id="gap-chart" height="110"></canvas>
+      <div class="chart-track-row">
+        <div class="gap-chart-wrap">
+          <div class="gap-chart-label">Live Gap Chart &nbsp;·&nbsp; <span id="gc-label-user" style="color:#a78bfa">▪ You
+              lead</span>
+            &nbsp;<span style="color:#FF6B35">▪ Remin leads</span></div>
+          <canvas id="gap-chart" height="110"></canvas>
+        </div>
+        <div class="track-map-tile" id="track-map-tile">
+          <div class="track-map-label">Track Position</div>
+          <canvas id="track-map-canvas" width="160" height="130"></canvas>
+          <div class="track-map-legend">
+            <span id="tm-dot-user" class="tm-car-dot"></span><span id="tm-label-user">YOU</span>
+            <span class="tm-car-dot" style="background:#FF6B35"></span><span>REMIN</span>
+          </div>
+        </div>
       </div>
 
       <div class="timeline-section">
@@ -3479,6 +3692,16 @@
       <div class="pit-section">
         <div class="tl-label">Pit windows</div>
         <div class="pit-row" id="pit-row"></div>
+      </div>
+
+      <!-- REPLAY BAR -->
+      <div class="replay-bar" id="replay-bar">
+        <span>◀</span>
+        <span id="replay-lap-disp" class="replay-lap-display">L1</span>
+        <input class="replay-scrubber" id="replay-scrubber" type="range" min="1" max="52" value="1"
+          oninput="replayScrub(this.value)">
+        <span>L52</span>
+        <button class="btn-replay-ctrl" onclick="replayClose()">✕ Close</button>
       </div>
 
       <div class="result-section" id="result-section">
@@ -3510,6 +3733,7 @@
           <button class="btn-again" onclick="goSetup()">Race Again</button>
           <button class="btn-share" onclick="shareResult()">↗ Share</button>
           <button class="btn-share" onclick="downloadResultCard()">↓ Save&nbsp;Card</button>
+          <button class="btn-share" id="btn-replay" onclick="replayRace()" style="display:none">▶ Watch Replay</button>
           <button class="btn-challenge" id="btn-challenge" onclick="createChallenge(this)">⚔️ Challenge a
             Friend</button>
         </div>
@@ -4649,6 +4873,16 @@
       if (gbw) gbw.classList.remove('tension');
       // Apply track accent per race
       applyTrackAccent(currentTrackKey);
+      initTrackMap();
+      // Reset replay bar
+      const replayBar = document.getElementById('replay-bar');
+      if (replayBar) replayBar.classList.remove('visible');
+      replayActive = false;
+      // Update driver dot color on track map legend
+      const tmDot = document.getElementById('tm-dot-user');
+      if (tmDot) tmDot.style.background = drvColor;
+      const tmLabel = document.getElementById('tm-label-user');
+      if (tmLabel) tmLabel.textContent = (userName || 'YOU').toUpperCase().slice(0, 6);
       lastRemLeading = null;
       gapHistory = [];
       simSpeed = 1;
@@ -4661,6 +4895,7 @@
       setTimeout(() => {
         const gc = document.getElementById('gap-chart');
         if (gc && gc.parentElement?.clientWidth > 0) { gc.width = gc.parentElement.clientWidth; drawGapChart(); }
+        drawTrackMap(0, 0, true);
       }, 60);
 
       // AI reveal overlay — hold long enough to read, then start race
@@ -4737,6 +4972,7 @@
       simState.lastGap = gap;
       gapHistory.push({ lap, gap: frame.gap });
       drawGapChart();
+      if (!replayActive) drawTrackMap(frame.gap, lap, false);
 
       document.getElementById('s-user-pos').textContent = userLeads ? 'P1' : 'P2';
       document.getElementById('s-rem-pos').textContent = userLeads ? 'P2' : 'P1';
@@ -5034,6 +5270,14 @@
       // v2.1: tyre strategy heatmap
       renderHeatmap(simState.raceData, 'heatmap-grid-user', 'heatmap-grid-rem', 'heatmap-wrap', simState.driverColor);
 
+      // Draw track map at final lap
+      const lastFrame = simState.raceData.laps[LAPS - 1];
+      if (lastFrame) drawTrackMap(lastFrame.gap, LAPS, false);
+
+      // Show replay button
+      const btnReplay = document.getElementById('btn-replay');
+      if (btnReplay) btnReplay.style.display = '';
+
       // Win/lose visual state on result box
       const resultBox = rs.querySelector('.result-box');
       if (resultBox) {
@@ -5097,6 +5341,12 @@
       if (rab) rab.classList.remove('show');
       const rt = document.getElementById('remin-toast');
       if (rt) rt.classList.remove('show');
+      // Reset replay
+      replayActive = false;
+      const replayBar2 = document.getElementById('replay-bar');
+      if (replayBar2) replayBar2.classList.remove('visible');
+      const btnReplay2 = document.getElementById('btn-replay');
+      if (btnReplay2) btnReplay2.style.display = 'none';
       showScreen('screen-setup');
     }
 
@@ -5114,6 +5364,223 @@
           body: JSON.stringify(data)
         });
       } catch (e) { /* silent — never affect gameplay */ }
+    }
+
+    /* ── TRACK MAP CIRCUITS ─────────────────────────────────────────
+       Each circuit is a normalized polyline [x,y] pairs in 0-1 space.
+       We trace them onto a 160×130 canvas, with a little internal margin.
+       Cars are placed along arc-length position derived from gap data.
+    ─────────────────────────────────────────────────────────────── */
+    const CIRCUIT_PATHS = {
+      silverstone: [
+        [0.50, 0.10], [0.65, 0.09], [0.78, 0.11], [0.88, 0.20], [0.90, 0.30],
+        [0.85, 0.40], [0.88, 0.52], [0.87, 0.63], [0.80, 0.72], [0.70, 0.75],
+        [0.62, 0.79], [0.55, 0.88], [0.50, 0.92], [0.44, 0.88], [0.38, 0.82],
+        [0.28, 0.78], [0.20, 0.72], [0.14, 0.63], [0.12, 0.52], [0.15, 0.40],
+        [0.12, 0.30], [0.14, 0.20], [0.24, 0.11], [0.36, 0.09], [0.50, 0.10]
+      ],
+      monaco: [
+        [0.50, 0.08], [0.68, 0.10], [0.80, 0.18], [0.85, 0.30], [0.80, 0.42],
+        [0.72, 0.48], [0.80, 0.55], [0.82, 0.65], [0.75, 0.75], [0.62, 0.82],
+        [0.50, 0.86], [0.38, 0.82], [0.28, 0.72], [0.22, 0.60], [0.20, 0.48],
+        [0.28, 0.38], [0.22, 0.28], [0.28, 0.18], [0.38, 0.10], [0.50, 0.08]
+      ],
+      sao_paulo: [
+        [0.50, 0.08], [0.64, 0.10], [0.75, 0.18], [0.80, 0.30], [0.75, 0.45],
+        [0.65, 0.55], [0.72, 0.65], [0.70, 0.76], [0.60, 0.84], [0.50, 0.88],
+        [0.40, 0.84], [0.32, 0.76], [0.30, 0.65], [0.38, 0.55], [0.28, 0.45],
+        [0.24, 0.32], [0.28, 0.20], [0.38, 0.12], [0.50, 0.08]
+      ]
+    };
+    // default fallback for unknown tracks
+    CIRCUIT_PATHS._default = CIRCUIT_PATHS.silverstone;
+
+    // Build cumulative arc-lengths for a path (normalized 0-1)
+    function buildArcLengths(pts) {
+      const dists = [0];
+      for (let i = 1; i < pts.length; i++) {
+        const dx = pts[i][0] - pts[i - 1][0], dy = pts[i][1] - pts[i - 1][1];
+        dists.push(dists[i - 1] + Math.sqrt(dx * dx + dy * dy));
+      }
+      const total = dists[dists.length - 1];
+      return { dists, total };
+    }
+
+    // Get canvas [x,y] for a fraction t (0-1) along path
+    function pointAlongPath(pts, arc, t, cw, ch, margin) {
+      const target = t * arc.total;
+      let i = 0;
+      while (i < arc.dists.length - 2 && arc.dists[i + 1] < target) i++;
+      const seg = arc.dists[i + 1] - arc.dists[i];
+      const frac = seg > 0 ? (target - arc.dists[i]) / seg : 0;
+      const p0 = pts[i], p1 = pts[i + 1] || pts[i];
+      const px = p0[0] + (p1[0] - p0[0]) * frac;
+      const py = p0[1] + (p1[1] - p0[1]) * frac;
+      return [margin + px * (cw - 2 * margin), margin + py * (ch - 2 * margin)];
+    }
+
+    let trackMapArc = null; // cached arc lengths
+
+    function initTrackMap() {
+      const path = CIRCUIT_PATHS[currentTrackKey] || CIRCUIT_PATHS._default;
+      trackMapArc = buildArcLengths(path);
+      drawTrackMap(0, 0, true); // blank state
+    }
+
+    function drawTrackMap(userGap, currentLap, blank) {
+      const canvas = document.getElementById('track-map-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const cw = canvas.width, ch = canvas.height;
+      const margin = 18;
+
+      ctx.clearRect(0, 0, cw, ch);
+      ctx.fillStyle = '#0a0a12';
+      ctx.fillRect(0, 0, cw, ch);
+
+      const path = CIRCUIT_PATHS[currentTrackKey] || CIRCUIT_PATHS._default;
+      const arc = trackMapArc || buildArcLengths(path);
+
+      // Draw track outline (thick dark + thin accent)
+      function tracePath(lw, color) {
+        ctx.beginPath();
+        path.forEach(([x, y], i) => {
+          const px = margin + x * (cw - 2 * margin), py = margin + y * (ch - 2 * margin);
+          i === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+        });
+        ctx.closePath();
+        ctx.strokeStyle = color;
+        ctx.lineWidth = lw;
+        ctx.lineJoin = 'round';
+        ctx.stroke();
+      }
+      tracePath(7, 'rgba(255,255,255,0.08)');
+      // Read track accent colour from CSS variable (canvas can't use var())
+      const accentRgb = getComputedStyle(document.documentElement).getPropertyValue('--track-accent-rgb').trim() || '167 139 250';
+      tracePath(3, `rgba(${accentRgb}, 0.65)`);
+
+      // Track name label
+      ctx.font = 'bold 8px sans-serif';
+      ctx.fillStyle = 'rgba(255,255,255,0.25)';
+      ctx.textAlign = 'center';
+      ctx.fillText((currentTrack?.name || 'Circuit').toUpperCase(), cw / 2, ch - 4);
+      ctx.textAlign = 'left';
+
+      if (blank) return;
+
+      // Car positions — both start at "lap 0" = fraction 0
+      // userGap > 0 → player leads. We map raceLap → fraction T for each car.
+      const LAPS_TOTAL = LAPS;
+      // Convert gap (seconds) into lap fraction offset: ~1s ≈ 1/BASE_LAP of a lap
+      const gapFraction = Math.min(Math.abs(userGap) / BASE_LAP, 0.1);
+      const userFrac = ((currentLap - 1) / LAPS_TOTAL) % 1;
+      const remFrac = ((userGap >= 0)
+        ? userFrac - gapFraction   // user leads, remin is behind
+        : userFrac + gapFraction)  // remin leads, remin is ahead
+        .toFixed(6);
+
+      const remT = ((parseFloat(remFrac) % 1) + 1) % 1;
+      const userT = ((userFrac % 1) + 1) % 1;
+
+      const userColor = simState.driverColor || '#a78bfa';
+
+      // Draw car dots
+      [[userT, userColor, 6], [remT, '#FF6B35', 5]].forEach(([t, color, r]) => {
+        const [cx, cy] = pointAlongPath(path, arc, t, cw, ch, margin);
+        // glow
+        const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, r * 2.5);
+        g.addColorStop(0, color + 'cc');
+        g.addColorStop(1, color + '00');
+        ctx.beginPath(); ctx.arc(cx, cy, r * 2.5, 0, Math.PI * 2);
+        ctx.fillStyle = g; ctx.fill();
+        // dot
+        ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2);
+        ctx.fillStyle = color; ctx.fill();
+      });
+    }
+
+    /* ── REPLAY SYSTEM ─────────────────────────────────────────────── */
+    let replayActive = false;
+
+    function replayRace() {
+      if (!simState.raceData || !simState.raceData.laps) return;
+      replayActive = true;
+      const bar = document.getElementById('replay-bar');
+      if (bar) {
+        bar.classList.add('visible');
+        const sc = document.getElementById('replay-scrubber');
+        if (sc) { sc.max = LAPS; sc.value = 1; }
+      }
+      // Scroll to chart row
+      const tile = document.getElementById('track-map-tile');
+      if (tile) tile.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      replayScrub(1);
+    }
+
+    function replayScrub(lapStr) {
+      const lap = parseInt(lapStr, 10);
+      if (!simState.raceData || !simState.raceData.laps) return;
+      const frame = simState.raceData.laps[lap - 1];
+      if (!frame) return;
+
+      // Update lap display
+      const ld = document.getElementById('replay-lap-disp');
+      if (ld) ld.textContent = `L${lap}`;
+      const sc = document.getElementById('replay-scrubber');
+      if (sc) sc.value = lap;
+
+      // Replay gap bar
+      const absGap = Math.abs(frame.gap);
+      const userLeads = frame.gap > 0;
+      const gdb = document.getElementById('gap-disp-big');
+      if (gdb) { gdb.textContent = absGap.toFixed(3) + 's'; gdb.style.color = userLeads ? (simState.driverColor || 'var(--accent)') : 'var(--rem)'; }
+      const barLeft = document.getElementById('gap-bar-left');
+      const barRight = document.getElementById('gap-bar-right');
+      if (barLeft && barRight) {
+        const maxGap = 25, bias = Math.min(absGap / maxGap * 50, 50);
+        barLeft.style.width = (userLeads ? 50 + bias : 50 - bias).toFixed(1) + '%';
+        barRight.style.width = (userLeads ? 50 - bias : 50 + bias).toFixed(1) + '%';
+        barLeft.classList.toggle('leading', userLeads);
+        barRight.classList.toggle('leading', !userLeads);
+      }
+      const gbWrap = document.getElementById('gap-bar-wrap');
+      if (gbWrap) gbWrap.classList.toggle('tension', absGap < 1.5);
+
+      // Replay lap counter
+      const lapEl = document.getElementById('lap-disp');
+      if (lapEl) lapEl.textContent = lap;
+
+      // Replay tyre info
+      const us = getStintAt(simState.userStints, lap);
+      const rs = getStintAt(simState.remStints, lap);
+      const uc = COMPOUND[us.compound], rc = COMPOUND[rs.compound];
+      const el1 = document.getElementById('s-user-tyre');
+      if (el1) el1.innerHTML = `<span class="tyre-dot" style="background:${uc.color}"></span>${uc.name}`;
+      const el2 = document.getElementById('s-rem-tyre');
+      if (el2) el2.innerHTML = `<span class="tyre-dot" style="background:${rc.color}"></span>${rc.name}`;
+      const el3 = document.getElementById('s-user-age'); if (el3) el3.textContent = `Lap ${us.age}`;
+      const el4 = document.getElementById('s-rem-age'); if (el4) el4.textContent = `Lap ${rs.age}`;
+
+      // Redraw gap chart up to this lap
+      const partialHistory = simState.raceData.laps.slice(0, lap).map(f => ({ lap: f.lap, gap: f.gap }));
+      const savedHistory = gapHistory;
+      gapHistory = partialHistory;
+      drawGapChart();
+      gapHistory = savedHistory;
+
+      // Draw track map
+      drawTrackMap(frame.gap, lap, false);
+    }
+
+    function replayClose() {
+      replayActive = false;
+      const bar = document.getElementById('replay-bar');
+      if (bar) bar.classList.remove('visible');
+      // Restore live gap chart
+      gapHistory = simState.raceData ? simState.raceData.laps.map(f => ({ lap: f.lap, gap: f.gap })) : [];
+      drawGapChart();
+      const lastFrame = simState.raceData?.laps[LAPS - 1];
+      if (lastFrame) drawTrackMap(lastFrame.gap, LAPS, false);
     }
 
     /* ── GAP CHART ── */
