@@ -64,6 +64,11 @@
       --rem: #FF6B35;
       --font-display: 'Barlow Condensed', sans-serif;
       --font-body: 'Barlow', sans-serif;
+      /* ── Track accent (overridden per track) ── */
+      --track-accent: #a78bfa;
+      --track-accent2: #7c3aed;
+      --track-accent-rgb: 167 139 250;
+      --track-bg-tint: rgba(167, 139, 250, 0.035);
     }
 
     * {
@@ -86,11 +91,12 @@
       position: fixed;
       inset: 0;
       background-image:
-        linear-gradient(rgba(167, 139, 250, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(167, 139, 250, 0.03) 1px, transparent 1px);
+        linear-gradient(rgba(var(--track-accent-rgb), 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(var(--track-accent-rgb), 0.03) 1px, transparent 1px);
       background-size: 40px 40px;
       pointer-events: none;
       z-index: 0;
+      transition: background-image 0.6s;
     }
 
     .app {
@@ -425,18 +431,39 @@
       border-radius: 14px;
       padding: 18px 16px 14px;
       cursor: pointer;
-      transition: border-color .2s, background .2s, transform .15s;
+      transition: border-color .2s, background .2s, transform .2s, box-shadow .2s;
       user-select: none;
     }
 
     .track-card:hover {
       background: var(--bg3);
-      transform: translateY(-2px);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
     }
 
     .track-card.selected {
-      border-color: var(--accent);
-      background: rgba(167, 139, 250, 0.09);
+      border-color: var(--track-accent);
+      background: var(--track-bg-tint);
+      box-shadow: 0 0 0 2px var(--track-accent), 0 8px 32px rgba(var(--track-accent-rgb), 0.18);
+      transform: translateY(-2px);
+    }
+
+    .track-card.track-select-pulse {
+      animation: trackSelectPulse 0.35s cubic-bezier(.36, .07, .19, .97);
+    }
+
+    @keyframes trackSelectPulse {
+      0% {
+        transform: scale(1) translateY(-2px);
+      }
+
+      40% {
+        transform: scale(1.04) translateY(-4px);
+      }
+
+      100% {
+        transform: scale(1) translateY(-2px);
+      }
     }
 
     .track-flag {
@@ -476,8 +503,8 @@
     }
 
     .track-card.selected .track-tag {
-      color: var(--accent);
-      background: rgba(167, 139, 250, 0.12);
+      color: var(--track-accent);
+      background: rgba(var(--track-accent-rgb), 0.12);
     }
 
     /* ── STRATEGY BUILDER ── */
@@ -623,7 +650,7 @@
       width: 16px;
       height: 16px;
       border-radius: 50%;
-      background: var(--accent);
+      background: var(--track-accent);
       cursor: pointer;
     }
 
@@ -655,9 +682,9 @@
     }
 
     .lap-step:hover {
-      border-color: var(--accent);
-      background: rgba(167, 139, 250, 0.1);
-      color: var(--accent);
+      border-color: var(--track-accent);
+      background: rgba(var(--track-accent-rgb), 0.1);
+      color: var(--track-accent);
     }
 
     .add-stint-btn {
@@ -675,8 +702,8 @@
     }
 
     .add-stint-btn:hover {
-      border-color: var(--accent);
-      color: var(--accent);
+      border-color: var(--track-accent);
+      color: var(--track-accent);
     }
 
     /* Strategy preview bar */
@@ -741,8 +768,8 @@
     }
 
     .name-field:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 2px rgba(167, 139, 250, 0.15);
+      border-color: var(--track-accent);
+      box-shadow: 0 0 0 2px rgba(var(--track-accent-rgb), 0.15);
     }
 
     .name-field::placeholder {
@@ -764,17 +791,18 @@
       letter-spacing: 2px;
       text-transform: uppercase;
       padding: 14px 32px;
-      background: var(--accent2);
+      background: var(--track-accent2);
       color: #fff;
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      transition: background .15s, transform .1s;
+      transition: background .15s, transform .1s, box-shadow .2s;
     }
 
     .btn-start:hover {
-      background: var(--accent);
+      background: var(--track-accent);
       transform: translateY(-1px);
+      box-shadow: 0 6px 24px rgba(var(--track-accent-rgb), 0.35);
     }
 
     .btn-start:active {
@@ -999,15 +1027,7 @@
       font-weight: 500;
     }
 
-    .tyre-dot {
-      display: inline-block;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      margin-right: 4px;
-      vertical-align: middle;
-      border: 1px solid rgba(0, 0, 0, 0.2);
-    }
+    /* tyre-dot: defined in v2.1 section below */
 
     .mom-bar {
       height: 4px;
@@ -2766,11 +2786,26 @@
     }
 
     .glb-pos.p2 {
-      color: #aaaaaa;
+      color: #C0C0C0;
     }
 
     .glb-pos.p3 {
       color: #cd7f32;
+    }
+
+    .glb-row.p1 {
+      border-left: 3px solid #FFD700;
+      background: rgba(255, 215, 0, 0.04);
+    }
+
+    .glb-row.p2 {
+      border-left: 3px solid #C0C0C0;
+      background: rgba(192, 192, 192, 0.04);
+    }
+
+    .glb-row.p3 {
+      border-left: 3px solid #cd7f32;
+      background: rgba(205, 127, 50, 0.04);
     }
 
     .glb-name {
@@ -2846,6 +2881,236 @@
       text-align: right;
       margin-top: 8px;
       letter-spacing: 0.3px;
+    }
+
+    /* ── v2.1: GAP TENSION ZONE ── */
+    .gap-bar-wrap.tension {
+      animation: tensionPulse 0.6s ease-in-out infinite alternate;
+    }
+
+    @keyframes tensionPulse {
+      from {
+        box-shadow: 0 0 0 0 rgba(248, 113, 113, 0);
+        border-color: var(--border);
+      }
+
+      to {
+        box-shadow: 0 0 18px 4px rgba(248, 113, 113, 0.22);
+        border-color: rgba(248, 113, 113, 0.5);
+      }
+    }
+
+    .tension-label {
+      position: absolute;
+      top: 8px;
+      right: 14px;
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      color: #f87171;
+      text-transform: uppercase;
+      opacity: 0;
+      transition: opacity .3s;
+      pointer-events: none;
+    }
+
+    .gap-bar-wrap.tension .tension-label {
+      opacity: 1;
+    }
+
+    /* ── v2.1: FINAL LAPS ── */
+    .lap-big.final-laps {
+      color: #f87171 !important;
+      animation: finalLapPulse 0.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes finalLapPulse {
+      from {
+        text-shadow: 0 0 0px #f87171;
+      }
+
+      to {
+        text-shadow: 0 0 18px #f87171cc;
+      }
+    }
+
+    .final-laps-badge {
+      display: none;
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: #f87171;
+      background: rgba(248, 113, 113, 0.12);
+      border: 1px solid rgba(248, 113, 113, 0.35);
+      border-radius: 4px;
+      padding: 2px 8px;
+      margin-left: 8px;
+      vertical-align: middle;
+      text-transform: uppercase;
+      animation: finalLapPulse 0.7s ease-in-out infinite alternate;
+    }
+
+    .final-laps-badge.show {
+      display: inline-block;
+    }
+
+    /* ── v2.1: TYRE HEALTH GRADIENT ── */
+    .tyre-dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 5px;
+      vertical-align: middle;
+      flex-shrink: 0;
+      transition: background .4s, box-shadow .4s;
+    }
+
+    .tyre-dot.health-warm {
+      box-shadow: 0 0 5px 2px rgba(255, 215, 0, 0.5);
+    }
+
+    .tyre-dot.health-hot {
+      box-shadow: 0 0 8px 3px rgba(255, 107, 53, 0.6);
+    }
+
+    .tyre-dot.health-cliff {
+      box-shadow: 0 0 12px 4px rgba(232, 0, 45, 0.8);
+      animation: tyreWarnPulse 0.7s ease-in-out infinite alternate;
+    }
+
+    /* ── v2.1: UNDERCUT / PIT FLASH BANNER ── */
+    .race-alert-banner {
+      position: fixed;
+      bottom: 72px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: rgba(10, 10, 18, 0.95);
+      border: 1px solid var(--track-accent);
+      border-radius: 10px;
+      padding: 10px 22px;
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      color: var(--text);
+      text-transform: uppercase;
+      opacity: 0;
+      transition: opacity .25s, transform .25s;
+      pointer-events: none;
+      z-index: 500;
+      white-space: nowrap;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+    }
+
+    .race-alert-banner.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .race-alert-banner.undercut {
+      border-color: #FFD700;
+      color: #FFD700;
+    }
+
+    .race-alert-banner.pit-in {
+      border-color: #FF6B35;
+      color: #FF6B35;
+    }
+
+    /* ── v2.1: SCORE COUNT-UP ── */
+    .score-num {
+      transition: color .4s;
+    }
+
+    /* ── v2.1: REMIN CORNER TOAST ── */
+    #remin-toast {
+      position: fixed;
+      bottom: 24px;
+      right: 20px;
+      background: rgba(10, 10, 18, 0.96);
+      border: 1px solid var(--border2);
+      border-radius: 12px;
+      padding: 12px 16px;
+      max-width: 260px;
+      font-size: 12px;
+      color: var(--text);
+      line-height: 1.5;
+      opacity: 0;
+      transform: translateY(12px) scale(0.97);
+      transition: opacity .3s, transform .3s;
+      pointer-events: none;
+      z-index: 600;
+      box-shadow: 0 6px 28px rgba(0, 0, 0, 0.5);
+    }
+
+    #remin-toast.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    #remin-toast strong {
+      color: var(--rem);
+    }
+
+    /* ── v2.1: TYRE HEATMAP ── */
+    .heatmap-wrap {
+      margin-top: 20px;
+    }
+
+    .heatmap-label {
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .heatmap-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2px;
+    }
+
+    .heatmap-cell {
+      width: 12px;
+      height: 18px;
+      border-radius: 2px;
+      flex-shrink: 0;
+      position: relative;
+      cursor: default;
+    }
+
+    .heatmap-row-label {
+      font-family: var(--font-display);
+      font-size: 9px;
+      color: var(--muted);
+      letter-spacing: 0.5px;
+      margin-bottom: 3px;
+      text-transform: uppercase;
+    }
+
+    /* ── v2.1: TRACK ACCENT HERO TINT ── */
+    .hero {
+      padding: 32px 0 28px;
+      position: relative;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -16px;
+      right: -16px;
+      height: 100%;
+      background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(var(--track-accent-rgb), 0.07) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: -1;
+      transition: background 0.6s;
     }
   </style>
 </head>
@@ -3099,6 +3364,7 @@
           <div class="race-lap-display">
             <span class="lap-big" id="lap-disp">0</span>
             <span class="lap-total" id="lap-total">/ 52</span>
+            <span class="final-laps-badge" id="final-laps-badge">FINAL LAPS</span>
           </div>
         </div>
       </div>
@@ -3107,6 +3373,7 @@
       <!-- gap-disp kept hidden for JS text caching (challenge/leaderboard references) -->
       <div id="gap-disp" style="display:none">Gap: —</div>
       <div class="gap-bar-wrap" id="gap-bar-wrap">
+        <span class="tension-label">⚡ DANGER ZONE</span>
         <div class="gap-bar-labels">
           <span class="gap-bar-name" id="gbname-user" style="color:var(--rus)">YOU</span>
           <span class="gap-bar-center" id="gap-disp-big">—</span>
@@ -3191,6 +3458,11 @@
           </div>
           <div class="analysis" id="result-analysis"></div>
           <div class="key-moments" id="key-moments"></div>
+          <div class="heatmap-wrap" id="heatmap-wrap" style="display:none">
+            <div class="heatmap-label">Lap-by-lap pace map</div>
+            <div id="heatmap-grid-user" style="margin-bottom:6px"></div>
+            <div id="heatmap-grid-rem"></div>
+          </div>
           <div class="lb-section" id="lb-section" style="display:none">
             <div class="lb-heading">🏆 Closest Wins · Global Board</div>
             <div id="lb-rows"></div>
@@ -3413,7 +3685,12 @@
       PIT_LOSS = currentTrack.pitLoss;
       document.querySelectorAll('.track-card').forEach(c => c.classList.remove('selected'));
       const tc = document.querySelector(`[data-track="${key}"]`);
-      if (tc) tc.classList.add('selected');
+      if (tc) {
+        tc.classList.add('selected');
+        tc.classList.remove('track-select-pulse');
+        void tc.offsetWidth;
+        tc.classList.add('track-select-pulse');
+      }
       resetStints();
       const lbl = document.getElementById('strategy-label-laps');
       if (lbl) lbl.textContent = `(must total ${LAPS} laps)`;
@@ -3421,6 +3698,26 @@
       const dateStr = now.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
       const ey = document.getElementById('hero-eyebrow');
       if (ey) ey.textContent = `Today's Race · ${dateStr} · ${currentTrack.name}`;
+      // Apply track accent CSS variables
+      applyTrackAccent(key);
+    }
+
+    const TRACK_ACCENTS = {
+      silverstone: { accent: '#a78bfa', accent2: '#7c3aed', rgb: '167 139 250', bgTint: 'rgba(167,139,250,0.035)' },
+      monaco: { accent: '#FFD700', accent2: '#b8860b', rgb: '255 215 0', bgTint: 'rgba(255,215,0,0.04)' },
+      sao_paulo: { accent: '#22c55e', accent2: '#15803d', rgb: '34 197 94', bgTint: 'rgba(34,197,94,0.04)' },
+    };
+
+    function applyTrackAccent(key) {
+      const a = TRACK_ACCENTS[key] || TRACK_ACCENTS.silverstone;
+      const root = document.documentElement;
+      root.style.setProperty('--track-accent', a.accent);
+      root.style.setProperty('--track-accent2', a.accent2);
+      root.style.setProperty('--track-accent-rgb', a.rgb);
+      root.style.setProperty('--track-bg-tint', a.bgTint);
+      // Also update --accent for backward-compat (gap chart, slider, etc.)
+      root.style.setProperty('--accent', a.accent);
+      root.style.setProperty('--accent2', a.accent2);
     }
 
     function resetStints() {
@@ -4071,6 +4368,90 @@
       av.classList.add(mood);
     }
 
+    /* ── v2.1: REMIN CORNER TOAST ── */
+    let toastTimeout = null;
+    function showReminToast(category) {
+      const lines = REMIN_LINES[category];
+      if (!lines) return;
+      const line = lines[Math.floor(Math.random() * lines.length)];
+      const el = document.getElementById('remin-toast');
+      if (!el) return;
+      el.innerHTML = `<strong>Remin:</strong> ${line}`;
+      el.classList.remove('show');
+      void el.offsetWidth;
+      el.classList.add('show');
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => el.classList.remove('show'), 4200);
+    }
+
+    /* ── v2.1: RACE ALERT BANNER ── */
+    let alertTimeout = null;
+    function showRaceAlert(message, type = '') {
+      const el = document.getElementById('race-alert-banner');
+      if (!el) return;
+      if (navigator.vibrate) navigator.vibrate(type === 'pit-in' ? [40, 20, 40] : [60]);
+      el.textContent = message;
+      el.className = `race-alert-banner ${type}`;
+      el.classList.add('show');
+      clearTimeout(alertTimeout);
+      alertTimeout = setTimeout(() => el.classList.remove('show'), 3200);
+    }
+
+    /* ── v2.1: SCORE COUNT-UP ── */
+    function animateScoreCount(targetScore, color) {
+      const el = document.getElementById('score-num');
+      if (!el) return;
+      let current = 0;
+      el.style.color = color;
+      const step = Math.ceil(targetScore / 30);
+      const interval = setInterval(() => {
+        current = Math.min(current + step, targetScore);
+        el.textContent = current;
+        if (current >= targetScore) clearInterval(interval);
+      }, 28);
+    }
+
+    /* ── v2.1: TYRE HEATMAP ── */
+    function renderHeatmap(raceData) {
+      const wrap = document.getElementById('heatmap-wrap');
+      if (!wrap) return;
+      wrap.style.display = 'block';
+      const laps = raceData.laps;
+      const TYRE_COLORS = { soft: '#E8002D', med: '#FFD700', hard: '#888' };
+      function buildRow(labelText, lapGetter, compoundGetter, pitGetter, gridId) {
+        const labelEl = document.createElement('div');
+        labelEl.className = 'heatmap-row-label';
+        labelEl.textContent = labelText;
+        const grid = document.getElementById(gridId);
+        grid.innerHTML = '';
+        grid.appendChild(labelEl);
+        const gridRow = document.createElement('div');
+        gridRow.className = 'heatmap-grid';
+        laps.forEach(f => {
+          const cell = document.createElement('div');
+          cell.className = 'heatmap-cell';
+          const lapT = lapGetter(f);
+          const compound = compoundGetter(f);
+          const isPit = pitGetter(f);
+          // Heat: compare lap time to median — green = fast, red = slow
+          const medianLap = BASE_LAP;
+          const delta = lapT - medianLap;
+          let heat;
+          if (isPit) heat = 'rgba(255,107,53,0.9)';
+          else if (delta < -0.3) heat = '#22c55e';
+          else if (delta < 0.5) { const t = (delta + 0.3) / 0.8; heat = `hsl(${120 - t * 120},80%,50%)`; }
+          else { const t = Math.min((delta - 0.5) / 3, 1); heat = `hsl(${60 - t * 60},90%,50%)`; }
+          cell.style.background = heat;
+          cell.style.outline = `1.5px solid ${TYRE_COLORS[compound] || '#555'}`;
+          cell.title = `L${f.lap} · ${lapT.toFixed(2)}s${isPit ? ' (PIT)' : ''}`;
+          gridRow.appendChild(cell);
+        });
+        grid.appendChild(gridRow);
+      }
+      buildRow('YOU', f => f.playerLapTime, f => f.playerCompound, f => f.playerPitted, 'heatmap-grid-user');
+      buildRow('REMIN', f => f.aiLapTime, f => f.aiCompound, f => f.aiPitted, 'heatmap-grid-rem');
+    }
+
     /* ── MAIN GAME LOGIC ── */
     function startRace() {
       if (!userDriver) { document.getElementById('strat-error').textContent = 'Pick a driver first.'; return; }
@@ -4145,6 +4526,17 @@
       });
 
       document.getElementById('result-section').style.display = 'none';
+      // v2.1: reset heatmap, final-laps badge, tension zone
+      const hw = document.getElementById('heatmap-wrap');
+      if (hw) hw.style.display = 'none';
+      const flb = document.getElementById('final-laps-badge');
+      if (flb) flb.classList.remove('show');
+      const lapDisp = document.getElementById('lap-disp');
+      if (lapDisp) lapDisp.classList.remove('final-laps');
+      const gbw = document.getElementById('gap-bar-wrap');
+      if (gbw) gbw.classList.remove('tension');
+      // Apply track accent per race
+      applyTrackAccent(currentTrackKey);
       lastRemLeading = null;
       gapHistory = [];
       simSpeed = 1;
@@ -4212,7 +4604,6 @@
       if (bigGap && barLeft && barRight) {
         bigGap.textContent = absGap.toFixed(3) + 's';
         bigGap.style.color = userLeads ? 'var(--gap-player-color, var(--accent))' : 'var(--rem)';
-        // Map gap to bar width: 50% each = tied, max visual split at 25s
         const maxGap = 25;
         const bias = Math.min(absGap / maxGap * 50, 50);
         const leftPct = userLeads ? 50 + bias : 50 - bias;
@@ -4221,7 +4612,16 @@
         barRight.style.width = rightPct.toFixed(1) + '%';
         barLeft.classList.toggle('leading', userLeads);
         barRight.classList.toggle('leading', !userLeads);
+        // v2.1: tension zone when gap < 1.5s
+        const gbWrap = document.getElementById('gap-bar-wrap');
+        if (gbWrap) gbWrap.classList.toggle('tension', absGap < 1.5);
       }
+      // v2.1: final 5 laps mode
+      const finalLap = LAPS - lap <= 4;
+      const lapDispEl = document.getElementById('lap-disp');
+      if (lapDispEl) lapDispEl.classList.toggle('final-laps', finalLap);
+      const flBadge = document.getElementById('final-laps-badge');
+      if (flBadge) flBadge.classList.toggle('show', finalLap);
       simState.lastGap = gap;
       gapHistory.push({ lap, gap: frame.gap });
       drawGapChart();
@@ -4238,9 +4638,10 @@
       const uc = COMPOUND[us.compound];
       const rc = COMPOUND[rs.compound];
 
-      // Tyre cliff warning: glow red when within 3 laps of cliff
-      const cliffWarning = us.age >= (uc.cliff - 3);
-      document.getElementById('s-user-tyre').innerHTML = `<span class="tyre-dot${cliffWarning ? ' tyre-warn' : ''}" style="background:${uc.color}"></span>${uc.name}${cliffWarning ? ' ⚠' : ''}`;
+      // v2.1: tyre health gradient — green → warm → hot → cliff
+      const tyreFraction = Math.min(us.age / uc.cliff, 1.1);
+      const tyreHealth = tyreFraction < 0.6 ? '' : tyreFraction < 0.85 ? 'health-warm' : tyreFraction < 1.0 ? 'health-hot' : 'health-cliff';
+      document.getElementById('s-user-tyre').innerHTML = `<span class="tyre-dot ${tyreHealth}" style="background:${uc.color}"></span>${uc.name}${tyreHealth === 'health-cliff' ? ' ⚠' : ''}`;
       document.getElementById('s-user-age').textContent = `Lap ${us.age}`;
       document.getElementById('s-rem-tyre').innerHTML = `<span class="tyre-dot" style="background:${rc.color}"></span>${rc.name}`;
       document.getElementById('s-rem-age').textContent = `Lap ${rs.age}`;
@@ -4260,12 +4661,20 @@
         if (lap === l) {
           const el = document.getElementById(`pu${l}`);
           if (el) { el.classList.add('fired'); el.classList.add('pit-flash'); }
+          // v2.1: pit-in flash banner
+          showRaceAlert(`🔧 PIT STOP · LAP ${lap}`, 'pit-in');
         }
       });
       simState.remPitLaps.forEach(l => {
         if (lap === l) {
           const el = document.getElementById(`pr${l}`);
           if (el) { el.classList.add('fired'); el.classList.add('pit-flash'); }
+          // v2.1: undercut threat — Remin pits within 3 laps of user's next stop
+          const nextUserPit = simState.userPitLaps.find(p => p > lap);
+          if (nextUserPit && Math.abs(lap - nextUserPit) <= 3 && !userLeads) {
+            showRaceAlert('⚡ UNDERCUT THREATENED', 'undercut');
+            showReminToast('pushing');
+          }
         }
       });
 
@@ -4274,6 +4683,7 @@
         lastRemLeading = remLeading;
         setReminMood(remLeading ? 'celebrate' : 'sulk');
         setReminSpeech(remLeading ? 'leading' : 'trailing');
+        showReminToast(remLeading ? 'leading' : 'trailing');
       }
       if (lap === Math.floor(LAPS * 0.3) || lap === Math.floor(LAPS * 0.65)) {
         // Cliff warning speech: if user is within 3 laps of cliff, Remin taunts
@@ -4281,6 +4691,7 @@
         const ucNow = COMPOUND[usNow.compound];
         const nearCliff = usNow.age >= ucNow.cliff - 4 && usNow.age < ucNow.cliff + 3;
         setReminSpeech(nearCliff ? 'cliff_warning' : (remLeading ? 'leading' : 'trailing'));
+        showReminToast(nearCliff ? 'cliff_warning' : (remLeading ? 'leading' : 'trailing'));
       }
 
       // ── WILDCARD EVENT trigger ──
@@ -4491,8 +4902,8 @@
       simState.finalGap = parseFloat(gap);
       const score = calcStrategyScore(simState.userStints, simState.userPitLaps, userWins, parseFloat(gap));
       const { grade, color: gradeColor, sub } = getScoreGrade(score);
-      document.getElementById('score-num').textContent = score;
-      document.getElementById('score-num').style.color = gradeColor;
+      // v2.1: animated score count-up
+      animateScoreCount(score, gradeColor);
       document.getElementById('score-grade').textContent = grade;
       document.getElementById('score-grade').style.color = gradeColor;
       document.getElementById('score-sub').textContent = sub;
@@ -4507,6 +4918,9 @@
       const rs = document.getElementById('result-section');
       rs.style.display = 'block';
       rs.classList.add('result-animate');
+
+      // v2.1: tyre strategy heatmap
+      renderHeatmap(simState.raceData);
 
       // Win/lose visual state on result box
       const resultBox = rs.querySelector('.result-box');
@@ -4566,6 +4980,11 @@
       confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
       rainCtx.clearRect(0, 0, rainCanvas.width, rainCanvas.height);
       rainCanvas.style.opacity = '0';
+      // v2.1: hide race alert banner and remin toast
+      const rab = document.getElementById('race-alert-banner');
+      if (rab) rab.classList.remove('show');
+      const rt = document.getElementById('remin-toast');
+      if (rt) rt.classList.remove('show');
       showScreen('screen-setup');
     }
 
@@ -4991,7 +5410,7 @@
     /* ── GLOBAL LEADERBOARD ── */
     let lbCurrentTab = 'wins';
 
-    const DRIVER_COLORS = { VER: '#3671C6', LEC: '#E8002D', RUS: '#00D2BE' };
+    const DRIVER_COLORS = { VER: '#3671C6', LEC: '#E8002D', RUS: '#00D2BE', NOR: '#FF8000', ALB: '#37BEDD' };
 
     async function loadGlobalLeaderboard(tab) {
       if (!SUPABASE_URL || SUPABASE_URL === 'YOUR_SUPABASE_URL') {
@@ -5041,7 +5460,7 @@
 
         rows.forEach((r, i) => {
           const strat = (r.user_strategy || '').slice(0, 30);
-          html += `<div class="glb-row">
+          html += `<div class="glb-row ${posClass(i)}">
             <div class="glb-pos ${posClass(i)}">${posIcon(i)}</div>
             <div>
               <div class="glb-name">${(r.name || 'Anon').slice(0, 20)}</div>
@@ -5059,7 +5478,7 @@
         tableEl.innerHTML = html;
         const now = new Date();
         document.getElementById('glb-refresh').textContent =
-          `Last updated ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`;
+          `Last updated ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')} `;
       } catch (e) {
         tableEl.innerHTML = '<div class="glb-empty">Could not load leaderboard.</div>';
       }
@@ -5082,8 +5501,8 @@
       if (!cid || !SUPABASE_URL || SUPABASE_URL === 'YOUR_SUPABASE_URL') return;
       try {
         const res = await fetch(
-          `${SUPABASE_URL}/rest/v1/challenges?id=eq.${encodeURIComponent(cid)}&limit=1`,
-          { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } }
+          `${SUPABASE_URL} /rest/v1 / challenges ? id = eq.${encodeURIComponent(cid)}& limit=1`,
+          { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY} ` } }
         );
         const rows = await res.json();
         if (Array.isArray(rows) && rows[0]) {
@@ -5102,7 +5521,7 @@
         `${DNAMES[data.driver] || data.driver || ''} · ${data.user_strategy || ''} — beat Remin faster`;
       const gapEl = document.getElementById('cb-gap');
       if (data.result === 'win') {
-        gapEl.textContent = `Their gap vs Remin: ${parseFloat(data.gap_seconds).toFixed(3)}s — can you beat it?`;
+        gapEl.textContent = `Their gap vs Remin: ${parseFloat(data.gap_seconds).toFixed(3)} s — can you beat it ? `;
         gapEl.style.cssText = 'background:rgba(52,211,153,0.12);color:#34d399;border:1px solid rgba(52,211,153,0.3)';
       } else {
         gapEl.textContent = 'They lost to Remin — can you do better?';
@@ -5128,7 +5547,7 @@
 
       const myEntry = {
         name: (myName || simState.driverKey || 'You').slice(0, 20).toUpperCase(),
-        strategy: simState.userStints.map(s => `${COMPOUND[s.compound].name}(${s.laps}L)`).join(' → '),
+        strategy: simState.userStints.map(s => `${COMPOUND[s.compound].name} (${s.laps}L)`).join(' → '),
         driver: DNAMES[simState.driverKey] || simState.driverKey || '',
         result: myResult, gap: myGap
       };
@@ -5145,7 +5564,7 @@
       const p2c = iWin ? '#FF6B35' : '#34d399';
 
       const row = (pos, col, e) => `
-        <div class="h2h-row${pos === 1 ? ' winner' : ''}">
+          < div class="h2h-row${pos === 1 ? ' winner' : ''}" >
           <div class="h2h-pos" style="color:${col}">${pos}</div>
           <div class="h2h-info">
             <div class="h2h-name" style="color:${col}">${e.name}</div>
@@ -5153,18 +5572,18 @@
           </div>
           <div class="h2h-gap" style="color:${col}">${e.result === 'win' ? e.gap.toFixed(3) + 's' : 'No win'}</div>
           <span class="h2h-badge ${e.result}">${e.result === 'win' ? 'Win' : 'Loss'}</span>
-        </div>`;
+        </div > `;
 
       // Verdict copy for all 4 scenarios
       let verdictText, verdictColor, verdictBg;
       const chalName = (cd.name || 'Challenger').slice(0, 20);
       if (myWon && iWin) { verdictText = `🏆 You win the challenge! You beat Remin AND ${chalName}.`; verdictColor = '#34d399'; verdictBg = 'rgba(52,211,153,0.08)'; }
       else if (myWon && !iWin) { verdictText = `🥈 So close — you beat Remin, but ${chalName} had a faster gap.`; verdictColor = '#FFD700'; verdictBg = 'rgba(255,215,0,0.07)'; }
-      else if (!myWon && iWin) { verdictText = `🤝 You win the challenge — but Remin got you both. You were closer.`; verdictColor = '#a78bfa'; verdictBg = 'rgba(167,139,250,0.08)'; }
-      else { verdictText = `❌ ${chalName} wins this one. Try a different strategy!`; verdictColor = '#f87171'; verdictBg = 'rgba(248,113,113,0.08)'; }
+      else if (!myWon && iWin) { verdictText = `🤝 You win the challenge — but Remin got you both.You were closer.`; verdictColor = '#a78bfa'; verdictBg = 'rgba(167,139,250,0.08)'; }
+      else { verdictText = `❌ ${chalName} wins this one.Try a different strategy!`; verdictColor = '#f87171'; verdictBg = 'rgba(248,113,113,0.08)'; }
 
       const h2h = document.getElementById('h2h-section');
-      h2h.innerHTML = `<div class="h2h-label">⚔️ HEAD TO HEAD</div>${row(1, p1c, p1)}${row(2, p2c, p2)}
+      h2h.innerHTML = `< div class="h2h-label" >⚔️ HEAD TO HEAD</div > ${row(1, p1c, p1)}${row(2, p2c, p2)}
         <div style="margin-top:10px;padding:10px 12px;border-radius:8px;font-size:13px;font-weight:600;background:${verdictBg};color:${verdictColor};border:1px solid ${verdictColor}33">${verdictText}</div>`;
       h2h.classList.add('visible');
       return { iWin, myWon, chalWon, chalName };
@@ -5183,11 +5602,11 @@
         gap_seconds: simState.finalGap || 0
       };
       try {
-        const res = await fetch(`${SUPABASE_URL}/rest/v1/challenges`, {
+        const res = await fetch(`${SUPABASE_URL} /rest/v1 / challenges`, {
           method: 'POST',
           headers: {
             'apikey': SUPABASE_ANON_KEY,
-            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY} `,
             'Content-Type': 'application/json',
             'Prefer': 'return=representation'
           },
@@ -5196,7 +5615,7 @@
         const rows = await res.json();
         const id = rows?.[0]?.id;
         if (id) {
-          const url = `${window.location.origin}${window.location.pathname}?challenge=${id}`;
+          const url = `${window.location.origin}${window.location.pathname}?challenge = ${id} `;
           document.getElementById('challenge-url-text').value = url;
           document.getElementById('challenge-url-wrap').classList.add('visible');
           btn.textContent = '\u2705 Link Ready';
@@ -5221,6 +5640,8 @@
 
     resetStints();
     renderPBBar(loadPB());
+    // v2.1: apply default track accent on page load
+    applyTrackAccent('silverstone');
 
     // Daily eyebrow: "Today's Race · Mar 24 · Silverstone"
     (function setHeroEyebrow() {
@@ -5277,6 +5698,12 @@
 
   <!-- Win/loss cinematic flash -->
   <div class="result-cinematic-flash" id="result-cinematic-flash"></div>
+
+  <!-- v2.1: Race alert banner (undercut, pit-in) -->
+  <div class="race-alert-banner" id="race-alert-banner"></div>
+
+  <!-- v2.1: Remin corner toast -->
+  <div id="remin-toast"></div>
 </body>
 
 </html>
