@@ -650,6 +650,100 @@
     .status-grid { grid-template-columns: 1fr; }
     .hero-title { font-size: 38px; }
   }
+
+  /* ── REMIN CHARACTER ── */
+  .remin-character {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .remin-avatar {
+    flex-shrink: 0;
+    transition: transform .3s ease;
+  }
+  .remin-avatar.celebrate { animation: remCelebrate 0.6s ease infinite alternate; }
+  .remin-avatar.sulk      { animation: remSulk 1.2s ease infinite alternate; }
+  .remin-avatar.idle      { animation: remIdle 3s ease infinite alternate; }
+  .remin-speech {
+    background: var(--bg3);
+    border: 1px solid var(--border2);
+    border-radius: 12px 12px 12px 2px;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.5;
+    max-width: 340px;
+    position: relative;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity .4s ease, transform .4s ease;
+  }
+  .remin-speech.visible { opacity: 1; transform: translateY(0); }
+  .remin-speech strong { color: var(--rem); }
+
+  @keyframes remCelebrate {
+    0%   { transform: translateY(0) rotate(-3deg); }
+    100% { transform: translateY(-8px) rotate(3deg); }
+  }
+  @keyframes remSulk {
+    0%   { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(3px) rotate(-2deg); }
+  }
+  @keyframes remIdle {
+    0%   { transform: translateY(0); }
+    100% { transform: translateY(-3px); }
+  }
+
+  /* ── CONFETTI ── */
+  #confetti-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  /* ── DISAPPOINTMENT overlay ── */
+  #rain-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0;
+    transition: opacity .5s;
+  }
+
+  /* ── LAP TICK animation ── */
+  @keyframes lapPulse {
+    0%   { transform: scale(1); }
+    40%  { transform: scale(1.15); color: var(--accent); }
+    100% { transform: scale(1); }
+  }
+  .lap-pulse { animation: lapPulse .25s ease; }
+
+  /* ── GAP change flash ── */
+  @keyframes gapGain { 0%{color:#34d399} 100%{color:var(--accent)} }
+  @keyframes gapLose { 0%{color:#f87171} 100%{color:var(--accent)} }
+  .gap-gain { animation: gapGain .5s ease forwards; }
+  .gap-lose { animation: gapLose .5s ease forwards; }
+
+  /* ── PIT stop flash ── */
+  @keyframes pitFlash {
+    0%   { background: rgba(167,139,250,0.3); }
+    100% { background: transparent; }
+  }
+  .pit-flash { animation: pitFlash .6s ease; }
+
+  /* ── Result entrance ── */
+  @keyframes resultSlideIn {
+    0%   { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  .result-animate { animation: resultSlideIn .5s ease forwards; }
+  .result-row { opacity: 0; }
+  .result-row.visible { animation: resultSlideIn .4s ease forwards; }
 </style>
 </head>
 <body>
@@ -726,8 +820,36 @@
     </div>
   </div>
 
+  <canvas id="confetti-canvas"></canvas>
+  <canvas id="rain-canvas"></canvas>
+
   <!-- RACE SCREEN -->
   <div class="screen" id="screen-race">
+
+    <!-- REMIN CHARACTER -->
+    <div class="remin-character" id="remin-char">
+      <svg class="remin-avatar idle" id="remin-avatar" width="72" height="88" viewBox="0 0 72 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="18" y="46" width="36" height="32" rx="8" fill="#FF6B35"/>
+        <rect x="28" y="44" width="16" height="8" rx="3" fill="#cc4a1a"/>
+        <rect x="6" y="48" width="14" height="22" rx="6" fill="#FF6B35"/>
+        <rect x="52" y="48" width="14" height="22" rx="6" fill="#FF6B35"/>
+        <rect x="5" y="68" width="15" height="10" rx="5" fill="#222"/>
+        <rect x="52" y="68" width="15" height="10" rx="5" fill="#222"/>
+        <rect x="20" y="74" width="13" height="14" rx="5" fill="#cc4a1a"/>
+        <rect x="39" y="74" width="13" height="14" rx="5" fill="#cc4a1a"/>
+        <rect x="18" y="82" width="16" height="6" rx="3" fill="#111"/>
+        <rect x="37" y="82" width="16" height="6" rx="3" fill="#111"/>
+        <ellipse cx="36" cy="30" rx="18" ry="20" fill="#FF6B35"/>
+        <path d="M20 28 Q36 18 52 28 Q52 38 36 40 Q20 38 20 28Z" fill="#111" opacity="0.85"/>
+        <path d="M24 27 Q30 22 38 24" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" opacity="0.3"/>
+        <rect x="34" y="12" width="4" height="16" rx="2" fill="#fff" opacity="0.3"/>
+        <text x="36" y="64" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-weight="800" font-size="11" fill="#fff" opacity="0.7">RF</text>
+      </svg>
+      <div class="remin-speech" id="remin-speech">
+        <strong>Remin</strong> is watching your strategy...
+      </div>
+    </div>
+
     <div class="race-top">
       <div>
         <div class="hero-eyebrow" id="race-eyebrow">Race</div>
@@ -938,6 +1060,168 @@ function calcTime(stints, drv, isRemin, lap) {
   return total;
 }
 
+/* ── CONFETTI ENGINE ── */
+const confettiCanvas = document.getElementById('confetti-canvas');
+const confettiCtx = confettiCanvas.getContext('2d');
+let confettiParticles = [];
+let confettiRaf = null;
+
+function resizeCanvas() {
+  confettiCanvas.width = window.innerWidth;
+  confettiCanvas.height = window.innerHeight;
+  document.getElementById('rain-canvas').width = window.innerWidth;
+  document.getElementById('rain-canvas').height = window.innerHeight;
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+function launchConfetti() {
+  confettiParticles = [];
+  const colors = ['#FF6B35','#a78bfa','#FFD700','#34d399','#f87171','#60a5fa','#fff'];
+  for(let i = 0; i < 140; i++) {
+    confettiParticles.push({
+      x: Math.random() * window.innerWidth,
+      y: -10 - Math.random() * 200,
+      w: 6 + Math.random() * 8,
+      h: 4 + Math.random() * 5,
+      color: colors[Math.floor(Math.random()*colors.length)],
+      vx: (Math.random()-0.5)*4,
+      vy: 2 + Math.random()*4,
+      angle: Math.random()*360,
+      spin: (Math.random()-0.5)*8,
+      alpha: 1
+    });
+  }
+  if(confettiRaf) cancelAnimationFrame(confettiRaf);
+  animateConfetti();
+  setTimeout(stopConfetti, 4000);
+}
+
+function animateConfetti() {
+  confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+  confettiParticles.forEach(p => {
+    p.x += p.vx; p.y += p.vy; p.angle += p.spin; p.vy += 0.07;
+    if(p.y > window.innerHeight * 0.8) p.alpha -= 0.03;
+    confettiCtx.save();
+    confettiCtx.globalAlpha = Math.max(0, p.alpha);
+    confettiCtx.translate(p.x, p.y);
+    confettiCtx.rotate(p.angle * Math.PI/180);
+    confettiCtx.fillStyle = p.color;
+    confettiCtx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+    confettiCtx.restore();
+  });
+  confettiParticles = confettiParticles.filter(p => p.alpha > 0);
+  if(confettiParticles.length > 0) confettiRaf = requestAnimationFrame(animateConfetti);
+  else confettiCtx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);
+}
+
+function stopConfetti() {
+  confettiParticles.forEach(p => p.vy += 0.5);
+}
+
+/* ── RAIN ENGINE (disappointment) ── */
+const rainCanvas = document.getElementById('rain-canvas');
+const rainCtx = rainCanvas.getContext('2d');
+let rainDrops = [];
+let rainRaf = null;
+let rainActive = false;
+
+function launchRain() {
+  rainActive = true;
+  rainDrops = [];
+  rainCanvas.style.opacity = '1';
+  for(let i = 0; i < 80; i++) {
+    rainDrops.push({
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+      len: 12 + Math.random()*18,
+      speed: 6 + Math.random()*6,
+      alpha: 0.1 + Math.random()*0.25
+    });
+  }
+  animateRain();
+  setTimeout(stopRain, 3500);
+}
+
+function animateRain() {
+  rainCtx.clearRect(0,0,rainCanvas.width,rainCanvas.height);
+  rainDrops.forEach(d => {
+    rainCtx.beginPath();
+    rainCtx.moveTo(d.x, d.y);
+    rainCtx.lineTo(d.x - 1, d.y + d.len);
+    rainCtx.strokeStyle = `rgba(100,160,255,${d.alpha})`;
+    rainCtx.lineWidth = 1;
+    rainCtx.stroke();
+    d.y += d.speed;
+    if(d.y > rainCanvas.height) { d.y = -20; d.x = Math.random()*rainCanvas.width; }
+  });
+  if(rainActive) rainRaf = requestAnimationFrame(animateRain);
+}
+
+function stopRain() {
+  rainActive = false;
+  cancelAnimationFrame(rainRaf);
+  rainCanvas.style.transition = 'opacity 1.5s';
+  rainCanvas.style.opacity = '0';
+  setTimeout(()=>{ rainCtx.clearRect(0,0,rainCanvas.width,rainCanvas.height); }, 1600);
+}
+
+/* ── REMIN SPEECH ── */
+const REMIN_LINES = {
+  idle: [
+    "Watching your strategy... carefully.",
+    "I've already adapted. Have you?",
+    "Silverstone doesn't forgive bad tyre calls.",
+    "The data is in. My counter is set.",
+  ],
+  leading: [
+    "You won't hold this lead. My tyres are fresh.",
+    "Enjoy P1. It's temporary.",
+    "Gap's closing. Tick tock.",
+    "My strategy kicks in after your next pit.",
+  ],
+  trailing: [
+    "Good gap. Don't waste it.",
+    "You earned that lead. Now defend it.",
+    "Impressive. But I'm not done adapting.",
+    "Alright. You got me on that stint.",
+  ],
+  win: [
+    "GG. That strategy was clean. You beat me fair.",
+    "Respect. You read the tyre window perfectly.",
+    "I adapted and still lost. Well played.",
+    "You out-strategised me. Silverstone is yours.",
+  ],
+  lose: [
+    "That's on you. I told you the tyres wouldn't last.",
+    "Adapt or get lapped. Basic F1.",
+    "My counter was perfect. Your timing wasn't.",
+    "Better luck next race. Study the stint lengths.",
+  ]
+};
+
+let lastRemLeading = null;
+let speechTimeout = null;
+
+function setReminSpeech(category) {
+  const lines = REMIN_LINES[category];
+  const line = lines[Math.floor(Math.random()*lines.length)];
+  const el = document.getElementById('remin-speech');
+  el.classList.remove('visible');
+  clearTimeout(speechTimeout);
+  speechTimeout = setTimeout(() => {
+    el.innerHTML = `<strong>Remin:</strong> ${line}`;
+    el.classList.add('visible');
+  }, 150);
+}
+
+function setReminMood(mood) {
+  const av = document.getElementById('remin-avatar');
+  av.classList.remove('idle','celebrate','sulk');
+  av.classList.add(mood);
+}
+
+/* ── MAIN GAME LOGIC ── */
 function startRace() {
   if(!userDriver) { document.getElementById('strat-error').textContent = 'Pick a driver first.'; return; }
   const total = userStints.reduce((a,s)=>a+s.laps,0);
@@ -953,7 +1237,8 @@ function startRace() {
     userStints: JSON.parse(JSON.stringify(userStints)),
     remStints: JSON.parse(JSON.stringify(remStints)),
     userPitLaps: getPitLaps(userStints),
-    remPitLaps: getPitLaps(remStints)
+    remPitLaps: getPitLaps(remStints),
+    lastGap: 0
   };
 
   document.getElementById('card-user').style.setProperty('--card-color', drvColor);
@@ -979,6 +1264,9 @@ function startRace() {
   });
 
   document.getElementById('result-section').style.display = 'none';
+  lastRemLeading = null;
+  setReminMood('idle');
+  setReminSpeech('idle');
   showScreen('screen-race');
   paused = false;
   document.getElementById('btn-pause').textContent = 'Pause';
@@ -990,18 +1278,33 @@ function tick() {
   const lap = simState.lap;
   if(lap > LAPS) { clearInterval(simInterval); showResult(); return; }
 
-  document.getElementById('lap-disp').textContent = lap;
+  const lapEl = document.getElementById('lap-disp');
+  lapEl.classList.remove('lap-pulse');
+  void lapEl.offsetWidth;
+  lapEl.classList.add('lap-pulse');
+  lapEl.textContent = lap;
 
   const uTime = calcTime(simState.userStints, simState.driverKey, false, lap);
   const rTime = calcTime(simState.remStints, null, true, lap);
   const gap = uTime - rTime;
   const userLeads = gap < 0;
+  const absGap = Math.abs(gap);
 
-  document.getElementById('gap-disp').textContent = `Gap: ${Math.abs(gap).toFixed(3)}s`;
+  const gapEl = document.getElementById('gap-disp');
+  const prevGap = simState.lastGap || 0;
+  const userGainingGround = userLeads && gap < prevGap;
+  const userLosingGround  = !userLeads && gap > prevGap;
+  gapEl.textContent = `Gap: ${absGap.toFixed(3)}s`;
+  gapEl.classList.remove('gap-gain','gap-lose');
+  void gapEl.offsetWidth;
+  if(userGainingGround) gapEl.classList.add('gap-gain');
+  else if(userLosingGround) gapEl.classList.add('gap-lose');
+  simState.lastGap = gap;
+
   document.getElementById('s-user-pos').textContent = userLeads ? 'P1' : 'P2';
   document.getElementById('s-rem-pos').textContent  = userLeads ? 'P2' : 'P1';
   document.getElementById('s-user-gap').textContent = userLeads ? 'LEADER' : `+${gap.toFixed(3)}s`;
-  document.getElementById('s-rem-gap').textContent  = userLeads ? `+${Math.abs(gap).toFixed(3)}s` : 'LEADER';
+  document.getElementById('s-rem-gap').textContent  = userLeads ? `+${absGap.toFixed(3)}s` : 'LEADER';
   document.getElementById('card-user').classList.toggle('leading', userLeads);
   document.getElementById('card-rem').classList.toggle('leading', !userLeads);
 
@@ -1026,8 +1329,28 @@ function tick() {
   renderTimeline('tl-user', simState.userStints, lap);
   renderTimeline('tl-rem',  simState.remStints,  lap);
 
-  simState.userPitLaps.forEach(l => { if(lap>=l) document.getElementById(`pu${l}`)?.classList.add('fired'); });
-  simState.remPitLaps.forEach(l  => { if(lap>=l) document.getElementById(`pr${l}`)?.classList.add('fired'); });
+  simState.userPitLaps.forEach(l => {
+    if(lap === l) {
+      const el = document.getElementById(`pu${l}`);
+      if(el) { el.classList.add('fired'); el.classList.add('pit-flash'); }
+    }
+  });
+  simState.remPitLaps.forEach(l => {
+    if(lap === l) {
+      const el = document.getElementById(`pr${l}`);
+      if(el) { el.classList.add('fired'); el.classList.add('pit-flash'); }
+    }
+  });
+
+  const remLeading = !userLeads;
+  if(remLeading !== lastRemLeading) {
+    lastRemLeading = remLeading;
+    setReminMood(remLeading ? 'celebrate' : 'sulk');
+    setReminSpeech(remLeading ? 'leading' : 'trailing');
+  }
+  if(lap === Math.floor(LAPS * 0.3) || lap === Math.floor(LAPS * 0.65)) {
+    setReminSpeech(remLeading ? 'leading' : 'trailing');
+  }
 }
 
 function renderTimeline(id, stints, lap) {
@@ -1056,13 +1379,23 @@ function showResult() {
   const drv = DRIVERS[simState.driverKey];
   const drvColor = getComputedStyle(document.documentElement).getPropertyValue(drv.colorVar).trim();
 
+  if(userWins) {
+    setReminMood('sulk');
+    setReminSpeech('win');
+    setTimeout(launchConfetti, 400);
+  } else {
+    setReminMood('celebrate');
+    setReminSpeech('lose');
+    setTimeout(launchRain, 400);
+  }
+
   const p1 = userWins ? { name:drv.name, team:drv.team, color:drvColor, time:'1:24:07.112' }
-                      : { name:'Remin', team:'Strategy Lab', color:'var(--rem)', time:'1:24:03.891' };
-  const p2 = userWins ? { name:'Remin', team:'Strategy Lab', color:'var(--rem)', time:`+${gap}s` }
+                      : { name:'Remin', team:'Strategy Lab', color:'#FF6B35', time:'1:24:03.891' };
+  const p2 = userWins ? { name:'Remin', team:'Strategy Lab', color:'#FF6B35', time:`+${gap}s` }
                       : { name:drv.name, team:drv.team, color:drvColor, time:`+${gap}s` };
 
   document.getElementById('result-body').innerHTML = `
-    <div class="result-row">
+    <div class="result-row" id="rrow1">
       <div class="result-pos" style="color:${p1.color}">1</div>
       <div class="result-driver">
         <div class="result-name" style="color:${p1.color}">${p1.name}</div>
@@ -1070,7 +1403,7 @@ function showResult() {
       </div>
       <div class="result-time">${p1.time}</div>
     </div>
-    <div class="result-row">
+    <div class="result-row" id="rrow2">
       <div class="result-pos" style="color:${p2.color}">2</div>
       <div class="result-driver">
         <div class="result-name" style="color:${p2.color}">${p2.name}</div>
@@ -1085,7 +1418,11 @@ function showResult() {
     ? `Your strategy (${userStr}) beat Remin's adaptive counter (${remStr}) by ${gap}s. You read the tyre window correctly — at Silverstone in 2026 without DRS, track position in the final 15 laps is everything. Well played.`
     : `Remin adapted and won. After seeing your opening stint, Remin countered with ${remStr} — a better tyre delta in the closing laps sealed it. The gap was ${gap}s. At Silverstone, without DRS to recover, losing track position is fatal. Adjust your pit window and race again.`;
 
-  document.getElementById('result-section').style.display = 'block';
+  const rs = document.getElementById('result-section');
+  rs.style.display = 'block';
+  rs.classList.add('result-animate');
+  setTimeout(()=>{ document.getElementById('rrow1')?.classList.add('visible'); },200);
+  setTimeout(()=>{ document.getElementById('rrow2')?.classList.add('visible'); },400);
 }
 
 function togglePause() {
@@ -1102,6 +1439,12 @@ function showScreen(id) {
 function goSetup() {
   clearInterval(simInterval);
   paused = false;
+  rainActive = false;
+  cancelAnimationFrame(rainRaf);
+  cancelAnimationFrame(confettiRaf);
+  confettiCtx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);
+  rainCtx.clearRect(0,0,rainCanvas.width,rainCanvas.height);
+  rainCanvas.style.opacity = '0';
   showScreen('screen-setup');
 }
 
