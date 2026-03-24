@@ -407,7 +407,31 @@
       font-weight: 700;
       color: var(--text);
       min-width: 28px;
-      text-align: right;
+      text-align: center;
+    }
+
+    .lap-step {
+      background: none;
+      border: 1px solid var(--border2);
+      border-radius: 5px;
+      color: var(--text);
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1;
+      width: 26px;
+      height: 26px;
+      cursor: pointer;
+      transition: border-color .15s, background .15s;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lap-step:hover {
+      border-color: var(--accent);
+      background: rgba(167, 139, 250, 0.1);
+      color: var(--accent);
     }
 
     .add-stint-btn {
@@ -1574,6 +1598,11 @@
       if (s) { s.laps = parseInt(v); renderStints(); }
     }
 
+    function stepLaps(id, delta) {
+      const s = userStints.find(x => x.id === id);
+      if (s) { s.laps = Math.max(4, Math.min(44, s.laps + delta)); renderStints(); }
+    }
+
     function renderStints() {
       const cont = document.getElementById('stints-container');
       cont.innerHTML = '';
@@ -1590,9 +1619,11 @@
       </div>
       <div class="lap-row">
         <label>Laps</label>
-        <input type="range" min="4" max="44" step="1" value="${s.laps}"
+        <button class="lap-step" onclick="stepLaps(${s.id},-1)">&#x2212;</button>
+        <input type="range" min="4" max="44" step="1" value="${s.laps}" id="lr${s.id}"
           oninput="setLaps(${s.id},this.value);document.getElementById('lv${s.id}').textContent=this.value">
         <span class="lap-val" id="lv${s.id}">${s.laps}</span>
+        <button class="lap-step" onclick="stepLaps(${s.id},1)">&#x2B;</button>
       </div>`;
         cont.appendChild(div);
       });
