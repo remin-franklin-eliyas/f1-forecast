@@ -4460,72 +4460,77 @@
       const wrap = wrapId ? document.getElementById(wrapId) : null;
       if (wrap) wrap.style.display = 'block';
       const laps = raceData.laps;
-      const TYRE_COLORS = { soft: '#E8002D', med: '#FFD700', hard: '#CCC' };
+      const TYRE_OUTLINE = { soft: '#E8002D', med: '#FFD700', hard: '#CCC' };
 
-      function median(arr) {
-        const s = [...arr].sort((a, b) => a - b);
-        const m = Math.floor(s.length / 2);
-        return s.length % 2 !== 0 ? s[m] : (s[m - 1] + s[m]) / 2;
+      // Effective cliff for a compound (with per-track overrides)
+      function getCliff(compound) {
+        const trackOverride = currentTrack.compounds?.[compound] || {};
+        return trackOverride.cliff || COMPOUND[compound]?.cliff || 20;
       }
 
-      function buildRow(labelText, lapGetter, compoundGetter, pitGetter, gridId, labelColor) {
+      // Color by tyre age fraction (stintAge / cliff) — fuel-independent, always readable:
+      //   0.00–0.45 → green  (fresh)
+      //   0.45–0.75 → yellow (working)
+      //   0.75–1.00 → orange-red (near cliff)
+      //   >1.00     → deep red (over cliff — losing time here!)
+      function tyreHeatColor(stintAge, compound) {
+        const cliff = getCliff(compound);
+        const frac = stintAge / cliff;
+        if (frac <= 0.45) {
+          const t = frac / 0.45;
+          return `hsl(${135 - t * 30},${80 + t * 10}%,${42 - t * 4}%)`;
+        } else if (frac <= 0.75) {
+          const t = (frac - 0.45) / 0.30;
+          return `hsl(${105 - t * 60},90%,${38 + t * 5}%)`;
+        } else if (frac <= 1.0) {
+          const t = (frac - 0.75) / 0.25;
+          return `hsl(${45 - t * 35},90%,${43 - t * 8}%)`;
+        } else {
+          const over = Math.min(frac - 1.0, 1.0);
+          return `hsl(${10 - over * 8},${90 + over * 5}%,${35 - over * 10}%)`;
+        }
+      }
+
+      function buildRow(labelText, stintAgeGetter, compoundGetter, pitGetter, lapNumGetter, gridId, labelColor) {
         const grid = document.getElementById(gridId);
         if (!grid) return;
         grid.innerHTML = '';
 
-        // Row label
         const labelEl = document.createElement('div');
         labelEl.className = 'heatmap-row-label';
         labelEl.textContent = labelText;
         if (labelColor) labelEl.style.color = labelColor;
         grid.appendChild(labelEl);
 
-        // Compute this driver's median of non-pit laps for relative coloring
-        const racingTimes = laps.filter(f => !pitGetter(f)).map(f => lapGetter(f));
-        const med = racingTimes.length ? median(racingTimes) : BASE_LAP;
-
         const gridRow = document.createElement('div');
         gridRow.className = 'heatmap-grid';
         laps.forEach(f => {
           const cell = document.createElement('div');
           cell.className = 'heatmap-cell';
-          const lapT = lapGetter(f);
-          const compound = compoundGetter(f);
           const isPit = pitGetter(f);
+          const compound = compoundGetter(f);
+          const stintAge = stintAgeGetter(f);
+          const lapNum = lapNumGetter(f);
+          const cliff = getCliff(compound);
 
-          let heat, title;
           if (isPit) {
-            heat = 'rgba(255,107,53,0.85)';
-            title = `L${f.lap} · PIT STOP`;
+            cell.style.background = 'rgba(255,107,53,0.85)';
+            cell.title = `L${lapNum} · PIT STOP`;
           } else {
-            // Delta relative to this driver's own median — capped at ±4s
-            const delta = lapT - med;
-            const capped = Math.max(-4, Math.min(4, delta));
-            if (capped <= 0) {
-              // Faster than median: green (full = -4s ahead)
-              const t = -capped / 4;  // 0 = median, 1 = 4s faster
-              const lightness = 38 + t * 12;
-              heat = `hsl(140,${75 + t * 15}%,${lightness}%)`;
-            } else {
-              // Slower than median: yellow → red
-              const t = capped / 4;   // 0 = median, 1 = 4s slower
-              heat = `hsl(${55 - t * 55},90%,${42 - t * 10}%)`;
-            }
-            const sign = delta >= 0 ? '+' : '';
-            title = `L${f.lap} · ${sign}${delta.toFixed(2)}s vs median  [${(compound || '').toUpperCase()}]`;
+            cell.style.background = tyreHeatColor(stintAge, compound);
+            const overCliff = stintAge > cliff;
+            cell.title = `L${lapNum} · ${(compound || '').toUpperCase()} · Lap ${stintAge}/${cliff}${overCliff ? ' ⚠ PAST CLIFF' : ''}`;
           }
-          cell.style.background = heat;
-          cell.style.outline = `1.5px solid ${TYRE_COLORS[compound] || '#444'}`;
-          cell.title = title;
+          cell.style.outline = `1.5px solid ${TYRE_OUTLINE[compound] || '#444'}`;
           gridRow.appendChild(cell);
         });
         grid.appendChild(gridRow);
       }
 
-      buildRow('YOU', f => f.playerLapTime, f => f.playerCompound, f => f.playerPitted, userGridId, userLabelColor);
-      buildRow('REMIN', f => f.aiLapTime, f => f.aiCompound, f => f.aiPitted, remGridId, '#FF6B35');
+      buildRow('YOU', f => f.playerStintLap, f => f.playerCompound, f => f.playerPitted, f => f.lap, userGridId, userLabelColor);
+      buildRow('REMIN', f => f.aiStintLap, f => f.aiCompound, f => f.aiPitted, f => f.lap, remGridId, '#FF6B35');
 
-      // Add legend the first time (result page only — wrapId is set)
+      // Legend (result page only)
       if (wrapId) {
         const legendId = wrapId + '-legend';
         if (!document.getElementById(legendId)) {
@@ -4533,9 +4538,10 @@
           legend.id = legendId;
           legend.style.cssText = 'display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;align-items:center';
           const items = [
-            { color: 'hsl(140,90%,44%)', label: 'Faster than median' },
-            { color: 'hsl(55,90%,42%)', label: 'Near median' },
-            { color: 'hsl(0,90%,35%)', label: 'Slower than median' },
+            { color: 'hsl(135,80%,42%)', label: 'Fresh tyre' },
+            { color: 'hsl(75,90%,40%)', label: 'Working' },
+            { color: 'hsl(20,90%,38%)', label: 'Near cliff' },
+            { color: 'hsl(6,93%,28%)', label: 'Over cliff' },
             { color: 'rgba(255,107,53,0.85)', label: 'Pit stop' },
           ];
           items.forEach(({ color, label }) => {
