@@ -3459,7 +3459,8 @@
       </div>
 
       <div class="gap-chart-wrap">
-        <div class="gap-chart-label">Live Gap Chart &nbsp;·&nbsp; <span style="color:#a78bfa">▪ You lead</span>
+        <div class="gap-chart-label">Live Gap Chart &nbsp;·&nbsp; <span id="gc-label-user" style="color:#a78bfa">▪ You
+            lead</span>
           &nbsp;<span style="color:#FF6B35">▪ Remin leads</span></div>
         <canvas id="gap-chart" height="110"></canvas>
       </div>
@@ -4459,16 +4460,30 @@
       const wrap = wrapId ? document.getElementById(wrapId) : null;
       if (wrap) wrap.style.display = 'block';
       const laps = raceData.laps;
-      const TYRE_COLORS = { soft: '#E8002D', med: '#FFD700', hard: '#888' };
+      const TYRE_COLORS = { soft: '#E8002D', med: '#FFD700', hard: '#CCC' };
+
+      function median(arr) {
+        const s = [...arr].sort((a, b) => a - b);
+        const m = Math.floor(s.length / 2);
+        return s.length % 2 !== 0 ? s[m] : (s[m - 1] + s[m]) / 2;
+      }
+
       function buildRow(labelText, lapGetter, compoundGetter, pitGetter, gridId, labelColor) {
         const grid = document.getElementById(gridId);
         if (!grid) return;
         grid.innerHTML = '';
+
+        // Row label
         const labelEl = document.createElement('div');
         labelEl.className = 'heatmap-row-label';
         labelEl.textContent = labelText;
         if (labelColor) labelEl.style.color = labelColor;
         grid.appendChild(labelEl);
+
+        // Compute this driver's median of non-pit laps for relative coloring
+        const racingTimes = laps.filter(f => !pitGetter(f)).map(f => lapGetter(f));
+        const med = racingTimes.length ? median(racingTimes) : BASE_LAP;
+
         const gridRow = document.createElement('div');
         gridRow.className = 'heatmap-grid';
         laps.forEach(f => {
@@ -4477,22 +4492,66 @@
           const lapT = lapGetter(f);
           const compound = compoundGetter(f);
           const isPit = pitGetter(f);
-          const medianLap = BASE_LAP;
-          const delta = lapT - medianLap;
-          let heat;
-          if (isPit) heat = 'rgba(255,107,53,0.9)';
-          else if (delta < -0.3) heat = '#22c55e';
-          else if (delta < 0.5) { const t = (delta + 0.3) / 0.8; heat = `hsl(${120 - t * 120},80%,50%)`; }
-          else { const t = Math.min((delta - 0.5) / 3, 1); heat = `hsl(${60 - t * 60},90%,50%)`; }
+
+          let heat, title;
+          if (isPit) {
+            heat = 'rgba(255,107,53,0.85)';
+            title = `L${f.lap} · PIT STOP`;
+          } else {
+            // Delta relative to this driver's own median — capped at ±4s
+            const delta = lapT - med;
+            const capped = Math.max(-4, Math.min(4, delta));
+            if (capped <= 0) {
+              // Faster than median: green (full = -4s ahead)
+              const t = -capped / 4;  // 0 = median, 1 = 4s faster
+              const lightness = 38 + t * 12;
+              heat = `hsl(140,${75 + t * 15}%,${lightness}%)`;
+            } else {
+              // Slower than median: yellow → red
+              const t = capped / 4;   // 0 = median, 1 = 4s slower
+              heat = `hsl(${55 - t * 55},90%,${42 - t * 10}%)`;
+            }
+            const sign = delta >= 0 ? '+' : '';
+            title = `L${f.lap} · ${sign}${delta.toFixed(2)}s vs median  [${(compound || '').toUpperCase()}]`;
+          }
           cell.style.background = heat;
-          cell.style.outline = `1.5px solid ${TYRE_COLORS[compound] || '#555'}`;
-          cell.title = `L${f.lap} · ${lapT.toFixed(2)}s${isPit ? ' (PIT)' : ''}`;
+          cell.style.outline = `1.5px solid ${TYRE_COLORS[compound] || '#444'}`;
+          cell.title = title;
           gridRow.appendChild(cell);
         });
         grid.appendChild(gridRow);
       }
+
       buildRow('YOU', f => f.playerLapTime, f => f.playerCompound, f => f.playerPitted, userGridId, userLabelColor);
       buildRow('REMIN', f => f.aiLapTime, f => f.aiCompound, f => f.aiPitted, remGridId, '#FF6B35');
+
+      // Add legend the first time (result page only — wrapId is set)
+      if (wrapId) {
+        const legendId = wrapId + '-legend';
+        if (!document.getElementById(legendId)) {
+          const legend = document.createElement('div');
+          legend.id = legendId;
+          legend.style.cssText = 'display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;align-items:center';
+          const items = [
+            { color: 'hsl(140,90%,44%)', label: 'Faster than median' },
+            { color: 'hsl(55,90%,42%)', label: 'Near median' },
+            { color: 'hsl(0,90%,35%)', label: 'Slower than median' },
+            { color: 'rgba(255,107,53,0.85)', label: 'Pit stop' },
+          ];
+          items.forEach(({ color, label }) => {
+            const item = document.createElement('div');
+            item.style.cssText = 'display:flex;align-items:center;gap:4px;font-size:9px;font-family:var(--font-display);color:var(--muted);letter-spacing:.5px;text-transform:uppercase';
+            item.innerHTML = `<span style="width:10px;height:10px;border-radius:2px;background:${color};display:inline-block;flex-shrink:0"></span>${label}`;
+            legend.appendChild(item);
+          });
+          const tyreLegend = document.createElement('div');
+          tyreLegend.style.cssText = 'display:flex;align-items:center;gap:4px;font-size:9px;font-family:var(--font-display);color:var(--muted);letter-spacing:.5px;text-transform:uppercase;margin-left:4px;padding-left:10px;border-left:1px solid rgba(255,255,255,0.08)';
+          tyreLegend.innerHTML = `<span style="width:10px;height:10px;border-radius:2px;background:#333;outline:1.5px solid #E8002D;display:inline-block"></span>S &nbsp;<span style="width:10px;height:10px;border-radius:2px;background:#333;outline:1.5px solid #FFD700;display:inline-block"></span>M &nbsp;<span style="width:10px;height:10px;border-radius:2px;background:#333;outline:1.5px solid #CCC;display:inline-block"></span>H`;
+          legend.appendChild(tyreLegend);
+          const wrap2 = document.getElementById(wrapId);
+          if (wrap2) wrap2.appendChild(legend);
+        }
+      }
     }
 
     /* ── MAIN GAME LOGIC ── */
@@ -4553,6 +4612,9 @@
         const gbUser = document.getElementById('gbname-user');
         if (gbUser) { gbUser.textContent = (displayName.toUpperCase()).slice(0, 10); gbUser.style.color = drvColor; }
       }
+      // Gap chart legend label
+      const gcLabel = document.getElementById('gc-label-user');
+      if (gcLabel) gcLabel.style.color = drvColor;
 
       const pitRow = document.getElementById('pit-row');
       pitRow.innerHTML = '';
@@ -5113,15 +5175,16 @@
       ctx.lineTo(last.lap * scaleX, midY);
       ctx.lineTo(gapHistory[0].lap * scaleX, midY);
       ctx.closePath();
+      const playerColor = simState.driverColor || '#a78bfa';
       const lGrad = ctx.createLinearGradient(0, 0, 0, h);
-      if (last.gap >= 0) { lGrad.addColorStop(0, 'rgba(167,139,250,0.2)'); lGrad.addColorStop(1, 'rgba(167,139,250,0)'); }
+      if (last.gap >= 0) { lGrad.addColorStop(0, playerColor + '33'); lGrad.addColorStop(1, playerColor + '00'); }
       else { lGrad.addColorStop(0, 'rgba(255,107,53,0)'); lGrad.addColorStop(1, 'rgba(255,107,53,0.2)'); }
       ctx.fillStyle = lGrad; ctx.fill();
       // Line segments colored by leader
       for (let i = 1; i < gapHistory.length; i++) {
         const p = gapHistory[i - 1], c = gapHistory[i];
         ctx.beginPath();
-        ctx.strokeStyle = c.gap >= 0 ? '#a78bfa' : '#FF6B35';
+        ctx.strokeStyle = c.gap >= 0 ? playerColor : '#FF6B35';
         ctx.lineWidth = 2; ctx.lineJoin = 'round';
         ctx.moveTo(p.lap * scaleX, midY - p.gap * scaleY);
         ctx.lineTo(c.lap * scaleX, midY - c.gap * scaleY);
@@ -5129,7 +5192,7 @@
       }
       // Current position dot
       ctx.beginPath();
-      ctx.fillStyle = last.gap >= 0 ? '#a78bfa' : '#FF6B35';
+      ctx.fillStyle = last.gap >= 0 ? playerColor : '#FF6B35';
       ctx.arc(last.lap * scaleX, midY - last.gap * scaleY, 4, 0, Math.PI * 2);
       ctx.fill();
     }
