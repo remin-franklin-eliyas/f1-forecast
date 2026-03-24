@@ -4020,20 +4020,18 @@
         "This is where races are won. I'm not lifting.",
         "Maximum attack. This is what I do.",
         "Lap time: P1 material. Gap closing fast.",
-      const rh = document.getElementById('result-heading');
-      if(rh) rh.textContent = `Race Result — ${currentTrack.name} GP 2026`;
-      "The pace I'm showing right now? That's what an optimal strategy looks like.",
-      "Pushing hard. You should be worried.",
+        "The pace I'm showing right now? That's what an optimal strategy looks like.",
+        "Pushing hard. You should be worried.",
       ],
-    win: [
-      "GG. That was actually clean strategy from you. I respect it.",
-      "You got me. Read the tyre window perfectly. I'll remember that.",
-      "I adapted everything and still lost. Take it — you earned it.",
-      "Silverstone is yours today. Come back tomorrow and we'll see.",
-      "You beat my counter. That doesn't happen often. Well played.",
-      "I had the pace. You had the timing. Timing wins.",
-      "Fine. You outsmarted me. For one race.",
-    ],
+      win: [
+        "GG. That was actually clean strategy from you. I respect it.",
+        "You got me. Read the tyre window perfectly. I'll remember that.",
+        "I adapted everything and still lost. Take it — you earned it.",
+        "Silverstone is yours today. Come back tomorrow and we'll see.",
+        "You beat my counter. That doesn't happen often. Well played.",
+        "I had the pace. You had the timing. Timing wins.",
+        "Fine. You outsmarted me. For one race.",
+      ],
       lose: [
         "Predictable. You left two seconds on the table with that stint length.",
         "Basic F1: wrong tyre, wrong window, wrong result.",
@@ -4044,12 +4042,12 @@
         "I didn't even have to push hard. That's the part that stings.",
         "Better. That was better than last race. Still not good enough.",
       ],
-        rain_react: [
-          "Rain. Everything changes. My compound holds better — watch.",
-          "Weather in, your tyres suffer. This is my kind of race now.",
-          "A shower at Silverstone. The chaos always finds me.",
-          "Rain compounds the degradation. If you're on softs — you're in trouble.",
-        ],
+      rain_react: [
+        "Rain. Everything changes. My compound holds better — watch.",
+        "Weather in, your tyres suffer. This is my kind of race now.",
+        "A shower at Silverstone. The chaos always finds me.",
+        "Rain compounds the degradation. If you're on softs — you're in trouble.",
+      ],
     };
 
     let lastRemLeading = null;
@@ -4116,6 +4114,8 @@
       document.getElementById('s-user-label').style.color = drvColor;
       document.getElementById('tl-user-lbl').textContent = `${displayName} — ${drv.name}`;
       document.getElementById('race-eyebrow').textContent = `${displayName} · ${drv.name} vs Remin · ${currentTrack.name} 2026`;
+      const rh = document.getElementById('result-heading');
+      if (rh) rh.textContent = `Race Result — ${currentTrack.name} GP 2026`;
 
       // Gap bar: set player colour + label
       const gapBarWrap = document.getElementById('gap-bar-wrap');
