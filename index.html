@@ -1970,12 +1970,56 @@
       background: var(--bg2);
       border-radius: 20px;
       padding: 36px 32px 28px;
-      max-width: 440px;
+      max-width: min(880px, calc(100vw - 24px));
       width: calc(100% - 32px);
       text-align: center;
       position: relative;
       border: 1px solid rgba(255, 255, 255, 0.12);
       animation: modalPop .42s cubic-bezier(.34, 1.56, .64, 1) forwards;
+    }
+
+    .race-modal-inner {
+      display: flex;
+      gap: 32px;
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    .modal-left {
+      flex: 0 0 260px;
+      min-width: 0;
+      text-align: center;
+    }
+
+    .modal-right {
+      flex: 1;
+      min-width: 0;
+      border-left: 1px solid var(--border);
+      padding-left: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      --modal-accent: #FFB700;
+    }
+
+    @media (max-width: 640px) {
+      .race-modal-inner {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .modal-left {
+        flex: none;
+        width: 100%;
+      }
+
+      .modal-right {
+        border-left: none;
+        border-top: 1px solid var(--border);
+        padding-left: 0;
+        padding-top: 20px;
+        width: 100%;
+      }
     }
 
     @keyframes modalPop {
@@ -2145,6 +2189,89 @@
       color: var(--muted);
       margin-top: 14px;
       letter-spacing: 0.5px;
+    }
+
+    /* ── MODAL RIGHT PANEL ── */
+    .modal-analysis-label {
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--modal-accent, #FFB700);
+      margin-bottom: 2px;
+    }
+
+    .modal-analysis-text {
+      font-size: 13px;
+      line-height: 1.75;
+      color: var(--text);
+      min-height: 48px;
+    }
+
+    .modal-analysis-text::after {
+      content: '▍';
+      display: inline-block;
+      opacity: 1;
+      animation: cursorBlink .7s step-end infinite;
+      color: var(--modal-accent, #FFB700);
+      margin-left: 1px;
+    }
+
+    .modal-analysis-text.done::after {
+      display: none;
+    }
+
+    @keyframes cursorBlink {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0;
+      }
+    }
+
+    .modal-analysis-moments {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .modal-moment-pill {
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      padding: 3px 8px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 183, 0, 0.35);
+      background: rgba(255, 183, 0, 0.06);
+      color: #FFB700;
+      white-space: nowrap;
+    }
+
+    .modal-leaderboard-cta {
+      font-size: 12px;
+      line-height: 1.65;
+      color: var(--muted);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-left: 3px solid var(--modal-accent, #FFB700);
+      border-radius: 0 8px 8px 0;
+      padding: 10px 12px;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .modal-leaderboard-cta strong {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .modal-leaderboard-cta .cta-highlight {
+      color: var(--modal-accent, #FFB700);
+      font-weight: 700;
     }
 
     /* ── GLOBAL LEADERBOARD ── */
@@ -2498,28 +2625,40 @@
     <div id="race-modal-overlay">
       <div class="race-modal">
         <button class="btn-modal-close" onclick="closeRaceModal()" title="Close">×</button>
-        <div class="modal-lights" id="modal-lights">
-          <div class="modal-light" id="ml1"></div>
-          <div class="modal-light" id="ml2"></div>
-          <div class="modal-light" id="ml3"></div>
-          <div class="modal-light" id="ml4"></div>
-          <div class="modal-light" id="ml5"></div>
+        <div class="race-modal-inner">
+          <!-- LEFT PANEL: result + actions -->
+          <div class="modal-left">
+            <div class="modal-lights" id="modal-lights">
+              <div class="modal-light" id="ml1"></div>
+              <div class="modal-light" id="ml2"></div>
+              <div class="modal-light" id="ml3"></div>
+              <div class="modal-light" id="ml4"></div>
+              <div class="modal-light" id="ml5"></div>
+            </div>
+            <div class="modal-trophy" id="modal-trophy">🏆</div>
+            <div class="modal-eyebrow" id="modal-eyebrow">Silverstone GP · 2026</div>
+            <div class="modal-headline" id="modal-headline">You Win!</div>
+            <div class="modal-sub" id="modal-sub">Strategy locked in.</div>
+            <div class="modal-gap" id="modal-gap">+0.000s</div>
+            <div class="modal-actions">
+              <button class="btn-modal-primary" id="modal-btn-again" onclick="closeRaceModal();goSetup()">🔄 Race
+                Again</button>
+              <button class="btn-modal-secondary" onclick="closeRaceModal();downloadResultCard()">↓ Save Result
+                Card</button>
+              <button class="btn-modal-secondary" id="modal-btn-challenge"
+                onclick="closeRaceModal();createChallenge(document.getElementById('btn-challenge'));document.getElementById('result-section').scrollIntoView({behavior:'smooth'})">⚔️
+                Challenge a Friend</button>
+            </div>
+            <div class="modal-ticker" id="modal-ticker"></div>
+          </div>
+          <!-- RIGHT PANEL: analysis + leaderboard context -->
+          <div class="modal-right" id="modal-right">
+            <div class="modal-analysis-label" id="modal-analysis-label">RACE ANALYSIS</div>
+            <div class="modal-analysis-text" id="modal-analysis-text"></div>
+            <div class="modal-analysis-moments" id="modal-analysis-moments"></div>
+            <div class="modal-leaderboard-cta" id="modal-leaderboard-cta"></div>
+          </div>
         </div>
-        <div class="modal-trophy" id="modal-trophy">🏆</div>
-        <div class="modal-eyebrow" id="modal-eyebrow">Silverstone GP · 2026</div>
-        <div class="modal-headline" id="modal-headline">You Win!</div>
-        <div class="modal-sub" id="modal-sub">Strategy locked in.</div>
-        <div class="modal-gap" id="modal-gap">+0.000s</div>
-        <div class="modal-actions">
-          <button class="btn-modal-primary" id="modal-btn-again" onclick="closeRaceModal();goSetup()">🔄 Race
-            Again</button>
-          <button class="btn-modal-secondary" onclick="closeRaceModal();downloadResultCard()">↓ Save Result
-            Card</button>
-          <button class="btn-modal-secondary" id="modal-btn-challenge"
-            onclick="closeRaceModal();createChallenge(document.getElementById('btn-challenge'));document.getElementById('result-section').scrollIntoView({behavior:'smooth'})">⚔️
-            Challenge a Friend</button>
-        </div>
-        <div class="modal-ticker" id="modal-ticker"></div>
       </div>
     </div>
 
@@ -3659,6 +3798,7 @@
       const userStr = simState.userStints.map(s => `${COMPOUND[s.compound].name} (${s.laps}L)`).join(' → ');
 
       const analysis = generateAnalysis(simState.raceData, simState.userStints, simState.remStints, simState.event, simState.driverKey, userWins, parseFloat(gap));
+      simState.analysis = analysis;
       document.getElementById('result-analysis').textContent = analysis.verdict;
 
       const momentsEl = document.getElementById('key-moments');
@@ -3993,6 +4133,88 @@
           ? `Strategy IQ: ${score} · ${document.getElementById('score-grade')?.textContent || ''}`
           : '';
 
+        // ── RIGHT PANEL: accent colour, typewriter verdict, moments, leaderboard CTA ──
+        const celebrateRight = h2h ? h2h.iWin : userWins;
+        const accent = celebrateRight ? '#FFB700' : '#f87171';
+        const rightPanel = document.getElementById('modal-right');
+        if (rightPanel) {
+          rightPanel.style.setProperty('--modal-accent', accent);
+          // Label
+          const labelEl = document.getElementById('modal-analysis-label');
+          if (labelEl) labelEl.textContent = celebrateRight ? '🏁 RACE ANALYSIS' : '📋 POST-RACE DEBRIEF';
+
+          // Typewriter verdict
+          const analysis = simState.analysis;
+          if (analysis) {
+            const textEl = document.getElementById('modal-analysis-text');
+            if (textEl) typewriterEl(textEl, analysis.verdict, 18);
+
+            // Key moments pills
+            const momentsEl = document.getElementById('modal-analysis-moments');
+            if (momentsEl && analysis.keyMoments.length > 0) {
+              const pillColors = {
+                pit: { border: 'rgba(255,107,53,0.5)', bg: 'rgba(255,107,53,0.07)', color: '#FF6B35' },
+                event: { border: 'rgba(96,165,250,0.5)', bg: 'rgba(96,165,250,0.07)', color: '#60a5fa' },
+                cliff: { border: 'rgba(255,215,0,0.5)', bg: 'rgba(255,215,0,0.07)', color: '#FFD700' },
+                close: { border: 'rgba(167,139,250,0.4)', bg: 'rgba(167,139,250,0.07)', color: '#a78bfa' }
+              };
+              function getMomentTypeModal(text) {
+                if (/pit|stop/i.test(text)) return 'pit';
+                if (/sc|rain|safety|shower|vsc/i.test(text)) return 'event';
+                if (/cliff|advantage|pace/i.test(text)) return 'cliff';
+                return 'close';
+              }
+              momentsEl.innerHTML = analysis.keyMoments.map(m => {
+                const t = getMomentTypeModal(m.text);
+                const c = pillColors[t];
+                return `<span class="modal-moment-pill" style="border-color:${c.border};background:${c.bg};color:${c.color}">Lap ${m.lap} — ${m.text}</span>`;
+              }).join('');
+            }
+          }
+
+          // Leaderboard CTA
+          const ctaEl = document.getElementById('modal-leaderboard-cta');
+          if (ctaEl && SUPABASE_URL && SUPABASE_URL !== 'YOUR_SUPABASE_URL') {
+            ctaEl.innerHTML = '<span style="color:var(--muted);font-size:11px">Loading global leaderboard…</span>';
+            fetch(`${SUPABASE_URL}/rest/v1/forecasts?result=eq.win&order=gap_seconds.asc&limit=1`, {
+              headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` }
+            })
+              .then(r => r.json())
+              .then(data => {
+                const playerGap = simState.finalGap;
+                if (Array.isArray(data) && data.length > 0) {
+                  const leader = data[0];
+                  const leaderGap = parseFloat(leader.gap_seconds);
+                  const leaderName = leader.name || 'Anonymous';
+                  if (playerGap <= leaderGap && userWins) {
+                    ctaEl.innerHTML = `<span class="cta-highlight">🏆 You're #1 on the global board!</span><br>Gap: <strong>${playerGap.toFixed(3)}s</strong> — the best strategy run in the world. Defend it.`;
+                  } else if (userWins) {
+                    const diff = (playerGap - leaderGap).toFixed(3);
+                    ctaEl.innerHTML = `Global leader is <strong>${leaderName}</strong> — beat Remin by <strong>${leaderGap.toFixed(3)}s</strong>.<br>You're <span class="cta-highlight">${diff}s off the top</span>. Race again and take that #1 spot.`;
+                  } else {
+                    const playerBest = playerGap;
+                    ctaEl.innerHTML = `Global leader <strong>${leaderName}</strong> won by <strong>${leaderGap.toFixed(3)}s</strong>.<br>You lost by <span class="cta-highlight">${playerBest.toFixed(3)}s</span> this run. Study the key moments above and go again — the board is wide open.`;
+                  }
+                } else {
+                  if (userWins) {
+                    ctaEl.innerHTML = `<span class="cta-highlight">You won with a ${playerGap.toFixed(3)}s gap.</span> No one else on the board yet — you could be #1. Share the challenge and see who can beat you.`;
+                  } else {
+                    ctaEl.innerHTML = `Remin edged you by <span class="cta-highlight">${playerGap.toFixed(3)}s</span>. The global board is empty — win once and claim the top spot.`;
+                  }
+                }
+              })
+              .catch(() => {
+                if (ctaEl) ctaEl.innerHTML = '';
+              });
+          } else if (ctaEl) {
+            if (userWins) {
+              ctaEl.innerHTML = `You beat Remin by <span class="cta-highlight">${simState.finalGap.toFixed(3)}s</span>. Share the challenge link and see if anyone can top it.`;
+            } else {
+              ctaEl.innerHTML = `Remin edged you by <span class="cta-highlight">${simState.finalGap.toFixed(3)}s</span>. Review the key moments and come back with a sharper strategy.`;
+            }
+          }
+        }
+
         overlay.classList.add('show');
         // Close on backdrop click
         overlay.onclick = (e) => { if (e.target === overlay) closeRaceModal(); };
@@ -4001,6 +4223,17 @@
 
     function closeRaceModal() {
       document.getElementById('race-modal-overlay').classList.remove('show');
+    }
+
+    /* ── TYPEWRITER HELPER ── */
+    function typewriterEl(el, text, speed = 20) {
+      el.textContent = '';
+      el.classList.remove('done');
+      let i = 0;
+      const t = setInterval(() => {
+        el.textContent += text[i++];
+        if (i >= text.length) { clearInterval(t); el.classList.add('done'); }
+      }, speed);
     }
 
     /* ── DOWNLOAD RESULT CARD ── */
