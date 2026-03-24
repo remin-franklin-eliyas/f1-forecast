@@ -1,991 +1,1382 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>F1 Strategy Battle — Silverstone 2026</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #080810;
-    --bg2: #0f0f1a;
-    --bg3: #161625;
-    --border: rgba(255,255,255,0.08);
-    --border2: rgba(255,255,255,0.15);
-    --text: #f0f0f0;
-    --muted: #6b6b8a;
-    --accent: #a78bfa;
-    --accent2: #7c3aed;
-    --soft: #E8002D;
-    --med: #FFD700;
-    --hard: #aaaaaa;
-    --ver: #3671C6;
-    --lec: #E8002D;
-    --rus: #00D2BE;
-    --rem: #FF6B35;
-    --font-display: 'Barlow Condensed', sans-serif;
-    --font-body: 'Barlow', sans-serif;
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>F1 Strategy Battle — Silverstone 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&family=Barlow:wght@400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #080810;
+      --bg2: #0f0f1a;
+      --bg3: #161625;
+      --border: rgba(255, 255, 255, 0.08);
+      --border2: rgba(255, 255, 255, 0.15);
+      --text: #f0f0f0;
+      --muted: #6b6b8a;
+      --accent: #a78bfa;
+      --accent2: #7c3aed;
+      --soft: #E8002D;
+      --med: #FFD700;
+      --hard: #aaaaaa;
+      --ver: #3671C6;
+      --lec: #E8002D;
+      --rus: #00D2BE;
+      --rem: #FF6B35;
+      --font-display: 'Barlow Condensed', sans-serif;
+      --font-body: 'Barlow', sans-serif;
+    }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--font-body);
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-  /* Background grid */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(167,139,250,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(167,139,250,0.03) 1px, transparent 1px);
-    background-size: 40px 40px;
-    pointer-events: none;
-    z-index: 0;
-  }
+    /* Background grid */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(167, 139, 250, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(167, 139, 250, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
 
-  .app {
-    position: relative;
-    z-index: 1;
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0 16px 40px;
-  }
+    .app {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 16px 40px;
+    }
 
-  /* ── NAV ── */
-  nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 0 28px;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 32px;
-  }
-  .nav-logo {
-    font-family: var(--font-display);
-    font-size: 22px;
-    font-weight: 800;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--text);
-  }
-  .nav-logo span { color: var(--accent); }
-  .nav-badges { display: flex; gap: 8px; flex-wrap: wrap; }
-  .badge {
-    font-family: var(--font-display);
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    padding: 4px 10px;
-    border-radius: 4px;
-  }
-  .badge-purple { background: rgba(167,139,250,0.1); color: var(--accent); border: 1px solid rgba(167,139,250,0.3); }
-  .badge-green  { background: rgba(52,211,153,0.08); color: #34d399; border: 1px solid rgba(52,211,153,0.25); }
-  .badge-red    { background: rgba(248,113,113,0.08); color: #f87171; border: 1px solid rgba(248,113,113,0.25); }
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 0 28px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 32px;
+    }
 
-  /* ── SCREENS ── */
-  .screen { display: none; }
-  .screen.active { display: block; }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text);
+    }
 
-  /* ── SECTION LABELS ── */
-  .section-label {
-    font-family: var(--font-display);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 12px;
-  }
+    .nav-logo span {
+      color: var(--accent);
+    }
 
-  /* ── HERO ── */
-  .hero {
-    margin-bottom: 36px;
-  }
-  .hero-eyebrow {
-    font-family: var(--font-display);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 8px;
-  }
-  .hero-title {
-    font-family: var(--font-display);
-    font-size: clamp(42px, 8vw, 72px);
-    font-weight: 900;
-    line-height: 0.95;
-    text-transform: uppercase;
-    letter-spacing: -1px;
-    color: var(--text);
-    margin-bottom: 12px;
-  }
-  .hero-title em { color: var(--accent); font-style: normal; }
-  .hero-sub {
-    font-size: 14px;
-    color: var(--muted);
-    line-height: 1.6;
-    max-width: 480px;
-  }
+    .nav-badges {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
 
-  /* ── DRIVER GRID ── */
-  .driver-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 12px;
-    margin-bottom: 32px;
-  }
-  .driver-card {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px 16px;
-    cursor: pointer;
-    transition: border-color .2s, background .2s, transform .15s;
-    position: relative;
-    overflow: hidden;
-  }
-  .driver-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: var(--driver-color, #fff);
-    opacity: 0;
-    transition: opacity .2s;
-  }
-  .driver-card:hover { background: var(--bg3); border-color: var(--border2); transform: translateY(-2px); }
-  .driver-card:hover::before { opacity: 1; }
-  .driver-card.selected { border-color: var(--driver-color); background: var(--bg3); }
-  .driver-card.selected::before { opacity: 1; }
-  .driver-number {
-    font-family: var(--font-display);
-    font-size: 36px;
-    font-weight: 900;
-    color: var(--driver-color);
-    line-height: 1;
-    margin-bottom: 6px;
-  }
-  .driver-name {
-    font-family: var(--font-display);
-    font-size: 18px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: var(--text);
-    margin-bottom: 2px;
-  }
-  .driver-team {
-    font-size: 12px;
-    color: var(--muted);
-    margin-bottom: 12px;
-  }
-  .driver-stats { border-top: 1px solid var(--border); padding-top: 10px; }
-  .dstat {
-    display: flex;
-    justify-content: space-between;
-    font-size: 11px;
-    margin-bottom: 4px;
-  }
-  .dstat-label { color: var(--muted); }
-  .dstat-val { color: var(--text); font-weight: 500; }
+    .badge {
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 4px;
+    }
 
-  /* ── STRATEGY BUILDER ── */
-  .strategy-builder {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 24px;
-  }
-  .stint-block {
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 14px;
-    margin-bottom: 10px;
-  }
-  .stint-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 12px;
-  }
-  .stint-num {
-    font-family: var(--font-display);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-  .stint-remove {
-    background: none;
-    border: none;
-    color: var(--muted);
-    cursor: pointer;
-    font-size: 18px;
-    line-height: 1;
-    padding: 0;
-    transition: color .15s;
-  }
-  .stint-remove:hover { color: #f87171; }
-  .compound-row { display: flex; gap: 6px; margin-bottom: 12px; }
-  .cpd-btn {
-    flex: 1;
-    padding: 8px 4px;
-    border-radius: 6px;
-    border: 1px solid var(--border2);
-    background: transparent;
-    font-family: var(--font-display);
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    color: var(--muted);
-    cursor: pointer;
-    transition: all .15s;
-  }
-  .cpd-btn:hover { border-color: var(--border2); color: var(--text); }
-  .cpd-btn.active-soft { background: var(--soft); color: #fff; border-color: var(--soft); }
-  .cpd-btn.active-med  { background: var(--med); color: #111; border-color: var(--med); }
-  .cpd-btn.active-hard { background: #555; color: #eee; border-color: #666; }
-  .lap-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .lap-row label {
-    font-size: 11px;
-    color: var(--muted);
-    width: 36px;
-    flex-shrink: 0;
-  }
-  .lap-row input[type=range] {
-    flex: 1;
-    -webkit-appearance: none;
-    height: 4px;
-    background: var(--border2);
-    border-radius: 2px;
-    outline: none;
-  }
-  .lap-row input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: var(--accent);
-    cursor: pointer;
-  }
-  .lap-row .lap-val {
-    font-family: var(--font-display);
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--text);
-    min-width: 28px;
-    text-align: right;
-  }
-  .add-stint-btn {
-    background: transparent;
-    border: 1px dashed var(--border2);
-    border-radius: 8px;
-    color: var(--muted);
-    font-family: var(--font-body);
-    font-size: 13px;
-    padding: 10px;
-    width: 100%;
-    cursor: pointer;
-    transition: all .15s;
-    margin-top: 4px;
-  }
-  .add-stint-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .badge-purple {
+      background: rgba(167, 139, 250, 0.1);
+      color: var(--accent);
+      border: 1px solid rgba(167, 139, 250, 0.3);
+    }
 
-  /* Strategy preview bar */
-  .preview-wrap { margin-top: 16px; }
-  .preview-label {
-    font-size: 11px;
-    color: var(--muted);
-    margin-bottom: 6px;
-    display: flex;
-    justify-content: space-between;
-  }
-  .preview-bar {
-    height: 20px;
-    border-radius: 6px;
-    overflow: hidden;
-    background: var(--bg);
-    display: flex;
-    border: 1px solid var(--border);
-  }
-  .preview-seg {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-display);
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    transition: width .3s;
-    overflow: hidden;
-  }
-  .error-msg {
-    font-size: 12px;
-    color: #f87171;
-    margin-top: 8px;
-    min-height: 16px;
-  }
+    .badge-green {
+      background: rgba(52, 211, 153, 0.08);
+      color: #34d399;
+      border: 1px solid rgba(52, 211, 153, 0.25);
+    }
 
-  /* ── START BUTTON ── */
-  .start-row {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-  .btn-start {
-    font-family: var(--font-display);
-    font-size: 16px;
-    font-weight: 800;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    padding: 14px 32px;
-    background: var(--accent2);
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background .15s, transform .1s;
-  }
-  .btn-start:hover { background: var(--accent); transform: translateY(-1px); }
-  .btn-start:active { transform: translateY(0); }
-  .vs-text {
-    font-size: 13px;
-    color: var(--muted);
-  }
-  .vs-text strong { color: var(--rem); }
+    .badge-red {
+      background: rgba(248, 113, 113, 0.08);
+      color: #f87171;
+      border: 1px solid rgba(248, 113, 113, 0.25);
+    }
 
-  /* ── RACE SCREEN ── */
-  .race-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 24px;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-  .race-lap-display { display: flex; align-items: baseline; gap: 6px; }
-  .lap-big {
-    font-family: var(--font-display);
-    font-size: 48px;
-    font-weight: 900;
-    color: var(--text);
-    line-height: 1;
-  }
-  .lap-total {
-    font-family: var(--font-display);
-    font-size: 20px;
-    color: var(--muted);
-  }
-  .race-controls { display: flex; gap: 8px; align-items: center; }
-  .btn-ctrl {
-    font-family: var(--font-display);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    padding: 8px 16px;
-    background: var(--bg2);
-    color: var(--muted);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all .15s;
-  }
-  .btn-ctrl:hover { border-color: var(--border2); color: var(--text); }
-  .gap-pill {
-    font-family: var(--font-display);
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    color: var(--accent);
-    background: rgba(167,139,250,0.1);
-    border: 1px solid rgba(167,139,250,0.25);
-    padding: 6px 14px;
-    border-radius: 20px;
-  }
+    /* ── SCREENS ── */
+    .screen {
+      display: none;
+    }
 
-  /* Driver status cards */
-  .status-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 16px;
-  }
-  .status-card {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 16px;
-    position: relative;
-    overflow: hidden;
-    transition: border-color .3s;
-  }
-  .status-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: var(--card-color, #fff);
-  }
-  .status-card.leading { border-color: var(--card-color); }
-  .s-driver {
-    font-family: var(--font-display);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: var(--card-color);
-    margin-bottom: 6px;
-  }
-  .s-pos {
-    font-family: var(--font-display);
-    font-size: 32px;
-    font-weight: 900;
-    line-height: 1;
-    margin-bottom: 8px;
-  }
-  .s-row {
-    display: flex;
-    justify-content: space-between;
-    font-size: 11px;
-    margin-bottom: 4px;
-  }
-  .s-label { color: var(--muted); }
-  .s-val { font-weight: 500; }
-  .tyre-dot {
-    display: inline-block;
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    margin-right: 4px;
-    vertical-align: middle;
-    border: 1px solid rgba(0,0,0,0.2);
-  }
-  .mom-bar {
-    height: 4px;
-    background: var(--border);
-    border-radius: 2px;
-    margin-top: 8px;
-    overflow: hidden;
-  }
-  .mom-fill {
-    height: 100%;
-    border-radius: 2px;
-    background: var(--card-color);
-    transition: width .4s;
-  }
-  .mom-lbl {
-    font-size: 9px;
-    color: var(--muted);
-    margin-top: 3px;
-    letter-spacing: 0.3px;
-  }
+    .screen.active {
+      display: block;
+    }
 
-  /* Timeline */
-  .timeline-section { margin-bottom: 14px; }
-  .tl-label {
-    font-size: 10px;
-    color: var(--muted);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-bottom: 5px;
-  }
-  .tl-bg {
-    height: 20px;
-    background: var(--bg2);
-    border-radius: 5px;
-    overflow: hidden;
-    border: 1px solid var(--border);
-    margin-bottom: 6px;
-  }
-  .tl-bar {
-    height: 100%;
-    display: flex;
-    width: 0%;
-    transition: width .2s;
-  }
-  .tl-seg {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-display);
-    font-size: 9px;
-    font-weight: 700;
-    overflow: hidden;
-    min-width: 0;
-  }
+    /* ── SECTION LABELS ── */
+    .section-label {
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
 
-  /* Pit events */
-  .pit-section { margin-bottom: 16px; }
-  .pit-row { display: flex; gap: 6px; flex-wrap: wrap; }
-  .pit-badge {
-    font-size: 10px;
-    padding: 4px 10px;
-    border-radius: 6px;
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    color: var(--muted);
-    font-family: var(--font-display);
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    transition: all .2s;
-  }
-  .pit-badge.fired {
-    border-color: rgba(167,139,250,0.4);
-    color: var(--accent);
-    background: rgba(167,139,250,0.08);
-  }
+    /* ── HERO ── */
+    .hero {
+      margin-bottom: 36px;
+    }
 
-  /* ── RESULT ── */
-  .result-section {
-    display: none;
-    margin-top: 16px;
-  }
-  .result-box {
-    background: var(--bg2);
-    border: 1px solid rgba(167,139,250,0.3);
-    border-radius: 12px;
-    padding: 20px;
-  }
-  .result-heading {
-    font-family: var(--font-display);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 14px;
-  }
-  .result-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 0;
-    border-bottom: 1px solid var(--border);
-  }
-  .result-row:last-of-type { border-bottom: none; }
-  .result-pos {
-    font-family: var(--font-display);
-    font-size: 28px;
-    font-weight: 900;
-    width: 36px;
-    flex-shrink: 0;
-  }
-  .result-driver { flex: 1; }
-  .result-name {
-    font-family: var(--font-display);
-    font-size: 16px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-  .result-team { font-size: 11px; color: var(--muted); }
-  .result-time {
-    font-family: var(--font-display);
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--accent);
-  }
-  .analysis {
-    margin-top: 14px;
-    padding-top: 14px;
-    border-top: 1px solid var(--border);
-    font-size: 13px;
-    color: var(--muted);
-    line-height: 1.7;
-  }
-  .btn-again {
-    margin-top: 16px;
-    font-family: var(--font-display);
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    padding: 12px 28px;
-    background: var(--accent2);
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background .15s;
-  }
-  .btn-again:hover { background: var(--accent); }
+    .hero-eyebrow {
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
 
-  /* Footer */
-  footer {
-    margin-top: 48px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border);
-    font-size: 11px;
-    color: var(--muted);
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  footer span { color: var(--accent); }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(42px, 8vw, 72px);
+      font-weight: 900;
+      line-height: 0.95;
+      text-transform: uppercase;
+      letter-spacing: -1px;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
 
-  @media (max-width: 540px) {
-    .driver-grid { grid-template-columns: 1fr; }
-    .status-grid { grid-template-columns: 1fr; }
-    .hero-title { font-size: 38px; }
-  }
+    .hero-title em {
+      color: var(--accent);
+      font-style: normal;
+    }
 
-  /* ── REMIN CHARACTER ── */
-  .remin-character {
-    display: flex;
-    align-items: flex-end;
-    gap: 12px;
-    margin-bottom: 16px;
-  }
-  .remin-avatar {
-    flex-shrink: 0;
-    transition: transform .3s ease;
-  }
-  .remin-avatar.celebrate { animation: remCelebrate 0.6s ease infinite alternate; }
-  .remin-avatar.sulk      { animation: remSulk 1.2s ease infinite alternate; }
-  .remin-avatar.idle      { animation: remIdle 3s ease infinite alternate; }
-  .remin-speech {
-    background: var(--bg3);
-    border: 1px solid var(--border2);
-    border-radius: 12px 12px 12px 2px;
-    padding: 10px 14px;
-    font-size: 13px;
-    color: var(--text);
-    line-height: 1.5;
-    max-width: 340px;
-    position: relative;
-    opacity: 0;
-    transform: translateY(6px);
-    transition: opacity .4s ease, transform .4s ease;
-  }
-  .remin-speech.visible { opacity: 1; transform: translateY(0); }
-  .remin-speech strong { color: var(--rem); }
+    .hero-sub {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 480px;
+    }
 
-  @keyframes remCelebrate {
-    0%   { transform: translateY(0) rotate(-3deg); }
-    100% { transform: translateY(-8px) rotate(3deg); }
-  }
-  @keyframes remSulk {
-    0%   { transform: translateY(0) rotate(0deg); }
-    100% { transform: translateY(3px) rotate(-2deg); }
-  }
-  @keyframes remIdle {
-    0%   { transform: translateY(0); }
-    100% { transform: translateY(-3px); }
-  }
+    /* ── DRIVER GRID ── */
+    .driver-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 32px;
+    }
 
-  /* ── CONFETTI ── */
-  #confetti-canvas {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    pointer-events: none;
-    z-index: 999;
-  }
+    .driver-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 16px;
+      cursor: pointer;
+      transition: border-color .2s, background .2s, transform .15s;
+      position: relative;
+      overflow: hidden;
+    }
 
-  /* ── DISAPPOINTMENT overlay ── */
-  #rain-canvas {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    pointer-events: none;
-    z-index: 999;
-    opacity: 0;
-    transition: opacity .5s;
-  }
+    .driver-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--driver-color, #fff);
+      opacity: 0;
+      transition: opacity .2s;
+    }
 
-  /* ── LAP TICK animation ── */
-  @keyframes lapPulse {
-    0%   { transform: scale(1); }
-    40%  { transform: scale(1.15); color: var(--accent); }
-    100% { transform: scale(1); }
-  }
-  .lap-pulse { animation: lapPulse .25s ease; }
+    .driver-card:hover {
+      background: var(--bg3);
+      border-color: var(--border2);
+      transform: translateY(-2px);
+    }
 
-  /* ── GAP change flash ── */
-  @keyframes gapGain { 0%{color:#34d399} 100%{color:var(--accent)} }
-  @keyframes gapLose { 0%{color:#f87171} 100%{color:var(--accent)} }
-  .gap-gain { animation: gapGain .5s ease forwards; }
-  .gap-lose { animation: gapLose .5s ease forwards; }
+    .driver-card:hover::before {
+      opacity: 1;
+    }
 
-  /* ── PIT stop flash ── */
-  @keyframes pitFlash {
-    0%   { background: rgba(167,139,250,0.3); }
-    100% { background: transparent; }
-  }
-  .pit-flash { animation: pitFlash .6s ease; }
+    .driver-card.selected {
+      border-color: var(--driver-color);
+      background: var(--bg3);
+    }
 
-  /* ── Result entrance ── */
-  @keyframes resultSlideIn {
-    0%   { opacity: 0; transform: translateY(20px); }
-    100% { opacity: 1; transform: translateY(0); }
-  }
-  .result-animate { animation: resultSlideIn .5s ease forwards; }
-  .result-row { opacity: 0; }
-  .result-row.visible { animation: resultSlideIn .4s ease forwards; }
-</style>
+    .driver-card.selected::before {
+      opacity: 1;
+    }
+
+    .driver-number {
+      font-family: var(--font-display);
+      font-size: 36px;
+      font-weight: 900;
+      color: var(--driver-color);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .driver-name {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .driver-team {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .driver-stats {
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+    }
+
+    .dstat {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      margin-bottom: 4px;
+    }
+
+    .dstat-label {
+      color: var(--muted);
+    }
+
+    .dstat-val {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* ── STRATEGY BUILDER ── */
+    .strategy-builder {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+
+    .stint-block {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px;
+      margin-bottom: 10px;
+    }
+
+    .stint-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .stint-num {
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .stint-remove {
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 18px;
+      line-height: 1;
+      padding: 0;
+      transition: color .15s;
+    }
+
+    .stint-remove:hover {
+      color: #f87171;
+    }
+
+    .compound-row {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .cpd-btn {
+      flex: 1;
+      padding: 8px 4px;
+      border-radius: 6px;
+      border: 1px solid var(--border2);
+      background: transparent;
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all .15s;
+    }
+
+    .cpd-btn:hover {
+      border-color: var(--border2);
+      color: var(--text);
+    }
+
+    .cpd-btn.active-soft {
+      background: var(--soft);
+      color: #fff;
+      border-color: var(--soft);
+    }
+
+    .cpd-btn.active-med {
+      background: var(--med);
+      color: #111;
+      border-color: var(--med);
+    }
+
+    .cpd-btn.active-hard {
+      background: #555;
+      color: #eee;
+      border-color: #666;
+    }
+
+    .lap-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .lap-row label {
+      font-size: 11px;
+      color: var(--muted);
+      width: 36px;
+      flex-shrink: 0;
+    }
+
+    .lap-row input[type=range] {
+      flex: 1;
+      -webkit-appearance: none;
+      height: 4px;
+      background: var(--border2);
+      border-radius: 2px;
+      outline: none;
+    }
+
+    .lap-row input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--accent);
+      cursor: pointer;
+    }
+
+    .lap-row .lap-val {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      min-width: 28px;
+      text-align: right;
+    }
+
+    .add-stint-btn {
+      background: transparent;
+      border: 1px dashed var(--border2);
+      border-radius: 8px;
+      color: var(--muted);
+      font-family: var(--font-body);
+      font-size: 13px;
+      padding: 10px;
+      width: 100%;
+      cursor: pointer;
+      transition: all .15s;
+      margin-top: 4px;
+    }
+
+    .add-stint-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* Strategy preview bar */
+    .preview-wrap {
+      margin-top: 16px;
+    }
+
+    .preview-label {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 6px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .preview-bar {
+      height: 20px;
+      border-radius: 6px;
+      overflow: hidden;
+      background: var(--bg);
+      display: flex;
+      border: 1px solid var(--border);
+    }
+
+    .preview-seg {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      transition: width .3s;
+      overflow: hidden;
+    }
+
+    .error-msg {
+      font-size: 12px;
+      color: #f87171;
+      margin-top: 8px;
+      min-height: 16px;
+    }
+
+    /* ── NAME INPUT ── */
+    .name-field-wrap {
+      margin-bottom: 28px;
+    }
+
+    .name-field {
+      background: var(--bg2);
+      border: 1px solid var(--border2);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 15px;
+      padding: 12px 16px;
+      width: 100%;
+      max-width: 360px;
+      outline: none;
+      transition: border-color .2s;
+    }
+
+    .name-field:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(167, 139, 250, 0.15);
+    }
+
+    .name-field::placeholder {
+      color: var(--muted);
+    }
+
+    /* ── START BUTTON ── */
+    .start-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-start {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 14px 32px;
+      background: var(--accent2);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background .15s, transform .1s;
+    }
+
+    .btn-start:hover {
+      background: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .btn-start:active {
+      transform: translateY(0);
+    }
+
+    .vs-text {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .vs-text strong {
+      color: var(--rem);
+    }
+
+    /* ── RACE SCREEN ── */
+    .race-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .race-lap-display {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    .lap-big {
+      font-family: var(--font-display);
+      font-size: 48px;
+      font-weight: 900;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .lap-total {
+      font-family: var(--font-display);
+      font-size: 20px;
+      color: var(--muted);
+    }
+
+    .race-controls {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .btn-ctrl {
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 8px 16px;
+      background: var(--bg2);
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all .15s;
+    }
+
+    .btn-ctrl:hover {
+      border-color: var(--border2);
+      color: var(--text);
+    }
+
+    .gap-pill {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: var(--accent);
+      background: rgba(167, 139, 250, 0.1);
+      border: 1px solid rgba(167, 139, 250, 0.25);
+      padding: 6px 14px;
+      border-radius: 20px;
+    }
+
+    /* Driver status cards */
+    .status-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .status-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color .3s;
+    }
+
+    .status-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--card-color, #fff);
+    }
+
+    .status-card.leading {
+      border-color: var(--card-color);
+    }
+
+    .s-driver {
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--card-color);
+      margin-bottom: 6px;
+    }
+
+    .s-pos {
+      font-family: var(--font-display);
+      font-size: 32px;
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .s-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      margin-bottom: 4px;
+    }
+
+    .s-label {
+      color: var(--muted);
+    }
+
+    .s-val {
+      font-weight: 500;
+    }
+
+    .tyre-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 4px;
+      vertical-align: middle;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+    }
+
+    .mom-bar {
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      margin-top: 8px;
+      overflow: hidden;
+    }
+
+    .mom-fill {
+      height: 100%;
+      border-radius: 2px;
+      background: var(--card-color);
+      transition: width .4s;
+    }
+
+    .mom-lbl {
+      font-size: 9px;
+      color: var(--muted);
+      margin-top: 3px;
+      letter-spacing: 0.3px;
+    }
+
+    /* Timeline */
+    .timeline-section {
+      margin-bottom: 14px;
+    }
+
+    .tl-label {
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    .tl-bg {
+      height: 20px;
+      background: var(--bg2);
+      border-radius: 5px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      margin-bottom: 6px;
+    }
+
+    .tl-bar {
+      height: 100%;
+      display: flex;
+      width: 0%;
+      transition: width .2s;
+    }
+
+    .tl-seg {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 9px;
+      font-weight: 700;
+      overflow: hidden;
+      min-width: 0;
+    }
+
+    /* Pit events */
+    .pit-section {
+      margin-bottom: 16px;
+    }
+
+    .pit-row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .pit-badge {
+      font-size: 10px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-family: var(--font-display);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: all .2s;
+    }
+
+    .pit-badge.fired {
+      border-color: rgba(167, 139, 250, 0.4);
+      color: var(--accent);
+      background: rgba(167, 139, 250, 0.08);
+    }
+
+    /* ── RESULT ── */
+    .result-section {
+      display: none;
+      margin-top: 16px;
+    }
+
+    .result-box {
+      background: var(--bg2);
+      border: 1px solid rgba(167, 139, 250, 0.3);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .result-heading {
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    .result-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .result-row:last-of-type {
+      border-bottom: none;
+    }
+
+    .result-pos {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 900;
+      width: 36px;
+      flex-shrink: 0;
+    }
+
+    .result-driver {
+      flex: 1;
+    }
+
+    .result-name {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .result-team {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .result-time {
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .analysis {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .btn-again {
+      margin-top: 16px;
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 12px 28px;
+      background: var(--accent2);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background .15s;
+    }
+
+    .btn-again:hover {
+      background: var(--accent);
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 48px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      font-size: 11px;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    footer span {
+      color: var(--accent);
+    }
+
+    @media (max-width: 540px) {
+      .driver-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .status-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-title {
+        font-size: 38px;
+      }
+    }
+
+    /* ── REMIN CHARACTER ── */
+    .remin-character {
+      display: flex;
+      align-items: flex-end;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .remin-avatar {
+      flex-shrink: 0;
+      transition: transform .3s ease;
+    }
+
+    .remin-avatar.celebrate {
+      animation: remCelebrate 0.6s ease infinite alternate;
+    }
+
+    .remin-avatar.sulk {
+      animation: remSulk 1.2s ease infinite alternate;
+    }
+
+    .remin-avatar.idle {
+      animation: remIdle 3s ease infinite alternate;
+    }
+
+    .remin-speech {
+      background: var(--bg3);
+      border: 1px solid var(--border2);
+      border-radius: 12px 12px 12px 2px;
+      padding: 10px 14px;
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.5;
+      max-width: 340px;
+      position: relative;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity .4s ease, transform .4s ease;
+    }
+
+    .remin-speech.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .remin-speech strong {
+      color: var(--rem);
+    }
+
+    @keyframes remCelebrate {
+      0% {
+        transform: translateY(0) rotate(-3deg);
+      }
+
+      100% {
+        transform: translateY(-8px) rotate(3deg);
+      }
+    }
+
+    @keyframes remSulk {
+      0% {
+        transform: translateY(0) rotate(0deg);
+      }
+
+      100% {
+        transform: translateY(3px) rotate(-2deg);
+      }
+    }
+
+    @keyframes remIdle {
+      0% {
+        transform: translateY(0);
+      }
+
+      100% {
+        transform: translateY(-3px);
+      }
+    }
+
+    /* ── CONFETTI ── */
+    #confetti-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    /* ── DISAPPOINTMENT overlay ── */
+    #rain-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0;
+      transition: opacity .5s;
+    }
+
+    /* ── LAP TICK animation ── */
+    @keyframes lapPulse {
+      0% {
+        transform: scale(1);
+      }
+
+      40% {
+        transform: scale(1.15);
+        color: var(--accent);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .lap-pulse {
+      animation: lapPulse .25s ease;
+    }
+
+    /* ── GAP change flash ── */
+    @keyframes gapGain {
+      0% {
+        color: #34d399
+      }
+
+      100% {
+        color: var(--accent)
+      }
+    }
+
+    @keyframes gapLose {
+      0% {
+        color: #f87171
+      }
+
+      100% {
+        color: var(--accent)
+      }
+    }
+
+    .gap-gain {
+      animation: gapGain .5s ease forwards;
+    }
+
+    .gap-lose {
+      animation: gapLose .5s ease forwards;
+    }
+
+    /* ── PIT stop flash ── */
+    @keyframes pitFlash {
+      0% {
+        background: rgba(167, 139, 250, 0.3);
+      }
+
+      100% {
+        background: transparent;
+      }
+    }
+
+    .pit-flash {
+      animation: pitFlash .6s ease;
+    }
+
+    /* ── Result entrance ── */
+    @keyframes resultSlideIn {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .result-animate {
+      animation: resultSlideIn .5s ease forwards;
+    }
+
+    .result-row {
+      opacity: 0;
+    }
+
+    .result-row.visible {
+      animation: resultSlideIn .4s ease forwards;
+    }
+  </style>
 </head>
+
 <body>
-<div class="app">
+  <div class="app">
 
-  <nav>
-    <div class="nav-logo">F1 <span>Strategy</span> Battle</div>
-    <div class="nav-badges">
-      <span class="badge badge-purple">2026 Regs</span>
-      <span class="badge badge-green">MOM Active</span>
-      <span class="badge badge-red">No DRS</span>
-    </div>
-  </nav>
+    <nav>
+      <div class="nav-logo">F1 <span>Strategy</span> Battle</div>
+      <div class="nav-badges">
+        <span class="badge badge-purple">2026 Regs</span>
+        <span class="badge badge-green">MOM Active</span>
+        <span class="badge badge-red">No DRS</span>
+      </div>
+    </nav>
 
-  <!-- SETUP SCREEN -->
-  <div class="screen active" id="screen-setup">
-    <div class="hero">
-      <div class="hero-eyebrow">Silverstone Grand Prix · 52 Laps</div>
-      <h1 class="hero-title">Beat <em>Remin</em><br>on strategy.</h1>
-      <p class="hero-sub">Pick your driver. Build your tyre strategy. Race against Remin's adaptive AI. No driving skill — pure strategy.</p>
-    </div>
+    <!-- SETUP SCREEN -->
+    <div class="screen active" id="screen-setup">
+      <div class="hero">
+        <div class="hero-eyebrow">Silverstone Grand Prix · 52 Laps</div>
+        <h1 class="hero-title">Beat <em>Remin</em><br>on strategy.</h1>
+        <p class="hero-sub">Pick your driver. Build your tyre strategy. Race against Remin's adaptive AI. No driving
+          skill — pure strategy.</p>
+      </div>
 
-    <div class="section-label">Choose your driver</div>
-    <div class="driver-grid" id="driver-grid">
-      <div class="driver-card" data-driver="VER" onclick="selectDriver('VER')" style="--driver-color:var(--ver)">
-        <div class="driver-number">1</div>
-        <div class="driver-name">Verstappen</div>
-        <div class="driver-team">Oracle Red Bull Racing</div>
-        <div class="driver-stats">
-          <div class="dstat"><span class="dstat-label">Tyre deg</span><span class="dstat-val">Low</span></div>
-          <div class="dstat"><span class="dstat-label">Raw pace</span><span class="dstat-val">S-tier</span></div>
-          <div class="dstat"><span class="dstat-label">MOM mode</span><span class="dstat-val">Low-drag</span></div>
+      <div class="section-label">Your name</div>
+      <div class="name-field-wrap">
+        <input type="text" class="name-field" id="user-name-input" placeholder="Enter your name…" maxlength="40"
+          autocomplete="off" spellcheck="false">
+      </div>
+
+      <div class="section-label">Choose your driver</div>
+      <div class="driver-grid" id="driver-grid">
+        <div class="driver-card" data-driver="VER" onclick="selectDriver('VER')" style="--driver-color:var(--ver)">
+          <div class="driver-number">1</div>
+          <div class="driver-name">Verstappen</div>
+          <div class="driver-team">Oracle Red Bull Racing</div>
+          <div class="driver-stats">
+            <div class="dstat"><span class="dstat-label">Tyre deg</span><span class="dstat-val">Low</span></div>
+            <div class="dstat"><span class="dstat-label">Raw pace</span><span class="dstat-val">S-tier</span></div>
+            <div class="dstat"><span class="dstat-label">MOM mode</span><span class="dstat-val">Low-drag</span></div>
+          </div>
+        </div>
+        <div class="driver-card" data-driver="LEC" onclick="selectDriver('LEC')" style="--driver-color:var(--lec)">
+          <div class="driver-number">16</div>
+          <div class="driver-name">Leclerc</div>
+          <div class="driver-team">Scuderia Ferrari</div>
+          <div class="driver-stats">
+            <div class="dstat"><span class="dstat-label">Tyre deg</span><span class="dstat-val">Medium</span></div>
+            <div class="dstat"><span class="dstat-label">Raw pace</span><span class="dstat-val">S-tier</span></div>
+            <div class="dstat"><span class="dstat-label">MOM mode</span><span class="dstat-val">Balanced</span></div>
+          </div>
+        </div>
+        <div class="driver-card" data-driver="RUS" onclick="selectDriver('RUS')" style="--driver-color:var(--rus)">
+          <div class="driver-number">63</div>
+          <div class="driver-name">Russell</div>
+          <div class="driver-team">Mercedes-AMG F1</div>
+          <div class="driver-stats">
+            <div class="dstat"><span class="dstat-label">Tyre deg</span><span class="dstat-val">Low</span></div>
+            <div class="dstat"><span class="dstat-label">Raw pace</span><span class="dstat-val">A-tier</span></div>
+            <div class="dstat"><span class="dstat-label">MOM mode</span><span class="dstat-val">Hi-drag</span></div>
+          </div>
         </div>
       </div>
-      <div class="driver-card" data-driver="LEC" onclick="selectDriver('LEC')" style="--driver-color:var(--lec)">
-        <div class="driver-number">16</div>
-        <div class="driver-name">Leclerc</div>
-        <div class="driver-team">Scuderia Ferrari</div>
-        <div class="driver-stats">
-          <div class="dstat"><span class="dstat-label">Tyre deg</span><span class="dstat-val">Medium</span></div>
-          <div class="dstat"><span class="dstat-label">Raw pace</span><span class="dstat-val">S-tier</span></div>
-          <div class="dstat"><span class="dstat-label">MOM mode</span><span class="dstat-val">Balanced</span></div>
-        </div>
+
+      <div class="section-label">Build your strategy <span
+          style="color:var(--muted);font-size:10px;text-transform:none;letter-spacing:0">(must total 52 laps)</span>
       </div>
-      <div class="driver-card" data-driver="RUS" onclick="selectDriver('RUS')" style="--driver-color:var(--rus)">
-        <div class="driver-number">63</div>
-        <div class="driver-name">Russell</div>
-        <div class="driver-team">Mercedes-AMG F1</div>
-        <div class="driver-stats">
-          <div class="dstat"><span class="dstat-label">Tyre deg</span><span class="dstat-val">Low</span></div>
-          <div class="dstat"><span class="dstat-label">Raw pace</span><span class="dstat-val">A-tier</span></div>
-          <div class="dstat"><span class="dstat-label">MOM mode</span><span class="dstat-val">Hi-drag</span></div>
+      <div class="strategy-builder">
+        <div id="stints-container"></div>
+        <button class="add-stint-btn" onclick="addStint()">+ Add stint</button>
+        <div class="preview-wrap">
+          <div class="preview-label">
+            <span>Strategy preview</span>
+            <span id="lap-coverage" style="color:var(--muted)">0 / 52 laps</span>
+          </div>
+          <div class="preview-bar" id="strat-preview"></div>
         </div>
+        <div class="error-msg" id="strat-error"></div>
+      </div>
+
+      <div class="start-row">
+        <button class="btn-start" onclick="startRace()">Lights Out</button>
+        <div class="vs-text">vs <strong>Remin</strong> — reads your strategy and adapts</div>
       </div>
     </div>
 
-    <div class="section-label">Build your strategy <span style="color:var(--muted);font-size:10px;text-transform:none;letter-spacing:0">(must total 52 laps)</span></div>
-    <div class="strategy-builder">
-      <div id="stints-container"></div>
-      <button class="add-stint-btn" onclick="addStint()">+ Add stint</button>
-      <div class="preview-wrap">
-        <div class="preview-label">
-          <span>Strategy preview</span>
-          <span id="lap-coverage" style="color:var(--muted)">0 / 52 laps</span>
+    <canvas id="confetti-canvas"></canvas>
+    <canvas id="rain-canvas"></canvas>
+
+    <!-- RACE SCREEN -->
+    <div class="screen" id="screen-race">
+
+      <!-- REMIN CHARACTER -->
+      <div class="remin-character" id="remin-char">
+        <svg class="remin-avatar idle" id="remin-avatar" width="72" height="88" viewBox="0 0 72 88" fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <rect x="18" y="46" width="36" height="32" rx="8" fill="#FF6B35" />
+          <rect x="28" y="44" width="16" height="8" rx="3" fill="#cc4a1a" />
+          <rect x="6" y="48" width="14" height="22" rx="6" fill="#FF6B35" />
+          <rect x="52" y="48" width="14" height="22" rx="6" fill="#FF6B35" />
+          <rect x="5" y="68" width="15" height="10" rx="5" fill="#222" />
+          <rect x="52" y="68" width="15" height="10" rx="5" fill="#222" />
+          <rect x="20" y="74" width="13" height="14" rx="5" fill="#cc4a1a" />
+          <rect x="39" y="74" width="13" height="14" rx="5" fill="#cc4a1a" />
+          <rect x="18" y="82" width="16" height="6" rx="3" fill="#111" />
+          <rect x="37" y="82" width="16" height="6" rx="3" fill="#111" />
+          <ellipse cx="36" cy="30" rx="18" ry="20" fill="#FF6B35" />
+          <path d="M20 28 Q36 18 52 28 Q52 38 36 40 Q20 38 20 28Z" fill="#111" opacity="0.85" />
+          <path d="M24 27 Q30 22 38 24" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" opacity="0.3" />
+          <rect x="34" y="12" width="4" height="16" rx="2" fill="#fff" opacity="0.3" />
+          <text x="36" y="64" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-weight="800"
+            font-size="11" fill="#fff" opacity="0.7">RF</text>
+        </svg>
+        <div class="remin-speech" id="remin-speech">
+          <strong>Remin</strong> is watching your strategy...
         </div>
-        <div class="preview-bar" id="strat-preview"></div>
       </div>
-      <div class="error-msg" id="strat-error"></div>
+
+      <div class="race-top">
+        <div>
+          <div class="hero-eyebrow" id="race-eyebrow">Race</div>
+          <div class="race-lap-display">
+            <span class="lap-big" id="lap-disp">0</span>
+            <span class="lap-total">/ 52</span>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:10px">
+          <div class="gap-pill" id="gap-disp">Gap: —</div>
+          <div class="race-controls">
+            <button class="btn-ctrl" id="btn-pause" onclick="togglePause()">Pause</button>
+            <button class="btn-ctrl" onclick="goSetup()">Restart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="status-grid">
+        <div class="status-card" id="card-user" style="--card-color:var(--rus)">
+          <div class="s-driver" id="s-user-label">YOU</div>
+          <div class="s-pos" id="s-user-pos">—</div>
+          <div class="s-row"><span class="s-label">Gap</span><span class="s-val" id="s-user-gap">—</span></div>
+          <div class="s-row"><span class="s-label">Tyre</span><span class="s-val" id="s-user-tyre">—</span></div>
+          <div class="s-row"><span class="s-label">Stint age</span><span class="s-val" id="s-user-age">—</span></div>
+          <div class="mom-bar">
+            <div class="mom-fill" id="mom-user" style="width:50%"></div>
+          </div>
+          <div class="mom-lbl" id="mom-user-lbl">MOM Aero</div>
+        </div>
+        <div class="status-card" id="card-rem" style="--card-color:var(--rem)">
+          <div class="s-driver">REMIN</div>
+          <div class="s-pos" id="s-rem-pos">—</div>
+          <div class="s-row"><span class="s-label">Gap</span><span class="s-val" id="s-rem-gap">—</span></div>
+          <div class="s-row"><span class="s-label">Tyre</span><span class="s-val" id="s-rem-tyre">—</span></div>
+          <div class="s-row"><span class="s-label">Stint age</span><span class="s-val" id="s-rem-age">—</span></div>
+          <div class="mom-bar">
+            <div class="mom-fill" id="mom-rem" style="width:45%;background:var(--rem)"></div>
+          </div>
+          <div class="mom-lbl" id="mom-rem-lbl">MOM · Adaptive</div>
+        </div>
+      </div>
+
+      <div class="timeline-section">
+        <div class="tl-label" id="tl-user-lbl">You</div>
+        <div class="tl-bg">
+          <div class="tl-bar" id="tl-user"></div>
+        </div>
+        <div class="tl-label">Remin</div>
+        <div class="tl-bg">
+          <div class="tl-bar" id="tl-rem"></div>
+        </div>
+      </div>
+
+      <div class="pit-section">
+        <div class="tl-label">Pit windows</div>
+        <div class="pit-row" id="pit-row"></div>
+      </div>
+
+      <div class="result-section" id="result-section">
+        <div class="result-box">
+          <div class="result-heading">Race Result — Silverstone GP 2026</div>
+          <div id="result-body"></div>
+          <div class="analysis" id="result-analysis"></div>
+        </div>
+        <button class="btn-again" onclick="goSetup()">Race Again</button>
+      </div>
     </div>
 
-    <div class="start-row">
-      <button class="btn-start" onclick="startRace()">Lights Out</button>
-      <div class="vs-text">vs <strong>Remin</strong> — reads your strategy and adapts</div>
-    </div>
+    <footer>
+      <span>F1 Strategy Battle</span>
+      <span>Built by <span>Remin Franklin</span> · Silverstone 2026 · 2026 Regulations</span>
+    </footer>
+
   </div>
 
-  <canvas id="confetti-canvas"></canvas>
-  <canvas id="rain-canvas"></canvas>
+  <script>
+    /* ── SUPABASE CONFIG ──────────────────────────────────────────
+       Free analytics DB — https://supabase.com (free tier, no card)
+       Setup steps:
+       1. Create a project at supabase.com
+       2. Go to SQL Editor and run:
+            create table forecasts (
+              id bigint primary key generated always as identity,
+              name text, driver text,
+              user_strategy text, remin_strategy text,
+              result text, gap_seconds numeric,
+              created_at timestamptz default now()
+            );
+            alter table forecasts enable row level security;
+            create policy "anon_insert" on forecasts
+              for insert to anon with check (true);
+       3. Replace the two values below (Project Settings → API).
+    ─────────────────────────────────────────────────────────── */
+    const SUPABASE_URL = 'https://uqlajejcigqffjfdpgeu.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVxbGFqZWpjaWdxZmZqZmRwZ2V1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQzMTQzMzUsImV4cCI6MjA4OTg5MDMzNX0.xEUwVjIaIPQporC1UueP9ZsSYrfsXnC2egoDl2PLsDk';
 
-  <!-- RACE SCREEN -->
-  <div class="screen" id="screen-race">
+    const LAPS = 52;
+    const PIT_LOSS = 23.1;
+    const BASE_LAP = 88.2;
 
-    <!-- REMIN CHARACTER -->
-    <div class="remin-character" id="remin-char">
-      <svg class="remin-avatar idle" id="remin-avatar" width="72" height="88" viewBox="0 0 72 88" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="18" y="46" width="36" height="32" rx="8" fill="#FF6B35"/>
-        <rect x="28" y="44" width="16" height="8" rx="3" fill="#cc4a1a"/>
-        <rect x="6" y="48" width="14" height="22" rx="6" fill="#FF6B35"/>
-        <rect x="52" y="48" width="14" height="22" rx="6" fill="#FF6B35"/>
-        <rect x="5" y="68" width="15" height="10" rx="5" fill="#222"/>
-        <rect x="52" y="68" width="15" height="10" rx="5" fill="#222"/>
-        <rect x="20" y="74" width="13" height="14" rx="5" fill="#cc4a1a"/>
-        <rect x="39" y="74" width="13" height="14" rx="5" fill="#cc4a1a"/>
-        <rect x="18" y="82" width="16" height="6" rx="3" fill="#111"/>
-        <rect x="37" y="82" width="16" height="6" rx="3" fill="#111"/>
-        <ellipse cx="36" cy="30" rx="18" ry="20" fill="#FF6B35"/>
-        <path d="M20 28 Q36 18 52 28 Q52 38 36 40 Q20 38 20 28Z" fill="#111" opacity="0.85"/>
-        <path d="M24 27 Q30 22 38 24" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" opacity="0.3"/>
-        <rect x="34" y="12" width="4" height="16" rx="2" fill="#fff" opacity="0.3"/>
-        <text x="36" y="64" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-weight="800" font-size="11" fill="#fff" opacity="0.7">RF</text>
-      </svg>
-      <div class="remin-speech" id="remin-speech">
-        <strong>Remin</strong> is watching your strategy...
-      </div>
-    </div>
+    const DRIVERS = {
+      VER: { name: 'Verstappen', team: 'Red Bull', colorVar: '--ver', deg: 0.055, pace: 0.0, mom: 'low-drag' },
+      LEC: { name: 'Leclerc', team: 'Ferrari', colorVar: '--lec', deg: 0.070, pace: 0.08, mom: 'balanced' },
+      RUS: { name: 'Russell', team: 'Mercedes', colorVar: '--rus', deg: 0.060, pace: 0.22, mom: 'hi-drag' }
+    };
+    const REMIN_STATS = { name: 'Remin', deg: 0.065, pace: 0.14, mom: 'adaptive' };
 
-    <div class="race-top">
-      <div>
-        <div class="hero-eyebrow" id="race-eyebrow">Race</div>
-        <div class="race-lap-display">
-          <span class="lap-big" id="lap-disp">0</span>
-          <span class="lap-total">/ 52</span>
-        </div>
-      </div>
-      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:10px">
-        <div class="gap-pill" id="gap-disp">Gap: —</div>
-        <div class="race-controls">
-          <button class="btn-ctrl" id="btn-pause" onclick="togglePause()">Pause</button>
-          <button class="btn-ctrl" onclick="goSetup()">Restart</button>
-        </div>
-      </div>
-    </div>
+    const COMPOUND = {
+      soft: { name: 'Soft', color: '#E8002D', text: '#fff', off: -1.3, degMul: 1.4 },
+      med: { name: 'Med', color: '#FFD700', text: '#111', off: -0.6, degMul: 1.0 },
+      hard: { name: 'Hard', color: '#888888', text: '#eee', off: 0.1, degMul: 0.7 }
+    };
 
-    <div class="status-grid">
-      <div class="status-card" id="card-user" style="--card-color:var(--rus)">
-        <div class="s-driver" id="s-user-label">YOU</div>
-        <div class="s-pos" id="s-user-pos">—</div>
-        <div class="s-row"><span class="s-label">Gap</span><span class="s-val" id="s-user-gap">—</span></div>
-        <div class="s-row"><span class="s-label">Tyre</span><span class="s-val" id="s-user-tyre">—</span></div>
-        <div class="s-row"><span class="s-label">Stint age</span><span class="s-val" id="s-user-age">—</span></div>
-        <div class="mom-bar"><div class="mom-fill" id="mom-user" style="width:50%"></div></div>
-        <div class="mom-lbl" id="mom-user-lbl">MOM Aero</div>
-      </div>
-      <div class="status-card" id="card-rem" style="--card-color:var(--rem)">
-        <div class="s-driver">REMIN</div>
-        <div class="s-pos" id="s-rem-pos">—</div>
-        <div class="s-row"><span class="s-label">Gap</span><span class="s-val" id="s-rem-gap">—</span></div>
-        <div class="s-row"><span class="s-label">Tyre</span><span class="s-val" id="s-rem-tyre">—</span></div>
-        <div class="s-row"><span class="s-label">Stint age</span><span class="s-val" id="s-rem-age">—</span></div>
-        <div class="mom-bar"><div class="mom-fill" id="mom-rem" style="width:45%;background:var(--rem)"></div></div>
-        <div class="mom-lbl" id="mom-rem-lbl">MOM · Adaptive</div>
-      </div>
-    </div>
+    let userDriver = null;
+    let userName = '';
+    let userStints = [];
+    let remStints = [];
+    let simState = {};
+    let simInterval = null;
+    let paused = false;
 
-    <div class="timeline-section">
-      <div class="tl-label" id="tl-user-lbl">You</div>
-      <div class="tl-bg"><div class="tl-bar" id="tl-user"></div></div>
-      <div class="tl-label">Remin</div>
-      <div class="tl-bg"><div class="tl-bar" id="tl-rem"></div></div>
-    </div>
+    function getColor(driver) {
+      return getComputedStyle(document.documentElement).getPropertyValue('--' + driver.toLowerCase()).trim() || '#fff';
+    }
 
-    <div class="pit-section">
-      <div class="tl-label">Pit windows</div>
-      <div class="pit-row" id="pit-row"></div>
-    </div>
+    function selectDriver(d) {
+      userDriver = d;
+      document.querySelectorAll('.driver-card').forEach(c => c.classList.remove('selected'));
+      document.querySelector(`[data-driver="${d}"]`).classList.add('selected');
+    }
 
-    <div class="result-section" id="result-section">
-      <div class="result-box">
-        <div class="result-heading">Race Result — Silverstone GP 2026</div>
-        <div id="result-body"></div>
-        <div class="analysis" id="result-analysis"></div>
-      </div>
-      <button class="btn-again" onclick="goSetup()">Race Again</button>
-    </div>
-  </div>
+    function addStint(compound = 'soft', laps = 17) {
+      userStints.push({ id: Date.now() + Math.random(), compound, laps });
+      renderStints();
+    }
 
-  <footer>
-    <span>F1 Strategy Battle</span>
-    <span>Built by <span>Remin Franklin</span> · Silverstone 2026 · 2026 Regulations</span>
-  </footer>
+    function removeStint(id) {
+      if (userStints.length <= 1) return;
+      userStints = userStints.filter(s => s.id !== id);
+      renderStints();
+    }
 
-</div>
+    function setCompound(id, c) {
+      const s = userStints.find(x => x.id === id);
+      if (s) { s.compound = c; renderStints(); }
+    }
 
-<script>
-const LAPS = 52;
-const PIT_LOSS = 23.1;
-const BASE_LAP = 88.2;
+    function setLaps(id, v) {
+      const s = userStints.find(x => x.id === id);
+      if (s) { s.laps = parseInt(v); renderStints(); }
+    }
 
-const DRIVERS = {
-  VER: { name:'Verstappen', team:'Red Bull', colorVar:'--ver', deg:0.055, pace:0.0,  mom:'low-drag' },
-  LEC: { name:'Leclerc',    team:'Ferrari',  colorVar:'--lec', deg:0.070, pace:0.08, mom:'balanced' },
-  RUS: { name:'Russell',    team:'Mercedes', colorVar:'--rus', deg:0.060, pace:0.22, mom:'hi-drag'  }
-};
-const REMIN_STATS = { name:'Remin', deg:0.065, pace:0.14, mom:'adaptive' };
-
-const COMPOUND = {
-  soft: { name:'Soft', color:'#E8002D', text:'#fff',  off:-1.3, degMul:1.4 },
-  med:  { name:'Med',  color:'#FFD700', text:'#111',  off:-0.6, degMul:1.0 },
-  hard: { name:'Hard', color:'#888888', text:'#eee',  off:0.1,  degMul:0.7 }
-};
-
-let userDriver = null;
-let userStints = [];
-let remStints  = [];
-let simState   = {};
-let simInterval = null;
-let paused = false;
-
-function getColor(driver) {
-  return getComputedStyle(document.documentElement).getPropertyValue('--' + driver.toLowerCase()).trim() || '#fff';
-}
-
-function selectDriver(d) {
-  userDriver = d;
-  document.querySelectorAll('.driver-card').forEach(c => c.classList.remove('selected'));
-  document.querySelector(`[data-driver="${d}"]`).classList.add('selected');
-}
-
-function addStint(compound='soft', laps=17) {
-  userStints.push({ id: Date.now() + Math.random(), compound, laps });
-  renderStints();
-}
-
-function removeStint(id) {
-  if(userStints.length <= 1) return;
-  userStints = userStints.filter(s => s.id !== id);
-  renderStints();
-}
-
-function setCompound(id, c) {
-  const s = userStints.find(x => x.id === id);
-  if(s) { s.compound = c; renderStints(); }
-}
-
-function setLaps(id, v) {
-  const s = userStints.find(x => x.id === id);
-  if(s) { s.laps = parseInt(v); renderStints(); }
-}
-
-function renderStints() {
-  const cont = document.getElementById('stints-container');
-  cont.innerHTML = '';
-  userStints.forEach((s, i) => {
-    const div = document.createElement('div');
-    div.className = 'stint-block';
-    div.innerHTML = `
+    function renderStints() {
+      const cont = document.getElementById('stints-container');
+      cont.innerHTML = '';
+      userStints.forEach((s, i) => {
+        const div = document.createElement('div');
+        div.className = 'stint-block';
+        div.innerHTML = `
       <div class="stint-header">
-        <span class="stint-num">Stint ${i+1}</span>
+        <span class="stint-num">Stint ${i + 1}</span>
         ${userStints.length > 1 ? `<button class="stint-remove" onclick="removeStint(${s.id})" title="Remove">&#x2715;</button>` : ''}
       </div>
       <div class="compound-row">
-        ${['soft','med','hard'].map(c => `<button class="cpd-btn${s.compound===c?' active-'+c:''}" onclick="setCompound(${s.id},'${c}')">${c.charAt(0).toUpperCase()+c.slice(1)}</button>`).join('')}
+        ${['soft', 'med', 'hard'].map(c => `<button class="cpd-btn${s.compound === c ? ' active-' + c : ''}" onclick="setCompound(${s.id},'${c}')">${c.charAt(0).toUpperCase() + c.slice(1)}</button>`).join('')}
       </div>
       <div class="lap-row">
         <label>Laps</label>
@@ -993,408 +1384,413 @@ function renderStints() {
           oninput="setLaps(${s.id},this.value);document.getElementById('lv${s.id}').textContent=this.value">
         <span class="lap-val" id="lv${s.id}">${s.laps}</span>
       </div>`;
-    cont.appendChild(div);
-  });
-  updatePreview();
-}
-
-function updatePreview() {
-  const total = userStints.reduce((a,s)=>a+s.laps,0);
-  const prev = document.getElementById('strat-preview');
-  prev.innerHTML = '';
-  userStints.forEach(s => {
-    const c = COMPOUND[s.compound];
-    const seg = document.createElement('div');
-    seg.className = 'preview-seg';
-    seg.style.cssText = `width:${(s.laps/Math.max(total,1)*100).toFixed(1)}%;background:${c.color};color:${c.text}`;
-    seg.textContent = total > 0 && s.laps > 4 ? c.name[0] : '';
-    prev.appendChild(seg);
-  });
-  document.getElementById('lap-coverage').textContent = `${total} / ${LAPS} laps`;
-  const err = document.getElementById('strat-error');
-  err.textContent = total !== LAPS && total > 0 ? `Strategy must cover exactly ${LAPS} laps (currently ${total})` : '';
-}
-
-function buildRemStrategy(userStints) {
-  const first = userStints[0];
-  if(!first) return [{compound:'soft',laps:16},{compound:'med',laps:18},{compound:'hard',laps:18}];
-  if(first.compound === 'soft' && first.laps <= 14)
-    return [{compound:'med',laps:22},{compound:'hard',laps:30}];
-  if(first.compound === 'soft' && first.laps >= 20)
-    return [{compound:'soft',laps:13},{compound:'med',laps:18},{compound:'hard',laps:21}];
-  if(first.compound === 'med')
-    return [{compound:'soft',laps:15},{compound:'hard',laps:37}];
-  return [{compound:'soft',laps:17},{compound:'med',laps:19},{compound:'hard',laps:16}];
-}
-
-function getPitLaps(stints) {
-  const pits = []; let cum = 0;
-  stints.slice(0,-1).forEach(s => { cum += s.laps; pits.push(cum); });
-  return pits;
-}
-
-function getStintAt(stints, lap) {
-  let cum = 0;
-  for(const s of stints) {
-    if(lap <= cum + s.laps) return { ...s, age: lap - cum };
-    cum += s.laps;
-  }
-  const last = stints[stints.length-1];
-  return { ...last, age: last.laps };
-}
-
-function calcTime(stints, drv, isRemin, lap) {
-  const stats = isRemin ? REMIN_STATS : DRIVERS[drv];
-  const pitLaps = getPitLaps(stints);
-  let total = 0, cum = 0;
-  for(const s of stints) {
-    const c = COMPOUND[s.compound];
-    const stintLaps = Math.min(s.laps, Math.max(0, lap - cum));
-    for(let l = 1; l <= stintLaps; l++) {
-      total += BASE_LAP + c.off + (stats.deg * c.degMul * (l-1)) + stats.pace;
+        cont.appendChild(div);
+      });
+      updatePreview();
     }
-    cum += s.laps;
-    if(cum < lap && pitLaps.includes(cum)) total += PIT_LOSS;
-    if(cum >= lap) break;
-  }
-  return total;
-}
 
-/* ── CONFETTI ENGINE ── */
-const confettiCanvas = document.getElementById('confetti-canvas');
-const confettiCtx = confettiCanvas.getContext('2d');
-let confettiParticles = [];
-let confettiRaf = null;
-
-function resizeCanvas() {
-  confettiCanvas.width = window.innerWidth;
-  confettiCanvas.height = window.innerHeight;
-  document.getElementById('rain-canvas').width = window.innerWidth;
-  document.getElementById('rain-canvas').height = window.innerHeight;
-}
-window.addEventListener('resize', resizeCanvas);
-resizeCanvas();
-
-function launchConfetti() {
-  confettiParticles = [];
-  const colors = ['#FF6B35','#a78bfa','#FFD700','#34d399','#f87171','#60a5fa','#fff'];
-  for(let i = 0; i < 140; i++) {
-    confettiParticles.push({
-      x: Math.random() * window.innerWidth,
-      y: -10 - Math.random() * 200,
-      w: 6 + Math.random() * 8,
-      h: 4 + Math.random() * 5,
-      color: colors[Math.floor(Math.random()*colors.length)],
-      vx: (Math.random()-0.5)*4,
-      vy: 2 + Math.random()*4,
-      angle: Math.random()*360,
-      spin: (Math.random()-0.5)*8,
-      alpha: 1
-    });
-  }
-  if(confettiRaf) cancelAnimationFrame(confettiRaf);
-  animateConfetti();
-  setTimeout(stopConfetti, 4000);
-}
-
-function animateConfetti() {
-  confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
-  confettiParticles.forEach(p => {
-    p.x += p.vx; p.y += p.vy; p.angle += p.spin; p.vy += 0.07;
-    if(p.y > window.innerHeight * 0.8) p.alpha -= 0.03;
-    confettiCtx.save();
-    confettiCtx.globalAlpha = Math.max(0, p.alpha);
-    confettiCtx.translate(p.x, p.y);
-    confettiCtx.rotate(p.angle * Math.PI/180);
-    confettiCtx.fillStyle = p.color;
-    confettiCtx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
-    confettiCtx.restore();
-  });
-  confettiParticles = confettiParticles.filter(p => p.alpha > 0);
-  if(confettiParticles.length > 0) confettiRaf = requestAnimationFrame(animateConfetti);
-  else confettiCtx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);
-}
-
-function stopConfetti() {
-  confettiParticles.forEach(p => p.vy += 0.5);
-}
-
-/* ── RAIN ENGINE (disappointment) ── */
-const rainCanvas = document.getElementById('rain-canvas');
-const rainCtx = rainCanvas.getContext('2d');
-let rainDrops = [];
-let rainRaf = null;
-let rainActive = false;
-
-function launchRain() {
-  rainActive = true;
-  rainDrops = [];
-  rainCanvas.style.opacity = '1';
-  for(let i = 0; i < 80; i++) {
-    rainDrops.push({
-      x: Math.random() * window.innerWidth,
-      y: Math.random() * window.innerHeight,
-      len: 12 + Math.random()*18,
-      speed: 6 + Math.random()*6,
-      alpha: 0.1 + Math.random()*0.25
-    });
-  }
-  animateRain();
-  setTimeout(stopRain, 3500);
-}
-
-function animateRain() {
-  rainCtx.clearRect(0,0,rainCanvas.width,rainCanvas.height);
-  rainDrops.forEach(d => {
-    rainCtx.beginPath();
-    rainCtx.moveTo(d.x, d.y);
-    rainCtx.lineTo(d.x - 1, d.y + d.len);
-    rainCtx.strokeStyle = `rgba(100,160,255,${d.alpha})`;
-    rainCtx.lineWidth = 1;
-    rainCtx.stroke();
-    d.y += d.speed;
-    if(d.y > rainCanvas.height) { d.y = -20; d.x = Math.random()*rainCanvas.width; }
-  });
-  if(rainActive) rainRaf = requestAnimationFrame(animateRain);
-}
-
-function stopRain() {
-  rainActive = false;
-  cancelAnimationFrame(rainRaf);
-  rainCanvas.style.transition = 'opacity 1.5s';
-  rainCanvas.style.opacity = '0';
-  setTimeout(()=>{ rainCtx.clearRect(0,0,rainCanvas.width,rainCanvas.height); }, 1600);
-}
-
-/* ── REMIN SPEECH ── */
-const REMIN_LINES = {
-  idle: [
-    "Watching your strategy... carefully.",
-    "I've already adapted. Have you?",
-    "Silverstone doesn't forgive bad tyre calls.",
-    "The data is in. My counter is set.",
-  ],
-  leading: [
-    "You won't hold this lead. My tyres are fresh.",
-    "Enjoy P1. It's temporary.",
-    "Gap's closing. Tick tock.",
-    "My strategy kicks in after your next pit.",
-  ],
-  trailing: [
-    "Good gap. Don't waste it.",
-    "You earned that lead. Now defend it.",
-    "Impressive. But I'm not done adapting.",
-    "Alright. You got me on that stint.",
-  ],
-  win: [
-    "GG. That strategy was clean. You beat me fair.",
-    "Respect. You read the tyre window perfectly.",
-    "I adapted and still lost. Well played.",
-    "You out-strategised me. Silverstone is yours.",
-  ],
-  lose: [
-    "That's on you. I told you the tyres wouldn't last.",
-    "Adapt or get lapped. Basic F1.",
-    "My counter was perfect. Your timing wasn't.",
-    "Better luck next race. Study the stint lengths.",
-  ]
-};
-
-let lastRemLeading = null;
-let speechTimeout = null;
-
-function setReminSpeech(category) {
-  const lines = REMIN_LINES[category];
-  const line = lines[Math.floor(Math.random()*lines.length)];
-  const el = document.getElementById('remin-speech');
-  el.classList.remove('visible');
-  clearTimeout(speechTimeout);
-  speechTimeout = setTimeout(() => {
-    el.innerHTML = `<strong>Remin:</strong> ${line}`;
-    el.classList.add('visible');
-  }, 150);
-}
-
-function setReminMood(mood) {
-  const av = document.getElementById('remin-avatar');
-  av.classList.remove('idle','celebrate','sulk');
-  av.classList.add(mood);
-}
-
-/* ── MAIN GAME LOGIC ── */
-function startRace() {
-  if(!userDriver) { document.getElementById('strat-error').textContent = 'Pick a driver first.'; return; }
-  const total = userStints.reduce((a,s)=>a+s.laps,0);
-  if(total !== LAPS) { document.getElementById('strat-error').textContent = `Strategy must cover exactly ${LAPS} laps.`; return; }
-
-  remStints = buildRemStrategy(userStints);
-  const drv = DRIVERS[userDriver];
-  const drvColor = getComputedStyle(document.documentElement).getPropertyValue(drv.colorVar).trim();
-
-  simState = {
-    lap: 0,
-    driverKey: userDriver,
-    userStints: JSON.parse(JSON.stringify(userStints)),
-    remStints: JSON.parse(JSON.stringify(remStints)),
-    userPitLaps: getPitLaps(userStints),
-    remPitLaps: getPitLaps(remStints),
-    lastGap: 0
-  };
-
-  document.getElementById('card-user').style.setProperty('--card-color', drvColor);
-  document.getElementById('mom-user').style.background = drvColor;
-  document.getElementById('s-user-label').textContent = `YOU · ${drv.name.toUpperCase()}`;
-  document.getElementById('s-user-label').style.color = drvColor;
-  document.getElementById('tl-user-lbl').textContent = `You — ${drv.name}`;
-  document.getElementById('race-eyebrow').textContent = `${drv.name} vs Remin · Silverstone 2026`;
-
-  const pitRow = document.getElementById('pit-row');
-  pitRow.innerHTML = '';
-  simState.userPitLaps.forEach((l,i) => {
-    const b = document.createElement('div');
-    b.className = 'pit-badge'; b.id = `pu${l}`;
-    b.textContent = `${drv.name.split(' ').pop()} Pit ${i+1} — L${l}`;
-    pitRow.appendChild(b);
-  });
-  simState.remPitLaps.forEach((l,i) => {
-    const b = document.createElement('div');
-    b.className = 'pit-badge'; b.id = `pr${l}`;
-    b.textContent = `Remin Pit ${i+1} — L${l}`;
-    pitRow.appendChild(b);
-  });
-
-  document.getElementById('result-section').style.display = 'none';
-  lastRemLeading = null;
-  setReminMood('idle');
-  setReminSpeech('idle');
-  showScreen('screen-race');
-  paused = false;
-  document.getElementById('btn-pause').textContent = 'Pause';
-  simInterval = setInterval(tick, 200);
-}
-
-function tick() {
-  simState.lap++;
-  const lap = simState.lap;
-  if(lap > LAPS) { clearInterval(simInterval); showResult(); return; }
-
-  const lapEl = document.getElementById('lap-disp');
-  lapEl.classList.remove('lap-pulse');
-  void lapEl.offsetWidth;
-  lapEl.classList.add('lap-pulse');
-  lapEl.textContent = lap;
-
-  const uTime = calcTime(simState.userStints, simState.driverKey, false, lap);
-  const rTime = calcTime(simState.remStints, null, true, lap);
-  const gap = uTime - rTime;
-  const userLeads = gap < 0;
-  const absGap = Math.abs(gap);
-
-  const gapEl = document.getElementById('gap-disp');
-  const prevGap = simState.lastGap || 0;
-  const userGainingGround = userLeads && gap < prevGap;
-  const userLosingGround  = !userLeads && gap > prevGap;
-  gapEl.textContent = `Gap: ${absGap.toFixed(3)}s`;
-  gapEl.classList.remove('gap-gain','gap-lose');
-  void gapEl.offsetWidth;
-  if(userGainingGround) gapEl.classList.add('gap-gain');
-  else if(userLosingGround) gapEl.classList.add('gap-lose');
-  simState.lastGap = gap;
-
-  document.getElementById('s-user-pos').textContent = userLeads ? 'P1' : 'P2';
-  document.getElementById('s-rem-pos').textContent  = userLeads ? 'P2' : 'P1';
-  document.getElementById('s-user-gap').textContent = userLeads ? 'LEADER' : `+${gap.toFixed(3)}s`;
-  document.getElementById('s-rem-gap').textContent  = userLeads ? `+${absGap.toFixed(3)}s` : 'LEADER';
-  document.getElementById('card-user').classList.toggle('leading', userLeads);
-  document.getElementById('card-rem').classList.toggle('leading', !userLeads);
-
-  const us = getStintAt(simState.userStints, lap);
-  const rs = getStintAt(simState.remStints,  lap);
-  const uc = COMPOUND[us.compound];
-  const rc = COMPOUND[rs.compound];
-
-  document.getElementById('s-user-tyre').innerHTML = `<span class="tyre-dot" style="background:${uc.color}"></span>${uc.name}`;
-  document.getElementById('s-user-age').textContent  = `Lap ${us.age}`;
-  document.getElementById('s-rem-tyre').innerHTML  = `<span class="tyre-dot" style="background:${rc.color}"></span>${rc.name}`;
-  document.getElementById('s-rem-age').textContent   = `Lap ${rs.age}`;
-
-  const drv = DRIVERS[simState.driverKey];
-  const uMom = drv.mom === 'hi-drag' ? 72 : drv.mom === 'low-drag' ? 44 : 58;
-  const rMom = Math.min(40 + Math.round(lap/LAPS*35), 75);
-  document.getElementById('mom-user').style.width = uMom + '%';
-  document.getElementById('mom-rem').style.width  = rMom + '%';
-  document.getElementById('mom-user-lbl').textContent = `MOM Aero · ${drv.mom} · ${uMom}% deploy`;
-  document.getElementById('mom-rem-lbl').textContent  = `MOM · Adaptive · ${rMom}% deploy`;
-
-  renderTimeline('tl-user', simState.userStints, lap);
-  renderTimeline('tl-rem',  simState.remStints,  lap);
-
-  simState.userPitLaps.forEach(l => {
-    if(lap === l) {
-      const el = document.getElementById(`pu${l}`);
-      if(el) { el.classList.add('fired'); el.classList.add('pit-flash'); }
+    function updatePreview() {
+      const total = userStints.reduce((a, s) => a + s.laps, 0);
+      const prev = document.getElementById('strat-preview');
+      prev.innerHTML = '';
+      userStints.forEach(s => {
+        const c = COMPOUND[s.compound];
+        const seg = document.createElement('div');
+        seg.className = 'preview-seg';
+        seg.style.cssText = `width:${(s.laps / Math.max(total, 1) * 100).toFixed(1)}%;background:${c.color};color:${c.text}`;
+        seg.textContent = total > 0 && s.laps > 4 ? c.name[0] : '';
+        prev.appendChild(seg);
+      });
+      document.getElementById('lap-coverage').textContent = `${total} / ${LAPS} laps`;
+      const err = document.getElementById('strat-error');
+      err.textContent = total !== LAPS && total > 0 ? `Strategy must cover exactly ${LAPS} laps (currently ${total})` : '';
     }
-  });
-  simState.remPitLaps.forEach(l => {
-    if(lap === l) {
-      const el = document.getElementById(`pr${l}`);
-      if(el) { el.classList.add('fired'); el.classList.add('pit-flash'); }
+
+    function buildRemStrategy(userStints) {
+      const first = userStints[0];
+      if (!first) return [{ compound: 'soft', laps: 16 }, { compound: 'med', laps: 18 }, { compound: 'hard', laps: 18 }];
+      if (first.compound === 'soft' && first.laps <= 14)
+        return [{ compound: 'med', laps: 22 }, { compound: 'hard', laps: 30 }];
+      if (first.compound === 'soft' && first.laps >= 20)
+        return [{ compound: 'soft', laps: 13 }, { compound: 'med', laps: 18 }, { compound: 'hard', laps: 21 }];
+      if (first.compound === 'med')
+        return [{ compound: 'soft', laps: 15 }, { compound: 'hard', laps: 37 }];
+      return [{ compound: 'soft', laps: 17 }, { compound: 'med', laps: 19 }, { compound: 'hard', laps: 16 }];
     }
-  });
 
-  const remLeading = !userLeads;
-  if(remLeading !== lastRemLeading) {
-    lastRemLeading = remLeading;
-    setReminMood(remLeading ? 'celebrate' : 'sulk');
-    setReminSpeech(remLeading ? 'leading' : 'trailing');
-  }
-  if(lap === Math.floor(LAPS * 0.3) || lap === Math.floor(LAPS * 0.65)) {
-    setReminSpeech(remLeading ? 'leading' : 'trailing');
-  }
-}
+    function getPitLaps(stints) {
+      const pits = []; let cum = 0;
+      stints.slice(0, -1).forEach(s => { cum += s.laps; pits.push(cum); });
+      return pits;
+    }
 
-function renderTimeline(id, stints, lap) {
-  const bar = document.getElementById(id);
-  bar.style.width = (lap/LAPS*100).toFixed(1) + '%';
-  bar.innerHTML = '';
-  let cum = 0;
-  stints.forEach(s => {
-    const visible = Math.min(s.laps, Math.max(0, lap - cum));
-    if(visible <= 0) { cum += s.laps; return; }
-    const c = COMPOUND[s.compound];
-    const seg = document.createElement('div');
-    seg.className = 'tl-seg';
-    seg.style.cssText = `width:${(visible/lap*100).toFixed(1)}%;background:${c.color};color:${c.text}`;
-    seg.textContent = visible > 6 ? c.name[0] : '';
-    bar.appendChild(seg);
-    cum += s.laps;
-  });
-}
+    function getStintAt(stints, lap) {
+      let cum = 0;
+      for (const s of stints) {
+        if (lap <= cum + s.laps) return { ...s, age: lap - cum };
+        cum += s.laps;
+      }
+      const last = stints[stints.length - 1];
+      return { ...last, age: last.laps };
+    }
 
-function showResult() {
-  const uTime = calcTime(simState.userStints, simState.driverKey, false, LAPS);
-  const rTime = calcTime(simState.remStints, null, true, LAPS);
-  const gap = Math.abs(uTime - rTime).toFixed(3);
-  const userWins = uTime < rTime;
-  const drv = DRIVERS[simState.driverKey];
-  const drvColor = getComputedStyle(document.documentElement).getPropertyValue(drv.colorVar).trim();
+    function calcTime(stints, drv, isRemin, lap) {
+      const stats = isRemin ? REMIN_STATS : DRIVERS[drv];
+      const pitLaps = getPitLaps(stints);
+      let total = 0, cum = 0;
+      for (const s of stints) {
+        const c = COMPOUND[s.compound];
+        const stintLaps = Math.min(s.laps, Math.max(0, lap - cum));
+        for (let l = 1; l <= stintLaps; l++) {
+          total += BASE_LAP + c.off + (stats.deg * c.degMul * (l - 1)) + stats.pace;
+        }
+        cum += s.laps;
+        if (cum < lap && pitLaps.includes(cum)) total += PIT_LOSS;
+        if (cum >= lap) break;
+      }
+      return total;
+    }
 
-  if(userWins) {
-    setReminMood('sulk');
-    setReminSpeech('win');
-    setTimeout(launchConfetti, 400);
-  } else {
-    setReminMood('celebrate');
-    setReminSpeech('lose');
-    setTimeout(launchRain, 400);
-  }
+    /* ── CONFETTI ENGINE ── */
+    const confettiCanvas = document.getElementById('confetti-canvas');
+    const confettiCtx = confettiCanvas.getContext('2d');
+    let confettiParticles = [];
+    let confettiRaf = null;
 
-  const p1 = userWins ? { name:drv.name, team:drv.team, color:drvColor, time:'1:24:07.112' }
-                      : { name:'Remin', team:'Strategy Lab', color:'#FF6B35', time:'1:24:03.891' };
-  const p2 = userWins ? { name:'Remin', team:'Strategy Lab', color:'#FF6B35', time:`+${gap}s` }
-                      : { name:drv.name, team:drv.team, color:drvColor, time:`+${gap}s` };
+    function resizeCanvas() {
+      confettiCanvas.width = window.innerWidth;
+      confettiCanvas.height = window.innerHeight;
+      document.getElementById('rain-canvas').width = window.innerWidth;
+      document.getElementById('rain-canvas').height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
 
-  document.getElementById('result-body').innerHTML = `
+    function launchConfetti() {
+      confettiParticles = [];
+      const colors = ['#FF6B35', '#a78bfa', '#FFD700', '#34d399', '#f87171', '#60a5fa', '#fff'];
+      for (let i = 0; i < 140; i++) {
+        confettiParticles.push({
+          x: Math.random() * window.innerWidth,
+          y: -10 - Math.random() * 200,
+          w: 6 + Math.random() * 8,
+          h: 4 + Math.random() * 5,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          vx: (Math.random() - 0.5) * 4,
+          vy: 2 + Math.random() * 4,
+          angle: Math.random() * 360,
+          spin: (Math.random() - 0.5) * 8,
+          alpha: 1
+        });
+      }
+      if (confettiRaf) cancelAnimationFrame(confettiRaf);
+      animateConfetti();
+      setTimeout(stopConfetti, 4000);
+    }
+
+    function animateConfetti() {
+      confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+      confettiParticles.forEach(p => {
+        p.x += p.vx; p.y += p.vy; p.angle += p.spin; p.vy += 0.07;
+        if (p.y > window.innerHeight * 0.8) p.alpha -= 0.03;
+        confettiCtx.save();
+        confettiCtx.globalAlpha = Math.max(0, p.alpha);
+        confettiCtx.translate(p.x, p.y);
+        confettiCtx.rotate(p.angle * Math.PI / 180);
+        confettiCtx.fillStyle = p.color;
+        confettiCtx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+        confettiCtx.restore();
+      });
+      confettiParticles = confettiParticles.filter(p => p.alpha > 0);
+      if (confettiParticles.length > 0) confettiRaf = requestAnimationFrame(animateConfetti);
+      else confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+    }
+
+    function stopConfetti() {
+      confettiParticles.forEach(p => p.vy += 0.5);
+    }
+
+    /* ── RAIN ENGINE (disappointment) ── */
+    const rainCanvas = document.getElementById('rain-canvas');
+    const rainCtx = rainCanvas.getContext('2d');
+    let rainDrops = [];
+    let rainRaf = null;
+    let rainActive = false;
+
+    function launchRain() {
+      rainActive = true;
+      rainDrops = [];
+      rainCanvas.style.opacity = '1';
+      for (let i = 0; i < 80; i++) {
+        rainDrops.push({
+          x: Math.random() * window.innerWidth,
+          y: Math.random() * window.innerHeight,
+          len: 12 + Math.random() * 18,
+          speed: 6 + Math.random() * 6,
+          alpha: 0.1 + Math.random() * 0.25
+        });
+      }
+      animateRain();
+      setTimeout(stopRain, 3500);
+    }
+
+    function animateRain() {
+      rainCtx.clearRect(0, 0, rainCanvas.width, rainCanvas.height);
+      rainDrops.forEach(d => {
+        rainCtx.beginPath();
+        rainCtx.moveTo(d.x, d.y);
+        rainCtx.lineTo(d.x - 1, d.y + d.len);
+        rainCtx.strokeStyle = `rgba(100,160,255,${d.alpha})`;
+        rainCtx.lineWidth = 1;
+        rainCtx.stroke();
+        d.y += d.speed;
+        if (d.y > rainCanvas.height) { d.y = -20; d.x = Math.random() * rainCanvas.width; }
+      });
+      if (rainActive) rainRaf = requestAnimationFrame(animateRain);
+    }
+
+    function stopRain() {
+      rainActive = false;
+      cancelAnimationFrame(rainRaf);
+      rainCanvas.style.transition = 'opacity 1.5s';
+      rainCanvas.style.opacity = '0';
+      setTimeout(() => { rainCtx.clearRect(0, 0, rainCanvas.width, rainCanvas.height); }, 1600);
+    }
+
+    /* ── REMIN SPEECH ── */
+    const REMIN_LINES = {
+      idle: [
+        "Watching your strategy... carefully.",
+        "I've already adapted. Have you?",
+        "Silverstone doesn't forgive bad tyre calls.",
+        "The data is in. My counter is set.",
+      ],
+      leading: [
+        "You won't hold this lead. My tyres are fresh.",
+        "Enjoy P1. It's temporary.",
+        "Gap's closing. Tick tock.",
+        "My strategy kicks in after your next pit.",
+      ],
+      trailing: [
+        "Good gap. Don't waste it.",
+        "You earned that lead. Now defend it.",
+        "Impressive. But I'm not done adapting.",
+        "Alright. You got me on that stint.",
+      ],
+      win: [
+        "GG. That strategy was clean. You beat me fair.",
+        "Respect. You read the tyre window perfectly.",
+        "I adapted and still lost. Well played.",
+        "You out-strategised me. Silverstone is yours.",
+      ],
+      lose: [
+        "That's on you. I told you the tyres wouldn't last.",
+        "Adapt or get lapped. Basic F1.",
+        "My counter was perfect. Your timing wasn't.",
+        "Better luck next race. Study the stint lengths.",
+      ]
+    };
+
+    let lastRemLeading = null;
+    let speechTimeout = null;
+
+    function setReminSpeech(category) {
+      const lines = REMIN_LINES[category];
+      const line = lines[Math.floor(Math.random() * lines.length)];
+      const el = document.getElementById('remin-speech');
+      el.classList.remove('visible');
+      clearTimeout(speechTimeout);
+      speechTimeout = setTimeout(() => {
+        el.innerHTML = `<strong>Remin:</strong> ${line}`;
+        el.classList.add('visible');
+      }, 150);
+    }
+
+    function setReminMood(mood) {
+      const av = document.getElementById('remin-avatar');
+      av.classList.remove('idle', 'celebrate', 'sulk');
+      av.classList.add(mood);
+    }
+
+    /* ── MAIN GAME LOGIC ── */
+    function startRace() {
+      if (!userDriver) { document.getElementById('strat-error').textContent = 'Pick a driver first.'; return; }
+      const total = userStints.reduce((a, s) => a + s.laps, 0);
+      if (total !== LAPS) { document.getElementById('strat-error').textContent = `Strategy must cover exactly ${LAPS} laps.`; return; }
+
+      userName = (document.getElementById('user-name-input').value || '').trim().slice(0, 40);
+
+      remStints = buildRemStrategy(userStints);
+      const drv = DRIVERS[userDriver];
+      const drvColor = getComputedStyle(document.documentElement).getPropertyValue(drv.colorVar).trim();
+
+      simState = {
+        lap: 0,
+        driverKey: userDriver,
+        userName: userName,
+        userStints: JSON.parse(JSON.stringify(userStints)),
+        remStints: JSON.parse(JSON.stringify(remStints)),
+        userPitLaps: getPitLaps(userStints),
+        remPitLaps: getPitLaps(remStints),
+        lastGap: 0
+      };
+
+      const displayName = userName || 'YOU';
+      document.getElementById('card-user').style.setProperty('--card-color', drvColor);
+      document.getElementById('mom-user').style.background = drvColor;
+      document.getElementById('s-user-label').textContent = `${displayName.toUpperCase()} · ${drv.name.toUpperCase()}`;
+      document.getElementById('s-user-label').style.color = drvColor;
+      document.getElementById('tl-user-lbl').textContent = `${displayName} — ${drv.name}`;
+      document.getElementById('race-eyebrow').textContent = `${displayName} · ${drv.name} vs Remin · Silverstone 2026`;
+
+      const pitRow = document.getElementById('pit-row');
+      pitRow.innerHTML = '';
+      simState.userPitLaps.forEach((l, i) => {
+        const b = document.createElement('div');
+        b.className = 'pit-badge'; b.id = `pu${l}`;
+        b.textContent = `${drv.name.split(' ').pop()} Pit ${i + 1} — L${l}`;
+        pitRow.appendChild(b);
+      });
+      simState.remPitLaps.forEach((l, i) => {
+        const b = document.createElement('div');
+        b.className = 'pit-badge'; b.id = `pr${l}`;
+        b.textContent = `Remin Pit ${i + 1} — L${l}`;
+        pitRow.appendChild(b);
+      });
+
+      document.getElementById('result-section').style.display = 'none';
+      lastRemLeading = null;
+      setReminMood('idle');
+      setReminSpeech('idle');
+      showScreen('screen-race');
+      paused = false;
+      document.getElementById('btn-pause').textContent = 'Pause';
+      simInterval = setInterval(tick, 200);
+    }
+
+    function tick() {
+      simState.lap++;
+      const lap = simState.lap;
+      if (lap > LAPS) { clearInterval(simInterval); showResult(); return; }
+
+      const lapEl = document.getElementById('lap-disp');
+      lapEl.classList.remove('lap-pulse');
+      void lapEl.offsetWidth;
+      lapEl.classList.add('lap-pulse');
+      lapEl.textContent = lap;
+
+      const uTime = calcTime(simState.userStints, simState.driverKey, false, lap);
+      const rTime = calcTime(simState.remStints, null, true, lap);
+      const gap = uTime - rTime;
+      const userLeads = gap < 0;
+      const absGap = Math.abs(gap);
+
+      const gapEl = document.getElementById('gap-disp');
+      const prevGap = simState.lastGap || 0;
+      const userGainingGround = userLeads && gap < prevGap;
+      const userLosingGround = !userLeads && gap > prevGap;
+      gapEl.textContent = `Gap: ${absGap.toFixed(3)}s`;
+      gapEl.classList.remove('gap-gain', 'gap-lose');
+      void gapEl.offsetWidth;
+      if (userGainingGround) gapEl.classList.add('gap-gain');
+      else if (userLosingGround) gapEl.classList.add('gap-lose');
+      simState.lastGap = gap;
+
+      document.getElementById('s-user-pos').textContent = userLeads ? 'P1' : 'P2';
+      document.getElementById('s-rem-pos').textContent = userLeads ? 'P2' : 'P1';
+      document.getElementById('s-user-gap').textContent = userLeads ? 'LEADER' : `+${gap.toFixed(3)}s`;
+      document.getElementById('s-rem-gap').textContent = userLeads ? `+${absGap.toFixed(3)}s` : 'LEADER';
+      document.getElementById('card-user').classList.toggle('leading', userLeads);
+      document.getElementById('card-rem').classList.toggle('leading', !userLeads);
+
+      const us = getStintAt(simState.userStints, lap);
+      const rs = getStintAt(simState.remStints, lap);
+      const uc = COMPOUND[us.compound];
+      const rc = COMPOUND[rs.compound];
+
+      document.getElementById('s-user-tyre').innerHTML = `<span class="tyre-dot" style="background:${uc.color}"></span>${uc.name}`;
+      document.getElementById('s-user-age').textContent = `Lap ${us.age}`;
+      document.getElementById('s-rem-tyre').innerHTML = `<span class="tyre-dot" style="background:${rc.color}"></span>${rc.name}`;
+      document.getElementById('s-rem-age').textContent = `Lap ${rs.age}`;
+
+      const drv = DRIVERS[simState.driverKey];
+      const uMom = drv.mom === 'hi-drag' ? 72 : drv.mom === 'low-drag' ? 44 : 58;
+      const rMom = Math.min(40 + Math.round(lap / LAPS * 35), 75);
+      document.getElementById('mom-user').style.width = uMom + '%';
+      document.getElementById('mom-rem').style.width = rMom + '%';
+      document.getElementById('mom-user-lbl').textContent = `MOM Aero · ${drv.mom} · ${uMom}% deploy`;
+      document.getElementById('mom-rem-lbl').textContent = `MOM · Adaptive · ${rMom}% deploy`;
+
+      renderTimeline('tl-user', simState.userStints, lap);
+      renderTimeline('tl-rem', simState.remStints, lap);
+
+      simState.userPitLaps.forEach(l => {
+        if (lap === l) {
+          const el = document.getElementById(`pu${l}`);
+          if (el) { el.classList.add('fired'); el.classList.add('pit-flash'); }
+        }
+      });
+      simState.remPitLaps.forEach(l => {
+        if (lap === l) {
+          const el = document.getElementById(`pr${l}`);
+          if (el) { el.classList.add('fired'); el.classList.add('pit-flash'); }
+        }
+      });
+
+      const remLeading = !userLeads;
+      if (remLeading !== lastRemLeading) {
+        lastRemLeading = remLeading;
+        setReminMood(remLeading ? 'celebrate' : 'sulk');
+        setReminSpeech(remLeading ? 'leading' : 'trailing');
+      }
+      if (lap === Math.floor(LAPS * 0.3) || lap === Math.floor(LAPS * 0.65)) {
+        setReminSpeech(remLeading ? 'leading' : 'trailing');
+      }
+    }
+
+    function renderTimeline(id, stints, lap) {
+      const bar = document.getElementById(id);
+      bar.style.width = (lap / LAPS * 100).toFixed(1) + '%';
+      bar.innerHTML = '';
+      let cum = 0;
+      stints.forEach(s => {
+        const visible = Math.min(s.laps, Math.max(0, lap - cum));
+        if (visible <= 0) { cum += s.laps; return; }
+        const c = COMPOUND[s.compound];
+        const seg = document.createElement('div');
+        seg.className = 'tl-seg';
+        seg.style.cssText = `width:${(visible / lap * 100).toFixed(1)}%;background:${c.color};color:${c.text}`;
+        seg.textContent = visible > 6 ? c.name[0] : '';
+        bar.appendChild(seg);
+        cum += s.laps;
+      });
+    }
+
+    function showResult() {
+      const uTime = calcTime(simState.userStints, simState.driverKey, false, LAPS);
+      const rTime = calcTime(simState.remStints, null, true, LAPS);
+      const gap = Math.abs(uTime - rTime).toFixed(3);
+      const userWins = uTime < rTime;
+      const drv = DRIVERS[simState.driverKey];
+      const drvColor = getComputedStyle(document.documentElement).getPropertyValue(drv.colorVar).trim();
+
+      if (userWins) {
+        setReminMood('sulk');
+        setReminSpeech('win');
+        setTimeout(launchConfetti, 400);
+      } else {
+        setReminMood('celebrate');
+        setReminSpeech('lose');
+        setTimeout(launchRain, 400);
+      }
+
+      const displayName = simState.userName || drv.name;
+      const p1 = userWins ? { name: displayName, team: drv.team, color: drvColor, time: '1:24:07.112' }
+        : { name: 'Remin', team: 'Strategy Lab', color: '#FF6B35', time: '1:24:03.891' };
+      const p2 = userWins ? { name: 'Remin', team: 'Strategy Lab', color: '#FF6B35', time: `+${gap}s` }
+        : { name: displayName, team: drv.team, color: drvColor, time: `+${gap}s` };
+
+      document.getElementById('result-body').innerHTML = `
     <div class="result-row" id="rrow1">
       <div class="result-pos" style="color:${p1.color}">1</div>
       <div class="result-driver">
@@ -1412,45 +1808,71 @@ function showResult() {
       <div class="result-time">${p2.time}</div>
     </div>`;
 
-  const remStr  = remStints.map(s=>`${COMPOUND[s.compound].name} (${s.laps}L)`).join(' → ');
-  const userStr = userStints.map(s=>`${COMPOUND[s.compound].name} (${s.laps}L)`).join(' → ');
-  document.getElementById('result-analysis').textContent = userWins
-    ? `Your strategy (${userStr}) beat Remin's adaptive counter (${remStr}) by ${gap}s. You read the tyre window correctly — at Silverstone in 2026 without DRS, track position in the final 15 laps is everything. Well played.`
-    : `Remin adapted and won. After seeing your opening stint, Remin countered with ${remStr} — a better tyre delta in the closing laps sealed it. The gap was ${gap}s. At Silverstone, without DRS to recover, losing track position is fatal. Adjust your pit window and race again.`;
+      const remStr = remStints.map(s => `${COMPOUND[s.compound].name} (${s.laps}L)`).join(' → ');
+      const userStr = userStints.map(s => `${COMPOUND[s.compound].name} (${s.laps}L)`).join(' → ');
+      document.getElementById('result-analysis').textContent = userWins
+        ? `Your strategy (${userStr}) beat Remin's adaptive counter (${remStr}) by ${gap}s. You read the tyre window correctly — at Silverstone in 2026 without DRS, track position in the final 15 laps is everything. Well played.`
+        : `Remin adapted and won. After seeing your opening stint, Remin countered with ${remStr} — a better tyre delta in the closing laps sealed it. The gap was ${gap}s. At Silverstone, without DRS to recover, losing track position is fatal. Adjust your pit window and race again.`;
 
-  const rs = document.getElementById('result-section');
-  rs.style.display = 'block';
-  rs.classList.add('result-animate');
-  setTimeout(()=>{ document.getElementById('rrow1')?.classList.add('visible'); },200);
-  setTimeout(()=>{ document.getElementById('rrow2')?.classList.add('visible'); },400);
-}
+      saveToDatabase({
+        name: simState.userName || 'Anonymous',
+        driver: simState.driverKey,
+        user_strategy: userStr,
+        remin_strategy: remStr,
+        result: userWins ? 'win' : 'lose',
+        gap_seconds: parseFloat(gap)
+      });
 
-function togglePause() {
-  paused = !paused;
-  if(paused) { clearInterval(simInterval); document.getElementById('btn-pause').textContent = 'Resume'; }
-  else { simInterval = setInterval(tick, 200); document.getElementById('btn-pause').textContent = 'Pause'; }
-}
+      const rs = document.getElementById('result-section');
+      rs.style.display = 'block';
+      rs.classList.add('result-animate');
+      setTimeout(() => { document.getElementById('rrow1')?.classList.add('visible'); }, 200);
+      setTimeout(() => { document.getElementById('rrow2')?.classList.add('visible'); }, 400);
+    }
 
-function showScreen(id) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-}
+    function togglePause() {
+      paused = !paused;
+      if (paused) { clearInterval(simInterval); document.getElementById('btn-pause').textContent = 'Resume'; }
+      else { simInterval = setInterval(tick, 200); document.getElementById('btn-pause').textContent = 'Pause'; }
+    }
 
-function goSetup() {
-  clearInterval(simInterval);
-  paused = false;
-  rainActive = false;
-  cancelAnimationFrame(rainRaf);
-  cancelAnimationFrame(confettiRaf);
-  confettiCtx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);
-  rainCtx.clearRect(0,0,rainCanvas.width,rainCanvas.height);
-  rainCanvas.style.opacity = '0';
-  showScreen('screen-setup');
-}
+    function showScreen(id) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
 
-addStint('soft', 17);
-addStint('med', 18);
-addStint('hard', 17);
-</script>
+    function goSetup() {
+      clearInterval(simInterval);
+      paused = false;
+      rainActive = false;
+      cancelAnimationFrame(rainRaf);
+      cancelAnimationFrame(confettiRaf);
+      confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+      rainCtx.clearRect(0, 0, rainCanvas.width, rainCanvas.height);
+      rainCanvas.style.opacity = '0';
+      showScreen('screen-setup');
+    }
+
+    async function saveToDatabase(data) {
+      if (!SUPABASE_URL || SUPABASE_URL === 'YOUR_SUPABASE_URL') return;
+      try {
+        await fetch(`${SUPABASE_URL}/rest/v1/forecasts`, {
+          method: 'POST',
+          headers: {
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+            'Content-Type': 'application/json',
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify(data)
+        });
+      } catch (e) { /* silent — never affect gameplay */ }
+    }
+
+    addStint('soft', 17);
+    addStint('med', 18);
+    addStint('hard', 17);
+  </script>
 </body>
+
 </html>
