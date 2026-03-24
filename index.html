@@ -3098,7 +3098,7 @@
           <div class="hero-eyebrow" id="race-eyebrow">Race</div>
           <div class="race-lap-display">
             <span class="lap-big" id="lap-disp">0</span>
-            <span class="lap-total">/ 52</span>
+            <span class="lap-total" id="lap-total">/ 52</span>
           </div>
         </div>
       </div>
@@ -4116,6 +4116,8 @@
       document.getElementById('race-eyebrow').textContent = `${displayName} · ${drv.name} vs Remin · ${currentTrack.name} 2026`;
       const rh = document.getElementById('result-heading');
       if (rh) rh.textContent = `Race Result — ${currentTrack.name} GP 2026`;
+      const lt = document.getElementById('lap-total');
+      if (lt) lt.textContent = `/ ${LAPS}`;
 
       // Gap bar: set player colour + label
       const gapBarWrap = document.getElementById('gap-bar-wrap');
