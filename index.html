@@ -1498,6 +1498,240 @@
       margin-top: 14px;
       letter-spacing: 0.5px;
     }
+
+    /* ── GLOBAL LEADERBOARD ── */
+    .global-lb {
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+
+    .global-lb-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .global-lb-title {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text);
+    }
+
+    .global-lb-title em {
+      color: var(--accent);
+      font-style: normal;
+    }
+
+    .lb-live-dot {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #34d399;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: rgba(52, 211, 153, 0.08);
+      border: 1px solid rgba(52, 211, 153, 0.25);
+    }
+
+    .lb-live-dot::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #34d399;
+      animation: liveBlink 1.2s ease infinite;
+    }
+
+    @keyframes liveBlink {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: .2
+      }
+    }
+
+    .global-lb-tabs {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+
+    .lb-tab {
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 5px;
+      border: 1px solid var(--border);
+      background: var(--bg2);
+      color: var(--muted);
+      cursor: pointer;
+      transition: all .15s;
+    }
+
+    .lb-tab.active {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(167, 139, 250, 0.08);
+    }
+
+    .lb-tab:hover {
+      border-color: var(--border2);
+      color: var(--text);
+    }
+
+    .global-lb-table {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .glb-row {
+      display: grid;
+      grid-template-columns: 40px 1fr auto auto;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      transition: background .15s;
+    }
+
+    .glb-row:last-child {
+      border-bottom: none;
+    }
+
+    .glb-row:hover {
+      background: var(--bg3);
+    }
+
+    .glb-head {
+      grid-template-columns: 40px 1fr auto auto;
+      background: var(--bg3);
+      border-bottom: 1px solid var(--border2) !important;
+    }
+
+    .glb-head>* {
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .glb-pos {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .glb-pos.p1 {
+      color: #FFD700;
+    }
+
+    .glb-pos.p2 {
+      color: #aaaaaa;
+    }
+
+    .glb-pos.p3 {
+      color: #cd7f32;
+    }
+
+    .glb-name {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    .glb-meta {
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 2px;
+      font-family: var(--font-body);
+    }
+
+    .glb-driver-badge {
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      padding: 2px 7px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      color: #fff;
+      display: inline-block;
+      margin-top: 2px;
+    }
+
+    .glb-gap {
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .glb-badge {
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 4px;
+      text-align: center;
+    }
+
+    .glb-badge.win {
+      color: #34d399;
+      background: rgba(52, 211, 153, 0.1);
+      border: 1px solid rgba(52, 211, 153, 0.25);
+    }
+
+    .glb-badge.lose {
+      color: #f87171;
+      background: rgba(248, 113, 113, 0.05);
+      border: 1px solid rgba(248, 113, 113, 0.2);
+    }
+
+    .glb-empty {
+      padding: 28px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .glb-refresh {
+      font-size: 10px;
+      color: var(--muted);
+      text-align: right;
+      margin-top: 8px;
+      letter-spacing: 0.3px;
+    }
   </style>
 </head>
 
@@ -1740,6 +1974,26 @@
       <span>F1 Strategy Battle</span>
       <span>Built by <span>Remin Franklin</span> · Silverstone 2026 · 2026 Regulations</span>
     </footer>
+
+    <!-- GLOBAL LEADERBOARD -->
+    <div class="global-lb">
+      <div class="global-lb-header">
+        <div>
+          <div class="global-lb-title">Global <em>Board</em></div>
+          <div style="font-size:13px;color:var(--muted);margin-top:4px">Every race played worldwide · Silverstone 2026
+          </div>
+        </div>
+        <span class="lb-live-dot">Live</span>
+      </div>
+      <div class="global-lb-tabs">
+        <button class="lb-tab active" id="tab-wins" onclick="switchTab('wins')">Closest Wins</button>
+        <button class="lb-tab" id="tab-all" onclick="switchTab('all')">All Races</button>
+      </div>
+      <div class="global-lb-table" id="global-lb-table">
+        <div class="glb-empty" id="glb-loading">Loading leaderboard…</div>
+      </div>
+      <div class="glb-refresh" id="glb-refresh"></div>
+    </div>
 
   </div>
 
@@ -2312,6 +2566,7 @@
       document.getElementById('score-sub').textContent = sub;
 
       fetchLeaderboard(simState.userName, parseFloat(gap), userWins);
+      setTimeout(() => loadGlobalLeaderboard(lbCurrentTab), 1500);
 
       const rs = document.getElementById('result-section');
       rs.style.display = 'block';
@@ -2614,9 +2869,91 @@
       a.click();
     }
 
+    /* ── GLOBAL LEADERBOARD ── */
+    let lbCurrentTab = 'wins';
+
+    const DRIVER_COLORS = { VER: '#3671C6', LEC: '#E8002D', RUS: '#00D2BE' };
+
+    async function loadGlobalLeaderboard(tab) {
+      if (!SUPABASE_URL || SUPABASE_URL === 'YOUR_SUPABASE_URL') {
+        document.getElementById('global-lb-table').innerHTML =
+          '<div class="glb-empty">Configure Supabase to see the live leaderboard.</div>';
+        return;
+      }
+      const tableEl = document.getElementById('global-lb-table');
+      tableEl.innerHTML = '<div class="glb-empty" id="glb-loading">Loading\u2026</div>';
+
+      try {
+        const isWins = tab === 'wins';
+        const filter = isWins ? '?result=eq.win&order=gap_seconds.asc&limit=10'
+          : '?order=created_at.desc&limit=10';
+        const res = await fetch(
+          `${SUPABASE_URL}/rest/v1/forecasts${filter}`,
+          { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } }
+        );
+        const rows = await res.json();
+        if (!Array.isArray(rows) || rows.length === 0) {
+          tableEl.innerHTML = '<div class="glb-empty">No races recorded yet. Be the first!</div>';
+          return;
+        }
+
+        const posClass = i => i === 0 ? 'p1' : i === 1 ? 'p2' : i === 2 ? 'p3' : '';
+        const posIcon = i => i === 0 ? '\uD83E\uDD47' : i === 1 ? '\uD83E\uDD48' : i === 2 ? '\uD83E\uDD49' : String(i + 1);
+        const drvColor = d => DRIVER_COLORS[d] || '#a78bfa';
+        const timeSince = iso => {
+          if (!iso) return '';
+          const s = Math.floor((Date.now() - new Date(iso)) / 1000);
+          if (s < 60) return `${s}s ago`;
+          if (s < 3600) return `${Math.floor(s / 60)}m ago`;
+          if (s < 86400) return `${Math.floor(s / 3600)}h ago`;
+          return `${Math.floor(s / 86400)}d ago`;
+        };
+
+        let html = `<div class="glb-row glb-head">
+          <div>\u00a0</div>
+          <div>Racer</div>
+          <div style="text-align:right">${isWins ? 'Gap' : 'Gap'}</div>
+          <div style="text-align:center">Result</div>
+        </div>`;
+
+        rows.forEach((r, i) => {
+          const strat = (r.user_strategy || '').slice(0, 30);
+          html += `<div class="glb-row">
+            <div class="glb-pos ${posClass(i)}">${posIcon(i)}</div>
+            <div>
+              <div class="glb-name">${(r.name || 'Anon').slice(0, 20)}</div>
+              <div class="glb-meta">
+                <span class="glb-driver-badge" style="background:${drvColor(r.driver)}">${r.driver || '?'}</span>
+                &nbsp;${strat}
+              </div>
+              <div class="glb-meta" style="margin-top:1px">${timeSince(r.created_at)}</div>
+            </div>
+            <div class="glb-gap">${parseFloat(r.gap_seconds || 0).toFixed(3)}s</div>
+            <div><span class="glb-badge ${r.result}">${r.result === 'win' ? 'Win' : 'Loss'}</span></div>
+          </div>`;
+        });
+
+        tableEl.innerHTML = html;
+        const now = new Date();
+        document.getElementById('glb-refresh').textContent =
+          `Last updated ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`;
+      } catch (e) {
+        tableEl.innerHTML = '<div class="glb-empty">Could not load leaderboard.</div>';
+      }
+    }
+
+    function switchTab(tab) {
+      lbCurrentTab = tab;
+      document.getElementById('tab-wins').classList.toggle('active', tab === 'wins');
+      document.getElementById('tab-all').classList.toggle('active', tab === 'all');
+      loadGlobalLeaderboard(tab);
+    }
+
     addStint('soft', 17);
     addStint('med', 18);
     addStint('hard', 17);
+    loadGlobalLeaderboard('wins');
+    setInterval(() => loadGlobalLeaderboard(lbCurrentTab), 30000);
   </script>
 </body>
 
