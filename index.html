@@ -4649,7 +4649,7 @@
       ctx.lineTo(gapHistory[0].lap * scaleX, midY);
       ctx.closePath();
       const lGrad = ctx.createLinearGradient(0, 0, 0, h);
-      if (last.gap >= 0) { lGrad.addColorStop(0, 'rgba(167,139,250,0.2)'); lGrad.addC${ currentTrack.name } GP 2026` : `${ currentTrack.name } }
+      if (last.gap >= 0) { lGrad.addColorStop(0, 'rgba(167,139,250,0.2)'); lGrad.addColorStop(1, 'rgba(167,139,250,0)'); }
       else { lGrad.addColorStop(0, 'rgba(255,107,53,0)'); lGrad.addColorStop(1, 'rgba(255,107,53,0.2)'); }
       ctx.fillStyle = lGrad; ctx.fill();
       // Line segments colored by leader
@@ -4771,7 +4771,7 @@
           sub = userWins ? 'Strategy victory. Podium secured.' : 'Remin out-adapted you this time.';
         }
         document.getElementById('modal-trophy').textContent = trophy;
-        document.getElementById('modal-eyebrow').textContent = h2h ? `⚔️ Challenge · Silverstone GP 2026` : `Silverstone GP · 2026`;
+        document.getElementById('modal-eyebrow').textContent = h2h ? `⚔️ Challenge · ${currentTrack.name} GP 2026` : `${currentTrack.name} GP · 2026`;
         document.getElementById('modal-headline').textContent = headline;
         document.getElementById('modal-headline').style.color = headlineColor;
         document.getElementById('modal-sub').textContent = sub;
