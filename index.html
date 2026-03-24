@@ -1269,6 +1269,231 @@
       border-color: var(--accent);
     }
 
+    /* ── CHALLENGE BANNER ── */
+    .challenge-banner {
+      display: none;
+      background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(167, 139, 250, 0.06));
+      border: 1px solid rgba(255, 107, 53, 0.4);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+    }
+
+    .challenge-banner.visible {
+      display: block;
+    }
+
+    .challenge-banner-label {
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #FF6B35;
+      margin-bottom: 6px;
+    }
+
+    .challenge-banner-headline {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: 0.5px;
+    }
+
+    .challenge-banner-meta {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .challenge-banner-gap {
+      display: inline-block;
+      border-radius: 6px;
+      padding: 3px 12px;
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 700;
+      margin-top: 10px;
+    }
+
+    /* ── CHALLENGE BUTTON ── */
+    .btn-challenge {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 12px 28px;
+      background: linear-gradient(135deg, rgba(255, 107, 53, 0.15), rgba(255, 107, 53, 0.06));
+      color: #FF6B35;
+      border: 1px solid rgba(255, 107, 53, 0.45);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all .15s;
+    }
+
+    .btn-challenge:hover {
+      background: rgba(255, 107, 53, 0.22);
+      border-color: #FF6B35;
+    }
+
+    .btn-challenge:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* ── CHALLENGE URL BOX ── */
+    .challenge-url-wrap {
+      display: none;
+      margin-top: 12px;
+      background: var(--bg2);
+      border: 1px solid rgba(255, 107, 53, 0.3);
+      border-radius: 8px;
+      padding: 10px 14px;
+    }
+
+    .challenge-url-wrap.visible {
+      display: block;
+    }
+
+    .challenge-url-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #FF6B35;
+      margin-bottom: 6px;
+    }
+
+    .challenge-url-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .challenge-url-text {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: var(--text);
+      font-size: 12px;
+      font-family: monospace;
+      outline: none;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .btn-copy {
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      padding: 5px 14px;
+      background: rgba(255, 107, 53, 0.15);
+      color: #FF6B35;
+      border: 1px solid rgba(255, 107, 53, 0.3);
+      border-radius: 6px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all .15s;
+    }
+
+    .btn-copy:hover {
+      background: rgba(255, 107, 53, 0.25);
+    }
+
+    /* ── H2H SECTION ── */
+    .h2h-section {
+      display: none;
+      margin-top: 14px;
+      background: linear-gradient(135deg, rgba(255, 107, 53, 0.05), rgba(167, 139, 250, 0.05));
+      border: 1px solid var(--border2);
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+
+    .h2h-section.visible {
+      display: block;
+    }
+
+    .h2h-label {
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .h2h-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 9px 6px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .h2h-row:last-child {
+      border-bottom: none;
+    }
+
+    .h2h-row.winner {
+      background: rgba(52, 211, 153, 0.05);
+      border-radius: 6px;
+    }
+
+    .h2h-pos {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 900;
+      width: 24px;
+      text-align: center;
+    }
+
+    .h2h-info {
+      flex: 1;
+    }
+
+    .h2h-name {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .h2h-meta {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .h2h-gap {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .h2h-badge {
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .h2h-badge.win {
+      background: rgba(52, 211, 153, 0.15);
+      color: #34d399;
+    }
+
+    .h2h-badge.lose {
+      background: rgba(248, 113, 113, 0.1);
+      color: #f87171;
+    }
+
     /* ── SPEED CONTROL ── */
     .speed-btns {
       display: flex;
@@ -1749,6 +1974,15 @@
 
     <!-- SETUP SCREEN -->
     <div class="screen active" id="screen-setup">
+
+      <!-- CHALLENGE BANNER (shown when opening a challenge link) -->
+      <div class="challenge-banner" id="challenge-banner">
+        <div class="challenge-banner-label">⚔️ You've been challenged</div>
+        <div class="challenge-banner-headline" id="cb-headline">Someone challenged you!</div>
+        <div class="challenge-banner-meta" id="cb-meta">Pick your strategy and beat them</div>
+        <div class="challenge-banner-gap" id="cb-gap">Loading…</div>
+      </div>
+
       <div class="hero">
         <div class="hero-eyebrow">Silverstone Grand Prix · 52 Laps</div>
         <h1 class="hero-title">Beat <em>Remin</em><br>on strategy.</h1>
@@ -1962,10 +2196,20 @@
             <div class="lb-heading">🏆 Closest Wins · Global Board</div>
             <div id="lb-rows"></div>
           </div>
+          <div class="h2h-section" id="h2h-section"></div>
         </div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px">
           <button class="btn-again" onclick="goSetup()">Race Again</button>
           <button class="btn-share" onclick="downloadResultCard()">↓ Save&nbsp;Card</button>
+          <button class="btn-challenge" id="btn-challenge" onclick="createChallenge(this)">⚔️ Challenge a
+            Friend</button>
+        </div>
+        <div class="challenge-url-wrap" id="challenge-url-wrap">
+          <div class="challenge-url-label">Share this link — they play against your result</div>
+          <div class="challenge-url-row">
+            <input class="challenge-url-text" id="challenge-url-text" readonly>
+            <button class="btn-copy" onclick="copyChallenge()">Copy</button>
+          </div>
         </div>
       </div>
     </div>
@@ -2557,6 +2801,7 @@
       });
 
       simState.userWins = userWins;
+      simState.finalGap = parseFloat(gap);
       const score = calcStrategyScore(simState.userStints, simState.userPitLaps, userWins, parseFloat(gap));
       const { grade, color: gradeColor, sub } = getScoreGrade(score);
       document.getElementById('score-num').textContent = score;
@@ -2566,6 +2811,7 @@
       document.getElementById('score-sub').textContent = sub;
 
       fetchLeaderboard(simState.userName, parseFloat(gap), userWins);
+      if (challengeMode) showH2H(simState.userName, userWins ? 'win' : 'lose', parseFloat(gap));
       setTimeout(() => loadGlobalLeaderboard(lbCurrentTab), 1500);
 
       const rs = document.getElementById('result-section');
@@ -2594,6 +2840,10 @@
       rainActive = false;
       gapHistory = [];
       closeRaceModal();
+      document.getElementById('challenge-url-wrap').classList.remove('visible');
+      document.getElementById('h2h-section').classList.remove('visible');
+      const challengeBtn = document.getElementById('btn-challenge');
+      if (challengeBtn) { challengeBtn.disabled = false; challengeBtn.textContent = '\u2694\ufe0f Challenge a Friend'; }
       cancelAnimationFrame(rainRaf);
       cancelAnimationFrame(confettiRaf);
       confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
@@ -2953,9 +3203,147 @@
       loadGlobalLeaderboard(tab);
     }
 
+    /* ── CHALLENGE SYSTEM ── */
+    let challengeMode = false;
+    let challengeData = null;
+
+    async function checkChallengeParam() {
+      const params = new URLSearchParams(window.location.search);
+      const cid = params.get('challenge');
+      if (!cid || !SUPABASE_URL || SUPABASE_URL === 'YOUR_SUPABASE_URL') return;
+      try {
+        const res = await fetch(
+          `${SUPABASE_URL}/rest/v1/challenges?id=eq.${encodeURIComponent(cid)}&limit=1`,
+          { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } }
+        );
+        const rows = await res.json();
+        if (Array.isArray(rows) && rows[0]) {
+          challengeMode = true;
+          challengeData = rows[0];
+          showChallengeBanner(challengeData);
+        }
+      } catch (e) { /* silent */ }
+    }
+
+    function showChallengeBanner(data) {
+      const DNAMES = { VER: 'Verstappen', LEC: 'Leclerc', RUS: 'Russell' };
+      const chalName = (data.name || 'Someone').slice(0, 24);
+      document.getElementById('cb-headline').textContent = `${chalName} challenged you!`;
+      document.getElementById('cb-meta').textContent =
+        `${DNAMES[data.driver] || data.driver || ''} · ${data.user_strategy || ''} — beat Remin faster`;
+      const gapEl = document.getElementById('cb-gap');
+      if (data.result === 'win') {
+        gapEl.textContent = `Their gap vs Remin: ${parseFloat(data.gap_seconds).toFixed(3)}s — can you beat it?`;
+        gapEl.style.cssText = 'background:rgba(52,211,153,0.12);color:#34d399;border:1px solid rgba(52,211,153,0.3)';
+      } else {
+        gapEl.textContent = 'They lost to Remin — can you do better?';
+        gapEl.style.cssText = 'background:rgba(248,113,113,0.1);color:#f87171;border:1px solid rgba(248,113,113,0.25)';
+      }
+      document.getElementById('challenge-banner').classList.add('visible');
+    }
+
+    function showH2H(myName, myResult, myGap) {
+      if (!challengeMode || !challengeData) return;
+      const DNAMES = { VER: 'Verstappen', LEC: 'Leclerc', RUS: 'Russell' };
+      const cd = challengeData;
+      const chalGap = parseFloat(cd.gap_seconds);
+      const chalWon = cd.result === 'win';
+      const myWon = myResult === 'win';
+
+      // Determine h2h winner: wins beat losses; if same, smaller gap wins
+      let iWin;
+      if (myWon && !chalWon) iWin = true;
+      else if (!myWon && chalWon) iWin = false;
+      else if (myWon && chalWon) iWin = myGap < chalGap;
+      else iWin = myGap < chalGap; // both lost, closer gap is "better"
+
+      const myEntry = {
+        name: (myName || simState.driverKey || 'You').slice(0, 20).toUpperCase(),
+        strategy: simState.userStints.map(s => `${COMPOUND[s.compound].name}(${s.laps}L)`).join(' → '),
+        driver: DNAMES[simState.driverKey] || simState.driverKey || '',
+        result: myResult, gap: myGap
+      };
+      const chalEntry = {
+        name: (cd.name || 'Challenger').slice(0, 20).toUpperCase(),
+        strategy: cd.user_strategy || '',
+        driver: DNAMES[cd.driver] || cd.driver || '',
+        result: cd.result, gap: chalGap
+      };
+
+      const p1 = iWin ? myEntry : chalEntry;
+      const p2 = iWin ? chalEntry : myEntry;
+      const p1c = iWin ? '#34d399' : '#FF6B35';
+      const p2c = iWin ? '#FF6B35' : '#34d399';
+
+      const row = (pos, col, e) => `
+        <div class="h2h-row${pos === 1 ? ' winner' : ''}">
+          <div class="h2h-pos" style="color:${col}">${pos}</div>
+          <div class="h2h-info">
+            <div class="h2h-name" style="color:${col}">${e.name}</div>
+            <div class="h2h-meta">${e.driver} · ${e.strategy}</div>
+          </div>
+          <div class="h2h-gap" style="color:${col}">${e.result === 'win' ? e.gap.toFixed(3) + 's' : 'No win'}</div>
+          <span class="h2h-badge ${e.result}">${e.result === 'win' ? 'Win' : 'Loss'}</span>
+        </div>`;
+
+      const h2h = document.getElementById('h2h-section');
+      h2h.innerHTML = `<div class="h2h-label">\u2694\ufe0f HEAD TO HEAD</div>${row(1, p1c, p1)}${row(2, p2c, p2)}`;
+      h2h.classList.add('visible');
+    }
+
+    async function createChallenge(btn) {
+      if (!SUPABASE_URL || SUPABASE_URL === 'YOUR_SUPABASE_URL') return;
+      btn.disabled = true;
+      btn.textContent = 'Saving\u2026';
+      const userStr = simState.userStints.map(s => `${COMPOUND[s.compound].name} (${s.laps}L)`).join(' → ');
+      const payload = {
+        name: simState.userName || 'Anonymous',
+        driver: simState.driverKey,
+        user_strategy: userStr,
+        result: simState.userWins ? 'win' : 'lose',
+        gap_seconds: simState.finalGap || 0
+      };
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/challenges`, {
+          method: 'POST',
+          headers: {
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+            'Content-Type': 'application/json',
+            'Prefer': 'return=representation'
+          },
+          body: JSON.stringify(payload)
+        });
+        const rows = await res.json();
+        const id = rows?.[0]?.id;
+        if (id) {
+          const url = `${window.location.origin}${window.location.pathname}?challenge=${id}`;
+          document.getElementById('challenge-url-text').value = url;
+          document.getElementById('challenge-url-wrap').classList.add('visible');
+          btn.textContent = '\u2705 Link Ready';
+        } else {
+          btn.disabled = false;
+          btn.textContent = '\u2694\ufe0f Challenge a Friend';
+        }
+      } catch (e) {
+        btn.disabled = false;
+        btn.textContent = '\u2694\ufe0f Challenge a Friend';
+      }
+    }
+
+    function copyChallenge() {
+      const inp = document.getElementById('challenge-url-text');
+      inp.select();
+      navigator.clipboard.writeText(inp.value).catch(() => document.execCommand('copy'));
+      const btn = inp.parentElement.querySelector('.btn-copy');
+      btn.textContent = 'Copied!';
+      setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+    }
+
     addStint('soft', 17);
     addStint('med', 18);
     addStint('hard', 17);
+    checkChallengeParam();
     loadGlobalLeaderboard('wins');
     setInterval(() => loadGlobalLeaderboard(lbCurrentTab), 30000);
   </script>
