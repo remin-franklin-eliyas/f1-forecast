@@ -2892,8 +2892,12 @@
           { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } }
         );
         const rows = await res.json();
+        if (!res.ok) {
+          tableEl.innerHTML = `<div class="glb-empty">DB error: ${rows?.message || rows?.error || JSON.stringify(rows)}</div>`;
+          return;
+        }
         if (!Array.isArray(rows) || rows.length === 0) {
-          tableEl.innerHTML = '<div class="glb-empty">No races recorded yet. Be the first!</div>';
+          tableEl.innerHTML = '<div class="glb-empty">No races recorded yet — play a race to be the first on the board!</div>';
           return;
         }
 
