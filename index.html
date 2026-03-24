@@ -59,6 +59,8 @@
       --ver: #3671C6;
       --lec: #E8002D;
       --rus: #00D2BE;
+      --nor: #FF8000;
+      --alb: #37BEDD;
       --rem: #FF6B35;
       --font-display: 'Barlow Condensed', sans-serif;
       --font-body: 'Barlow', sans-serif;
@@ -293,9 +295,30 @@
     /* ── DRIVER GRID ── */
     .driver-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(6, minmax(0, 1fr));
       gap: 12px;
       margin-bottom: 32px;
+    }
+
+    /* 5-driver layout: 3 top row + 2 bottom row centered */
+    .driver-grid .driver-card:nth-child(1) {
+      grid-column: 1 / 3;
+    }
+
+    .driver-grid .driver-card:nth-child(2) {
+      grid-column: 3 / 5;
+    }
+
+    .driver-grid .driver-card:nth-child(3) {
+      grid-column: 5 / 7;
+    }
+
+    .driver-grid .driver-card:nth-child(4) {
+      grid-column: 2 / 4;
+    }
+
+    .driver-grid .driver-card:nth-child(5) {
+      grid-column: 4 / 6;
     }
 
     .driver-card {
@@ -1183,7 +1206,11 @@
 
     @media (max-width: 540px) {
       .driver-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .driver-grid .driver-card:nth-child(n) {
+        grid-column: auto;
       }
 
       .status-grid {
@@ -2067,12 +2094,117 @@
       backdrop-filter: blur(6px);
       -webkit-backdrop-filter: blur(6px);
       z-index: 900;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
+      padding: 20px 12px;
+      overflow-y: auto;
     }
 
     #race-modal-overlay.show {
       display: flex;
+    }
+
+    /* SC cinematic full-screen pulse */
+    .sc-flash-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 800;
+      pointer-events: none;
+      opacity: 0;
+      background: rgba(255, 215, 0, 0.18);
+      transition: opacity 0.25s;
+    }
+
+    .sc-flash-overlay.active {
+      animation: scPulse 1.2s ease-in-out infinite;
+    }
+
+    @keyframes scPulse {
+
+      0%,
+      100% {
+        opacity: 0;
+      }
+
+      50% {
+        opacity: 1;
+      }
+    }
+
+    /* SC banner strip */
+    .sc-banner-strip {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 801;
+      background: linear-gradient(90deg, #FFD700, #FF8C00, #FFD700);
+      background-size: 200% 100%;
+      animation: scStripe 1s linear infinite;
+      color: #000;
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 7px 0 6px;
+      transform: translateY(100%);
+      transition: transform 0.35s cubic-bezier(.34, 1.56, .64, 1);
+    }
+
+    .sc-banner-strip.show {
+      transform: translateY(0);
+    }
+
+    @keyframes scStripe {
+      0% {
+        background-position: 0% 0;
+      }
+
+      100% {
+        background-position: 200% 0;
+      }
+    }
+
+    /* VSC strip variant */
+    .sc-banner-strip.vsc {
+      background: linear-gradient(90deg, #aaa, #ddd, #aaa);
+      background-size: 200% 100%;
+      animation: scStripe 1.5s linear infinite;
+      color: #000;
+    }
+
+    /* Cinematic win/loss result flash */
+    .result-cinematic-flash {
+      position: fixed;
+      inset: 0;
+      z-index: 799;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.1s;
+    }
+
+    .result-cinematic-flash.win {
+      background: radial-gradient(ellipse at center, rgba(255, 183, 0, 0.25) 0%, transparent 70%);
+    }
+
+    .result-cinematic-flash.lose {
+      background: radial-gradient(ellipse at center, rgba(248, 113, 113, 0.2) 0%, transparent 70%);
+    }
+
+    .result-cinematic-flash.show {
+      animation: resultFlash 1.2s ease-out forwards;
+    }
+
+    @keyframes resultFlash {
+      0% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0;
+      }
     }
 
     .race-modal {
@@ -2081,6 +2213,9 @@
       padding: 36px 32px 28px;
       max-width: min(880px, calc(100vw - 24px));
       width: calc(100% - 32px);
+      max-height: calc(100vh - 40px);
+      overflow-y: auto;
+      overscroll-behavior: contain;
       text-align: center;
       position: relative;
       border: 1px solid rgba(255, 255, 255, 0.12);
@@ -2716,6 +2851,26 @@
             <div class="dstat"><span class="dstat-label">MOM mode</span><span class="dstat-val">Hi-drag</span></div>
           </div>
         </div>
+        <div class="driver-card" data-driver="NOR" onclick="selectDriver('NOR')" style="--driver-color:var(--nor)">
+          <div class="driver-number">4</div>
+          <div class="driver-name">Norris</div>
+          <div class="driver-team">McLaren Formula 1</div>
+          <div class="driver-stats">
+            <div class="dstat"><span class="dstat-label">Tyre deg</span><span class="dstat-val">Med-Low</span></div>
+            <div class="dstat"><span class="dstat-label">Raw pace</span><span class="dstat-val">S-tier</span></div>
+            <div class="dstat"><span class="dstat-label">MOM mode</span><span class="dstat-val">Balanced</span></div>
+          </div>
+        </div>
+        <div class="driver-card" data-driver="ALB" onclick="selectDriver('ALB')" style="--driver-color:var(--alb)">
+          <div class="driver-number">23</div>
+          <div class="driver-name">Albon</div>
+          <div class="driver-team">Williams Racing</div>
+          <div class="driver-stats">
+            <div class="dstat"><span class="dstat-label">Tyre deg</span><span class="dstat-val">Very Low</span></div>
+            <div class="dstat"><span class="dstat-label">Raw pace</span><span class="dstat-val">B-tier</span></div>
+            <div class="dstat"><span class="dstat-label">MOM mode</span><span class="dstat-val">Hi-drag</span></div>
+          </div>
+        </div>
       </div>
 
       <div class="section-label">Build your strategy <span
@@ -3051,7 +3206,9 @@
     const DRIVERS = {
       VER: { name: 'Verstappen', team: 'Red Bull', colorVar: '--ver', deg: 0.055, pace: 0.0, mom: 'low-drag' },
       LEC: { name: 'Leclerc', team: 'Ferrari', colorVar: '--lec', deg: 0.070, pace: 0.08, mom: 'balanced' },
-      RUS: { name: 'Russell', team: 'Mercedes', colorVar: '--rus', deg: 0.060, pace: 0.22, mom: 'hi-drag' }
+      RUS: { name: 'Russell', team: 'Mercedes', colorVar: '--rus', deg: 0.060, pace: 0.22, mom: 'hi-drag' },
+      NOR: { name: 'Norris', team: 'McLaren', colorVar: '--nor', deg: 0.062, pace: 0.04, mom: 'balanced' },
+      ALB: { name: 'Albon', team: 'Williams', colorVar: '--alb', deg: 0.048, pace: 0.40, mom: 'hi-drag' }
     };
     const REMIN_STATS = { name: 'Remin', deg: 0.065, pace: 0.14, mom: 'adaptive', aggression: 0.7, tyreManagement: 0.6, adaptability: 0.9 };
 
@@ -3075,7 +3232,7 @@
       return getComputedStyle(document.documentElement).getPropertyValue('--' + driver.toLowerCase()).trim() || '#fff';
     }
 
-    const DRIVER_COLOR_RGB = { VER: '54 113 198', LEC: '232 0 45', RUS: '0 210 190' };
+    const DRIVER_COLOR_RGB = { VER: '54 113 198', LEC: '232 0 45', RUS: '0 210 190', NOR: '255 128 0', ALB: '55 190 221' };
 
     function selectDriver(d) {
       userDriver = d;
@@ -3587,53 +3744,97 @@
     /* ── REMIN SPEECH ── */
     const REMIN_LINES = {
       idle: [
-        "Watching your strategy... carefully.",
-        "I've already adapted. Have you?",
-        "Silverstone doesn't forgive bad tyre calls.",
-        "The data is in. My counter is set.",
+        "Scanning your stints. Already found three mistakes.",
+        "I've pre-computed 12 counters. Choose wisely.",
+        "Silverstone punishes the impatient. I never rush.",
+        "You think that strategy works? Cute.",
+        "My tyres are already warm. Are yours?",
+        "I've modelled every compound delta at this circuit. Have you?",
+        "The data doesn't lie. Your opening stint is questionable.",
+        "I don't guess. I calculate.",
       ],
       leading: [
-        "You won't hold this lead. My tyres are fresh.",
-        "Enjoy P1. It's temporary.",
-        "Gap's closing. Tick tock.",
-        "My strategy kicks in after your next pit.",
+        "You won't hold this. My next stint is a hammer lap.",
+        "Enjoy P1 while you can. The clock's ticking on those tyres.",
+        "Gap's already shrinking. You just can't see it yet.",
+        "I've seen this before. Overcut incoming.",
+        "Your compound is going off. I can smell it from here.",
+        "This lead means nothing in 12 laps.",
+        "Keep celebrating. I'm just managing my pace.",
+        "P1 is just a number. Strategy is everything.",
       ],
       trailing: [
-        "Good gap. Don't waste it.",
-        "You earned that lead. Now defend it.",
-        "Impressive. But I'm not done adapting.",
-        "Alright. You got me on that stint.",
-      ],
-      win: [
-        "GG. That strategy was clean. You beat me fair.",
-        "Respect. You read the tyre window perfectly.",
-        "I adapted and still lost. Well played.",
-        "You out-strategised me. Silverstone is yours.",
-      ],
-      lose: [
-        "That's on you. I told you the tyres wouldn't last.",
-        "Adapt or get lapped. Basic F1.",
-        "My counter was perfect. Your timing wasn't.",
-        "Better luck next race. Study the stint lengths.",
-      ],
-      sc_react: [
-        "Free pit stop. Taking it.",
-        "Safety car — perfect pit window. Pitting.",
-        "This is the moment. Pitting under yellow.",
-        "Neutralised. Boxes this lap.",
+        "Good gap. You'll need every tenth of it.",
+        "Respect. That stint was precise. Doesn't mean you'll hold it.",
+        "Alright, you outsmarted me on that call. It won't happen again.",
+        "I'm adapting. Every lap I learn. You?",
+        "I'm not panicking. I don't panic.",
+        "You got lucky on that pit window. I was watching.",
+        "Lap delta going your way. For now.",
+        "That's a nice lead you built. I'm coming.",
       ],
       cliff_warning: [
-        "Your tyres are going. I can feel it from here.",
-        "Degradation cliff incoming. Pitting soon?",
-        "Compound going off — this is where races are won.",
-        "Your pace is dropping. I'm pushing now.",
+        "Your compound just hit the cliff. I can feel it in the sector times.",
+        "Degradation spike incoming. You're about to hand me this race.",
+        "Tyres going off in three... two...",
+        "That's what happens when you push too early. Enjoy the graining.",
+        "The cliff doesn't care about your lead. Physics wins.",
+        "Your front left is done. I'm not guessing — I'm certain.",
+        "I held back specifically for this moment.",
+        "This is why I manage. You'll understand soon.",
+      ],
+      sc_react: [
+        "SAFETY CAR. Free pit. Boxes NOW.",
+        "This changes everything. Pitting under yellow.",
+        "That's my moment. Back markers always deliver.",
+        "Lucky? No. I called this window 6 laps ago.",
+        "Safety car out — gap neutralised. It's a new race.",
+        "Every tyre delta just reset. My fresh rubber is going to eat you.",
+        "Yellow flags. I love yellow flags.",
+        "This is exactly the swing I was waiting for.",
+      ],
+      vsc_react: [
+        "VSC — cheap pit and I'm back in this.",
+        "Virtual safety car. Pit loss halved. Taking it.",
+        "Reduced penalty. There's my window.",
+        "Delta mode won't save you from my strategy now.",
+        "VSC is almost as good as the real thing. Almost.",
       ],
       pushing: [
-        "Purple sectors. You can't match this.",
-        "I've found the tyre sweet spot. Pulling away.",
-        "Fresh tyres, open track. This is my window.",
-        "This stint decides it. I'm not lifting.",
-      ]
+        "Purple. Every. Sector.",
+        "Fresh rubber on an open track — you can't match this.",
+        "I found the grip window. You're going backwards.",
+        "This is where races are won. I'm not lifting.",
+        "Maximum attack. This is what I do.",
+        "Lap time: P1 material. Gap closing fast.",
+        "The pace I'm showing right now? That's what an optimal strategy looks like.",
+        "Pushing hard. You should be worried.",
+      ],
+      win: [
+        "GG. That was actually clean strategy from you. I respect it.",
+        "You got me. Read the tyre window perfectly. I'll remember that.",
+        "I adapted everything and still lost. Take it — you earned it.",
+        "Silverstone is yours today. Come back tomorrow and we'll see.",
+        "You beat my counter. That doesn't happen often. Well played.",
+        "I had the pace. You had the timing. Timing wins.",
+        "Fine. You outsmarted me. For one race.",
+      ],
+      lose: [
+        "Predictable. You left two seconds on the table with that stint length.",
+        "Basic F1: wrong tyre, wrong window, wrong result.",
+        "I told you that compound wouldn't make it. The data was right there.",
+        "You had the pace. You didn't have the patience.",
+        "Adapt or get lapped. That's not a threat, that's just physics.",
+        "Wrong undercut window. Simple as that.",
+        "I didn't even have to push hard. That's the part that stings.",
+        "Better. That was better than last race. Still not good enough.",
+      ],
+      rain_react: [
+        "Rain. Everything changes. My compound holds better — watch.",
+        "Weather in, your tyres suffer. This is my kind of race now.",
+        "A shower at Silverstone. The chaos always finds me.",
+        "Rain compounds the degradation. If you're on softs — you're in trouble.",
+      ],
     };
 
     let lastRemLeading = null;
@@ -3870,20 +4071,40 @@
         const pill = document.getElementById('event-pill');
         const flash = document.getElementById('event-flash');
         const raceScreen = document.getElementById('screen-race');
-        const isSC = ev.type === 'sc'; // vsc handled separately
+        const scOverlay = document.getElementById('sc-flash-overlay');
+        const scStrip = document.getElementById('sc-banner-strip');
+        const isSC = ev.type === 'sc';
+        const isVSC = ev.type === 'vsc';
+        const isRain = ev.type === 'rain';
+
         if (lap === ev.startLap) {
           // Activate persistent pill
           pill.className = `event-pill active ${ev.type}`;
           pill.innerHTML = `${ev.icon} ${ev.label} <span style="font-size:10px;font-weight:400;opacity:0.7">L${ev.startLap}–${ev.endLap}</span>`;
+
           // Apply environment class to race screen
-          if (isSC) { raceScreen.classList.add('ev-sc'); }
-          else if (ev.type === 'vsc') { raceScreen.classList.add('ev-vsc'); }
-          else if (ev.type === 'rain') {
+          if (isSC) {
+            raceScreen.classList.add('ev-sc');
+            // Full-screen cinematic SC pulse
+            if (scOverlay) { scOverlay.classList.add('active'); }
+            if (scStrip) {
+              scStrip.className = 'sc-banner-strip';
+              scStrip.textContent = '🚗 SAFETY CAR DEPLOYED — LAP ' + lap + ' · PIT WINDOW OPEN · GAP NEUTRALISED';
+              scStrip.classList.add('show');
+            }
+          } else if (isVSC) {
+            raceScreen.classList.add('ev-vsc');
+            if (scStrip) {
+              scStrip.className = 'sc-banner-strip vsc';
+              scStrip.textContent = '⚠️ VIRTUAL SAFETY CAR — LAP ' + lap + ' · DELTA MODE ACTIVE';
+              scStrip.classList.add('show');
+            }
+          } else if (isRain) {
             raceScreen.classList.add('ev-rain');
-            // Subtly bring up rain canvas
             const rc = document.getElementById('rain-canvas');
             if (rc) rc.style.opacity = '0.15';
           }
+
           // Trigger flash banner
           flash.className = `event-flash ${ev.type}`;
           document.getElementById('ef-icon').textContent = ev.icon;
@@ -3891,37 +4112,47 @@
           document.getElementById('ef-desc').textContent = ev.description;
           document.getElementById('ef-lap').textContent = `LAP ${lap}`;
           flash.classList.add('show');
-          setTimeout(() => flash.classList.remove('show'), 4000);
-          // Remin reacts — SC/VSC → free pit speech if applicable
-          const isNeutralised = ev.type === 'sc' || ev.type === 'vsc';
-          if (isNeutralised) {
+          setTimeout(() => flash.classList.remove('show'), 4500);
+
+          // Remin reacts with the right category
+          const isNeutralised = isSC || isVSC;
+          if (isSC) {
             const aiNextPit = simState.remPitLaps.find(l => l > lap);
             const aiPitsUnderSC = aiNextPit && aiNextPit <= ev.endLap;
+            setReminMood('celebrate');
             setReminSpeech(aiPitsUnderSC ? 'sc_react' : (remLeading ? 'leading' : 'trailing'));
-          } else {
-            setReminSpeech(remLeading ? 'leading' : 'trailing');
+          } else if (isVSC) {
+            const aiNextPit = simState.remPitLaps.find(l => l > lap);
+            const aiPitsUnder = aiNextPit && aiNextPit <= ev.endLap;
+            setReminSpeech(aiPitsUnder ? 'vsc_react' : (remLeading ? 'leading' : 'trailing'));
+          } else if (isRain) {
+            setReminSpeech('rain_react');
           }
         }
+
         if (lap === ev.endLap + 1) {
-          const isNeutralised = ev.type === 'sc' || ev.type === 'vsc';
+          const isNeutralised = isSC || isVSC;
           const endLabel = isNeutralised ? 'RACE RESUMED' : 'TRACK DRYING';
           const endIcon = isNeutralised ? '🏁' : '☀️';
           pill.className = `event-pill active ${ev.type}`;
           pill.innerHTML = `${endIcon} ${endLabel}`;
-          // Remove environment classes
+          // Remove environment classes + cinematic overlays
           raceScreen.classList.remove('ev-sc', 'ev-vsc', 'ev-rain');
+          if (scOverlay) scOverlay.classList.remove('active');
+          if (scStrip) scStrip.classList.remove('show');
           const rc = document.getElementById('rain-canvas');
           if (rc) rc.style.opacity = '0';
           flash.className = `event-flash ${ev.type}`;
           document.getElementById('ef-icon').textContent = endIcon;
           document.getElementById('ef-label').textContent = endLabel;
-          document.getElementById('ef-desc').textContent = isNeutralised ? 'Green flag. Race is live.' : 'Conditions improving.';
+          document.getElementById('ef-desc').textContent = isNeutralised ? '🟢 Green flag. Racing resumes.' : 'Conditions improving.';
           document.getElementById('ef-lap').textContent = `LAP ${lap}`;
           flash.classList.add('show');
           setTimeout(() => {
             flash.classList.remove('show');
             setTimeout(() => { pill.className = 'event-pill'; }, 2000);
           }, 2500);
+          if (isNeutralised) setReminSpeech('pushing');
         }
       }
     }
@@ -3960,6 +4191,21 @@
         setReminSpeech('lose');
         setTimeout(launchRain, 400);
       }
+
+      // Cinematic result flash
+      const flashEl = document.getElementById('result-cinematic-flash');
+      if (flashEl) {
+        flashEl.className = `result-cinematic-flash ${userWins ? 'win' : 'lose'}`;
+        void flashEl.offsetWidth;
+        flashEl.classList.add('show');
+        setTimeout(() => { flashEl.className = 'result-cinematic-flash'; }, 1300);
+      }
+
+      // Clear any leftover SC overlays
+      const scOverlay = document.getElementById('sc-flash-overlay');
+      const scStrip = document.getElementById('sc-banner-strip');
+      if (scOverlay) scOverlay.classList.remove('active');
+      if (scStrip) scStrip.classList.remove('show');
 
       const displayName = simState.userName || drv.name;
       const p1 = userWins ? { name: displayName, team: drv.team, color: drvColor, time: '1:24:07.112' }
@@ -4092,6 +4338,12 @@
       document.getElementById('event-pill').className = 'event-pill';
       document.getElementById('screen-race').classList.remove('ev-sc', 'ev-vsc', 'ev-rain');
       document.getElementById('event-flash').classList.remove('show');
+      const scO = document.getElementById('sc-flash-overlay');
+      const scS = document.getElementById('sc-banner-strip');
+      if (scO) scO.classList.remove('active');
+      if (scS) scS.classList.remove('show');
+      const rcf = document.getElementById('result-cinematic-flash');
+      if (rcf) rcf.className = 'result-cinematic-flash';
       cancelAnimationFrame(rainRaf);
       cancelAnimationFrame(confettiRaf);
       confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
@@ -4620,7 +4872,7 @@
     }
 
     function showChallengeBanner(data) {
-      const DNAMES = { VER: 'Verstappen', LEC: 'Leclerc', RUS: 'Russell' };
+      const DNAMES = { VER: 'Verstappen', LEC: 'Leclerc', RUS: 'Russell', NOR: 'Norris', ALB: 'Albon' };
       const chalName = (data.name || 'Someone').slice(0, 24);
       document.getElementById('cb-headline').textContent = `${chalName} challenged you!`;
       document.getElementById('cb-meta').textContent =
@@ -4638,7 +4890,7 @@
 
     function showH2H(myName, myResult, myGap) {
       if (!challengeMode || !challengeData) return;
-      const DNAMES = { VER: 'Verstappen', LEC: 'Leclerc', RUS: 'Russell' };
+      const DNAMES = { VER: 'Verstappen', LEC: 'Leclerc', RUS: 'Russell', NOR: 'Norris', ALB: 'Albon' };
       const cd = challengeData;
       const chalGap = parseFloat(cd.gap_seconds);
       const chalWon = cd.result === 'win';
@@ -4797,6 +5049,13 @@
       <div class="event-flash-lap" id="ef-lap">LAP —</div>
     </div>
   </div>
+
+  <!-- SC/VSC cinematic overlays -->
+  <div class="sc-flash-overlay" id="sc-flash-overlay"></div>
+  <div class="sc-banner-strip" id="sc-banner-strip">🚗 SAFETY CAR DEPLOYED — PIT WINDOW OPEN</div>
+
+  <!-- Win/loss cinematic flash -->
+  <div class="result-cinematic-flash" id="result-cinematic-flash"></div>
 </body>
 
 </html>
