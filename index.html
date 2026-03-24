@@ -2076,6 +2076,9 @@
             Again</button>
           <button class="btn-modal-secondary" onclick="closeRaceModal();downloadResultCard()">↓ Save Result
             Card</button>
+          <button class="btn-modal-secondary" id="modal-btn-challenge"
+            onclick="closeRaceModal();createChallenge(document.getElementById('btn-challenge'));document.getElementById('result-section').scrollIntoView({behavior:'smooth'})">⚔️
+            Challenge a Friend</button>
         </div>
         <div class="modal-ticker" id="modal-ticker"></div>
       </div>
