@@ -44,3 +44,4 @@ data/f1_cache/
 
 # Pre-commit
 .pre-commit-cache/
+data/forecasts_rows.csv
