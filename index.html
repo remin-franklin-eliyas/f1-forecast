@@ -2944,6 +2944,44 @@
       letter-spacing: 0.3px;
     }
 
+    /* ── LEADERBOARD SUB-FILTER ── */
+    .glb-sub-filter {
+      display: none;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .glb-sub-filter.visible {
+      display: flex;
+    }
+
+    .glb-sf-btn {
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 4px 11px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: var(--bg3);
+      color: var(--muted);
+      cursor: pointer;
+      transition: all .15s;
+    }
+
+    .glb-sf-btn:hover {
+      border-color: var(--border2);
+      color: var(--text);
+    }
+
+    .glb-sf-btn.active {
+      border-color: var(--sf-c, var(--accent));
+      color: var(--sf-c, var(--accent));
+      background: rgba(167, 139, 250, 0.08);
+    }
+
     /* ── v2.1: GAP TENSION ZONE ── */
     .gap-bar-wrap.tension {
       animation: tensionPulse 0.6s ease-in-out infinite alternate;
@@ -3758,15 +3796,32 @@
       <div class="global-lb-header">
         <div>
           <div class="global-lb-title">Global <em>Board</em></div>
-          <div style="font-size:13px;color:var(--muted);margin-top:4px">Every race played worldwide · <span
-              id="glb-track-name">Silverstone</span> 2026
-          </div>
+          <div style="font-size:13px;color:var(--muted);margin-top:4px">Every race played worldwide</div>
         </div>
         <span class="lb-live-dot">Live</span>
       </div>
       <div class="global-lb-tabs">
-        <button class="lb-tab active" id="tab-wins" onclick="switchTab('wins')">Closest Wins</button>
-        <button class="lb-tab" id="tab-all" onclick="switchTab('all')">All Races</button>
+        <button class="lb-tab active" id="tab-track" onclick="switchLbTab('track')">By Track</button>
+        <button class="lb-tab" id="tab-driver" onclick="switchLbTab('driver')">By Driver</button>
+        <button class="lb-tab" id="tab-fastest" onclick="switchLbTab('fastest')">Fastest</button>
+        <button class="lb-tab" id="tab-recent" onclick="switchLbTab('recent')">Recent</button>
+      </div>
+      <!-- Track sub-filter -->
+      <div class="glb-sub-filter visible" id="glb-sf-track">
+        <button class="glb-sf-btn active" id="sf-silverstone" style="--sf-c:#a78bfa"
+          onclick="setLbTrack('silverstone')">🇬🇧 Silverstone</button>
+        <button class="glb-sf-btn" id="sf-monaco" style="--sf-c:#FFD700" onclick="setLbTrack('monaco')">🇲🇨
+          Monaco</button>
+        <button class="glb-sf-btn" id="sf-sao_paulo" style="--sf-c:#22c55e" onclick="setLbTrack('sao_paulo')">🇧🇷 São
+          Paulo</button>
+      </div>
+      <!-- Driver sub-filter -->
+      <div class="glb-sub-filter" id="glb-sf-driver">
+        <button class="glb-sf-btn active" id="sf-VER" style="--sf-c:#3671C6" onclick="setLbDriver('VER')">VER</button>
+        <button class="glb-sf-btn" id="sf-LEC" style="--sf-c:#E8002D" onclick="setLbDriver('LEC')">LEC</button>
+        <button class="glb-sf-btn" id="sf-RUS" style="--sf-c:#00D2BE" onclick="setLbDriver('RUS')">RUS</button>
+        <button class="glb-sf-btn" id="sf-NOR" style="--sf-c:#FF8000" onclick="setLbDriver('NOR')">NOR</button>
+        <button class="glb-sf-btn" id="sf-ALB" style="--sf-c:#37BEDD" onclick="setLbDriver('ALB')">ALB</button>
       </div>
       <div class="global-lb-table" id="global-lb-table">
         <div class="glb-empty" id="glb-loading">Loading leaderboard…</div>
@@ -3787,11 +3842,15 @@
               name text, driver text,
               user_strategy text, remin_strategy text,
               result text, gap_seconds numeric,
+              track text, fastest_lap numeric,
               created_at timestamptz default now()
             );
             alter table forecasts enable row level security;
             create policy "anon_insert" on forecasts
               for insert to anon with check (true);
+            -- If upgrading an existing table, run:
+            -- alter table forecasts add column if not exists track text;
+            -- alter table forecasts add column if not exists fastest_lap numeric;
        3. Replace the two values below (Project Settings → API).
     ─────────────────────────────────────────────────────────── */
     const SUPABASE_URL = 'https://uqlajejcigqffjfdpgeu.supabase.co';
@@ -5243,7 +5302,9 @@
         user_strategy: userStr,
         remin_strategy: remStr,
         result: userWins ? 'win' : 'lose',
-        gap_seconds: parseFloat(gap)
+        gap_seconds: parseFloat(gap),
+        track: currentTrackKey,
+        fastest_lap: parseFloat(Math.min(...simState.raceData.laps.map(f => f.playerLapTime)).toFixed(3))
       });
 
       simState.userWins = userWins;
@@ -5261,7 +5322,8 @@
 
       fetchLeaderboard(simState.userName, parseFloat(gap), userWins);
       const h2hResult = challengeMode ? showH2H(simState.userName, userWins ? 'win' : 'lose', parseFloat(gap)) : null;
-      setTimeout(() => loadGlobalLeaderboard(lbCurrentTab), 1500);
+      // Switch global board to the track just played, then reload
+      setTimeout(() => { switchLbTab('track'); setLbTrack(currentTrackKey); }, 1500);
 
       const rs = document.getElementById('result-section');
       rs.style.display = 'block';
@@ -6093,9 +6155,12 @@
     }
 
     /* ── GLOBAL LEADERBOARD ── */
-    let lbCurrentTab = 'wins';
+    let lbCurrentTab = 'track';
+    let lbTrackFilter = 'silverstone';
+    let lbDriverFilter = 'VER';
 
     const DRIVER_COLORS = { VER: '#3671C6', LEC: '#E8002D', RUS: '#00D2BE', NOR: '#FF8000', ALB: '#37BEDD' };
+    const TRACK_LABELS = { silverstone: 'Silverstone', monaco: 'Monaco', sao_paulo: 'São Paulo' };
 
     async function loadGlobalLeaderboard(tab) {
       if (!SUPABASE_URL || SUPABASE_URL === 'YOUR_SUPABASE_URL') {
@@ -6103,31 +6168,44 @@
           '<div class="glb-empty">Configure Supabase to see the live leaderboard.</div>';
         return;
       }
+      lbCurrentTab = tab;
       const tableEl = document.getElementById('global-lb-table');
-      tableEl.innerHTML = '<div class="glb-empty" id="glb-loading">Loading\u2026</div>';
+      tableEl.innerHTML = '<div class="glb-empty">Loading…</div>';
 
       try {
-        const isWins = tab === 'wins';
-        const filter = isWins ? '?result=eq.win&order=gap_seconds.asc&limit=10'
-          : '?order=created_at.desc&limit=10';
+        let filter, h3, h4;
+        if (tab === 'track') {
+          filter = `?track=eq.${encodeURIComponent(lbTrackFilter)}&result=eq.win&order=gap_seconds.asc&limit=10`;
+          h3 = 'Gap'; h4 = 'Time';
+        } else if (tab === 'driver') {
+          filter = `?driver=eq.${encodeURIComponent(lbDriverFilter)}&result=eq.win&order=gap_seconds.asc&limit=10`;
+          h3 = 'Gap'; h4 = 'Track';
+        } else if (tab === 'fastest') {
+          filter = `?result=eq.win&order=fastest_lap.asc&limit=10`;
+          h3 = 'Fastest Lap'; h4 = 'Track';
+        } else {
+          filter = `?order=created_at.desc&limit=10`;
+          h3 = 'Gap'; h4 = 'Result';
+        }
+
         const res = await fetch(
           `${SUPABASE_URL}/rest/v1/forecasts${filter}`,
           { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } }
         );
         const rows = await res.json();
         if (!res.ok) {
-          tableEl.innerHTML = `<div class="glb-empty">DB error: ${rows?.message || rows?.error || JSON.stringify(rows)}</div>`;
+          tableEl.innerHTML = '<div class="glb-empty">No data yet — be the first on the board!</div>';
           return;
         }
         if (!Array.isArray(rows) || rows.length === 0) {
-          tableEl.innerHTML = '<div class="glb-empty">No races recorded yet — play a race to be the first on the board!</div>';
+          tableEl.innerHTML = '<div class="glb-empty">No races recorded yet — play a race to get on the board!</div>';
           return;
         }
 
-        const posClass = i => i === 0 ? 'p1' : i === 1 ? 'p2' : i === 2 ? 'p3' : '';
-        const posIcon = i => i === 0 ? '\uD83E\uDD47' : i === 1 ? '\uD83E\uDD48' : i === 2 ? '\uD83E\uDD49' : String(i + 1);
-        const drvColor = d => DRIVER_COLORS[d] || '#a78bfa';
-        const timeSince = iso => {
+        const pc = i => i === 0 ? 'p1' : i === 1 ? 'p2' : i === 2 ? 'p3' : '';
+        const icon = i => i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : String(i + 1);
+        const dc = d => DRIVER_COLORS[d] || '#a78bfa';
+        const ago = iso => {
           if (!iso) return '';
           const s = Math.floor((Date.now() - new Date(iso)) / 1000);
           if (s < 60) return `${s}s ago`;
@@ -6137,43 +6215,80 @@
         };
 
         let html = `<div class="glb-row glb-head">
-          <div>\u00a0</div>
-          <div>Racer</div>
-          <div style="text-align:right">${isWins ? 'Gap' : 'Gap'}</div>
-          <div style="text-align:center">Result</div>
+          <div>&nbsp;</div><div>Racer</div>
+          <div style="text-align:right">${h3}</div>
+          <div style="text-align:center">${h4}</div>
         </div>`;
 
         rows.forEach((r, i) => {
-          const strat = (r.user_strategy || '').slice(0, 30);
-          html += `<div class="glb-row ${posClass(i)}">
-            <div class="glb-pos ${posClass(i)}">${posIcon(i)}</div>
+          const strat = (r.user_strategy || '').slice(0, 28);
+          const trackLabel = TRACK_LABELS[r.track] || r.track || '—';
+          let col3, col4;
+
+          if (tab === 'fastest') {
+            col3 = `<div class="glb-gap" style="color:#FFD700">${r.fastest_lap ? parseFloat(r.fastest_lap).toFixed(3) + 's' : '—'}</div>`;
+            col4 = `<span class="glb-badge" style="background:rgba(255,255,255,0.04);border:1px solid var(--border);color:var(--muted);white-space:nowrap">${trackLabel}</span>`;
+          } else if (tab === 'driver') {
+            col3 = `<div class="glb-gap">${parseFloat(r.gap_seconds || 0).toFixed(3)}s</div>`;
+            col4 = `<span class="glb-badge" style="background:rgba(255,255,255,0.04);border:1px solid var(--border);color:var(--muted);white-space:nowrap">${trackLabel}</span>`;
+          } else if (tab === 'recent') {
+            col3 = `<div class="glb-gap" style="color:${r.result === 'win' ? '#34d399' : '#f87171'}">${parseFloat(r.gap_seconds || 0).toFixed(3)}s</div>`;
+            col4 = `<span class="glb-badge ${r.result}">${r.result === 'win' ? 'Win' : 'Loss'}</span>`;
+          } else {
+            col3 = `<div class="glb-gap">${parseFloat(r.gap_seconds || 0).toFixed(3)}s</div>`;
+            col4 = `<span class="glb-meta" style="white-space:nowrap">${ago(r.created_at)}</span>`;
+          }
+
+          html += `<div class="glb-row ${pc(i)}">
+            <div class="glb-pos ${pc(i)}">${icon(i)}</div>
             <div>
               <div class="glb-name">${(r.name || 'Anon').slice(0, 20)}</div>
               <div class="glb-meta">
-                <span class="glb-driver-badge" style="background:${drvColor(r.driver)}">${r.driver || '?'}</span>
+                <span class="glb-driver-badge" style="background:${dc(r.driver)}">${r.driver || '?'}</span>
                 &nbsp;${strat}
               </div>
-              <div class="glb-meta" style="margin-top:1px">${timeSince(r.created_at)}</div>
+              ${tab === 'recent' || tab === 'fastest' ? `<div class="glb-meta" style="margin-top:1px">${ago(r.created_at)}</div>` : ''}
             </div>
-            <div class="glb-gap">${parseFloat(r.gap_seconds || 0).toFixed(3)}s</div>
-            <div><span class="glb-badge ${r.result}">${r.result === 'win' ? 'Win' : 'Loss'}</span></div>
+            ${col3}${col4}
           </div>`;
         });
 
         tableEl.innerHTML = html;
         const now = new Date();
         document.getElementById('glb-refresh').textContent =
-          `Last updated ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')} `;
+          `Updated ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`;
       } catch (e) {
         tableEl.innerHTML = '<div class="glb-empty">Could not load leaderboard.</div>';
       }
     }
 
-    function switchTab(tab) {
+    function switchLbTab(tab) {
       lbCurrentTab = tab;
-      document.getElementById('tab-wins').classList.toggle('active', tab === 'wins');
-      document.getElementById('tab-all').classList.toggle('active', tab === 'all');
+      ['track', 'driver', 'fastest', 'recent'].forEach(t =>
+        document.getElementById(`tab-${t}`)?.classList.toggle('active', t === tab)
+      );
+      document.getElementById('glb-sf-track')?.classList.toggle('visible', tab === 'track');
+      document.getElementById('glb-sf-driver')?.classList.toggle('visible', tab === 'driver');
       loadGlobalLeaderboard(tab);
+    }
+
+    function switchTab(tab) {
+      // back-compat shim — maps old 2-tab names to 4-tab system
+      switchLbTab(tab === 'all' ? 'recent' : 'track');
+    }
+
+    function setLbTrack(key) {
+      lbTrackFilter = key;
+      document.querySelectorAll('#glb-sf-track .glb-sf-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(`sf-${key}`)?.classList.add('active');
+      loadGlobalLeaderboard('track');
+    }
+
+    function setLbDriver(drv) {
+      lbDriverFilter = drv;
+      document.querySelectorAll('#glb-sf-driver .glb-sf-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(`sf-${drv}`)?.classList.add('active');
+      loadGlobalLeaderboard('driver');
     }
 
     /* ── CHALLENGE SYSTEM ── */
@@ -6361,7 +6476,7 @@
     })();
 
     checkChallengeParam();
-    loadGlobalLeaderboard('wins');
+    loadGlobalLeaderboard('track');
     setInterval(() => loadGlobalLeaderboard(lbCurrentTab), 30000);
   </script>
 
