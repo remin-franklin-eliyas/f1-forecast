@@ -2194,7 +2194,7 @@
     }
 
     .result-cinematic-flash.show {
-      animation: resultFlash 1.2s ease-out forwards;
+      animation: resultFlash 2.2s ease-out forwards;
     }
 
     @keyframes resultFlash {
@@ -3942,7 +3942,7 @@
         if (gc && gc.parentElement?.clientWidth > 0) { gc.width = gc.parentElement.clientWidth; drawGapChart(); }
       }, 60);
 
-      // AI reveal overlay — 900ms flash then start race
+      // AI reveal overlay — hold long enough to read, then start race
       const aiReveal = document.getElementById('ai-reveal-overlay');
       const aiSub = document.getElementById('ai-reveal-sub');
       const aiHeadline = document.getElementById('ai-reveal-headline');
@@ -3953,10 +3953,10 @@
         aiReveal.classList.add('show');
         setTimeout(() => {
           aiReveal.classList.remove('show');
-          simInterval = setInterval(tick, 200);
-        }, 1000);
+          simInterval = setInterval(tick, 380);
+        }, 2400);
       } else {
-        simInterval = setInterval(tick, 200);
+        simInterval = setInterval(tick, 380);
       }
     }
 
@@ -4112,7 +4112,7 @@
           document.getElementById('ef-desc').textContent = ev.description;
           document.getElementById('ef-lap').textContent = `LAP ${lap}`;
           flash.classList.add('show');
-          setTimeout(() => flash.classList.remove('show'), 4500);
+          setTimeout(() => flash.classList.remove('show'), 6000);
 
           // Remin reacts with the right category
           const isNeutralised = isSC || isVSC;
@@ -4150,8 +4150,8 @@
           flash.classList.add('show');
           setTimeout(() => {
             flash.classList.remove('show');
-            setTimeout(() => { pill.className = 'event-pill'; }, 2000);
-          }, 2500);
+            setTimeout(() => { pill.className = 'event-pill'; }, 3000);
+          }, 3500);
           if (isNeutralised) setReminSpeech('pushing');
         }
       }
@@ -4198,7 +4198,7 @@
         flashEl.className = `result-cinematic-flash ${userWins ? 'win' : 'lose'}`;
         void flashEl.offsetWidth;
         flashEl.classList.add('show');
-        setTimeout(() => { flashEl.className = 'result-cinematic-flash'; }, 1300);
+        setTimeout(() => { flashEl.className = 'result-cinematic-flash'; }, 2300);
       }
 
       // Clear any leftover SC overlays
@@ -4310,13 +4310,13 @@
         if (!userWins) r2?.classList.add('result-lose-p2');
       }, 400);
 
-      setTimeout(() => showRaceModal(userWins, gap, simState.userName, drv, h2hResult), 700);
+      setTimeout(() => showRaceModal(userWins, gap, simState.userName, drv, h2hResult), 1600);
     }
 
     function togglePause() {
       paused = !paused;
       if (paused) { clearInterval(simInterval); document.getElementById('btn-pause').textContent = 'Resume'; }
-      else { simInterval = setInterval(tick, Math.round(200 / simSpeed)); document.getElementById('btn-pause').textContent = 'Pause'; }
+      else { simInterval = setInterval(tick, Math.round(380 / simSpeed)); document.getElementById('btn-pause').textContent = 'Pause'; }
     }
 
     function showScreen(id) {
@@ -4488,7 +4488,7 @@
       [1, 2, 5].forEach(n => document.getElementById(`spd${n}`)?.classList.toggle('active', n === x));
       if (!paused && simInterval) {
         clearInterval(simInterval);
-        simInterval = setInterval(tick, Math.round(200 / x));
+        simInterval = setInterval(tick, Math.round(380 / x));
       }
     }
 
@@ -4530,7 +4530,7 @@
         setTimeout(() => {
           const el = document.getElementById(id);
           if (el) el.classList.add('on-red');
-        }, i * 220);
+        }, i * 420);
       });
 
       setTimeout(() => {
@@ -4664,7 +4664,7 @@
         overlay.classList.add('show');
         // Close on backdrop click
         overlay.onclick = (e) => { if (e.target === overlay) closeRaceModal(); };
-      }, lights.length * 220 + 200);
+      }, lights.length * 420 + 600);
     }
 
     function closeRaceModal() {
@@ -4689,9 +4689,7 @@
         window.open(tweetUrl, '_blank', 'noopener,noreferrer,width=550,height=420');
       }
     }
-
-    /* ── TYPEWRITER HELPER ── */
-    function typewriterEl(el, text, speed = 20) {
+    function typewriterEl(el, text, speed = 30) {
       el.textContent = '';
       el.classList.remove('done');
       let i = 0;
