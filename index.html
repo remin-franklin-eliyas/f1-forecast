@@ -1761,6 +1761,93 @@
       cursor: not-allowed;
     }
 
+    /* ── POST-RACE BUTTON ROW ── */
+    .result-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .result-actions .btn-again {
+      grid-column: 1 / -1;
+      /* Race Again spans full width */
+      margin-top: 0;
+    }
+
+    @media (min-width: 541px) {
+      .result-actions {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .result-actions .btn-again {
+        grid-column: unset;
+      }
+    }
+
+    /* ── MODAL IQ STRIP ── */
+    .modal-iq-strip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      margin-top: 10px;
+      margin-bottom: 2px;
+    }
+
+    .modal-iq-score {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 900;
+      line-height: 1;
+      min-width: 36px;
+      text-align: center;
+    }
+
+    .modal-iq-right {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      min-width: 0;
+    }
+
+    .modal-iq-grade {
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+    }
+
+    .modal-iq-sub {
+      font-size: 10px;
+      color: var(--muted);
+      line-height: 1.3;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 180px;
+    }
+
+    .modal-iq-bar-wrap {
+      flex: 1;
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      min-width: 30px;
+      overflow: hidden;
+    }
+
+    .modal-iq-bar-fill {
+      height: 100%;
+      border-radius: 2px;
+      transition: width .6s cubic-bezier(.4, 0, .2, 1);
+    }
+
     /* ── CHALLENGE URL BOX ── */
     .challenge-url-wrap {
       display: none;
@@ -3594,6 +3681,17 @@
             <div class="modal-analysis-label" id="modal-analysis-label">RACE ANALYSIS</div>
             <div class="modal-analysis-text" id="modal-analysis-text"></div>
             <div class="modal-analysis-moments" id="modal-analysis-moments"></div>
+            <!-- IQ strip injected by showRaceModal() -->
+            <div class="modal-iq-strip" id="modal-iq-strip" style="display:none">
+              <div class="modal-iq-score" id="modal-iq-score">—</div>
+              <div class="modal-iq-right">
+                <div class="modal-iq-grade" id="modal-iq-grade">—</div>
+                <div class="modal-iq-sub" id="modal-iq-sub"></div>
+              </div>
+              <div class="modal-iq-bar-wrap">
+                <div class="modal-iq-bar-fill" id="modal-iq-bar-fill" style="width:0%"></div>
+              </div>
+            </div>
             <div class="modal-heatmap-section" id="modal-heatmap-section" style="display:none">
               <div class="modal-heatmap-label">⬛ LAP-BY-LAP PACE MAP</div>
               <div id="modal-heatmap-grid-user"></div>
@@ -3767,13 +3865,12 @@
           </div>
           <div class="h2h-section" id="h2h-section"></div>
         </div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px">
+        <div class="result-actions">
           <button class="btn-again" onclick="goSetup()">Race Again</button>
           <button class="btn-share" onclick="shareResult()">↗ Share</button>
-          <button class="btn-share" onclick="downloadResultCard()">↓ Save&nbsp;Card</button>
-          <button class="btn-share" id="btn-replay" onclick="replayRace()" style="display:none">▶ Watch Replay</button>
-          <button class="btn-challenge" id="btn-challenge" onclick="createChallenge(this)">⚔️ Challenge a
-            Friend</button>
+          <button class="btn-share" onclick="downloadResultCard()">↓ Save Card</button>
+          <button class="btn-share" id="btn-replay" onclick="replayRace()" style="display:none">▶ Replay</button>
+          <button class="btn-challenge" id="btn-challenge" onclick="createChallenge(this)">⚔️ Challenge</button>
         </div>
         <div class="challenge-url-wrap" id="challenge-url-wrap">
           <div class="challenge-url-label">Share this link — they play against your result</div>
@@ -5309,8 +5406,8 @@
 
       simState.userWins = userWins;
       simState.finalGap = parseFloat(gap);
-      const score = calcStrategyScore(simState.userStints, simState.userPitLaps, userWins, parseFloat(gap));
-      const { grade, color: gradeColor, sub } = getScoreGrade(score);
+      const { score, reasons } = calcStrategyScore(simState.userStints, simState.userPitLaps, userWins, parseFloat(gap), simState.raceData, simState.event);
+      const { grade, color: gradeColor, sub } = getScoreGrade(score, reasons);
       // v2.1: animated score count-up
       animateScoreCount(score, gradeColor);
       document.getElementById('score-grade').textContent = grade;
@@ -5409,6 +5506,8 @@
       if (replayBar2) replayBar2.classList.remove('visible');
       const btnReplay2 = document.getElementById('btn-replay');
       if (btnReplay2) btnReplay2.style.display = 'none';
+      const iqStrip2 = document.getElementById('modal-iq-strip');
+      if (iqStrip2) iqStrip2.style.display = 'none';
       showScreen('screen-setup');
     }
 
@@ -5733,31 +5832,162 @@
     }
 
     /* ── STRATEGY SCORE ── */
-    function calcStrategyScore(stints, pitLaps, userWins, gapSec) {
-      let score = 42;
-      if (stints.length === 2) score += 15;
-      else if (stints.length === 3) score += 10;
-      else if (stints.length === 1) score -= 20;
-      const compounds = new Set(stints.map(s => s.compound));
-      if (compounds.size >= 2) score += 10;
-      if (compounds.size === 3) score += 5;
-      pitLaps.forEach((_, i) => {
-        const len = stints[i].laps;
-        if (len >= 12 && len <= 22) score += 8;
-        else if (len >= 23 && len <= 28) score += 4;
-        else score -= 4;
+    function calcStrategyScore(stints, pitLaps, userWins, gapSec, raceData, event) {
+      // ── Base ──────────────────────────────────────────────────────────
+      let score = 38;
+      const reasons = [];
+
+      const compounds = stints.map(s => s.compound);
+      const uniqueCpds = new Set(compounds);
+      const laps = raceData?.laps || [];
+      const trackDeg = currentTrack.degScale || 1.0;
+      const LAPS_TOTAL = LAPS;
+
+      // ── STOP COUNT ────────────────────────────────────────────────────
+      // One stop is risky; two is clean; three is aggressive; four+ is panic
+      if (stints.length === 1) { score -= 22; reasons.push('no_stop'); }
+      else if (stints.length === 2) { score += 14; }
+      else if (stints.length === 3) { score += 9; }
+      else if (stints.length >= 4) { score -= 8; reasons.push('too_many_stops'); }
+
+      // ── COMPOUND VARIETY ──────────────────────────────────────────────
+      if (uniqueCpds.size === 1) { score -= 18; reasons.push('mono_compound'); }
+      else if (uniqueCpds.size === 2) { score += 8; }
+      else if (uniqueCpds.size === 3) { score += 14; }
+
+      // Penalty: same compound used back-to-back (wasted stop)
+      for (let i = 1; i < stints.length; i++) {
+        if (stints[i].compound === stints[i - 1].compound) { score -= 10; reasons.push('back_to_back'); break; }
+      }
+
+      // ── STINT LENGTH ANALYSIS ──────────────────────────────────────────
+      const evenSplit = LAPS_TOTAL / stints.length;
+      stints.forEach((s, i) => {
+        const len = s.laps;
+        const cData = { ...COMPOUND[s.compound], ...(currentTrack.compounds?.[s.compound] || {}) };
+        const cliff = cData.cliff;
+
+        // Too short = wasted pit-stop time
+        if (len < 8) { score -= 10; reasons.push('short_stint'); }
+        else if (len < 12) { score -= 4; }
+
+        // Too long opener burns fuel advantage but wastes fresh tyre pace window
+        if (i === 0 && len > LAPS_TOTAL * 0.55) { score -= 8; reasons.push('long_opener'); }
+
+        // Balanced stint distribution bonus (within 35% of even split)
+        if (Math.abs(len - evenSplit) / evenSplit < 0.35) score += 3;
       });
-      if (userWins) score += 20;
-      if (userWins && gapSec < 5) score += 5;
-      return Math.max(0, Math.min(100, Math.round(score)));
+
+      // ── CLIFF OVERRUN ─────────────────────────────────────────────────
+      // Per-lap analysis: count laps driven beyond the cliff on each stint
+      if (laps.length > 0) {
+        let cliffPenalty = 0;
+        let stintIdx = 0, stintLapCount = 0;
+        for (const frame of laps) {
+          stintLapCount++;
+          if (stintIdx >= stints.length) break;
+          const s = stints[stintIdx];
+          const cData = { ...COMPOUND[s.compound], ...(currentTrack.compounds?.[s.compound] || {}) };
+          const cliff = cData.cliff;
+          const overByLaps = Math.max(0, frame.playerStintLap - cliff);
+          if (overByLaps > 0) {
+            // Scale penalty by how far over: 1 lap over = -0.5, 4 laps = -2, 8 = -5
+            cliffPenalty += Math.min(overByLaps * 0.6, 5) * trackDeg;
+          }
+          if (stintLapCount >= s.laps) { stintIdx++; stintLapCount = 0; }
+        }
+        score -= Math.round(cliffPenalty);
+        if (cliffPenalty > 3) reasons.push('cliff_overrun');
+      }
+
+      // ── OPENING COMPOUND QUALITY ──────────────────────────────────────
+      // Soft opener is aggressive and high-reward; hard opener is conservative
+      if (compounds[0] === 'soft') score += 3;
+      if (compounds[0] === 'hard' && stints.length < 3) { score -= 5; reasons.push('hard_opener_low_stops'); }
+
+      // ── CLOSING COMPOUND ──────────────────────────────────────────────
+      // Ending on soft with enough laps left is actually a negative (should save for final push)
+      const lastCompound = compounds[compounds.length - 1];
+      const lastStintLen = stints[stints.length - 1].laps;
+      if (lastCompound === 'soft' && lastStintLen >= 16) score += 6;  // aggressive closing S push
+      if (lastCompound === 'hard' && lastStintLen <= 8) { score -= 4; reasons.push('dead_hard_close'); }
+
+      // ── RESULT & GAP QUALITY ──────────────────────────────────────────
+      if (userWins) {
+        if (gapSec < 1) { score += 26; }  // razor-edge win: you read every lap
+        else if (gapSec < 3) { score += 20; }
+        else if (gapSec < 8) { score += 14; }
+        else if (gapSec < 15) { score += 8; }   // comfortable but opponent may have been weak
+        else { score += 2; reasons.push('soft_win'); } // big gap = Remin had bad day
+      } else {
+        // Losing penalty scales with margin
+        if (gapSec < 2) { score -= 4; }   // very close loss — nearly there
+        else if (gapSec < 8) { score -= 10; }
+        else if (gapSec < 20) { score -= 18; reasons.push('heavy_loss'); }
+        else { score -= 26; reasons.push('crushing_loss'); }
+      }
+
+      // ── EVENT EXPLOITATION ────────────────────────────────────────────
+      // If an SC/VSC occurred and user pitted during it → bonus
+      if (event && (event.type === 'sc' || event.type === 'vsc') && event.startLap) {
+        const pittedUnderSc = pitLaps.some(p => p >= event.startLap && p <= event.endLap);
+        if (pittedUnderSc) { score += 10; } // exploited the SC window
+        else if (pitLaps.some(p => p > event.endLap && p <= event.endLap + 3)) { score -= 5; } // pitted just after = missed it
+      }
+
+      // ── TRACK-SPECIFIC CONTEXT ────────────────────────────────────────
+      if (currentTrackKey === 'monaco') {
+        // Monaco: 1-stop is fine; 2-stop is punished by traffic loss
+        if (stints.length === 1) score += 14;  // partially restore single-stop on Monaco
+        if (stints.length >= 3) { score -= 6; reasons.push('monaco_overstops'); }
+      }
+      if (currentTrackKey === 'sao_paulo') {
+        // Sao Paulo: high deg — staying out too long on any compound is brutal
+        if (reasons.includes('cliff_overrun')) score -= 4; // additional deg penalty
+      }
+
+      return { score: Math.max(0, Math.min(100, Math.round(score))), reasons };
     }
 
-    function getScoreGrade(score) {
-      if (score >= 90) return { grade: 'Race Engineer', color: '#34d399', sub: 'Textbook strategy. Silverstone mastered.' };
-      if (score >= 75) return { grade: 'Strategy Chief', color: '#a78bfa', sub: 'Strong call. Pit timing was the key.' };
-      if (score >= 58) return { grade: 'Analyst', color: '#FFD700', sub: "Decent read — there's a faster window though." };
-      if (score >= 40) return { grade: 'Junior Engineer', color: '#f87171', sub: 'Tyre management cost you critical seconds.' };
-      return { grade: 'Backmarker', color: '#6b6b8a', sub: 'Rethink the opening stint entirely.' };
+    function getScoreGrade(score, reasons = []) {
+      const track = currentTrack?.name || 'the circuit';
+      const hasMono = reasons.includes('mono_compound');
+      const hasCliff = reasons.includes('cliff_overrun');
+      const hasSoftWin = reasons.includes('soft_win');
+      const hasCrush = reasons.includes('crushing_loss');
+      const hasBack = reasons.includes('back_to_back');
+
+      if (score >= 92) return {
+        grade: 'Race Engineer', color: '#34d399',
+        sub: `Textbook strategy. ${track} mastered — you out-thought the AI on every call.`
+      };
+      if (score >= 80) return {
+        grade: 'Strategy Chief', color: '#a78bfa',
+        sub: hasCliff ? `Strong overall, but you left time on the table running past the cliff.`
+          : `Precise timing. One slightly braver call and this is perfect.`
+      };
+      if (score >= 67) return {
+        grade: 'Analyst', color: '#60a5fa',
+        sub: hasBack ? `Back-to-back compounds wasted a pit stop — swap order and try again.`
+          : hasSoftWin ? `You won, but the gap suggests Remin underperformed. Can you replicate this on a hard day?`
+            : `Decent read — there's a faster window you left unexplored.`
+      };
+      if (score >= 52) return {
+        grade: 'Junior Engineer', color: '#FFD700',
+        sub: hasCliff ? `Tyre cliff cost you several critical seconds mid-race.`
+          : hasMono ? `Single compound across all stints killed your pace window.`
+            : `The structure was there — pit timing let you down.`
+      };
+      if (score >= 36) return {
+        grade: 'Data Intern', color: '#f87171',
+        sub: hasCrush ? `That gap tells the whole story. The opening stint needs a complete rethink.`
+          : hasMono ? `Running one compound the entire race is never the answer on this track.`
+            : `Tyre management and stop timing both need work. Study Remin\'s strategy.`
+      };
+      return {
+        grade: 'Backmarker', color: '#6b6b8a',
+        sub: `Back to the sim — rethink everything from compound selection to pit windows.`
+      };
     }
 
     /* ── SPEED CONTROL ── */
@@ -5886,6 +6116,26 @@
                 const c = pillColors[t];
                 return `<span class="modal-moment-pill" style="border-color:${c.border};background:${c.bg};color:${c.color}">Lap ${m.lap} — ${m.text}</span>`;
               }).join('');
+            }
+
+            // IQ strip in modal
+            const iqStrip = document.getElementById('modal-iq-strip');
+            if (iqStrip && simState.userWins !== undefined && simState.finalGap !== undefined) {
+              const { score: iqScore, reasons: iqReasons } = calcStrategyScore(
+                simState.userStints, simState.userPitLaps,
+                simState.userWins, simState.finalGap,
+                simState.raceData, simState.event
+              );
+              const { grade: iqGrade, color: iqColor, sub: iqSub } = getScoreGrade(iqScore, iqReasons);
+              const scoreEl = document.getElementById('modal-iq-score');
+              const gradeEl = document.getElementById('modal-iq-grade');
+              const subEl = document.getElementById('modal-iq-sub');
+              const fillEl = document.getElementById('modal-iq-bar-fill');
+              if (scoreEl) { scoreEl.textContent = iqScore; scoreEl.style.color = iqColor; }
+              if (gradeEl) { gradeEl.textContent = iqGrade; gradeEl.style.color = iqColor; }
+              if (subEl) { subEl.textContent = iqSub; }
+              if (fillEl) { fillEl.style.width = iqScore + '%'; fillEl.style.background = iqColor; }
+              iqStrip.style.display = 'flex';
             }
 
             // v2.1: heatmap in modal
