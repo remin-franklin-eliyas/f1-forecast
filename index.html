@@ -4,7 +4,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>F1 Strategy Battle — Silverstone 2026</title>
+  <title>F1 Strategy Battle — Beat Remin at Silverstone 2026</title>
+
+  <!-- Favicon: chequered flag SVG inline -->
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23080810'/><rect x='4' y='4' width='6' height='6' fill='%23f0f0f0'/><rect x='10' y='4' width='6' height='6' fill='%23080810'/><rect x='16' y='4' width='6' height='6' fill='%23f0f0f0'/><rect x='22' y='4' width='6' height='6' fill='%23080810'/><rect x='4' y='10' width='6' height='6' fill='%23080810'/><rect x='10' y='10' width='6' height='6' fill='%23f0f0f0'/><rect x='16' y='10' width='6' height='6' fill='%23080810'/><rect x='22' y='10' width='6' height='6' fill='%23f0f0f0'/><rect x='4' y='16' width='6' height='6' fill='%23f0f0f0'/><rect x='10' y='16' width='6' height='6' fill='%23080810'/><rect x='16' y='16' width='6' height='6' fill='%23f0f0f0'/><rect x='22' y='16' width='6' height='6' fill='%23080810'/><rect x='4' y='22' width='6' height='6' fill='%23a78bfa'/><rect x='10' y='22' width='6' height='6' fill='%23f0f0f0'/><rect x='16' y='22' width='6' height='6' fill='%23a78bfa'/><rect x='22' y='22' width='6' height='6' fill='%23f0f0f0'/></svg>">
+  <meta name="theme-color" content="#080810">
+
+  <!-- SEO -->
+  <meta name="description"
+    content="Pick your tyre strategy. Race Remin's adaptive AI over 52 laps at Silverstone. Pure strategy — no driving skill needed. Claim the global top spot.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://remin-franklin-eliyas.github.io/f1-forecast/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://remin-franklin-eliyas.github.io/f1-forecast/">
+  <meta property="og:title" content="F1 Strategy Battle — Beat Remin at Silverstone 2026">
+  <meta property="og:description"
+    content="Pick your tyre strategy for 52 laps. Out-think Remin's adaptive AI and claim the global leaderboard top spot.">
+  <meta property="og:image" content="https://remin-franklin-eliyas.github.io/f1-forecast/preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="F1 Strategy Battle — Beat Remin at Silverstone 2026">
+  <meta name="twitter:description"
+    content="Pick your tyre strategy for 52 laps. Out-think Remin's adaptive AI and claim the global leaderboard top spot.">
+  <meta name="twitter:image" content="https://remin-franklin-eliyas.github.io/f1-forecast/preview.png">
+
+  <!-- Web App Manifest -->
+  <link rel="manifest"
+    href="data:application/manifest+json,{&quot;name&quot;:&quot;F1 Strategy Battle&quot;,&quot;short_name&quot;:&quot;F1 Battle&quot;,&quot;start_url&quot;:&quot;/f1-forecast/&quot;,&quot;display&quot;:&quot;standalone&quot;,&quot;background_color&quot;:&quot;%23080810&quot;,&quot;theme_color&quot;:&quot;%23080810&quot;,&quot;description&quot;:&quot;Beat Remin on F1 tyre strategy.&quot;}">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link
     href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&family=Barlow:wght@400;500&display=swap"
@@ -179,6 +212,82 @@
       color: var(--muted);
       line-height: 1.6;
       max-width: 480px;
+    }
+
+    .hero-race-count {
+      margin-top: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .hero-race-count::before {
+      content: '🌍';
+      font-size: 12px;
+    }
+
+    /* ── PERSONAL BEST BAR ── */
+    .pb-bar {
+      margin-bottom: 28px;
+      margin-top: -8px;
+    }
+
+    .pb-bar-inner {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      align-items: center;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 16px;
+      font-size: 12px;
+    }
+
+    .pb-stat {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pb-label {
+      color: var(--muted);
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .pb-value {
+      color: var(--text);
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .pb-value.gold {
+      color: #FFB700;
+    }
+
+    .pb-value.green {
+      color: #34d399;
+    }
+
+    .pb-value.red {
+      color: #f87171;
+    }
+
+    .pb-sep {
+      width: 1px;
+      height: 18px;
+      background: var(--border);
     }
 
     /* ── DRIVER GRID ── */
@@ -2274,6 +2383,29 @@
       font-weight: 700;
     }
 
+    .modal-tweet-btn {
+      display: block;
+      width: 100%;
+      padding: 9px 16px;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background .15s, border-color .15s;
+      margin-top: 4px;
+    }
+
+    .modal-tweet-btn:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.28);
+    }
+
     /* ── GLOBAL LEADERBOARD ── */
     .global-lb {
       margin-top: 48px;
@@ -2534,10 +2666,16 @@
       </div>
 
       <div class="hero">
-        <div class="hero-eyebrow">Silverstone Grand Prix · 52 Laps</div>
+        <div class="hero-eyebrow" id="hero-eyebrow">Silverstone Grand Prix · 52 Laps</div>
         <h1 class="hero-title">Beat <em>Remin</em><br>on strategy.</h1>
         <p class="hero-sub">Pick your driver. Build your tyre strategy. Race against Remin's adaptive AI. No driving
           skill — pure strategy.</p>
+        <div class="hero-race-count" id="hero-race-count" style="display:none"></div>
+      </div>
+
+      <!-- Personal best bar — hidden until first race played -->
+      <div class="pb-bar" id="pb-bar" style="display:none">
+        <div class="pb-bar-inner" id="pb-bar-inner"></div>
       </div>
 
       <div class="section-label">Your name</div>
@@ -2643,8 +2781,8 @@
             <div class="modal-actions">
               <button class="btn-modal-primary" id="modal-btn-again" onclick="closeRaceModal();goSetup()">🔄 Race
                 Again</button>
-              <button class="btn-modal-secondary" onclick="closeRaceModal();downloadResultCard()">↓ Save Result
-                Card</button>
+              <button class="btn-modal-secondary" id="modal-btn-share" onclick="shareResult()">↗ Share Result</button>
+              <button class="btn-modal-secondary" onclick="closeRaceModal();downloadResultCard()">↓ Save Card</button>
               <button class="btn-modal-secondary" id="modal-btn-challenge"
                 onclick="closeRaceModal();createChallenge(document.getElementById('btn-challenge'));document.getElementById('result-section').scrollIntoView({behavior:'smooth'})">⚔️
                 Challenge a Friend</button>
@@ -2657,6 +2795,7 @@
             <div class="modal-analysis-text" id="modal-analysis-text"></div>
             <div class="modal-analysis-moments" id="modal-analysis-moments"></div>
             <div class="modal-leaderboard-cta" id="modal-leaderboard-cta"></div>
+            <button class="modal-tweet-btn" id="modal-btn-tweet" onclick="shareResult()">𝕏 Post your result</button>
           </div>
         </div>
       </div>
@@ -2797,6 +2936,7 @@
         </div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px">
           <button class="btn-again" onclick="goSetup()">Race Again</button>
+          <button class="btn-share" onclick="shareResult()">↗ Share</button>
           <button class="btn-share" onclick="downloadResultCard()">↓ Save&nbsp;Card</button>
           <button class="btn-challenge" id="btn-challenge" onclick="createChallenge(this)">⚔️ Challenge a
             Friend</button>
@@ -2858,6 +2998,51 @@
     ─────────────────────────────────────────────────────────── */
     const SUPABASE_URL = 'https://uqlajejcigqffjfdpgeu.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVxbGFqZWpjaWdxZmZqZmRwZ2V1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQzMTQzMzUsImV4cCI6MjA4OTg5MDMzNX0.xEUwVjIaIPQporC1UueP9ZsSYrfsXnC2egoDl2PLsDk';
+
+    /* ── PERSONAL BEST (localStorage) ── */
+    const PB_KEY = 'f1sb_pb';
+    function loadPB() {
+      try { return JSON.parse(localStorage.getItem(PB_KEY)) || {}; } catch { return {}; }
+    }
+    function savePB(data) {
+      try { localStorage.setItem(PB_KEY, JSON.stringify(data)); } catch { }
+    }
+    function updatePB(userWins, gap, score) {
+      const pb = loadPB();
+      const races = (pb.races || 0) + 1;
+      const wins = (pb.wins || 0) + (userWins ? 1 : 0);
+      const streak = userWins ? (pb.streak || 0) + 1 : 0;
+      const bestStreak = Math.max(streak, pb.bestStreak || 0);
+      const bestWinGap = (userWins && gap < (pb.bestWinGap ?? Infinity)) ? gap : (pb.bestWinGap ?? null);
+      const bestScore = Math.max(score || 0, pb.bestScore || 0);
+      const updated = { races, wins, streak, bestStreak, bestWinGap, bestScore };
+      savePB(updated);
+      renderPBBar(updated);
+      return updated;
+    }
+    function renderPBBar(pb) {
+      const bar = document.getElementById('pb-bar');
+      const inner = document.getElementById('pb-bar-inner');
+      if (!bar || !inner || !pb || !pb.races) return;
+      const parts = [];
+      parts.push(`<div class="pb-stat"><span class="pb-label">Races</span><span class="pb-value">${pb.races}</span></div>`);
+      parts.push(`<div class="pb-sep"></div>`);
+      parts.push(`<div class="pb-stat"><span class="pb-label">Wins</span><span class="pb-value green">${pb.wins || 0}</span></div>`);
+      if ((pb.streak || 0) >= 2) {
+        parts.push(`<div class="pb-sep"></div>`);
+        parts.push(`<div class="pb-stat"><span class="pb-label">Streak</span><span class="pb-value gold">🔥 ${pb.streak}</span></div>`);
+      }
+      if (pb.bestWinGap != null) {
+        parts.push(`<div class="pb-sep"></div>`);
+        parts.push(`<div class="pb-stat"><span class="pb-label">Best gap</span><span class="pb-value gold">${pb.bestWinGap.toFixed(3)}s</span></div>`);
+      }
+      if (pb.bestScore) {
+        parts.push(`<div class="pb-sep"></div>`);
+        parts.push(`<div class="pb-stat"><span class="pb-label">Best IQ</span><span class="pb-value">${pb.bestScore}</span></div>`);
+      }
+      inner.innerHTML = parts.join('');
+      bar.style.display = 'block';
+    }
 
     const LAPS = 52;
     const PIT_LOSS = 23.1;
@@ -3480,7 +3665,13 @@
 
       userName = (document.getElementById('user-name-input').value || '').trim().slice(0, 40);
 
-      const raceSeed = Math.random();
+      // Daily seed: same Remin AI behaviour for everyone on the same calendar day
+      const today = new Date().toISOString().slice(0, 10); // "2026-03-24"
+      const dailySeedStr = today + userDriver;
+      let dailySeedHash = 0;
+      for (let ci = 0; ci < dailySeedStr.length; ci++) { dailySeedHash = (Math.imul(31, dailySeedHash) + dailySeedStr.charCodeAt(ci)) >>> 0; }
+      const raceSeed = (dailySeedHash % 1e6) / 1e6; // 0..1 deterministic
+
       const raceEvent = pickEvent();
       remStints = buildAdaptiveStrategy(userStints, userDriver, raceEvent, raceSeed);
       const drv = DRIVERS[userDriver];
@@ -3842,6 +4033,9 @@
       document.getElementById('score-grade').textContent = grade;
       document.getElementById('score-grade').style.color = gradeColor;
       document.getElementById('score-sub').textContent = sub;
+
+      // Update personal best in localStorage
+      updatePB(userWins, parseFloat(gap), score);
 
       fetchLeaderboard(simState.userName, parseFloat(gap), userWins);
       const h2hResult = challengeMode ? showH2H(simState.userName, userWins ? 'win' : 'lose', parseFloat(gap)) : null;
@@ -4225,6 +4419,25 @@
       document.getElementById('race-modal-overlay').classList.remove('show');
     }
 
+    /* ── SHARE RESULT ── */
+    function shareResult() {
+      const wins = simState.userWins;
+      const gap = (simState.finalGap || 0).toFixed(3);
+      const score = document.getElementById('score-num')?.textContent || '—';
+      const grade = document.getElementById('score-grade')?.textContent || '';
+      const name = (simState.userName || 'I').toUpperCase();
+      const resultText = wins
+        ? `${name} beat Remin by ${gap}s at Silverstone 🏁 Strategy IQ: ${score} / ${grade}. Can you top it?`
+        : `${name} lost to Remin by ${gap}s at Silverstone 😤 Strategy IQ: ${score} / ${grade}. Think you can do better?`;
+      const url = window.location.origin + window.location.pathname;
+      const tweetUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(resultText + ' ' + url)}`;
+      if (navigator.share) {
+        navigator.share({ title: 'F1 Strategy Battle', text: resultText, url }).catch(() => { });
+      } else {
+        window.open(tweetUrl, '_blank', 'noopener,noreferrer,width=550,height=420');
+      }
+    }
+
     /* ── TYPEWRITER HELPER ── */
     function typewriterEl(el, text, speed = 20) {
       el.textContent = '';
@@ -4534,6 +4747,40 @@
     addStint('soft', 17);
     addStint('med', 18);
     addStint('hard', 17);
+    renderPBBar(loadPB());
+
+    // Daily eyebrow: "Today's Race · Mar 24 · Silverstone"
+    (function setHeroEyebrow() {
+      const now = new Date();
+      const dateStr = now.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+      const el = document.getElementById('hero-eyebrow');
+      if (el) el.textContent = `Today's Race · ${dateStr} · Silverstone`;
+    })();
+
+    // Race counter social proof — fetched asynchronously
+    (async function fetchRaceCount() {
+      if (!SUPABASE_URL || SUPABASE_URL === 'YOUR_SUPABASE_URL') return;
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/forecasts?select=id`, {
+          headers: {
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+            'Prefer': 'count=exact',
+            'Range': '0-0'
+          }
+        });
+        const countHeader = res.headers.get('content-range');
+        const total = countHeader ? parseInt(countHeader.split('/')[1]) : NaN;
+        if (!isNaN(total) && total > 0) {
+          const el = document.getElementById('hero-race-count');
+          if (el) {
+            el.textContent = `${total.toLocaleString()} races played worldwide`;
+            el.style.display = 'block';
+          }
+        }
+      } catch { }
+    })();
+
     checkChallengeParam();
     loadGlobalLeaderboard('wins');
     setInterval(() => loadGlobalLeaderboard(lbCurrentTab), 30000);
