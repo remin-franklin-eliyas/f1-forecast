@@ -224,7 +224,9 @@
 
     .driver-card.selected {
       border-color: var(--driver-color);
-      background: var(--bg3);
+      background: rgba(var(--driver-color-rgb, 167 139 250) / 0.05);
+      box-shadow: 0 0 0 1px var(--driver-color), 0 0 32px rgba(var(--driver-color-rgb, 167 139 250) / 0.18);
+      transform: scale(1.02) translateY(-2px);
     }
 
     .driver-card.selected::before {
@@ -289,9 +291,11 @@
     .stint-block {
       background: var(--bg3);
       border: 1px solid var(--border);
+      border-left: 3px solid var(--stint-compound-color, var(--border));
       border-radius: 8px;
       padding: 14px;
       margin-bottom: 10px;
+      transition: border-left-color .2s;
     }
 
     .stint-header {
@@ -350,6 +354,27 @@
     .cpd-btn:hover {
       border-color: var(--border2);
       color: var(--text);
+    }
+
+    .cpd-btn.active-soft,
+    .cpd-btn:hover.cpd-soft-hover {
+      background: var(--soft);
+      color: #fff;
+      border-color: var(--soft);
+    }
+
+    .cpd-btn.active-med,
+    .cpd-btn:hover.cpd-med-hover {
+      background: var(--med);
+      color: #111;
+      border-color: var(--med);
+    }
+
+    .cpd-btn.active-hard,
+    .cpd-btn:hover.cpd-hard-hover {
+      background: #555;
+      color: #eee;
+      border-color: #666;
     }
 
     .cpd-btn.active-soft {
@@ -630,6 +655,80 @@
       border: 1px solid rgba(167, 139, 250, 0.25);
       padding: 6px 14px;
       border-radius: 20px;
+      display: none;
+      /* hidden — replaced by gap-bar */
+    }
+
+    /* ── FULL-WIDTH GAP BAR (Phase C) ── */
+    .gap-bar-wrap {
+      margin-bottom: 18px;
+      padding: 12px 16px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      position: relative;
+    }
+
+    .gap-bar-labels {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .gap-bar-name {
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .gap-bar-name.leader {
+      font-size: 12px;
+    }
+
+    .gap-bar-center {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      text-align: center;
+      transition: color .3s;
+    }
+
+    .gap-bar-track {
+      height: 8px;
+      background: var(--bg);
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+      border: 1px solid var(--border);
+      position: relative;
+    }
+
+    .gap-bar-left {
+      height: 100%;
+      background: var(--gap-player-color, var(--accent));
+      border-radius: 4px 0 0 4px;
+      transition: width .3s ease, box-shadow .3s;
+      flex-shrink: 0;
+    }
+
+    .gap-bar-right {
+      height: 100%;
+      background: var(--rem);
+      border-radius: 0 4px 4px 0;
+      transition: width .3s ease, box-shadow .3s;
+      flex-shrink: 0;
+    }
+
+    .gap-bar-left.leading {
+      box-shadow: 2px 0 12px var(--gap-player-color, var(--accent));
+    }
+
+    .gap-bar-right.leading {
+      box-shadow: -2px 0 12px var(--rem);
     }
 
     /* Driver status cards */
@@ -662,6 +761,8 @@
 
     .status-card.leading {
       border-color: var(--card-color);
+      box-shadow: 0 4px 30px color-mix(in srgb, var(--card-color) 20%, transparent);
+      background: color-mix(in srgb, var(--card-color) 4%, var(--bg2));
     }
 
     .s-driver {
@@ -811,6 +912,31 @@
       border: 1px solid rgba(167, 139, 250, 0.3);
       border-radius: 12px;
       padding: 20px;
+      transition: border-color .4s, box-shadow .4s;
+    }
+
+    .result-box.result-win {
+      border-color: rgba(255, 183, 0, 0.5);
+      box-shadow: 0 0 40px rgba(255, 183, 0, 0.08), inset 0 0 30px rgba(255, 183, 0, 0.03);
+    }
+
+    .result-box.result-lose {
+      border-color: rgba(248, 113, 113, 0.3);
+      box-shadow: 0 0 30px rgba(248, 113, 113, 0.06);
+    }
+
+    #rrow1.result-win-p1 {
+      background: radial-gradient(ellipse at left, rgba(255, 183, 0, 0.07) 0%, transparent 70%);
+      border-radius: 6px;
+    }
+
+    #rrow2.result-lose-p2 {
+      opacity: 0.65;
+    }
+
+    .result-row.p1-rem {
+      border-left: 3px solid var(--rem);
+      padding-left: 8px;
     }
 
     .result-heading {
@@ -1709,6 +1835,120 @@
       color: var(--accent);
     }
 
+    /* ── EVENT VISUAL ENVIRONMENT (Phase E) ── */
+    .screen.active.ev-sc,
+    .screen.active.ev-vsc {
+      outline: 2px solid rgba(255, 215, 0, 0.25);
+      outline-offset: -2px;
+      animation: evScPulse 1.8s ease-in-out infinite;
+    }
+
+    .screen.active.ev-rain {
+      outline: 2px solid rgba(96, 165, 250, 0.2);
+      outline-offset: -2px;
+    }
+
+    @keyframes evScPulse {
+
+      0%,
+      100% {
+        outline-color: rgba(255, 215, 0, 0.15);
+      }
+
+      50% {
+        outline-color: rgba(255, 215, 0, 0.4);
+      }
+    }
+
+    /* ── AI REVEAL OVERLAY (Phase G) ── */
+    #ai-reveal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(4, 4, 14, 0.92);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 950;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #ai-reveal-overlay.show {
+      display: flex;
+    }
+
+    .ai-reveal-inner {
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      padding: 40px 48px;
+      border: 1px solid rgba(255, 107, 53, 0.3);
+      border-radius: 16px;
+      background: var(--bg2);
+      animation: aiRevealPop .3s cubic-bezier(.34, 1.56, .64, 1) forwards;
+    }
+
+    @keyframes aiRevealPop {
+      from {
+        opacity: 0;
+        transform: scale(.88);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .ai-reveal-label {
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--rem);
+      margin-bottom: 12px;
+    }
+
+    .ai-reveal-headline {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 6vw, 42px);
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      line-height: 1.1;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+
+    .ai-reveal-sub {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .ai-reveal-shimmer {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(105deg,
+          transparent 20%,
+          rgba(255, 107, 53, 0.12) 40%,
+          rgba(255, 255, 255, 0.06) 50%,
+          rgba(255, 107, 53, 0.12) 60%,
+          transparent 80%);
+      animation: aiShimmer .9s ease forwards;
+      pointer-events: none;
+    }
+
+    @keyframes aiShimmer {
+      from {
+        transform: translateX(-100%);
+      }
+
+      to {
+        transform: translateX(100%);
+      }
+    }
+
     /* ── END RACE MODAL ── */
     #race-modal-overlay {
       display: none;
@@ -2244,6 +2484,16 @@
     <canvas id="confetti-canvas"></canvas>
     <canvas id="rain-canvas"></canvas>
 
+    <!-- AI REVEAL OVERLAY -->
+    <div id="ai-reveal-overlay">
+      <div class="ai-reveal-inner">
+        <div class="ai-reveal-label">ADAPTIVE AI</div>
+        <div class="ai-reveal-headline" id="ai-reveal-headline">REMIN COMPUTED<br>12 STRATEGIES</div>
+        <div class="ai-reveal-sub" id="ai-reveal-sub">Optimal counter-strategy selected</div>
+        <div class="ai-reveal-shimmer"></div>
+      </div>
+    </div>
+
     <!-- END RACE MODAL -->
     <div id="race-modal-overlay">
       <div class="race-modal">
@@ -2310,17 +2560,31 @@
             <span class="lap-total">/ 52</span>
           </div>
         </div>
-        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:10px">
-          <div class="gap-pill" id="gap-disp">Gap: —</div>
-          <div id="event-pill" class="event-pill"></div>
-          <div class="race-controls">
-            <button class="btn-ctrl" id="btn-pause" onclick="togglePause()">Pause</button>
-            <button class="btn-ctrl" onclick="goSetup()">Restart</button>
-          </div>
+      </div>
+
+      <!-- FULL-WIDTH GAP BAR -->
+      <!-- gap-disp kept hidden for JS text caching (challenge/leaderboard references) -->
+      <div id="gap-disp" style="display:none">Gap: —</div>
+      <div class="gap-bar-wrap" id="gap-bar-wrap">
+        <div class="gap-bar-labels">
+          <span class="gap-bar-name" id="gbname-user" style="color:var(--rus)">YOU</span>
+          <span class="gap-bar-center" id="gap-disp-big">—</span>
+          <span class="gap-bar-name" id="gbname-rem" style="color:var(--rem)">REMIN</span>
+        </div>
+        <div class="gap-bar-track">
+          <div class="gap-bar-left" id="gap-bar-left" style="width:50%"></div>
+          <div class="gap-bar-right" id="gap-bar-right" style="width:50%"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:6px;align-items:center">
+          <div id="event-pill" class="event-pill" style="margin:0"></div>
           <div class="speed-btns">
             <button class="btn-speed active" id="spd1" onclick="setSpeed(1)">1×</button>
             <button class="btn-speed" id="spd2" onclick="setSpeed(2)">2×</button>
             <button class="btn-speed" id="spd5" onclick="setSpeed(5)">5×</button>
+          </div>
+          <div class="race-controls" style="margin:0">
+            <button class="btn-ctrl" id="btn-pause" onclick="togglePause()">Pause</button>
+            <button class="btn-ctrl" onclick="goSetup()">Restart</button>
           </div>
         </div>
       </div>
@@ -2487,10 +2751,16 @@
       return getComputedStyle(document.documentElement).getPropertyValue('--' + driver.toLowerCase()).trim() || '#fff';
     }
 
+    const DRIVER_COLOR_RGB = { VER: '54 113 198', LEC: '232 0 45', RUS: '0 210 190' };
+
     function selectDriver(d) {
       userDriver = d;
       document.querySelectorAll('.driver-card').forEach(c => c.classList.remove('selected'));
-      document.querySelector(`[data-driver="${d}"]`).classList.add('selected');
+      const card = document.querySelector(`[data-driver="${d}"]`);
+      card.classList.add('selected');
+      // Pass RGB triplet for CSS box-shadow glow
+      const rgb = DRIVER_COLOR_RGB[d];
+      if (rgb) card.style.setProperty('--driver-color-rgb', rgb);
     }
 
     function addStint(compound = 'soft', laps = 17) {
@@ -2523,8 +2793,10 @@
       const cont = document.getElementById('stints-container');
       cont.innerHTML = '';
       userStints.forEach((s, i) => {
+        const compoundColors = { soft: '#E8002D', med: '#FFD700', hard: '#888888' };
         const div = document.createElement('div');
         div.className = 'stint-block';
+        div.style.setProperty('--stint-compound-color', compoundColors[s.compound] || 'var(--border)');
         div.innerHTML = `
       <div class="stint-header">
         <span class="stint-num">Stint ${i + 1}</span>
@@ -3099,6 +3371,16 @@
       document.getElementById('tl-user-lbl').textContent = `${displayName} — ${drv.name}`;
       document.getElementById('race-eyebrow').textContent = `${displayName} · ${drv.name} vs Remin · Silverstone 2026`;
 
+      // Gap bar: set player colour + label
+      const gapBarWrap = document.getElementById('gap-bar-wrap');
+      if (gapBarWrap) {
+        gapBarWrap.style.setProperty('--gap-player-color', drvColor);
+        document.getElementById('gap-bar-left').style.setProperty('--gap-player-color', drvColor);
+        document.getElementById('gap-bar-left').style.background = drvColor;
+        const gbUser = document.getElementById('gbname-user');
+        if (gbUser) { gbUser.textContent = (displayName.toUpperCase()).slice(0, 10); gbUser.style.color = drvColor; }
+      }
+
       const pitRow = document.getElementById('pit-row');
       pitRow.innerHTML = '';
       simState.userPitLaps.forEach((l, i) => {
@@ -3128,7 +3410,23 @@
         const gc = document.getElementById('gap-chart');
         if (gc && gc.parentElement?.clientWidth > 0) { gc.width = gc.parentElement.clientWidth; drawGapChart(); }
       }, 60);
-      simInterval = setInterval(tick, 200);
+
+      // AI reveal overlay — 900ms flash then start race
+      const aiReveal = document.getElementById('ai-reveal-overlay');
+      const aiSub = document.getElementById('ai-reveal-sub');
+      const aiHeadline = document.getElementById('ai-reveal-headline');
+      if (aiReveal) {
+        const remStintsLabel = remStints.map(s => `${COMPOUND[s.compound].name[0]}(${s.laps})`).join('–');
+        aiHeadline.innerHTML = `REMIN COMPUTED<br>12 STRATEGIES`;
+        if (aiSub) aiSub.textContent = `Counter selected: ${remStintsLabel}`;
+        aiReveal.classList.add('show');
+        setTimeout(() => {
+          aiReveal.classList.remove('show');
+          simInterval = setInterval(tick, 200);
+        }, 1000);
+      } else {
+        simInterval = setInterval(tick, 200);
+      }
     }
 
     function tick() {
@@ -3158,6 +3456,24 @@
       void gapEl.offsetWidth;
       if (userGainingGround) gapEl.classList.add('gap-gain');
       else if (userLosingGround) gapEl.classList.add('gap-lose');
+
+      // ── GAP BAR update ──
+      const bigGap = document.getElementById('gap-disp-big');
+      const barLeft = document.getElementById('gap-bar-left');
+      const barRight = document.getElementById('gap-bar-right');
+      if (bigGap && barLeft && barRight) {
+        bigGap.textContent = absGap.toFixed(3) + 's';
+        bigGap.style.color = userLeads ? 'var(--gap-player-color, var(--accent))' : 'var(--rem)';
+        // Map gap to bar width: 50% each = tied, max visual split at 25s
+        const maxGap = 25;
+        const bias = Math.min(absGap / maxGap * 50, 50);
+        const leftPct = userLeads ? 50 + bias : 50 - bias;
+        const rightPct = 100 - leftPct;
+        barLeft.style.width = leftPct.toFixed(1) + '%';
+        barRight.style.width = rightPct.toFixed(1) + '%';
+        barLeft.classList.toggle('leading', userLeads);
+        barRight.classList.toggle('leading', !userLeads);
+      }
       simState.lastGap = gap;
       gapHistory.push({ lap, gap: frame.gap });
       drawGapChart();
@@ -3223,11 +3539,21 @@
       if (ev && ev.type !== 'none') {
         const pill = document.getElementById('event-pill');
         const flash = document.getElementById('event-flash');
-        const isSC = ev.type === 'sc' || ev.type === 'vsc';
+        const raceScreen = document.getElementById('screen-race');
+        const isSC = ev.type === 'sc'; // vsc handled separately
         if (lap === ev.startLap) {
           // Activate persistent pill
           pill.className = `event-pill active ${ev.type}`;
           pill.innerHTML = `${ev.icon} ${ev.label} <span style="font-size:10px;font-weight:400;opacity:0.7">L${ev.startLap}–${ev.endLap}</span>`;
+          // Apply environment class to race screen
+          if (isSC) { raceScreen.classList.add('ev-sc'); }
+          else if (ev.type === 'vsc') { raceScreen.classList.add('ev-vsc'); }
+          else if (ev.type === 'rain') {
+            raceScreen.classList.add('ev-rain');
+            // Subtly bring up rain canvas
+            const rc = document.getElementById('rain-canvas');
+            if (rc) rc.style.opacity = '0.15';
+          }
           // Trigger flash banner
           flash.className = `event-flash ${ev.type}`;
           document.getElementById('ef-icon').textContent = ev.icon;
@@ -3237,7 +3563,8 @@
           flash.classList.add('show');
           setTimeout(() => flash.classList.remove('show'), 4000);
           // Remin reacts — SC/VSC → free pit speech if applicable
-          if (isSC) {
+          const isNeutralised = ev.type === 'sc' || ev.type === 'vsc';
+          if (isNeutralised) {
             const aiNextPit = simState.remPitLaps.find(l => l > lap);
             const aiPitsUnderSC = aiNextPit && aiNextPit <= ev.endLap;
             setReminSpeech(aiPitsUnderSC ? 'sc_react' : (remLeading ? 'leading' : 'trailing'));
@@ -3246,14 +3573,19 @@
           }
         }
         if (lap === ev.endLap + 1) {
-          const endLabel = isSC ? 'RACE RESUMED' : 'TRACK DRYING';
-          const endIcon = isSC ? '🏁' : '☀️';
+          const isNeutralised = ev.type === 'sc' || ev.type === 'vsc';
+          const endLabel = isNeutralised ? 'RACE RESUMED' : 'TRACK DRYING';
+          const endIcon = isNeutralised ? '🏁' : '☀️';
           pill.className = `event-pill active ${ev.type}`;
           pill.innerHTML = `${endIcon} ${endLabel}`;
+          // Remove environment classes
+          raceScreen.classList.remove('ev-sc', 'ev-vsc', 'ev-rain');
+          const rc = document.getElementById('rain-canvas');
+          if (rc) rc.style.opacity = '0';
           flash.className = `event-flash ${ev.type}`;
           document.getElementById('ef-icon').textContent = endIcon;
           document.getElementById('ef-label').textContent = endLabel;
-          document.getElementById('ef-desc').textContent = isSC ? 'Green flag. Race is live.' : 'Conditions improving.';
+          document.getElementById('ef-desc').textContent = isNeutralised ? 'Green flag. Race is live.' : 'Conditions improving.';
           document.getElementById('ef-lap').textContent = `LAP ${lap}`;
           flash.classList.add('show');
           setTimeout(() => {
@@ -3331,8 +3663,24 @@
 
       const momentsEl = document.getElementById('key-moments');
       if (momentsEl) {
+        const momentColors = {
+          pit: { border: 'rgba(255,107,53,0.5)', bg: 'rgba(255,107,53,0.06)', label: 'var(--rem)' },  // pit swings
+          cliff: { border: 'rgba(255,215,0,0.5)', bg: 'rgba(255,215,0,0.06)', label: '#FFD700' },    // cliff/reversal
+          event: { border: 'rgba(96,165,250,0.5)', bg: 'rgba(96,165,250,0.06)', label: '#60a5fa' },    // event
+          close: { border: 'rgba(167,139,250,0.4)', bg: 'rgba(167,139,250,0.06)', label: 'var(--accent)' } // closing stint
+        };
+        function getMomentType(text) {
+          if (/pit|stop/i.test(text)) return 'pit';
+          if (/sc|rain|safety|shower|vsc/i.test(text)) return 'event';
+          if (/cliff|advantage|pace/i.test(text)) return 'cliff';
+          return 'close';
+        }
         momentsEl.innerHTML = analysis.keyMoments.length > 0
-          ? analysis.keyMoments.map(m => `<span class="moment-pill">Lap ${m.lap} — ${m.text}</span>`).join('')
+          ? analysis.keyMoments.map(m => {
+            const t = getMomentType(m.text);
+            const c = momentColors[t];
+            return `<span class="moment-pill" style="border-color:${c.border};background:${c.bg};color:${c.label}">Lap ${m.lap} — ${m.text}</span>`;
+          }).join('')
           : '';
       }
 
@@ -3362,8 +3710,25 @@
       const rs = document.getElementById('result-section');
       rs.style.display = 'block';
       rs.classList.add('result-animate');
-      setTimeout(() => { document.getElementById('rrow1')?.classList.add('visible'); }, 200);
-      setTimeout(() => { document.getElementById('rrow2')?.classList.add('visible'); }, 400);
+
+      // Win/lose visual state on result box
+      const resultBox = rs.querySelector('.result-box');
+      if (resultBox) {
+        resultBox.classList.remove('result-win', 'result-lose');
+        resultBox.classList.add(userWins ? 'result-win' : 'result-lose');
+      }
+
+      setTimeout(() => {
+        const r1 = document.getElementById('rrow1');
+        r1?.classList.add('visible');
+        if (userWins) { r1?.classList.add('result-win-p1'); }
+        else { r1?.classList.add('p1-rem'); }
+      }, 200);
+      setTimeout(() => {
+        const r2 = document.getElementById('rrow2');
+        r2?.classList.add('visible');
+        if (!userWins) r2?.classList.add('result-lose-p2');
+      }, 400);
 
       setTimeout(() => showRaceModal(userWins, gap, simState.userName, drv, h2hResult), 700);
     }
@@ -3391,6 +3756,7 @@
       if (challengeBtn) { challengeBtn.disabled = false; challengeBtn.textContent = '\u2694\ufe0f Challenge a Friend'; }
       // Reset event UI
       document.getElementById('event-pill').className = 'event-pill';
+      document.getElementById('screen-race').classList.remove('ev-sc', 'ev-vsc', 'ev-rain');
       document.getElementById('event-flash').classList.remove('show');
       cancelAnimationFrame(rainRaf);
       cancelAnimationFrame(confettiRaf);
