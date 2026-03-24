@@ -6464,6 +6464,13 @@
           if (s < 86400) return `${Math.floor(s / 3600)}h ago`;
           return `${Math.floor(s / 86400)}d ago`;
         };
+        const fmtLap = sec => {
+          if (!sec) return '—';
+          const total = parseFloat(sec);
+          const m = Math.floor(total / 60);
+          const s = (total - m * 60).toFixed(3).padStart(6, '0');
+          return `${m}:${s}`;
+        };
 
         let html = `<div class="glb-row glb-head">
           <div>&nbsp;</div><div>Racer</div>
@@ -6477,7 +6484,7 @@
           let col3, col4;
 
           if (tab === 'fastest') {
-            col3 = `<div class="glb-gap" style="color:#FFD700">${r.fastest_lap ? parseFloat(r.fastest_lap).toFixed(3) + 's' : '—'}</div>`;
+            col3 = `<div class="glb-gap" style="color:#FFD700">${fmtLap(r.fastest_lap)}</div>`;
             col4 = `<span class="glb-badge" style="background:rgba(255,255,255,0.04);border:1px solid var(--border);color:var(--muted);white-space:nowrap">${trackLabel}</span>`;
           } else if (tab === 'driver') {
             col3 = `<div class="glb-gap">${parseFloat(r.gap_seconds || 0).toFixed(3)}s</div>`;
