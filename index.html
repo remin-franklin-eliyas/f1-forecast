@@ -1300,6 +1300,204 @@
       border-color: var(--border2);
       color: var(--text);
     }
+
+    /* ── END RACE MODAL ── */
+    #race-modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(4, 4, 14, 0.82);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index: 900;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #race-modal-overlay.show {
+      display: flex;
+    }
+
+    .race-modal {
+      background: var(--bg2);
+      border-radius: 20px;
+      padding: 36px 32px 28px;
+      max-width: 440px;
+      width: calc(100% - 32px);
+      text-align: center;
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      animation: modalPop .42s cubic-bezier(.34, 1.56, .64, 1) forwards;
+    }
+
+    @keyframes modalPop {
+      0% {
+        opacity: 0;
+        transform: scale(.82) translateY(28px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .modal-lights {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+
+    .modal-light {
+      width: 14px;
+      height: 36px;
+      border-radius: 3px;
+      background: #18182a;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: background .15s, box-shadow .15s;
+    }
+
+    .modal-light.on-red {
+      background: #E8002D;
+      box-shadow: 0 0 14px #E8002D88;
+    }
+
+    .modal-light.on-green {
+      background: #34d399;
+      box-shadow: 0 0 18px #34d39988;
+      animation: greenPulse .55s ease infinite alternate;
+    }
+
+    @keyframes greenPulse {
+      0% {
+        opacity: .8;
+      }
+
+      100% {
+        opacity: 1;
+        box-shadow: 0 0 32px #34d39988;
+      }
+    }
+
+    .modal-trophy {
+      font-size: 48px;
+      margin-bottom: 4px;
+      line-height: 1.2;
+    }
+
+    .modal-eyebrow {
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .modal-headline {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 6vw, 46px);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .modal-sub {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    .modal-gap {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      padding: 5px 18px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+    }
+
+    .modal-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn-modal-primary {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 14px 24px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      width: 100%;
+      background: linear-gradient(135deg, #7c3aed, #a78bfa);
+      color: #fff;
+      transition: filter .15s, transform .1s;
+    }
+
+    .btn-modal-primary:hover {
+      filter: brightness(1.15);
+      transform: translateY(-1px);
+    }
+
+    .btn-modal-primary:active {
+      transform: translateY(0);
+    }
+
+    .btn-modal-secondary {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 12px 24px;
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid rgba(167, 139, 250, 0.35);
+      border-radius: 10px;
+      cursor: pointer;
+      width: 100%;
+      transition: background .15s, border-color .15s;
+    }
+
+    .btn-modal-secondary:hover {
+      background: rgba(167, 139, 250, 0.1);
+      border-color: var(--accent);
+    }
+
+    .btn-modal-close {
+      position: absolute;
+      top: 12px;
+      right: 14px;
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 22px;
+      cursor: pointer;
+      line-height: 1;
+      transition: color .15s;
+    }
+
+    .btn-modal-close:hover {
+      color: var(--text);
+    }
+
+    .modal-ticker {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 14px;
+      letter-spacing: 0.5px;
+    }
   </style>
 </head>
 
