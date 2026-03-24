@@ -2814,7 +2814,7 @@
       document.getElementById('score-sub').textContent = sub;
 
       fetchLeaderboard(simState.userName, parseFloat(gap), userWins);
-      if (challengeMode) showH2H(simState.userName, userWins ? 'win' : 'lose', parseFloat(gap));
+      const h2hResult = challengeMode ? showH2H(simState.userName, userWins ? 'win' : 'lose', parseFloat(gap)) : null;
       setTimeout(() => loadGlobalLeaderboard(lbCurrentTab), 1500);
 
       const rs = document.getElementById('result-section');
@@ -2823,7 +2823,7 @@
       setTimeout(() => { document.getElementById('rrow1')?.classList.add('visible'); }, 200);
       setTimeout(() => { document.getElementById('rrow2')?.classList.add('visible'); }, 400);
 
-      setTimeout(() => showRaceModal(userWins, gap, simState.userName, drv), 700);
+      setTimeout(() => showRaceModal(userWins, gap, simState.userName, drv, h2hResult), 700);
     }
 
     function togglePause() {
@@ -3004,7 +3004,7 @@
     }
 
     /* ── END RACE MODAL ── */
-    function showRaceModal(userWins, gap, name, drv) {
+    function showRaceModal(userWins, gap, name, drv, h2h) {
       const overlay = document.getElementById('race-modal-overlay');
       const displayName = (name || drv.name).toUpperCase();
 
@@ -3019,29 +3019,45 @@
       });
 
       setTimeout(() => {
-        if (userWins) {
+        const celebrateWin = h2h ? h2h.iWin : userWins;
+        if (celebrateWin) {
           lights.forEach(id => {
             const el = document.getElementById(id);
             if (el) { el.classList.remove('on-red'); el.classList.add('on-green'); }
           });
         }
-        // Set copy
-        document.getElementById('modal-trophy').textContent = userWins ? '🏆' : '🤖';
-        document.getElementById('modal-eyebrow').textContent = `Silverstone GP · 2026`;
-        document.getElementById('modal-headline').textContent = userWins
-          ? `${displayName} WINS!`
-          : 'Remin Wins';
-        document.getElementById('modal-headline').style.color = userWins ? '#f0f0f0' : '#FF6B35';
-        document.getElementById('modal-sub').textContent = userWins
-          ? 'Strategy victory. Podium secured.'
-          : 'Remin out-adapted you this time.';
+        // Set copy — challenge-aware
+        let trophy, headline, headlineColor, sub;
+        if (h2h) {
+          const cn = h2h.chalName;
+          if (h2h.myWon && h2h.iWin) { trophy = '🏆'; headline = `${displayName} WINS!`; headlineColor = '#f0f0f0'; sub = `Challenge won. You beat Remin AND ${cn}!`; }
+          else if (h2h.myWon && !h2h.iWin) { trophy = '🥈'; headline = `${cn} EDGES YOU`; headlineColor = '#FFD700'; sub = `You beat Remin, but ${cn} had a tighter gap. So close.`; }
+          else if (!h2h.myWon && h2h.iWin) { trophy = '🤝'; headline = 'CHALLENGE WIN'; headlineColor = '#a78bfa'; sub = `Remin got you both — but you were closer. The moral victory.`; }
+          else { trophy = '❌'; headline = `${cn} WINS`; headlineColor = '#f87171'; sub = `${cn} out-strategized you in this duel. Rematch?`; }
+        } else {
+          trophy = userWins ? '🏆' : '🤖';
+          headline = userWins ? `${displayName} WINS!` : 'Remin Wins';
+          headlineColor = userWins ? '#f0f0f0' : '#FF6B35';
+          sub = userWins ? 'Strategy victory. Podium secured.' : 'Remin out-adapted you this time.';
+        }
+        document.getElementById('modal-trophy').textContent = trophy;
+        document.getElementById('modal-eyebrow').textContent = h2h ? `⚔️ Challenge · Silverstone GP 2026` : `Silverstone GP · 2026`;
+        document.getElementById('modal-headline').textContent = headline;
+        document.getElementById('modal-headline').style.color = headlineColor;
+        document.getElementById('modal-sub').textContent = sub;
         const gapEl = document.getElementById('modal-gap');
-        gapEl.textContent = `Gap: ${gap}s`;
-        gapEl.style.background = userWins ? 'rgba(52,211,153,0.12)' : 'rgba(248,113,113,0.1)';
-        gapEl.style.color = userWins ? '#34d399' : '#f87171';
-        gapEl.style.border = `1px solid ${userWins ? 'rgba(52,211,153,0.3)' : 'rgba(248,113,113,0.25)'}`;
+        const gapWin = h2h ? h2h.iWin : userWins;
+        gapEl.textContent = h2h
+          ? (h2h.myWon ? `Your gap: ${gap}s vs Remin` : `Gap: ${gap}s`)
+          : `Gap: ${gap}s`;
+        gapEl.style.background = gapWin ? 'rgba(52,211,153,0.12)' : 'rgba(248,113,113,0.1)';
+        gapEl.style.color = gapWin ? '#34d399' : '#f87171';
+        gapEl.style.border = `1px solid ${gapWin ? 'rgba(52,211,153,0.3)' : 'rgba(248,113,113,0.25)'}`;
+        // Hide challenge button in modal when already responding to a challenge
+        const modalChalBtn = document.getElementById('modal-btn-challenge');
+        if (modalChalBtn) modalChalBtn.style.display = h2h ? 'none' : '';
         const againBtn = document.getElementById('modal-btn-again');
-        againBtn.style.background = userWins ? 'linear-gradient(135deg,#7c3aed,#a78bfa)' : 'linear-gradient(135deg,#7c3aed,#a78bfa)';
+        againBtn.style.background = 'linear-gradient(135deg,#7c3aed,#a78bfa)';
         againBtn.style.color = '#fff';
         const score = document.getElementById('score-num')?.textContent;
         document.getElementById('modal-ticker').textContent = score && score !== '—'
@@ -3289,9 +3305,19 @@
           <span class="h2h-badge ${e.result}">${e.result === 'win' ? 'Win' : 'Loss'}</span>
         </div>`;
 
+      // Verdict copy for all 4 scenarios
+      let verdictText, verdictColor, verdictBg;
+      const chalName = (cd.name || 'Challenger').slice(0, 20);
+      if (myWon && iWin) { verdictText = `🏆 You win the challenge! You beat Remin AND ${chalName}.`; verdictColor = '#34d399'; verdictBg = 'rgba(52,211,153,0.08)'; }
+      else if (myWon && !iWin) { verdictText = `🥈 So close — you beat Remin, but ${chalName} had a faster gap.`; verdictColor = '#FFD700'; verdictBg = 'rgba(255,215,0,0.07)'; }
+      else if (!myWon && iWin) { verdictText = `🤝 You win the challenge — but Remin got you both. You were closer.`; verdictColor = '#a78bfa'; verdictBg = 'rgba(167,139,250,0.08)'; }
+      else { verdictText = `❌ ${chalName} wins this one. Try a different strategy!`; verdictColor = '#f87171'; verdictBg = 'rgba(248,113,113,0.08)'; }
+
       const h2h = document.getElementById('h2h-section');
-      h2h.innerHTML = `<div class="h2h-label">\u2694\ufe0f HEAD TO HEAD</div>${row(1, p1c, p1)}${row(2, p2c, p2)}`;
+      h2h.innerHTML = `<div class="h2h-label">⚔️ HEAD TO HEAD</div>${row(1, p1c, p1)}${row(2, p2c, p2)}
+        <div style="margin-top:10px;padding:10px 12px;border-radius:8px;font-size:13px;font-weight:600;background:${verdictBg};color:${verdictColor};border:1px solid ${verdictColor}33">${verdictText}</div>`;
       h2h.classList.add('visible');
+      return { iWin, myWon, chalWon, chalName };
     }
 
     async function createChallenge(btn) {
