@@ -659,13 +659,413 @@ season,round,race_name,circuit,country,date,position,constructor_name,points,poi
 2023,20,São Paulo Grand Prix,São Paulo,Brazil,2023-11-05,7,Williams,26.0,0.0,712.0,686.0,22,90.9
 2023,21,Las Vegas Grand Prix,Las Vegas,United States,2023-11-18,7,Williams,26.0,0.0,752.0,726.0,22,95.5
 2023,22,Abu Dhabi Grand Prix,Yas Island,Abu Dhabi,2023-11-26,7,Williams,26.0,0.0,790.0,764.0,22,100.0
-2024,1,Bahrain Grand Prix,Sakhir,Bahrain,2024-03-02,6,Alpine,0.0,0.0,44.0,44.0,1,100.0
-2024,1,Bahrain Grand Prix,Sakhir,Bahrain,2024-03-02,5,Aston Martin,3.0,3.0,44.0,41.0,1,100.0
-2024,1,Bahrain Grand Prix,Sakhir,Bahrain,2024-03-02,2,Ferrari,27.0,27.0,44.0,17.0,1,100.0
-2024,1,Bahrain Grand Prix,Sakhir,Bahrain,2024-03-02,7,Haas F1 Team,0.0,0.0,44.0,44.0,1,100.0
-2024,1,Bahrain Grand Prix,Sakhir,Bahrain,2024-03-02,8,Kick Sauber,0.0,0.0,44.0,44.0,1,100.0
-2024,1,Bahrain Grand Prix,Sakhir,Bahrain,2024-03-02,4,McLaren,12.0,12.0,44.0,32.0,1,100.0
-2024,1,Bahrain Grand Prix,Sakhir,Bahrain,2024-03-02,3,Mercedes,16.0,16.0,44.0,28.0,1,100.0
-2024,1,Bahrain Grand Prix,Sakhir,Bahrain,2024-03-02,9,RB,0.0,0.0,44.0,44.0,1,100.0
-2024,1,Bahrain Grand Prix,Sakhir,Bahrain,2024-03-02,1,Red Bull Racing,44.0,44.0,44.0,0.0,1,100.0
-2024,1,Bahrain Grand Prix,Sakhir,Bahrain,2024-03-02,10,Williams,0.0,0.0,44.0,44.0,1,100.0
+2024,1,Bahrain Grand Prix,Sakhir,Bahrain,2024-03-02,6,Alpine,0.0,0.0,44.0,44.0,24,4.2
+2024,2,Saudi Arabian Grand Prix,Jeddah,Saudi Arabia,2024-03-09,7,Alpine,0.0,0.0,87.0,87.0,24,8.3
+2024,3,Australian Grand Prix,Melbourne,Australia,2024-03-24,7,Alpine,0.0,0.0,87.0,87.0,24,12.5
+2024,4,Japanese Grand Prix,Suzuka,Japan,2024-04-07,8,Alpine,0.0,0.0,131.0,131.0,24,16.7
+2024,5,Chinese Grand Prix,Shanghai,China,2024-04-21,8,Alpine,0.0,0.0,131.0,131.0,24,20.8
+2024,6,Miami Grand Prix,Miami,United States,2024-05-05,7,Alpine,1.0,1.0,161.0,160.0,24,25.0
+2024,7,Emilia Romagna Grand Prix,Imola,Italy,2024-05-19,7,Alpine,1.0,0.0,190.0,189.0,24,29.2
+2024,8,Monaco Grand Prix,Monaco,Monaco,2024-05-26,7,Alpine,1.0,0.0,190.0,189.0,24,33.3
+2024,9,Canadian Grand Prix,Montréal,Canada,2024-06-09,7,Alpine,4.0,3.0,215.0,211.0,24,37.5
+2024,10,Spanish Grand Prix,Barcelona,Spain,2024-06-23,7,Alpine,7.0,3.0,244.0,237.0,24,41.7
+2024,11,Austrian Grand Prix,Spielberg,Austria,2024-06-30,7,Alpine,7.0,0.0,244.0,237.0,24,45.8
+2024,12,British Grand Prix,Silverstone,United Kingdom,2024-07-07,8,Alpine,7.0,0.0,262.0,255.0,24,50.0
+2024,13,Hungarian Grand Prix,Budapest,Hungary,2024-07-21,8,Alpine,7.0,0.0,278.0,271.0,24,54.2
+2024,14,Belgian Grand Prix,Spa-Francorchamps,Belgium,2024-07-28,8,Alpine,7.0,0.0,278.0,271.0,24,58.3
+2024,15,Dutch Grand Prix,Zandvoort,Netherlands,2024-08-25,7,Alpine,9.0,2.0,304.0,295.0,24,62.5
+2024,16,Italian Grand Prix,Monza,Italy,2024-09-01,8,Alpine,9.0,0.0,316.0,307.0,24,66.7
+2024,17,Azerbaijan Grand Prix,Baku,Azerbaijan,2024-09-15,8,Alpine,9.0,0.0,316.0,307.0,24,70.8
+2024,18,Singapore Grand Prix,Marina Bay,Singapore,2024-09-22,8,Alpine,9.0,0.0,335.0,326.0,24,75.0
+2024,19,United States Grand Prix,Austin,United States,2024-10-20,8,Alpine,9.0,0.0,356.0,347.0,24,79.2
+2024,20,Mexico City Grand Prix,Mexico City,Mexico,2024-10-27,8,Alpine,9.0,0.0,356.0,347.0,24,83.3
+2024,21,São Paulo Grand Prix,São Paulo,Brazil,2024-11-03,6,Alpine,42.0,33.0,382.0,340.0,24,87.5
+2024,22,Las Vegas Grand Prix,Las Vegas,United States,2024-11-23,6,Alpine,42.0,0.0,382.0,340.0,24,91.7
+2024,23,Qatar Grand Prix,Lusail,Qatar,2024-12-01,6,Alpine,52.0,10.0,407.0,355.0,24,95.8
+2024,24,Abu Dhabi Grand Prix,Yas Island,United Arab Emirates,2024-12-08,6,Alpine,52.0,0.0,407.0,355.0,24,100.0
+2024,1,Bahrain Grand Prix,Sakhir,Bahrain,2024-03-02,5,Aston Martin,3.0,3.0,44.0,41.0,24,4.2
+2024,2,Saudi Arabian Grand Prix,Jeddah,Saudi Arabia,2024-03-09,5,Aston Martin,13.0,10.0,87.0,74.0,24,8.3
+2024,3,Australian Grand Prix,Melbourne,Australia,2024-03-24,5,Aston Martin,13.0,0.0,87.0,74.0,24,12.5
+2024,4,Japanese Grand Prix,Suzuka,Japan,2024-04-07,5,Aston Martin,21.0,8.0,131.0,110.0,24,16.7
+2024,5,Chinese Grand Prix,Shanghai,China,2024-04-21,5,Aston Martin,21.0,0.0,131.0,110.0,24,20.8
+2024,6,Miami Grand Prix,Miami,United States,2024-05-05,5,Aston Martin,23.0,2.0,161.0,138.0,24,25.0
+2024,7,Emilia Romagna Grand Prix,Imola,Italy,2024-05-19,5,Aston Martin,25.0,2.0,190.0,165.0,24,29.2
+2024,8,Monaco Grand Prix,Monaco,Monaco,2024-05-26,5,Aston Martin,25.0,0.0,190.0,165.0,24,33.3
+2024,9,Canadian Grand Prix,Montréal,Canada,2024-06-09,5,Aston Martin,39.0,14.0,215.0,176.0,24,37.5
+2024,10,Spanish Grand Prix,Barcelona,Spain,2024-06-23,5,Aston Martin,39.0,0.0,244.0,205.0,24,41.7
+2024,11,Austrian Grand Prix,Spielberg,Austria,2024-06-30,5,Aston Martin,39.0,0.0,244.0,205.0,24,45.8
+2024,12,British Grand Prix,Silverstone,United Kingdom,2024-07-07,5,Aston Martin,49.0,10.0,262.0,213.0,24,50.0
+2024,13,Hungarian Grand Prix,Budapest,Hungary,2024-07-21,5,Aston Martin,50.0,1.0,278.0,228.0,24,54.2
+2024,14,Belgian Grand Prix,Spa-Francorchamps,Belgium,2024-07-28,5,Aston Martin,50.0,0.0,278.0,228.0,24,58.3
+2024,15,Dutch Grand Prix,Zandvoort,Netherlands,2024-08-25,5,Aston Martin,51.0,1.0,304.0,253.0,24,62.5
+2024,16,Italian Grand Prix,Monza,Italy,2024-09-01,5,Aston Martin,51.0,0.0,316.0,265.0,24,66.7
+2024,17,Azerbaijan Grand Prix,Baku,Azerbaijan,2024-09-15,5,Aston Martin,51.0,0.0,316.0,265.0,24,70.8
+2024,18,Singapore Grand Prix,Marina Bay,Singapore,2024-09-22,5,Aston Martin,55.0,4.0,335.0,280.0,24,75.0
+2024,19,United States Grand Prix,Austin,United States,2024-10-20,5,Aston Martin,55.0,0.0,356.0,301.0,24,79.2
+2024,20,Mexico City Grand Prix,Mexico City,Mexico,2024-10-27,5,Aston Martin,55.0,0.0,356.0,301.0,24,83.3
+2024,21,São Paulo Grand Prix,São Paulo,Brazil,2024-11-03,5,Aston Martin,55.0,0.0,382.0,327.0,24,87.5
+2024,22,Las Vegas Grand Prix,Las Vegas,United States,2024-11-23,5,Aston Martin,55.0,0.0,382.0,327.0,24,91.7
+2024,23,Qatar Grand Prix,Lusail,Qatar,2024-12-01,5,Aston Martin,61.0,6.0,407.0,346.0,24,95.8
+2024,24,Abu Dhabi Grand Prix,Yas Island,United Arab Emirates,2024-12-08,5,Aston Martin,61.0,0.0,407.0,346.0,24,100.0
+2024,1,Bahrain Grand Prix,Sakhir,Bahrain,2024-03-02,2,Ferrari,27.0,27.0,44.0,17.0,24,4.2
+2024,2,Saudi Arabian Grand Prix,Jeddah,Saudi Arabia,2024-03-09,2,Ferrari,49.0,22.0,87.0,38.0,24,8.3
+2024,3,Australian Grand Prix,Melbourne,Australia,2024-03-24,2,Ferrari,49.0,0.0,87.0,38.0,24,12.5
+2024,4,Japanese Grand Prix,Suzuka,Japan,2024-04-07,2,Ferrari,76.0,27.0,131.0,55.0,24,16.7
+2024,5,Chinese Grand Prix,Shanghai,China,2024-04-21,2,Ferrari,76.0,0.0,131.0,55.0,24,20.8
+2024,6,Miami Grand Prix,Miami,United States,2024-05-05,2,Ferrari,101.0,25.0,161.0,60.0,24,25.0
+2024,7,Emilia Romagna Grand Prix,Imola,Italy,2024-05-19,2,Ferrari,126.0,25.0,190.0,64.0,24,29.2
+2024,8,Monaco Grand Prix,Monaco,Monaco,2024-05-26,2,Ferrari,126.0,0.0,190.0,64.0,24,33.3
+2024,9,Canadian Grand Prix,Montréal,Canada,2024-06-09,2,Ferrari,126.0,0.0,215.0,89.0,24,37.5
+2024,10,Spanish Grand Prix,Barcelona,Spain,2024-06-23,3,Ferrari,144.0,18.0,244.0,100.0,24,41.7
+2024,11,Austrian Grand Prix,Spielberg,Austria,2024-06-30,3,Ferrari,144.0,0.0,244.0,100.0,24,45.8
+2024,12,British Grand Prix,Silverstone,United Kingdom,2024-07-07,3,Ferrari,155.0,11.0,262.0,107.0,24,50.0
+2024,13,Hungarian Grand Prix,Budapest,Hungary,2024-07-21,3,Ferrari,175.0,20.0,278.0,103.0,24,54.2
+2024,14,Belgian Grand Prix,Spa-Francorchamps,Belgium,2024-07-28,3,Ferrari,175.0,0.0,278.0,103.0,24,58.3
+2024,15,Dutch Grand Prix,Zandvoort,Netherlands,2024-08-25,3,Ferrari,200.0,25.0,304.0,104.0,24,62.5
+2024,16,Italian Grand Prix,Monza,Italy,2024-09-01,3,Ferrari,237.0,37.0,316.0,79.0,24,66.7
+2024,17,Azerbaijan Grand Prix,Baku,Azerbaijan,2024-09-15,3,Ferrari,237.0,0.0,316.0,79.0,24,70.8
+2024,18,Singapore Grand Prix,Marina Bay,Singapore,2024-09-22,3,Ferrari,253.0,16.0,335.0,82.0,24,75.0
+2024,19,United States Grand Prix,Austin,United States,2024-10-20,3,Ferrari,296.0,43.0,356.0,60.0,24,79.2
+2024,20,Mexico City Grand Prix,Mexico City,Mexico,2024-10-27,3,Ferrari,296.0,0.0,356.0,60.0,24,83.3
+2024,21,São Paulo Grand Prix,São Paulo,Brazil,2024-11-03,3,Ferrari,306.0,10.0,382.0,76.0,24,87.5
+2024,22,Las Vegas Grand Prix,Las Vegas,United States,2024-11-23,3,Ferrari,306.0,0.0,382.0,76.0,24,91.7
+2024,23,Qatar Grand Prix,Lusail,Qatar,2024-12-01,3,Ferrari,332.0,26.0,407.0,75.0,24,95.8
+2024,24,Abu Dhabi Grand Prix,Yas Island,United Arab Emirates,2024-12-08,3,Ferrari,332.0,0.0,407.0,75.0,24,100.0
+2024,1,Bahrain Grand Prix,Sakhir,Bahrain,2024-03-02,7,Haas F1 Team,0.0,0.0,44.0,44.0,24,4.2
+2024,2,Saudi Arabian Grand Prix,Jeddah,Saudi Arabia,2024-03-09,6,Haas F1 Team,1.0,1.0,87.0,86.0,24,8.3
+2024,3,Australian Grand Prix,Melbourne,Australia,2024-03-24,6,Haas F1 Team,1.0,0.0,87.0,86.0,24,12.5
+2024,4,Japanese Grand Prix,Suzuka,Japan,2024-04-07,6,Haas F1 Team,1.0,0.0,131.0,130.0,24,16.7
+2024,5,Chinese Grand Prix,Shanghai,China,2024-04-21,6,Haas F1 Team,1.0,0.0,131.0,130.0,24,20.8
+2024,6,Miami Grand Prix,Miami,United States,2024-05-05,8,Haas F1 Team,1.0,0.0,161.0,160.0,24,25.0
+2024,7,Emilia Romagna Grand Prix,Imola,Italy,2024-05-19,8,Haas F1 Team,1.0,0.0,190.0,189.0,24,29.2
+2024,8,Monaco Grand Prix,Monaco,Monaco,2024-05-26,8,Haas F1 Team,1.0,0.0,190.0,189.0,24,33.3
+2024,9,Canadian Grand Prix,Montréal,Canada,2024-06-09,8,Haas F1 Team,1.0,0.0,215.0,214.0,24,37.5
+2024,10,Spanish Grand Prix,Barcelona,Spain,2024-06-23,8,Haas F1 Team,1.0,0.0,244.0,243.0,24,41.7
+2024,11,Austrian Grand Prix,Spielberg,Austria,2024-06-30,8,Haas F1 Team,1.0,0.0,244.0,243.0,24,45.8
+2024,12,British Grand Prix,Silverstone,United Kingdom,2024-07-07,7,Haas F1 Team,9.0,8.0,262.0,253.0,24,50.0
+2024,13,Hungarian Grand Prix,Budapest,Hungary,2024-07-21,7,Haas F1 Team,9.0,0.0,278.0,269.0,24,54.2
+2024,14,Belgian Grand Prix,Spa-Francorchamps,Belgium,2024-07-28,7,Haas F1 Team,9.0,0.0,278.0,269.0,24,58.3
+2024,15,Dutch Grand Prix,Zandvoort,Netherlands,2024-08-25,8,Haas F1 Team,9.0,0.0,304.0,295.0,24,62.5
+2024,16,Italian Grand Prix,Monza,Italy,2024-09-01,7,Haas F1 Team,10.0,1.0,316.0,306.0,24,66.7
+2024,17,Azerbaijan Grand Prix,Baku,Azerbaijan,2024-09-15,7,Haas F1 Team,10.0,0.0,316.0,306.0,24,70.8
+2024,18,Singapore Grand Prix,Marina Bay,Singapore,2024-09-22,7,Haas F1 Team,12.0,2.0,335.0,323.0,24,75.0
+2024,19,United States Grand Prix,Austin,United States,2024-10-20,7,Haas F1 Team,16.0,4.0,356.0,340.0,24,79.2
+2024,20,Mexico City Grand Prix,Mexico City,Mexico,2024-10-27,7,Haas F1 Team,16.0,0.0,356.0,340.0,24,83.3
+2024,21,São Paulo Grand Prix,São Paulo,Brazil,2024-11-03,8,Haas F1 Team,16.0,0.0,382.0,366.0,24,87.5
+2024,22,Las Vegas Grand Prix,Las Vegas,United States,2024-11-23,8,Haas F1 Team,16.0,0.0,382.0,366.0,24,91.7
+2024,23,Qatar Grand Prix,Lusail,Qatar,2024-12-01,8,Haas F1 Team,18.0,2.0,407.0,389.0,24,95.8
+2024,24,Abu Dhabi Grand Prix,Yas Island,United Arab Emirates,2024-12-08,8,Haas F1 Team,18.0,0.0,407.0,389.0,24,100.0
+2024,1,Bahrain Grand Prix,Sakhir,Bahrain,2024-03-02,8,Kick Sauber,0.0,0.0,44.0,44.0,24,4.2
+2024,2,Saudi Arabian Grand Prix,Jeddah,Saudi Arabia,2024-03-09,8,Kick Sauber,0.0,0.0,87.0,87.0,24,8.3
+2024,3,Australian Grand Prix,Melbourne,Australia,2024-03-24,8,Kick Sauber,0.0,0.0,87.0,87.0,24,12.5
+2024,4,Japanese Grand Prix,Suzuka,Japan,2024-04-07,9,Kick Sauber,0.0,0.0,131.0,131.0,24,16.7
+2024,5,Chinese Grand Prix,Shanghai,China,2024-04-21,9,Kick Sauber,0.0,0.0,131.0,131.0,24,20.8
+2024,6,Miami Grand Prix,Miami,United States,2024-05-05,9,Kick Sauber,0.0,0.0,161.0,161.0,24,25.0
+2024,7,Emilia Romagna Grand Prix,Imola,Italy,2024-05-19,9,Kick Sauber,0.0,0.0,190.0,190.0,24,29.2
+2024,8,Monaco Grand Prix,Monaco,Monaco,2024-05-26,9,Kick Sauber,0.0,0.0,190.0,190.0,24,33.3
+2024,9,Canadian Grand Prix,Montréal,Canada,2024-06-09,9,Kick Sauber,0.0,0.0,215.0,215.0,24,37.5
+2024,10,Spanish Grand Prix,Barcelona,Spain,2024-06-23,9,Kick Sauber,0.0,0.0,244.0,244.0,24,41.7
+2024,11,Austrian Grand Prix,Spielberg,Austria,2024-06-30,9,Kick Sauber,0.0,0.0,244.0,244.0,24,45.8
+2024,12,British Grand Prix,Silverstone,United Kingdom,2024-07-07,10,Kick Sauber,0.0,0.0,262.0,262.0,24,50.0
+2024,13,Hungarian Grand Prix,Budapest,Hungary,2024-07-21,10,Kick Sauber,0.0,0.0,278.0,278.0,24,54.2
+2024,14,Belgian Grand Prix,Spa-Francorchamps,Belgium,2024-07-28,10,Kick Sauber,0.0,0.0,278.0,278.0,24,58.3
+2024,15,Dutch Grand Prix,Zandvoort,Netherlands,2024-08-25,10,Kick Sauber,0.0,0.0,304.0,304.0,24,62.5
+2024,16,Italian Grand Prix,Monza,Italy,2024-09-01,10,Kick Sauber,0.0,0.0,316.0,316.0,24,66.7
+2024,17,Azerbaijan Grand Prix,Baku,Azerbaijan,2024-09-15,10,Kick Sauber,0.0,0.0,316.0,316.0,24,70.8
+2024,18,Singapore Grand Prix,Marina Bay,Singapore,2024-09-22,10,Kick Sauber,0.0,0.0,335.0,335.0,24,75.0
+2024,19,United States Grand Prix,Austin,United States,2024-10-20,10,Kick Sauber,0.0,0.0,356.0,356.0,24,79.2
+2024,20,Mexico City Grand Prix,Mexico City,Mexico,2024-10-27,10,Kick Sauber,0.0,0.0,356.0,356.0,24,83.3
+2024,21,São Paulo Grand Prix,São Paulo,Brazil,2024-11-03,10,Kick Sauber,0.0,0.0,382.0,382.0,24,87.5
+2024,22,Las Vegas Grand Prix,Las Vegas,United States,2024-11-23,10,Kick Sauber,0.0,0.0,382.0,382.0,24,91.7
+2024,23,Qatar Grand Prix,Lusail,Qatar,2024-12-01,10,Kick Sauber,4.0,4.0,407.0,403.0,24,95.8
+2024,24,Abu Dhabi Grand Prix,Yas Island,United Arab Emirates,2024-12-08,10,Kick Sauber,4.0,0.0,407.0,403.0,24,100.0
+2024,1,Bahrain Grand Prix,Sakhir,Bahrain,2024-03-02,4,McLaren,12.0,12.0,44.0,32.0,24,4.2
+2024,2,Saudi Arabian Grand Prix,Jeddah,Saudi Arabia,2024-03-09,3,McLaren,28.0,16.0,87.0,59.0,24,8.3
+2024,3,Australian Grand Prix,Melbourne,Australia,2024-03-24,3,McLaren,28.0,0.0,87.0,59.0,24,12.5
+2024,4,Japanese Grand Prix,Suzuka,Japan,2024-04-07,3,McLaren,42.0,14.0,131.0,89.0,24,16.7
+2024,5,Chinese Grand Prix,Shanghai,China,2024-04-21,3,McLaren,42.0,0.0,131.0,89.0,24,20.8
+2024,6,Miami Grand Prix,Miami,United States,2024-05-05,3,McLaren,67.0,25.0,161.0,94.0,24,25.0
+2024,7,Emilia Romagna Grand Prix,Imola,Italy,2024-05-19,3,McLaren,97.0,30.0,190.0,93.0,24,29.2
+2024,8,Monaco Grand Prix,Monaco,Monaco,2024-05-26,3,McLaren,97.0,0.0,190.0,93.0,24,33.3
+2024,9,Canadian Grand Prix,Montréal,Canada,2024-06-09,3,McLaren,125.0,28.0,215.0,90.0,24,37.5
+2024,10,Spanish Grand Prix,Barcelona,Spain,2024-06-23,2,McLaren,150.0,25.0,244.0,94.0,24,41.7
+2024,11,Austrian Grand Prix,Spielberg,Austria,2024-06-30,2,McLaren,150.0,0.0,244.0,94.0,24,45.8
+2024,12,British Grand Prix,Silverstone,United Kingdom,2024-07-07,2,McLaren,177.0,27.0,262.0,85.0,24,50.0
+2024,13,Hungarian Grand Prix,Budapest,Hungary,2024-07-21,2,McLaren,220.0,43.0,278.0,58.0,24,54.2
+2024,14,Belgian Grand Prix,Spa-Francorchamps,Belgium,2024-07-28,2,McLaren,220.0,0.0,278.0,58.0,24,58.3
+2024,15,Dutch Grand Prix,Zandvoort,Netherlands,2024-08-25,2,McLaren,258.0,38.0,304.0,46.0,24,62.5
+2024,16,Italian Grand Prix,Monza,Italy,2024-09-01,2,McLaren,292.0,34.0,316.0,24.0,24,66.7
+2024,17,Azerbaijan Grand Prix,Baku,Azerbaijan,2024-09-15,2,McLaren,292.0,0.0,316.0,24.0,24,70.8
+2024,18,Singapore Grand Prix,Marina Bay,Singapore,2024-09-22,2,McLaren,332.0,40.0,335.0,3.0,24,75.0
+2024,19,United States Grand Prix,Austin,United States,2024-10-20,2,McLaren,354.0,22.0,356.0,2.0,24,79.2
+2024,20,Mexico City Grand Prix,Mexico City,Mexico,2024-10-27,2,McLaren,354.0,0.0,356.0,2.0,24,83.3
+2024,21,São Paulo Grand Prix,São Paulo,Brazil,2024-11-03,2,McLaren,366.0,12.0,382.0,16.0,24,87.5
+2024,22,Las Vegas Grand Prix,Las Vegas,United States,2024-11-23,2,McLaren,366.0,0.0,382.0,16.0,24,91.7
+2024,23,Qatar Grand Prix,Lusail,Qatar,2024-12-01,2,McLaren,383.0,17.0,407.0,24.0,24,95.8
+2024,24,Abu Dhabi Grand Prix,Yas Island,United Arab Emirates,2024-12-08,2,McLaren,383.0,0.0,407.0,24.0,24,100.0
+2024,1,Bahrain Grand Prix,Sakhir,Bahrain,2024-03-02,3,Mercedes,16.0,16.0,44.0,28.0,24,4.2
+2024,2,Saudi Arabian Grand Prix,Jeddah,Saudi Arabia,2024-03-09,4,Mercedes,26.0,10.0,87.0,61.0,24,8.3
+2024,3,Australian Grand Prix,Melbourne,Australia,2024-03-24,4,Mercedes,26.0,0.0,87.0,61.0,24,12.5
+2024,4,Japanese Grand Prix,Suzuka,Japan,2024-04-07,4,Mercedes,34.0,8.0,131.0,97.0,24,16.7
+2024,5,Chinese Grand Prix,Shanghai,China,2024-04-21,4,Mercedes,34.0,0.0,131.0,97.0,24,20.8
+2024,6,Miami Grand Prix,Miami,United States,2024-05-05,4,Mercedes,46.0,12.0,161.0,115.0,24,25.0
+2024,7,Emilia Romagna Grand Prix,Imola,Italy,2024-05-19,4,Mercedes,61.0,15.0,190.0,129.0,24,29.2
+2024,8,Monaco Grand Prix,Monaco,Monaco,2024-05-26,4,Mercedes,61.0,0.0,190.0,129.0,24,33.3
+2024,9,Canadian Grand Prix,Montréal,Canada,2024-06-09,4,Mercedes,89.0,28.0,215.0,126.0,24,37.5
+2024,10,Spanish Grand Prix,Barcelona,Spain,2024-06-23,4,Mercedes,116.0,27.0,244.0,128.0,24,41.7
+2024,11,Austrian Grand Prix,Spielberg,Austria,2024-06-30,4,Mercedes,116.0,0.0,244.0,128.0,24,45.8
+2024,12,British Grand Prix,Silverstone,United Kingdom,2024-07-07,4,Mercedes,141.0,25.0,262.0,121.0,24,50.0
+2024,13,Hungarian Grand Prix,Budapest,Hungary,2024-07-21,4,Mercedes,161.0,20.0,278.0,117.0,24,54.2
+2024,14,Belgian Grand Prix,Spa-Francorchamps,Belgium,2024-07-28,4,Mercedes,161.0,0.0,278.0,117.0,24,58.3
+2024,15,Dutch Grand Prix,Zandvoort,Netherlands,2024-08-25,4,Mercedes,171.0,10.0,304.0,133.0,24,62.5
+2024,16,Italian Grand Prix,Monza,Italy,2024-09-01,4,Mercedes,187.0,16.0,316.0,129.0,24,66.7
+2024,17,Azerbaijan Grand Prix,Baku,Azerbaijan,2024-09-15,4,Mercedes,187.0,0.0,316.0,129.0,24,70.8
+2024,18,Singapore Grand Prix,Marina Bay,Singapore,2024-09-22,4,Mercedes,207.0,20.0,335.0,128.0,24,75.0
+2024,19,United States Grand Prix,Austin,United States,2024-10-20,4,Mercedes,215.0,8.0,356.0,141.0,24,79.2
+2024,20,Mexico City Grand Prix,Mexico City,Mexico,2024-10-27,4,Mercedes,215.0,0.0,356.0,141.0,24,83.3
+2024,21,São Paulo Grand Prix,São Paulo,Brazil,2024-11-03,4,Mercedes,228.0,13.0,382.0,154.0,24,87.5
+2024,22,Las Vegas Grand Prix,Las Vegas,United States,2024-11-23,4,Mercedes,228.0,0.0,382.0,154.0,24,91.7
+2024,23,Qatar Grand Prix,Lusail,Qatar,2024-12-01,4,Mercedes,240.0,12.0,407.0,167.0,24,95.8
+2024,24,Abu Dhabi Grand Prix,Yas Island,United Arab Emirates,2024-12-08,4,Mercedes,240.0,0.0,407.0,167.0,24,100.0
+2024,1,Bahrain Grand Prix,Sakhir,Bahrain,2024-03-02,9,RB,0.0,0.0,44.0,44.0,24,4.2
+2024,2,Saudi Arabian Grand Prix,Jeddah,Saudi Arabia,2024-03-09,9,RB,0.0,0.0,87.0,87.0,24,8.3
+2024,3,Australian Grand Prix,Melbourne,Australia,2024-03-24,9,RB,0.0,0.0,87.0,87.0,24,12.5
+2024,4,Japanese Grand Prix,Suzuka,Japan,2024-04-07,7,RB,1.0,1.0,131.0,130.0,24,16.7
+2024,5,Chinese Grand Prix,Shanghai,China,2024-04-21,7,RB,1.0,0.0,131.0,130.0,24,20.8
+2024,6,Miami Grand Prix,Miami,United States,2024-05-05,6,RB,7.0,6.0,161.0,154.0,24,25.0
+2024,7,Emilia Romagna Grand Prix,Imola,Italy,2024-05-19,6,RB,8.0,1.0,190.0,182.0,24,29.2
+2024,8,Monaco Grand Prix,Monaco,Monaco,2024-05-26,6,RB,8.0,0.0,190.0,182.0,24,33.3
+2024,9,Canadian Grand Prix,Montréal,Canada,2024-06-09,6,RB,12.0,4.0,215.0,203.0,24,37.5
+2024,10,Spanish Grand Prix,Barcelona,Spain,2024-06-23,6,RB,12.0,0.0,244.0,232.0,24,41.7
+2024,11,Austrian Grand Prix,Spielberg,Austria,2024-06-30,6,RB,12.0,0.0,244.0,232.0,24,45.8
+2024,12,British Grand Prix,Silverstone,United Kingdom,2024-07-07,6,RB,13.0,1.0,262.0,249.0,24,50.0
+2024,13,Hungarian Grand Prix,Budapest,Hungary,2024-07-21,6,RB,15.0,2.0,278.0,263.0,24,54.2
+2024,14,Belgian Grand Prix,Spa-Francorchamps,Belgium,2024-07-28,6,RB,15.0,0.0,278.0,263.0,24,58.3
+2024,15,Dutch Grand Prix,Zandvoort,Netherlands,2024-08-25,6,RB,15.0,0.0,304.0,289.0,24,62.5
+2024,16,Italian Grand Prix,Monza,Italy,2024-09-01,6,RB,15.0,0.0,316.0,301.0,24,66.7
+2024,17,Azerbaijan Grand Prix,Baku,Azerbaijan,2024-09-15,6,RB,15.0,0.0,316.0,301.0,24,70.8
+2024,18,Singapore Grand Prix,Marina Bay,Singapore,2024-09-22,6,RB,15.0,0.0,335.0,320.0,24,75.0
+2024,19,United States Grand Prix,Austin,United States,2024-10-20,6,RB,17.0,2.0,356.0,339.0,24,79.2
+2024,20,Mexico City Grand Prix,Mexico City,Mexico,2024-10-27,6,RB,17.0,0.0,356.0,339.0,24,83.3
+2024,21,São Paulo Grand Prix,São Paulo,Brazil,2024-11-03,7,RB,25.0,8.0,382.0,357.0,24,87.5
+2024,22,Las Vegas Grand Prix,Las Vegas,United States,2024-11-23,7,RB,25.0,0.0,382.0,357.0,24,91.7
+2024,23,Qatar Grand Prix,Lusail,Qatar,2024-12-01,7,RB,25.0,0.0,407.0,382.0,24,95.8
+2024,24,Abu Dhabi Grand Prix,Yas Island,United Arab Emirates,2024-12-08,7,RB,25.0,0.0,407.0,382.0,24,100.0
+2024,1,Bahrain Grand Prix,Sakhir,Bahrain,2024-03-02,1,Red Bull Racing,44.0,44.0,44.0,0.0,24,4.2
+2024,2,Saudi Arabian Grand Prix,Jeddah,Saudi Arabia,2024-03-09,1,Red Bull Racing,87.0,43.0,87.0,0.0,24,8.3
+2024,3,Australian Grand Prix,Melbourne,Australia,2024-03-24,1,Red Bull Racing,87.0,0.0,87.0,0.0,24,12.5
+2024,4,Japanese Grand Prix,Suzuka,Japan,2024-04-07,1,Red Bull Racing,131.0,44.0,131.0,0.0,24,16.7
+2024,5,Chinese Grand Prix,Shanghai,China,2024-04-21,1,Red Bull Racing,131.0,0.0,131.0,0.0,24,20.8
+2024,6,Miami Grand Prix,Miami,United States,2024-05-05,1,Red Bull Racing,161.0,30.0,161.0,0.0,24,25.0
+2024,7,Emilia Romagna Grand Prix,Imola,Italy,2024-05-19,1,Red Bull Racing,190.0,29.0,190.0,0.0,24,29.2
+2024,8,Monaco Grand Prix,Monaco,Monaco,2024-05-26,1,Red Bull Racing,190.0,0.0,190.0,0.0,24,33.3
+2024,9,Canadian Grand Prix,Montréal,Canada,2024-06-09,1,Red Bull Racing,215.0,25.0,215.0,0.0,24,37.5
+2024,10,Spanish Grand Prix,Barcelona,Spain,2024-06-23,1,Red Bull Racing,244.0,29.0,244.0,0.0,24,41.7
+2024,11,Austrian Grand Prix,Spielberg,Austria,2024-06-30,1,Red Bull Racing,244.0,0.0,244.0,0.0,24,45.8
+2024,12,British Grand Prix,Silverstone,United Kingdom,2024-07-07,1,Red Bull Racing,262.0,18.0,262.0,0.0,24,50.0
+2024,13,Hungarian Grand Prix,Budapest,Hungary,2024-07-21,1,Red Bull Racing,278.0,16.0,278.0,0.0,24,54.2
+2024,14,Belgian Grand Prix,Spa-Francorchamps,Belgium,2024-07-28,1,Red Bull Racing,278.0,0.0,278.0,0.0,24,58.3
+2024,15,Dutch Grand Prix,Zandvoort,Netherlands,2024-08-25,1,Red Bull Racing,304.0,26.0,304.0,0.0,24,62.5
+2024,16,Italian Grand Prix,Monza,Italy,2024-09-01,1,Red Bull Racing,316.0,12.0,316.0,0.0,24,66.7
+2024,17,Azerbaijan Grand Prix,Baku,Azerbaijan,2024-09-15,1,Red Bull Racing,316.0,0.0,316.0,0.0,24,70.8
+2024,18,Singapore Grand Prix,Marina Bay,Singapore,2024-09-22,1,Red Bull Racing,335.0,19.0,335.0,0.0,24,75.0
+2024,19,United States Grand Prix,Austin,United States,2024-10-20,1,Red Bull Racing,356.0,21.0,356.0,0.0,24,79.2
+2024,20,Mexico City Grand Prix,Mexico City,Mexico,2024-10-27,1,Red Bull Racing,356.0,0.0,356.0,0.0,24,83.3
+2024,21,São Paulo Grand Prix,São Paulo,Brazil,2024-11-03,1,Red Bull Racing,382.0,26.0,382.0,0.0,24,87.5
+2024,22,Las Vegas Grand Prix,Las Vegas,United States,2024-11-23,1,Red Bull Racing,382.0,0.0,382.0,0.0,24,91.7
+2024,23,Qatar Grand Prix,Lusail,Qatar,2024-12-01,1,Red Bull Racing,407.0,25.0,407.0,0.0,24,95.8
+2024,24,Abu Dhabi Grand Prix,Yas Island,United Arab Emirates,2024-12-08,1,Red Bull Racing,407.0,0.0,407.0,0.0,24,100.0
+2024,1,Bahrain Grand Prix,Sakhir,Bahrain,2024-03-02,10,Williams,0.0,0.0,44.0,44.0,24,4.2
+2024,2,Saudi Arabian Grand Prix,Jeddah,Saudi Arabia,2024-03-09,10,Williams,0.0,0.0,87.0,87.0,24,8.3
+2024,3,Australian Grand Prix,Melbourne,Australia,2024-03-24,10,Williams,0.0,0.0,87.0,87.0,24,12.5
+2024,4,Japanese Grand Prix,Suzuka,Japan,2024-04-07,10,Williams,0.0,0.0,131.0,131.0,24,16.7
+2024,5,Chinese Grand Prix,Shanghai,China,2024-04-21,10,Williams,0.0,0.0,131.0,131.0,24,20.8
+2024,6,Miami Grand Prix,Miami,United States,2024-05-05,10,Williams,0.0,0.0,161.0,161.0,24,25.0
+2024,7,Emilia Romagna Grand Prix,Imola,Italy,2024-05-19,10,Williams,0.0,0.0,190.0,190.0,24,29.2
+2024,8,Monaco Grand Prix,Monaco,Monaco,2024-05-26,10,Williams,0.0,0.0,190.0,190.0,24,33.3
+2024,9,Canadian Grand Prix,Montréal,Canada,2024-06-09,10,Williams,0.0,0.0,215.0,215.0,24,37.5
+2024,10,Spanish Grand Prix,Barcelona,Spain,2024-06-23,10,Williams,0.0,0.0,244.0,244.0,24,41.7
+2024,11,Austrian Grand Prix,Spielberg,Austria,2024-06-30,10,Williams,0.0,0.0,244.0,244.0,24,45.8
+2024,12,British Grand Prix,Silverstone,United Kingdom,2024-07-07,9,Williams,2.0,2.0,262.0,260.0,24,50.0
+2024,13,Hungarian Grand Prix,Budapest,Hungary,2024-07-21,9,Williams,2.0,0.0,278.0,276.0,24,54.2
+2024,14,Belgian Grand Prix,Spa-Francorchamps,Belgium,2024-07-28,9,Williams,2.0,0.0,278.0,276.0,24,58.3
+2024,15,Dutch Grand Prix,Zandvoort,Netherlands,2024-08-25,9,Williams,2.0,0.0,304.0,302.0,24,62.5
+2024,16,Italian Grand Prix,Monza,Italy,2024-09-01,9,Williams,4.0,2.0,316.0,312.0,24,66.7
+2024,17,Azerbaijan Grand Prix,Baku,Azerbaijan,2024-09-15,9,Williams,4.0,0.0,316.0,312.0,24,70.8
+2024,18,Singapore Grand Prix,Marina Bay,Singapore,2024-09-22,9,Williams,4.0,0.0,335.0,331.0,24,75.0
+2024,19,United States Grand Prix,Austin,United States,2024-10-20,9,Williams,5.0,1.0,356.0,351.0,24,79.2
+2024,20,Mexico City Grand Prix,Mexico City,Mexico,2024-10-27,9,Williams,5.0,0.0,356.0,351.0,24,83.3
+2024,21,São Paulo Grand Prix,São Paulo,Brazil,2024-11-03,9,Williams,5.0,0.0,382.0,377.0,24,87.5
+2024,22,Las Vegas Grand Prix,Las Vegas,United States,2024-11-23,9,Williams,5.0,0.0,382.0,377.0,24,91.7
+2024,23,Qatar Grand Prix,Lusail,Qatar,2024-12-01,9,Williams,5.0,0.0,407.0,402.0,24,95.8
+2024,24,Abu Dhabi Grand Prix,Yas Island,United Arab Emirates,2024-12-08,9,Williams,5.0,0.0,407.0,402.0,24,100.0
+2025,1,Australian Grand Prix,Melbourne,Australia,2025-03-16,8,Alpine,0.0,0.0,27.0,27.0,17,5.9
+2025,2,Chinese Grand Prix,Shanghai,China,2025-03-23,9,Alpine,0.0,0.0,70.0,70.0,17,11.8
+2025,3,Japanese Grand Prix,Suzuka,Japan,2025-04-06,9,Alpine,0.0,0.0,70.0,70.0,17,17.6
+2025,4,Bahrain Grand Prix,Sakhir,Bahrain,2025-04-13,8,Alpine,6.0,6.0,110.0,104.0,17,23.5
+2025,5,Saudi Arabian Grand Prix,Jeddah,Saudi Arabia,2025-04-20,8,Alpine,6.0,0.0,147.0,141.0,17,29.4
+2025,6,Miami Grand Prix,Miami Gardens,United States,2025-05-04,8,Alpine,6.0,0.0,190.0,184.0,17,35.3
+2025,7,Emilia Romagna Grand Prix,Imola,Italy,2025-05-18,8,Alpine,6.0,0.0,190.0,184.0,17,41.2
+2025,8,Monaco Grand Prix,Monaco,Monaco,2025-05-25,9,Alpine,6.0,0.0,230.0,224.0,17,47.1
+2025,9,Spanish Grand Prix,Barcelona,Spain,2025-06-01,10,Alpine,10.0,4.0,273.0,263.0,17,52.9
+2025,10,Canadian Grand Prix,Montréal,Canada,2025-06-15,10,Alpine,10.0,0.0,285.0,275.0,17,58.8
+2025,11,Austrian Grand Prix,Spielberg,Austria,2025-06-29,10,Alpine,10.0,0.0,285.0,275.0,17,64.7
+2025,12,British Grand Prix,Silverstone,United Kingdom,2025-07-06,10,Alpine,18.0,8.0,328.0,310.0,17,70.6
+2025,13,Belgian Grand Prix,Spa-Francorchamps,Belgium,2025-07-27,10,Alpine,19.0,1.0,371.0,352.0,17,76.5
+2025,14,Hungarian Grand Prix,Budapest,Hungary,2025-08-03,10,Alpine,19.0,0.0,371.0,352.0,17,82.4
+2025,15,Dutch Grand Prix,Zandvoort,Netherlands,2025-08-31,10,Alpine,19.0,0.0,396.0,377.0,17,88.2
+2025,16,Italian Grand Prix,Monza,Italy,2025-09-07,10,Alpine,19.0,0.0,429.0,410.0,17,94.1
+2025,17,Azerbaijan Grand Prix,Baku,Azerbaijan,2025-09-21,10,Alpine,19.0,0.0,435.0,416.0,17,100.0
+2025,1,Australian Grand Prix,Melbourne,Australia,2025-03-16,5,Aston Martin,8.0,8.0,27.0,19.0,17,5.9
+2025,2,Chinese Grand Prix,Shanghai,China,2025-03-23,6,Aston Martin,10.0,2.0,70.0,60.0,17,11.8
+2025,3,Japanese Grand Prix,Suzuka,Japan,2025-04-06,6,Aston Martin,10.0,0.0,70.0,60.0,17,17.6
+2025,4,Bahrain Grand Prix,Sakhir,Bahrain,2025-04-13,7,Aston Martin,10.0,0.0,110.0,100.0,17,23.5
+2025,5,Saudi Arabian Grand Prix,Jeddah,Saudi Arabia,2025-04-20,7,Aston Martin,10.0,0.0,147.0,137.0,17,29.4
+2025,6,Miami Grand Prix,Miami Gardens,United States,2025-05-04,7,Aston Martin,10.0,0.0,190.0,180.0,17,35.3
+2025,7,Emilia Romagna Grand Prix,Imola,Italy,2025-05-18,7,Aston Martin,10.0,0.0,190.0,180.0,17,41.2
+2025,8,Monaco Grand Prix,Monaco,Monaco,2025-05-25,8,Aston Martin,10.0,0.0,230.0,220.0,17,47.1
+2025,9,Spanish Grand Prix,Barcelona,Spain,2025-06-01,9,Aston Martin,12.0,2.0,273.0,261.0,17,52.9
+2025,10,Canadian Grand Prix,Montréal,Canada,2025-06-15,9,Aston Martin,18.0,6.0,285.0,267.0,17,58.8
+2025,11,Austrian Grand Prix,Spielberg,Austria,2025-06-29,9,Aston Martin,18.0,0.0,285.0,267.0,17,64.7
+2025,12,British Grand Prix,Silverstone,United Kingdom,2025-07-06,8,Aston Martin,26.0,8.0,328.0,302.0,17,70.6
+2025,13,Belgian Grand Prix,Spa-Francorchamps,Belgium,2025-07-27,8,Aston Martin,26.0,0.0,371.0,345.0,17,76.5
+2025,14,Hungarian Grand Prix,Budapest,Hungary,2025-08-03,8,Aston Martin,26.0,0.0,371.0,345.0,17,82.4
+2025,15,Dutch Grand Prix,Zandvoort,Netherlands,2025-08-31,8,Aston Martin,36.0,10.0,396.0,360.0,17,88.2
+2025,16,Italian Grand Prix,Monza,Italy,2025-09-07,8,Aston Martin,36.0,0.0,429.0,393.0,17,94.1
+2025,17,Azerbaijan Grand Prix,Baku,Azerbaijan,2025-09-21,8,Aston Martin,36.0,0.0,435.0,399.0,17,100.0
+2025,1,Australian Grand Prix,Melbourne,Australia,2025-03-16,7,Ferrari,5.0,5.0,27.0,22.0,17,5.9
+2025,2,Chinese Grand Prix,Shanghai,China,2025-03-23,8,Ferrari,5.0,0.0,70.0,65.0,17,11.8
+2025,3,Japanese Grand Prix,Suzuka,Japan,2025-04-06,8,Ferrari,5.0,0.0,70.0,65.0,17,17.6
+2025,4,Bahrain Grand Prix,Sakhir,Bahrain,2025-04-13,4,Ferrari,27.0,22.0,110.0,83.0,17,23.5
+2025,5,Saudi Arabian Grand Prix,Jeddah,Saudi Arabia,2025-04-20,4,Ferrari,48.0,21.0,147.0,99.0,17,29.4
+2025,6,Miami Grand Prix,Miami Gardens,United States,2025-05-04,4,Ferrari,58.0,10.0,190.0,132.0,17,35.3
+2025,7,Emilia Romagna Grand Prix,Imola,Italy,2025-05-18,4,Ferrari,58.0,0.0,190.0,132.0,17,41.2
+2025,8,Monaco Grand Prix,Monaco,Monaco,2025-05-25,3,Ferrari,86.0,28.0,230.0,144.0,17,47.1
+2025,9,Spanish Grand Prix,Barcelona,Spain,2025-06-01,3,Ferrari,109.0,23.0,273.0,164.0,17,52.9
+2025,10,Canadian Grand Prix,Montréal,Canada,2025-06-15,3,Ferrari,127.0,18.0,285.0,158.0,17,58.8
+2025,11,Austrian Grand Prix,Spielberg,Austria,2025-06-29,3,Ferrari,127.0,0.0,285.0,158.0,17,64.7
+2025,12,British Grand Prix,Silverstone,United Kingdom,2025-07-06,3,Ferrari,139.0,12.0,328.0,189.0,17,70.6
+2025,13,Belgian Grand Prix,Spa-Francorchamps,Belgium,2025-07-27,3,Ferrari,160.0,21.0,371.0,211.0,17,76.5
+2025,14,Hungarian Grand Prix,Budapest,Hungary,2025-08-03,3,Ferrari,160.0,0.0,371.0,211.0,17,82.4
+2025,15,Dutch Grand Prix,Zandvoort,Netherlands,2025-08-31,3,Ferrari,160.0,0.0,396.0,236.0,17,88.2
+2025,16,Italian Grand Prix,Monza,Italy,2025-09-07,3,Ferrari,180.0,20.0,429.0,249.0,17,94.1
+2025,17,Azerbaijan Grand Prix,Baku,Azerbaijan,2025-09-21,4,Ferrari,186.0,6.0,435.0,249.0,17,100.0
+2025,1,Australian Grand Prix,Melbourne,Australia,2025-03-16,9,Haas F1 Team,0.0,0.0,27.0,27.0,17,5.9
+2025,2,Chinese Grand Prix,Shanghai,China,2025-03-23,5,Haas F1 Team,14.0,14.0,70.0,56.0,17,11.8
+2025,3,Japanese Grand Prix,Suzuka,Japan,2025-04-06,5,Haas F1 Team,14.0,0.0,70.0,56.0,17,17.6
+2025,4,Bahrain Grand Prix,Sakhir,Bahrain,2025-04-13,5,Haas F1 Team,19.0,5.0,110.0,91.0,17,23.5
+2025,5,Saudi Arabian Grand Prix,Jeddah,Saudi Arabia,2025-04-20,6,Haas F1 Team,19.0,0.0,147.0,128.0,17,29.4
+2025,6,Miami Grand Prix,Miami Gardens,United States,2025-05-04,6,Haas F1 Team,19.0,0.0,190.0,171.0,17,35.3
+2025,7,Emilia Romagna Grand Prix,Imola,Italy,2025-05-18,6,Haas F1 Team,19.0,0.0,190.0,171.0,17,41.2
+2025,8,Monaco Grand Prix,Monaco,Monaco,2025-05-25,6,Haas F1 Team,25.0,6.0,230.0,205.0,17,47.1
+2025,9,Spanish Grand Prix,Barcelona,Spain,2025-06-01,6,Haas F1 Team,25.0,0.0,273.0,248.0,17,52.9
+2025,10,Canadian Grand Prix,Montréal,Canada,2025-06-15,6,Haas F1 Team,27.0,2.0,285.0,258.0,17,58.8
+2025,11,Austrian Grand Prix,Spielberg,Austria,2025-06-29,6,Haas F1 Team,27.0,0.0,285.0,258.0,17,64.7
+2025,12,British Grand Prix,Silverstone,United Kingdom,2025-07-06,7,Haas F1 Team,27.0,0.0,328.0,301.0,17,70.6
+2025,13,Belgian Grand Prix,Spa-Francorchamps,Belgium,2025-07-27,7,Haas F1 Team,27.0,0.0,371.0,344.0,17,76.5
+2025,14,Hungarian Grand Prix,Budapest,Hungary,2025-08-03,7,Haas F1 Team,27.0,0.0,371.0,344.0,17,82.4
+2025,15,Dutch Grand Prix,Zandvoort,Netherlands,2025-08-31,9,Haas F1 Team,36.0,9.0,396.0,360.0,17,88.2
+2025,16,Italian Grand Prix,Monza,Italy,2025-09-07,9,Haas F1 Team,36.0,0.0,429.0,393.0,17,94.1
+2025,17,Azerbaijan Grand Prix,Baku,Azerbaijan,2025-09-21,9,Haas F1 Team,36.0,0.0,435.0,399.0,17,100.0
+2025,1,Australian Grand Prix,Melbourne,Australia,2025-03-16,6,Kick Sauber,6.0,6.0,27.0,21.0,17,5.9
+2025,2,Chinese Grand Prix,Shanghai,China,2025-03-23,7,Kick Sauber,6.0,0.0,70.0,64.0,17,11.8
+2025,3,Japanese Grand Prix,Suzuka,Japan,2025-04-06,7,Kick Sauber,6.0,0.0,70.0,64.0,17,17.6
+2025,4,Bahrain Grand Prix,Sakhir,Bahrain,2025-04-13,9,Kick Sauber,6.0,0.0,110.0,104.0,17,23.5
+2025,5,Saudi Arabian Grand Prix,Jeddah,Saudi Arabia,2025-04-20,9,Kick Sauber,6.0,0.0,147.0,141.0,17,29.4
+2025,6,Miami Grand Prix,Miami Gardens,United States,2025-05-04,9,Kick Sauber,6.0,0.0,190.0,184.0,17,35.3
+2025,7,Emilia Romagna Grand Prix,Imola,Italy,2025-05-18,9,Kick Sauber,6.0,0.0,190.0,184.0,17,41.2
+2025,8,Monaco Grand Prix,Monaco,Monaco,2025-05-25,10,Kick Sauber,6.0,0.0,230.0,224.0,17,47.1
+2025,9,Spanish Grand Prix,Barcelona,Spain,2025-06-01,8,Kick Sauber,16.0,10.0,273.0,257.0,17,52.9
+2025,10,Canadian Grand Prix,Montréal,Canada,2025-06-15,7,Kick Sauber,20.0,4.0,285.0,265.0,17,58.8
+2025,11,Austrian Grand Prix,Spielberg,Austria,2025-06-29,7,Kick Sauber,20.0,0.0,285.0,265.0,17,64.7
+2025,12,British Grand Prix,Silverstone,United Kingdom,2025-07-06,6,Kick Sauber,35.0,15.0,328.0,293.0,17,70.6
+2025,13,Belgian Grand Prix,Spa-Francorchamps,Belgium,2025-07-27,6,Kick Sauber,37.0,2.0,371.0,334.0,17,76.5
+2025,14,Hungarian Grand Prix,Budapest,Hungary,2025-08-03,6,Kick Sauber,37.0,0.0,371.0,334.0,17,82.4
+2025,15,Dutch Grand Prix,Zandvoort,Netherlands,2025-08-31,7,Kick Sauber,37.0,0.0,396.0,359.0,17,88.2
+2025,16,Italian Grand Prix,Monza,Italy,2025-09-07,6,Kick Sauber,41.0,4.0,429.0,388.0,17,94.1
+2025,17,Azerbaijan Grand Prix,Baku,Azerbaijan,2025-09-21,7,Kick Sauber,41.0,0.0,435.0,394.0,17,100.0
+2025,1,Australian Grand Prix,Melbourne,Australia,2025-03-16,1,McLaren,27.0,27.0,27.0,0.0,17,5.9
+2025,2,Chinese Grand Prix,Shanghai,China,2025-03-23,1,McLaren,70.0,43.0,70.0,0.0,17,11.8
+2025,3,Japanese Grand Prix,Suzuka,Japan,2025-04-06,1,McLaren,70.0,0.0,70.0,0.0,17,17.6
+2025,4,Bahrain Grand Prix,Sakhir,Bahrain,2025-04-13,1,McLaren,110.0,40.0,110.0,0.0,17,23.5
+2025,5,Saudi Arabian Grand Prix,Jeddah,Saudi Arabia,2025-04-20,1,McLaren,147.0,37.0,147.0,0.0,17,29.4
+2025,6,Miami Grand Prix,Miami Gardens,United States,2025-05-04,1,McLaren,190.0,43.0,190.0,0.0,17,35.3
+2025,7,Emilia Romagna Grand Prix,Imola,Italy,2025-05-18,1,McLaren,190.0,0.0,190.0,0.0,17,41.2
+2025,8,Monaco Grand Prix,Monaco,Monaco,2025-05-25,1,McLaren,230.0,40.0,230.0,0.0,17,47.1
+2025,9,Spanish Grand Prix,Barcelona,Spain,2025-06-01,1,McLaren,273.0,43.0,273.0,0.0,17,52.9
+2025,10,Canadian Grand Prix,Montréal,Canada,2025-06-15,1,McLaren,285.0,12.0,285.0,0.0,17,58.8
+2025,11,Austrian Grand Prix,Spielberg,Austria,2025-06-29,1,McLaren,285.0,0.0,285.0,0.0,17,64.7
+2025,12,British Grand Prix,Silverstone,United Kingdom,2025-07-06,1,McLaren,328.0,43.0,328.0,0.0,17,70.6
+2025,13,Belgian Grand Prix,Spa-Francorchamps,Belgium,2025-07-27,1,McLaren,371.0,43.0,371.0,0.0,17,76.5
+2025,14,Hungarian Grand Prix,Budapest,Hungary,2025-08-03,1,McLaren,371.0,0.0,371.0,0.0,17,82.4
+2025,15,Dutch Grand Prix,Zandvoort,Netherlands,2025-08-31,1,McLaren,396.0,25.0,396.0,0.0,17,88.2
+2025,16,Italian Grand Prix,Monza,Italy,2025-09-07,1,McLaren,429.0,33.0,429.0,0.0,17,94.1
+2025,17,Azerbaijan Grand Prix,Baku,Azerbaijan,2025-09-21,1,McLaren,435.0,6.0,435.0,0.0,17,100.0
+2025,1,Australian Grand Prix,Melbourne,Australia,2025-03-16,2,Mercedes,27.0,27.0,27.0,0.0,17,5.9
+2025,2,Chinese Grand Prix,Shanghai,China,2025-03-23,2,Mercedes,50.0,23.0,70.0,20.0,17,11.8
+2025,3,Japanese Grand Prix,Suzuka,Japan,2025-04-06,2,Mercedes,50.0,0.0,70.0,20.0,17,17.6
+2025,4,Bahrain Grand Prix,Sakhir,Bahrain,2025-04-13,2,Mercedes,68.0,18.0,110.0,42.0,17,23.5
+2025,5,Saudi Arabian Grand Prix,Jeddah,Saudi Arabia,2025-04-20,2,Mercedes,86.0,18.0,147.0,61.0,17,29.4
+2025,6,Miami Grand Prix,Miami Gardens,United States,2025-05-04,2,Mercedes,109.0,23.0,190.0,81.0,17,35.3
+2025,7,Emilia Romagna Grand Prix,Imola,Italy,2025-05-18,2,Mercedes,109.0,0.0,190.0,81.0,17,41.2
+2025,8,Monaco Grand Prix,Monaco,Monaco,2025-05-25,2,Mercedes,109.0,0.0,230.0,121.0,17,47.1
+2025,9,Spanish Grand Prix,Barcelona,Spain,2025-06-01,2,Mercedes,121.0,12.0,273.0,152.0,17,52.9
+2025,10,Canadian Grand Prix,Montréal,Canada,2025-06-15,2,Mercedes,161.0,40.0,285.0,124.0,17,58.8
+2025,11,Austrian Grand Prix,Spielberg,Austria,2025-06-29,2,Mercedes,161.0,0.0,285.0,124.0,17,64.7
+2025,12,British Grand Prix,Silverstone,United Kingdom,2025-07-06,2,Mercedes,162.0,1.0,328.0,166.0,17,70.6
+2025,13,Belgian Grand Prix,Spa-Francorchamps,Belgium,2025-07-27,2,Mercedes,172.0,10.0,371.0,199.0,17,76.5
+2025,14,Hungarian Grand Prix,Budapest,Hungary,2025-08-03,2,Mercedes,172.0,0.0,371.0,199.0,17,82.4
+2025,15,Dutch Grand Prix,Zandvoort,Netherlands,2025-08-31,2,Mercedes,184.0,12.0,396.0,212.0,17,88.2
+2025,16,Italian Grand Prix,Monza,Italy,2025-09-07,2,Mercedes,196.0,12.0,429.0,233.0,17,94.1
+2025,17,Azerbaijan Grand Prix,Baku,Azerbaijan,2025-09-21,2,Mercedes,226.0,30.0,435.0,209.0,17,100.0
+2025,1,Australian Grand Prix,Melbourne,Australia,2025-03-16,10,Racing Bulls,0.0,0.0,27.0,27.0,17,5.9
+2025,2,Chinese Grand Prix,Shanghai,China,2025-03-23,10,Racing Bulls,0.0,0.0,70.0,70.0,17,11.8
+2025,3,Japanese Grand Prix,Suzuka,Japan,2025-04-06,10,Racing Bulls,0.0,0.0,70.0,70.0,17,17.6
+2025,4,Bahrain Grand Prix,Sakhir,Bahrain,2025-04-13,10,Racing Bulls,0.0,0.0,110.0,110.0,17,23.5
+2025,5,Saudi Arabian Grand Prix,Jeddah,Saudi Arabia,2025-04-20,10,Racing Bulls,1.0,1.0,147.0,146.0,17,29.4
+2025,6,Miami Grand Prix,Miami Gardens,United States,2025-05-04,10,Racing Bulls,1.0,0.0,190.0,189.0,17,35.3
+2025,7,Emilia Romagna Grand Prix,Imola,Italy,2025-05-18,10,Racing Bulls,1.0,0.0,190.0,189.0,17,41.2
+2025,8,Monaco Grand Prix,Monaco,Monaco,2025-05-25,7,Racing Bulls,13.0,12.0,230.0,217.0,17,47.1
+2025,9,Spanish Grand Prix,Barcelona,Spain,2025-06-01,7,Racing Bulls,19.0,6.0,273.0,254.0,17,52.9
+2025,10,Canadian Grand Prix,Montréal,Canada,2025-06-15,8,Racing Bulls,19.0,0.0,285.0,266.0,17,58.8
+2025,11,Austrian Grand Prix,Spielberg,Austria,2025-06-29,8,Racing Bulls,19.0,0.0,285.0,266.0,17,64.7
+2025,12,British Grand Prix,Silverstone,United Kingdom,2025-07-06,9,Racing Bulls,19.0,0.0,328.0,309.0,17,70.6
+2025,13,Belgian Grand Prix,Spa-Francorchamps,Belgium,2025-07-27,9,Racing Bulls,23.0,4.0,371.0,348.0,17,76.5
+2025,14,Hungarian Grand Prix,Budapest,Hungary,2025-08-03,9,Racing Bulls,23.0,0.0,371.0,348.0,17,82.4
+2025,15,Dutch Grand Prix,Zandvoort,Netherlands,2025-08-31,6,Racing Bulls,38.0,15.0,396.0,358.0,17,88.2
+2025,16,Italian Grand Prix,Monza,Italy,2025-09-07,7,Racing Bulls,39.0,1.0,429.0,390.0,17,94.1
+2025,17,Azerbaijan Grand Prix,Baku,Azerbaijan,2025-09-21,6,Racing Bulls,50.0,11.0,435.0,385.0,17,100.0
+2025,1,Australian Grand Prix,Melbourne,Australia,2025-03-16,3,Red Bull Racing,18.0,18.0,27.0,9.0,17,5.9
+2025,2,Chinese Grand Prix,Shanghai,China,2025-03-23,3,Red Bull Racing,30.0,12.0,70.0,40.0,17,11.8
+2025,3,Japanese Grand Prix,Suzuka,Japan,2025-04-06,3,Red Bull Racing,30.0,0.0,70.0,40.0,17,17.6
+2025,4,Bahrain Grand Prix,Sakhir,Bahrain,2025-04-13,3,Red Bull Racing,40.0,10.0,110.0,70.0,17,23.5
+2025,5,Saudi Arabian Grand Prix,Jeddah,Saudi Arabia,2025-04-20,3,Red Bull Racing,58.0,18.0,147.0,89.0,17,29.4
+2025,6,Miami Grand Prix,Miami Gardens,United States,2025-05-04,3,Red Bull Racing,71.0,13.0,190.0,119.0,17,35.3
+2025,7,Emilia Romagna Grand Prix,Imola,Italy,2025-05-18,3,Red Bull Racing,71.0,0.0,190.0,119.0,17,41.2
+2025,8,Monaco Grand Prix,Monaco,Monaco,2025-05-25,4,Red Bull Racing,83.0,12.0,230.0,147.0,17,47.1
+2025,9,Spanish Grand Prix,Barcelona,Spain,2025-06-01,4,Red Bull Racing,84.0,1.0,273.0,189.0,17,52.9
+2025,10,Canadian Grand Prix,Montréal,Canada,2025-06-15,4,Red Bull Racing,102.0,18.0,285.0,183.0,17,58.8
+2025,11,Austrian Grand Prix,Spielberg,Austria,2025-06-29,4,Red Bull Racing,102.0,0.0,285.0,183.0,17,64.7
+2025,12,British Grand Prix,Silverstone,United Kingdom,2025-07-06,4,Red Bull Racing,112.0,10.0,328.0,216.0,17,70.6
+2025,13,Belgian Grand Prix,Spa-Francorchamps,Belgium,2025-07-27,4,Red Bull Racing,124.0,12.0,371.0,247.0,17,76.5
+2025,14,Hungarian Grand Prix,Budapest,Hungary,2025-08-03,4,Red Bull Racing,124.0,0.0,371.0,247.0,17,82.4
+2025,15,Dutch Grand Prix,Zandvoort,Netherlands,2025-08-31,4,Red Bull Racing,144.0,20.0,396.0,252.0,17,88.2
+2025,16,Italian Grand Prix,Monza,Italy,2025-09-07,4,Red Bull Racing,169.0,25.0,429.0,260.0,17,94.1
+2025,17,Azerbaijan Grand Prix,Baku,Azerbaijan,2025-09-21,3,Red Bull Racing,202.0,33.0,435.0,233.0,17,100.0
+2025,1,Australian Grand Prix,Melbourne,Australia,2025-03-16,4,Williams,10.0,10.0,27.0,17.0,17,5.9
+2025,2,Chinese Grand Prix,Shanghai,China,2025-03-23,4,Williams,17.0,7.0,70.0,53.0,17,11.8
+2025,3,Japanese Grand Prix,Suzuka,Japan,2025-04-06,4,Williams,17.0,0.0,70.0,53.0,17,17.6
+2025,4,Bahrain Grand Prix,Sakhir,Bahrain,2025-04-13,6,Williams,17.0,0.0,110.0,93.0,17,23.5
+2025,5,Saudi Arabian Grand Prix,Jeddah,Saudi Arabia,2025-04-20,5,Williams,23.0,6.0,147.0,124.0,17,29.4
+2025,6,Miami Grand Prix,Miami Gardens,United States,2025-05-04,5,Williams,35.0,12.0,190.0,155.0,17,35.3
+2025,7,Emilia Romagna Grand Prix,Imola,Italy,2025-05-18,5,Williams,35.0,0.0,190.0,155.0,17,41.2
+2025,8,Monaco Grand Prix,Monaco,Monaco,2025-05-25,5,Williams,38.0,3.0,230.0,192.0,17,47.1
+2025,9,Spanish Grand Prix,Barcelona,Spain,2025-06-01,5,Williams,38.0,0.0,273.0,235.0,17,52.9
+2025,10,Canadian Grand Prix,Montréal,Canada,2025-06-15,5,Williams,39.0,1.0,285.0,246.0,17,58.8
+2025,11,Austrian Grand Prix,Spielberg,Austria,2025-06-29,5,Williams,39.0,0.0,285.0,246.0,17,64.7
+2025,12,British Grand Prix,Silverstone,United Kingdom,2025-07-06,5,Williams,43.0,4.0,328.0,285.0,17,70.6
+2025,13,Belgian Grand Prix,Spa-Francorchamps,Belgium,2025-07-27,5,Williams,51.0,8.0,371.0,320.0,17,76.5
+2025,14,Hungarian Grand Prix,Budapest,Hungary,2025-08-03,5,Williams,51.0,0.0,371.0,320.0,17,82.4
+2025,15,Dutch Grand Prix,Zandvoort,Netherlands,2025-08-31,5,Williams,61.0,10.0,396.0,335.0,17,88.2
+2025,16,Italian Grand Prix,Monza,Italy,2025-09-07,5,Williams,67.0,6.0,429.0,362.0,17,94.1
+2025,17,Azerbaijan Grand Prix,Baku,Azerbaijan,2025-09-21,5,Williams,82.0,15.0,435.0,353.0,17,100.0
