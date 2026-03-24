@@ -4678,13 +4678,27 @@
       const score = document.getElementById('score-num')?.textContent || '—';
       const grade = document.getElementById('score-grade')?.textContent || '';
       const name = (simState.userName || 'I').toUpperCase();
-      const resultText = wins
-        ? `${name} beat Remin by ${gap}s at Silverstone 🏁 Strategy IQ: ${score} / ${grade}. Can you top it?`
-        : `${name} lost to Remin by ${gap}s at Silverstone 😤 Strategy IQ: ${score} / ${grade}. Think you can do better?`;
       const url = window.location.origin + window.location.pathname;
-      const tweetUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(resultText + ' ' + url)}`;
+
+      // Strategy compounds: "S(17)→M(18)→H(17)"
+      const fmt = stints => stints.map(s => `${COMPOUND[s.compound].name[0]}(${s.laps})`).join('→');
+      const userStratStr = simState.userStints?.length ? fmt(simState.userStints) : '';
+      const remStratStr = simState.remStints?.length ? fmt(simState.remStints) : '';
+      const stratLine = userStratStr ? `📋 ${userStratStr}  vs  Remin: ${remStratStr}` : '';
+
+      // Verdict snippet — first sentence, max 120 chars
+      const verdict = simState.analysis?.verdict || '';
+      const dotAt = verdict.indexOf('. ');
+      const firstSentence = dotAt > 0 ? verdict.slice(0, dotAt + 1) : verdict;
+      const snippet = firstSentence.length <= 120 ? firstSentence : firstSentence.slice(0, 117) + '…';
+
+      const text = wins
+        ? `🏆 ${name} beat Remin at Silverstone GP!\nGap: +${gap}s · IQ: ${score}/${grade}\n${stratLine}\n\n"${snippet}"\n\nCan you top it? #F1Strategy #F1`
+        : `🤖 Remin edged me at Silverstone GP (−${gap}s · IQ: ${score}/${grade})\n${stratLine}\n\n"${snippet}"\n\nThink you can do better? #F1Strategy #F1`;
+
+      const tweetUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(text + '\n' + url)}`;
       if (navigator.share) {
-        navigator.share({ title: 'F1 Strategy Battle', text: resultText, url }).catch(() => { });
+        navigator.share({ title: 'F1 Strategy Battle — Silverstone GP', text, url }).catch(() => { });
       } else {
         window.open(tweetUrl, '_blank', 'noopener,noreferrer,width=550,height=420');
       }
