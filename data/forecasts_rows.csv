@@ -1,0 +1,199 @@
+id,name,driver,user_strategy,remin_strategy,result,gap_seconds,created_at
+1,test remin,VER,Med (17L) → Med (18L) → Hard (17L),Soft (15L) → Hard (37L),win,6.407,2026-03-24 03:35:42.639584+00
+2,Anonymous,VER,Med (17L) → Med (18L) → Hard (17L),Soft (15L) → Hard (37L),win,6.407,2026-03-24 03:37:39.490576+00
+3,Na tha da leo,LEC,Med (17L) → Soft (18L) → Med (17L),Soft (15L) → Hard (37L),win,13.844,2026-03-24 03:42:23.328951+00
+4,franz herman,LEC,Soft (17L) → Med (18L) → Hard (17L),Soft (17L) → Med (19L) → Hard (16L),win,0.669,2026-03-24 03:54:08.506262+00
+5,franz herman,RUS,Soft (17L) → Med (18L) → Hard (17L),Soft (17L) → Med (19L) → Hard (16L),lose,2.225,2026-03-24 03:55:34.112373+00
+6,franz herman,RUS,Soft (17L) → Med (18L) → Hard (17L),Soft (17L) → Med (19L) → Hard (16L),lose,2.225,2026-03-24 03:55:48.476587+00
+7,franz herman,RUS,Soft (17L) → Med (18L) → Hard (17L),Soft (17L) → Med (19L) → Hard (16L),lose,2.225,2026-03-24 03:55:51.523187+00
+8,franz herman,RUS,Soft (17L) → Med (18L) → Hard (17L),Soft (17L) → Med (19L) → Hard (16L),lose,2.225,2026-03-24 03:55:54.680184+00
+9,franz herman,RUS,Soft (17L) → Med (18L) → Hard (17L),Soft (17L) → Med (19L) → Hard (16L),lose,2.225,2026-03-24 03:55:56.026188+00
+10,franz herman,RUS,Soft (17L) → Med (18L) → Hard (17L),Soft (17L) → Med (19L) → Hard (16L),lose,2.225,2026-03-24 03:55:58.990853+00
+11,Saran,LEC,Med (15L) → Med (21L) → Soft (16L),Soft (15L) → Hard (37L),win,12.668,2026-03-24 03:57:00.425024+00
+12,franz herman,RUS,Soft (11L) → Med (30L) → Hard (11L),Med (22L) → Hard (30L),lose,4.482,2026-03-24 03:57:34.818966+00
+13,Anonymous,VER,Med (19L) → Med (20L) → Soft (13L),Soft (15L) → Hard (37L),win,22.677,2026-03-24 03:59:56.314694+00
+14,Rajshiva,RUS,Soft (15L) → Med (4L) → Hard (33L),Soft (17L) → Med (19L) → Hard (16L),lose,19.865,2026-03-24 04:04:13.141242+00
+15,reminfranklin,LEC,Soft (11L) → Med (30L) → Hard (11L),Med (22L) → Hard (30L),lose,2.708,2026-03-24 04:07:40.943792+00
+16,Anonymous,RUS,Med (23L) → Hard (29L),Soft (15L) → Hard (37L),lose,1.434,2026-03-24 04:08:14.118999+00
+17,Anonymous,RUS,Hard (37L) → Soft (15L),Soft (17L) → Med (19L) → Hard (16L),lose,5.001,2026-03-24 04:11:13.395374+00
+18,Vishal,VER,Soft (10L) → Hard (42L),Med (22L) → Hard (30L),win,4.074,2026-03-24 04:12:17.178297+00
+19,Anonymous,RUS,Soft (25L) → Med (27L),Soft (13L) → Med (18L) → Hard (21L),win,22.378,2026-03-24 04:12:44.373931+00
+20,Anonymous,RUS,Soft (14L) → Med (24L) → Hard (14L),Med (22L) → Hard (30L),win,0.522,2026-03-24 04:14:00.079963+00
+21,Mahe,VER,Soft (17L) → Med (18L) → Med (17L),Soft (17L) → Med (19L) → Hard (16L),win,21.064,2026-03-24 04:14:54.858704+00
+22,Katta Poolu Bull,RUS,Soft (12L) → Med (30L) → Soft (10L),Med (22L) → Hard (30L),win,8.523,2026-03-24 04:15:06.699425+00
+23,Anonymous,RUS,Soft (14L) → Med (24L) → Hard (14L),Med (22L) → Hard (30L),win,0.522,2026-03-24 04:15:25.889497+00
+24,franz herman,LEC,Soft (25L) → Med (27L),Soft (13L) → Med (18L) → Hard (21L),win,21.948,2026-03-24 04:15:29.738897+00
+25,Mahe,VER,Soft (17L) → Med (18L) → Med (17L),Soft (17L) → Med (19L) → Hard (16L),win,21.064,2026-03-24 04:15:50.541376+00
+26,Maahi,LEC,Soft (15L) → Med (20L) → Hard (17L),Soft (17L) → Med (19L) → Hard (16L),lose,0.283,2026-03-24 04:16:12.004623+00
+27,Maahi,LEC,Soft (10L) → Med (22L) → Hard (20L),Med (22L) → Hard (30L),lose,1.062,2026-03-24 04:16:48.935013+00
+28,Remi Chan Owner,LEC,Soft (25L) → Hard (27L),Soft (13L) → Med (18L) → Hard (21L),win,10.419,2026-03-24 04:17:20.030815+00
+29,Maahi,LEC,Med (10L) → Med (22L) → Hard (20L),Soft (15L) → Hard (37L),lose,7.352,2026-03-24 04:17:30.928617+00
+30,Maahi,LEC,Med (10L) → Hard (22L) → Hard (20L),Soft (15L) → Hard (37L),lose,17.901,2026-03-24 04:17:59.563363+00
+31,Maahi,LEC,Soft (10L) → Soft (15L) → Hard (27L),Med (22L) → Hard (30L),win,2.529,2026-03-24 04:18:39.694351+00
+32,Remi Chan Owner,VER,Soft (12L) → Med (25L) → Med (15L),Med (22L) → Hard (30L),win,21.031,2026-03-24 04:19:17.074619+00
+33,Remi Chan Owner,VER,Soft (10L) → Soft (10L) → Soft (10L) → Soft (10L) → Soft (12L),Med (22L) → Hard (30L),win,11.245,2026-03-24 04:20:49.346575+00
+34,franz herman,LEC,Soft (25L) → Med (7L) → Soft (9L) → Soft (11L),Soft (13L) → Med (18L) → Hard (21L),win,3.93,2026-03-24 04:24:32.21154+00
+35,Remi Chan Owner,LEC,Med (25L) → Soft (27L),Soft (15L) → Hard (37L),win,21.88,2026-03-24 04:26:44.457634+00
+36,Remi Chan Owner,LEC,Med (25L) → Hard (27L),Soft (15L) → Hard (37L),win,1.279,2026-03-24 04:27:11.097259+00
+37,Anonymous,RUS,Med (25L) → Med (27L),Soft (15L) → Hard (37L),win,12.038,2026-03-24 04:27:27.527003+00
+38,Remi Chan Owner,RUS,Soft (12L) → Med (25L) → Soft (15L),Med (22L) → Hard (30L),win,15.083,2026-03-24 04:28:46.415595+00
+39,Remi Chan Owner,RUS,Soft (12L) → Med (25L) → Soft (15L),Med (22L) → Hard (30L),win,15.083,2026-03-24 04:28:53.136619+00
+40,Remi Chan Owner,RUS,Soft (12L) → Med (25L) → Soft (15L),Med (22L) → Hard (30L),win,15.083,2026-03-24 04:29:00.514603+00
+41,Anonymous,LEC,Hard (44L) → Soft (8L),Soft (17L) → Med (19L) → Hard (16L),lose,19.827,2026-03-24 04:34:19.123173+00
+42,Anonymous,VER,Soft (17L) → Med (18L) → Hard (17L),Soft (17L) → Med (19L) → Hard (16L),win,11.408,2026-03-24 04:39:43.026807+00
+43,Anonymous,RUS,Med (25L) → Med (27L),Soft (15L) → Hard (37L),win,12.038,2026-03-24 04:47:47.087957+00
+44,Anonymous,RUS,Soft (14L) → Hard (38L),Med (22L) → Hard (30L),lose,2.322,2026-03-24 04:50:42.059659+00
+45,Anonymous,RUS,Soft (14L) → Med (26L) → Soft (12L),Med (22L) → Hard (30L),win,14.059,2026-03-24 04:51:37.809495+00
+46,MAX,RUS,Soft (25L) → Med (27L),Soft (13L) → Med (18L) → Hard (21L),win,22.378,2026-03-24 05:01:45.425373+00
+47,MAX,RUS,Soft (25L) → Med (27L),Soft (13L) → Med (18L) → Hard (21L),win,22.378,2026-03-24 05:05:17.359962+00
+48,MAX 31,VER,Soft (11L) → Med (18L) → Hard (23L),Med (22L) → Hard (30L),win,9.197,2026-03-24 05:10:43.097034+00
+49,Vishal,RUS,Soft (12L) → Med (25L) → Soft (15L),Med (22L) → Hard (30L),win,15.083,2026-03-24 05:22:07.411409+00
+50,31,VER,Med (17L) → Hard (35L),Soft (15L) → Hard (37L),win,7.65,2026-03-24 05:23:38.355152+00
+51,Saran,LEC,Soft (15L) → Med (26L) → Soft (11L),Soft (17L) → Med (19L) → Hard (16L),win,11.141,2026-03-24 05:23:50.238546+00
+52,Vishal,LEC,Med (25L) → Hard (27L),Soft (15L) → Hard (37L),win,1.279,2026-03-24 05:24:10.221675+00
+53,Anonymous,RUS,Hard (37L) → Soft (15L),Soft (17L) → Med (19L) → Hard (16L),lose,5.001,2026-03-24 05:24:14.367993+00
+54,Anonymous,RUS,Soft (14L) → Hard (38L),Med (22L) → Hard (30L),lose,2.322,2026-03-24 05:24:43.708155+00
+55,Vishal,VER,Hard (30L) → Med (22L),Soft (17L) → Med (19L) → Hard (16L),win,8.179,2026-03-24 05:24:48.632787+00
+56,Anonymous,RUS,Soft (12L) → Hard (29L) → Soft (11L),Med (22L) → Hard (30L),lose,2.868,2026-03-24 05:25:48.397855+00
+57,Vishal,VER,Soft (15L) → Hard (37L),Soft (17L) → Med (19L) → Hard (16L),win,9.505,2026-03-24 05:25:49.982802+00
+58,31,VER,Soft (17L) → Med (35L),Soft (17L) → Med (19L) → Hard (16L),win,27.334,2026-03-24 05:25:54.252416+00
+59,Saran,VER,Med (19L) → Soft (16L) → Soft (17L),Soft (15L) → Hard (37L),win,33.421,2026-03-24 05:26:05.520211+00
+60,Saran,VER,Med (19L) → Soft (16L) → Soft (17L),Soft (15L) → Hard (37L),win,33.421,2026-03-24 05:26:22.731354+00
+61,Saran,VER,Med (19L) → Soft (16L) → Soft (17L),Soft (15L) → Hard (37L),win,33.421,2026-03-24 05:26:24.89349+00
+62,Anonymous,RUS,Med (26L) → Hard (26L),Soft (15L) → Hard (37L),lose,0.252,2026-03-24 05:26:33.210415+00
+63,Saran,RUS,Hard (15L) → Med (18L) → Soft (19L),Soft (17L) → Med (19L) → Hard (16L),lose,1.063,2026-03-24 05:27:16.508642+00
+64,63,RUS,Med (32L) → Soft (20L),Soft (15L) → Hard (37L),win,19.378,2026-03-24 05:27:19.131056+00
+65,Anonymous,RUS,Med (19L) → Hard (26L) → Soft (7L),Soft (15L) → Hard (37L),lose,10.976,2026-03-24 05:27:24.854091+00
+66,63,RUS,Med (32L) → Soft (20L),Soft (15L) → Hard (37L),win,19.378,2026-03-24 05:27:52.925806+00
+67,Saran,LEC,Soft (14L) → Med (22L) → Soft (16L),Med (22L) → Hard (30L),win,19.98,2026-03-24 05:28:04.442042+00
+68,Anonymous,RUS,Med (33L) → Hard (19L),Soft (15L) → Hard (37L),lose,3.764,2026-03-24 05:28:23.701168+00
+69,Vishal,RUS,Soft (17L) → Med (24L) → Soft (11L),Soft (17L) → Med (19L) → Hard (16L),win,11.087,2026-03-24 05:28:49.210751+00
+70,Anonymous,RUS,Soft (16L) → Hard (36L),Soft (17L) → Med (19L) → Hard (16L),lose,3.349,2026-03-24 05:28:54.053224+00
+71,Anonymous,RUS,Med (33L) → Soft (19L),Soft (15L) → Hard (37L),win,3.354,2026-03-24 05:29:32.144206+00
+72,Anonymous,LEC,Soft (15L) → Med (20L) → Hard (17L),Soft (17L) → Med (19L) → Hard (16L),lose,0.283,2026-03-24 05:29:38.022219+00
+73,Mahe,VER,Soft (17L) → Soft (18L) → Med (17L),Soft (17L) → Med (19L) → Hard (16L),win,30.298,2026-03-24 05:30:27.866516+00
+74,Mahe,VER,Med (17L) → Soft (18L) → Soft (17L),Soft (15L) → Hard (37L),win,34.205,2026-03-24 05:31:37.552636+00
+75,Vishal,LEC,Med (20L) → Med (20L) → Soft (12L),Soft (15L) → Hard (37L),win,25.61,2026-03-24 05:31:58.745383+00
+76,Mahe,VER,Soft (17L) → Hard (18L) → Soft (17L),Soft (17L) → Med (19L) → Hard (16L),win,19.897,2026-03-24 05:32:18.971922+00
+77,Mahe,VER,Med (17L) → Med (18L) → Med (17L),Soft (15L) → Hard (37L),win,13.363,2026-03-24 05:32:44.444923+00
+78,Vishal,RUS,Hard (40L) → Soft (12L),Soft (17L) → Med (19L) → Hard (16L),lose,10.713,2026-03-24 05:35:20.847181+00
+79,Vishal,RUS,Med (27L) → Med (25L),Soft (15L) → Hard (37L),win,12.038,2026-03-24 05:36:53.012814+00
+80,Maran,RUS,Med (6L) → Med (4L) → Med (4L) → Med (17L) → Med (6L) → Med (11L) → Med (4L),Soft (15L) → Hard (37L),lose,78.742,2026-03-24 06:04:29.515245+00
+81,Maran,RUS,Med (6L) → Med (4L) → Med (4L) → Med (17L) → Soft (6L) → Hard (11L) → Hard (4L),Soft (15L) → Hard (37L),lose,99.304,2026-03-24 06:05:16.276393+00
+82,Maran,RUS,Soft (6L) → Soft (4L) → Med (8L) → Med (5L) → Hard (4L) → Hard (7L) → Hard (14L) → Hard (4L),Med (22L) → Hard (30L),lose,109.505,2026-03-24 06:06:57.681833+00
+83,Maran,RUS,Soft (6L) → Soft (13L) → Med (7L) → Med (4L) → Hard (4L) → Hard (6L) → Hard (4L) → Hard (4L) → Hard (4L),Med (22L) → Hard (30L),lose,123.223,2026-03-24 06:07:53.950937+00
+84,Maran,RUS,Soft (6L) → Med (7L) → Med (5L) → Hard (7L) → Hard (4L) → Hard (6L) → Hard (4L) → Hard (4L) → Hard (4L) → Hard (5L),Med (22L) → Hard (30L),lose,158.813,2026-03-24 06:09:25.929833+00
+85,Maran,RUS,Med (6L) → Med (7L) → Med (5L) → Hard (7L) → Hard (4L) → Hard (6L) → Hard (4L) → Hard (4L) → Hard (4L) → Hard (5L),Soft (15L) → Hard (37L),lose,163.202,2026-03-24 06:09:49.244071+00
+86,93,VER,Soft (17L) → Med (18L) → Hard (17L),Soft (17L) → Med (19L) → Hard (16L),win,11.408,2026-03-24 06:10:58.695426+00
+87,Balaguru,VER,Soft (13L) → Med (22L) → Hard (17L),Med (22L) → Hard (30L),win,13.24,2026-03-24 06:26:20.863421+00
+88,Maran,VER,Soft (4L) → Med (18L) → Hard (30L),Med (22L) → Hard (30L),lose,3.837,2026-03-24 06:29:50.720969+00
+89,Maran,VER,Soft (10L) → Med (18L) → Hard (24L),Med (22L) → Hard (30L),win,7.681,2026-03-24 06:30:44.787952+00
+90,Maran,VER,Soft (17L) → Med (18L) → Hard (17L),Soft (17L) → Med (19L) → Hard (16L),win,11.408,2026-03-24 06:37:20.416488+00
+91,Maran,VER,Soft (17L) → Med (18L) → Hard (17L),Soft (17L) → Med (19L) → Hard (16L),win,11.408,2026-03-24 06:37:54.436869+00
+92,Maran,VER,Soft (17L) → Med (18L) → Hard (17L),Soft (17L) → Med (19L) → Hard (16L),win,11.408,2026-03-24 06:37:59.626447+00
+93,Maran,VER,Soft (17L) → Med (18L) → Hard (17L),Soft (17L) → Med (19L) → Hard (16L),win,11.408,2026-03-24 06:39:05.076723+00
+94,Maran,VER,Soft (17L) → Med (18L) → Hard (17L),Soft (17L) → Med (19L) → Hard (16L),win,11.408,2026-03-24 06:39:06.736831+00
+95,Anonymous,VER,Soft (20L) → Med (14L) → Hard (18L),Soft (13L) → Med (18L) → Hard (21L),win,15.353,2026-03-24 06:41:07.676503+00
+96,Mahe,VER,Hard (23L) → Soft (15L) → Med (14L),Soft (17L) → Med (19L) → Hard (16L),lose,7.899,2026-03-24 06:43:07.554327+00
+97,Mahe,VER,Soft (15L) → Soft (15L) → Hard (22L),Soft (17L) → Med (19L) → Hard (16L),win,16.068,2026-03-24 06:43:50.183504+00
+98,Anonymous,VER,Soft (14L) → Med (20L) → Hard (18L),Med (22L) → Hard (30L),win,9.84,2026-03-24 06:43:52.334777+00
+99,My shayla,RUS,Soft (13L) → Med (18L) → Hard (21L),Med (22L) → Hard (30L),lose,1.604,2026-03-24 09:35:37.554234+00
+100,My shayla,RUS,Soft (15L) → Med (20L) → Hard (17L),Soft (17L) → Med (19L) → Hard (16L),lose,3.241,2026-03-24 09:36:24.054276+00
+101,Sabarish,VER,Soft (20L) → Med (17L) → Hard (15L),Soft (13L) → Med (18L) → Hard (21L),win,13.626,2026-03-24 09:53:54.977576+00
+102,Vishal,RUS,Soft (10L) → Med (27L) → Soft (15L),Med (22L) → Hard (30L),win,11.387,2026-03-24 12:54:46.087892+00
+103,Vishal,RUS,Soft (14L) → Med (25L) → Soft (13L),Med (22L) → Hard (30L),win,15.252,2026-03-24 12:55:41.773543+00
+104,Vishal,VER,Med (20L) → Hard (32L),Soft (15L) → Hard (37L),win,10.592,2026-03-24 12:57:12.717245+00
+105,Vishal,RUS,Hard (40L) → Soft (12L),Soft (17L) → Med (19L) → Hard (16L),lose,8.713,2026-03-24 12:58:32.705072+00
+106,Vishal,RUS,Hard (30L) → Med (22L),Soft (17L) → Med (19L) → Hard (16L),win,1.261,2026-03-24 12:59:34.170067+00
+107,Vishal,RUS,Soft (15L) → Med (30L) → Soft (7L),Soft (17L) → Med (19L) → Hard (16L),win,2.807,2026-03-24 13:00:36.478318+00
+108,63,LEC,Soft (25L) → Med (27L),Med (30L) → Soft (22L),lose,11.48,2026-03-24 13:15:36.471224+00
+109,63,LEC,Soft (10L) → Med (24L) → Soft (18L),Soft (20L) → Hard (32L),win,7.051,2026-03-24 13:17:08.016501+00
+110,31,VER,Soft (10L) → Med (32L) → Soft (10L),Soft (20L) → Hard (32L),win,0.102,2026-03-24 13:42:59.833475+00
+111,31,VER,Soft (10L) → Med (32L) → Soft (10L),Soft (20L) → Hard (32L),win,5.302,2026-03-24 13:46:25.064378+00
+112,31,VER,Soft (10L) → Hard (32L) → Med (10L),Med (26L) → Soft (14L) → Hard (12L),lose,0.072,2026-03-24 13:48:19.06546+00
+113,31,VER,Soft (10L) → Med (15L) → Hard (27L),Soft (16L) → Med (18L) → Hard (18L),lose,0.602,2026-03-24 13:53:46.433211+00
+114,Vishal,VER,Soft (13L) → Med (25L) → Soft (14L),Med (30L) → Soft (22L),lose,5.269,2026-03-24 13:58:16.10951+00
+115,Vishal,VER,Soft (15L) → Hard (37L),Soft (20L) → Hard (32L),win,1.366,2026-03-24 13:59:15.994929+00
+116,Anonymous,RUS,Soft (17L) → Med (18L) → Hard (17L),Soft (13L) → Med (18L) → Hard (21L),lose,0.296,2026-03-24 14:00:05.699432+00
+117,31,VER,Soft (10L) → Med (15L) → Hard (27L),Soft (12L) → Soft (12L) → Hard (28L),lose,0.17,2026-03-24 14:04:24.101552+00
+118,Anonymous,RUS,Med (28L) → Hard (24L),Med (26L) → Soft (14L) → Hard (12L),win,0.26,2026-03-24 14:04:37.282937+00
+119,Saran,LEC,Soft (18L) → Med (21L) → Hard (13L),Soft (15L) → Hard (37L),win,0.22,2026-03-24 14:05:01.175359+00
+120,31,VER,Soft (17L) → Med (18L) → Hard (17L),Soft (15L) → Hard (37L),win,2.756,2026-03-24 14:10:40.133252+00
+121,31,LEC,Soft (17L) → Med (18L) → Hard (17L),Soft (15L) → Hard (37L),lose,1.404,2026-03-24 14:13:29.591582+00
+122,3,VER,Soft (22L) → Med (30L),Med (30L) → Soft (22L),win,7.001,2026-03-24 14:20:12.38266+00
+123,3,RUS,Soft (17L) → Med (18L) → Hard (17L),Soft (20L) → Hard (32L),win,0.449,2026-03-24 14:21:28.722411+00
+124,31,NOR,Soft (20L) → Hard (32L),Med (30L) → Soft (22L),lose,1.416,2026-03-24 14:38:59.194407+00
+125,31,ALB,Med (20L) → Hard (32L),Hard (25L) → Med (18L) → Soft (9L),lose,4.65,2026-03-24 14:41:23.078024+00
+126,31,NOR,Soft (17L) → Med (18L) → Hard (17L),Soft (15L) → Hard (37L),lose,1.324,2026-03-24 14:45:37.911481+00
+127,31,VER,Soft (17L) → Hard (22L) → Soft (13L),Hard (20L) → Soft (17L) → Med (15L),lose,1.456,2026-03-24 14:49:16.449715+00
+128,G,NOR,Soft (17L) → Med (18L) → Hard (17L),Soft (15L) → Hard (37L),win,0.676,2026-03-24 14:50:23.635726+00
+129,31,VER,Soft (17L) → Soft (22L) → Soft (13L),Med (30L) → Soft (22L),win,7.147,2026-03-24 14:57:01.303602+00
+130,13,LEC,Soft (17L) → Med (18L) → Hard (17L),Soft (15L) → Hard (37L),lose,1.404,2026-03-24 15:08:29.156655+00
+131,Anonymous,NOR,Med (25L) → Hard (27L),Soft (20L) → Hard (32L),lose,0.319,2026-03-24 15:15:26.13839+00
+132,13,ALB,Hard (33L) → Med (19L),Hard (25L) → Med (18L) → Soft (9L),lose,5.332,2026-03-24 15:20:40.819111+00
+133,Anonymous,ALB,Med (30L) → Med (22L),Soft (12L) → Soft (12L) → Hard (28L),win,1.416,2026-03-24 15:23:24.353845+00
+134,Anonymous,RUS,Soft (17L) → Med (25L) → Soft (10L),Soft (20L) → Hard (32L),lose,0.855,2026-03-24 15:25:26.148515+00
+135,Anonymous,RUS,Soft (18L) → Hard (34L),Soft (15L) → Hard (37L),lose,0.706,2026-03-24 15:26:27.645044+00
+136,Rohith,VER,Soft (17L) → Med (18L) → Hard (17L),Soft (15L) → Hard (37L),win,2.756,2026-03-24 15:26:36.607429+00
+137,Remin,VER,Soft (14L) → Med (24L) → Soft (14L),Med (30L) → Soft (22L),lose,4.411,2026-03-24 15:27:27.323981+00
+138,Anonymous,NOR,Soft (11L) → Med (26L) → Soft (15L),Med (22L) → Hard (30L),win,2.418,2026-03-24 15:28:03.191647+00
+139,Nan Than da Leo,LEC,Soft (16L) → Med (17L) → Hard (19L),Med (22L) → Hard (30L),win,0.778,2026-03-24 15:29:41.956644+00
+140,Anonymous,LEC,Soft (13L) → Med (23L) → Soft (16L),Soft (20L) → Hard (32L),win,8.625,2026-03-24 15:30:21.526776+00
+141,Ajay,RUS,Soft (13L) → Med (25L) → Soft (14L),Soft (20L) → Hard (32L),lose,0.159,2026-03-24 15:33:56.295034+00
+142,Anonymous,NOR,Soft (20L) → Hard (32L),Soft (20L) → Hard (32L),win,5.134,2026-03-24 15:33:57.055621+00
+143,Anonymous,NOR,Med (24L) → Hard (28L),Soft (15L) → Hard (37L),win,2.666,2026-03-24 15:34:29.117298+00
+144,Zen,VER,Soft (14L) → Hard (20L) → Med (18L),Soft (15L) → Hard (37L),lose,0.022,2026-03-24 15:36:19.345501+00
+145,Zen,VER,Soft (15L) → Hard (18L) → Med (19L),Soft (15L) → Hard (37L),win,1.396,2026-03-24 15:37:16.869292+00
+146,Gowtham23,VER,Med (17L) → Hard (18L) → Soft (17L),Soft (15L) → Hard (37L),win,2.328,2026-03-24 15:43:38.839418+00
+147,Ajay,NOR,Hard (18L) → Hard (20L) → Soft (14L),Hard (25L) → Med (18L) → Soft (9L),win,1.278,2026-03-24 15:46:51.105102+00
+148,Ajay,VER,Soft (12L) → Hard (26L) → Med (14L),Med (22L) → Hard (30L),win,2.692,2026-03-24 15:50:27.033695+00
+149,Ajay,LEC,Soft (16L) → Med (24L) → Hard (12L),Soft (15L) → Hard (37L),lose,0.81,2026-03-24 16:00:57.02556+00
+150,Anonymous,ALB,Soft (12L) → Med (26L) → Soft (14L),Soft (17L) → Med (19L) → Hard (16L),lose,0.45,2026-03-24 16:11:08.30805+00
+151,Anonymous,ALB,Med (18L) → Med (18L) → Soft (16L),Soft (13L) → Med (18L) → Hard (21L),lose,0.35,2026-03-24 16:13:22.387975+00
+152,Anonymous,ALB,Med (18L) → Med (21L) → Med (13L),Hard (25L) → Med (18L) → Soft (9L),lose,3.776,2026-03-24 16:17:29.096011+00
+153,Anonymous,LEC,Soft (18L) → Med (21L) → Soft (13L),Soft (13L) → Med (18L) → Hard (21L),win,9,2026-03-24 16:18:06.615899+00
+154,Anonymous,VER,Hard (10L) → Med (26L) → Soft (16L),Soft (16L) → Med (18L) → Hard (18L),lose,1.28,2026-03-24 16:19:14.579315+00
+155,Anonymous,VER,Med (16L) → Soft (17L) → Hard (19L),Soft (15L) → Hard (37L),win,1.84,2026-03-24 16:20:06.899963+00
+156,Anonymous,RUS,Med (16L) → Soft (20L) → Med (16L),Soft (15L) → Hard (37L),win,2.133,2026-03-24 16:20:57.117743+00
+157,Anonymous,NOR,Hard (30L) → Soft (22L),Soft (15L) → Hard (37L),win,2.425,2026-03-24 16:21:55.029751+00
+158,Anonymous,ALB,Hard (30L) → Soft (22L),Hard (20L) → Soft (17L) → Med (15L),win,0.094,2026-03-24 16:22:30.238156+00
+159,Anonymous,LEC,Med (30L) → Soft (22L),Med (30L) → Soft (22L),win,2.841,2026-03-24 16:23:03.927402+00
+160,Anonymous,LEC,Hard (35L) → Med (17L),Soft (17L) → Med (19L) → Hard (16L),win,0.388,2026-03-24 16:23:46.667895+00
+161,Saran,LEC,Med (31L) → Soft (21L),Med (30L) → Soft (22L),win,2.281,2026-03-24 16:24:54.250966+00
+162,Saran,LEC,Med (19L) → Soft (24L) → Med (9L),Soft (20L) → Hard (32L),win,2.531,2026-03-24 16:25:40.218739+00
+163,Saran,LEC,Hard (19L) → Soft (24L) → Soft (9L),Soft (13L) → Med (18L) → Hard (21L),win,1.803,2026-03-24 16:26:28.021048+00
+164,Saran,LEC,Med (19L) → Soft (24L) → Med (9L),Soft (20L) → Hard (32L),win,2.531,2026-03-24 16:27:32.420989+00
+165,Saran,LEC,Med (30L) → Soft (22L),Med (30L) → Soft (22L),win,2.841,2026-03-24 16:28:21.814133+00
+166,Saran,LEC,Hard (30L) → Soft (22L),Soft (20L) → Hard (32L),lose,5.122,2026-03-24 16:28:54.140202+00
+167,Saran,LEC,Med (24L) → Med (28L),Med (30L) → Soft (22L),lose,8.002,2026-03-24 16:29:31.615548+00
+168,Saran,LEC,Soft (23L) → Med (29L),Med (30L) → Soft (22L),lose,2.366,2026-03-24 16:30:24.351735+00
+169,Saran,LEC,Soft (23L) → Med (29L),Med (30L) → Soft (22L),win,4.834,2026-03-24 16:30:54.429988+00
+170,Saran,LEC,Hard (32L) → Soft (20L),Soft (20L) → Hard (32L),win,3.054,2026-03-24 16:31:44.205516+00
+171,Ajay,VER,Soft (13L) → Hard (26L) → Med (13L),Soft (17L) → Med (19L) → Hard (16L),lose,0.132,2026-03-24 16:32:21.515248+00
+172,Saran,LEC,Hard (21L) → Med (14L) → Soft (17L),Soft (17L) → Med (19L) → Hard (16L),win,0.68,2026-03-24 16:32:38.117133+00
+173,Saran,LEC,Hard (19L) → Med (14L) → Soft (19L),Soft (15L) → Hard (37L),lose,1.692,2026-03-24 16:33:19.276676+00
+174,Ajay,VER,Soft (13L) → Hard (26L) → Med (13L),Soft (17L) → Med (19L) → Hard (16L),lose,0.132,2026-03-24 16:33:28.776997+00
+175,Saran,LEC,Hard (15L) → Med (18L) → Soft (19L),Soft (20L) → Hard (32L),lose,3.163,2026-03-24 16:33:54.987408+00
+176,Saran,LEC,Soft (15L) → Soft (20L) → Med (17L),Med (30L) → Soft (22L),lose,4.642,2026-03-24 16:34:36.274452+00
+177,Saran,LEC,Soft (23L) → Med (29L),Med (30L) → Soft (22L),win,3.234,2026-03-24 16:35:30.392537+00
+178,Saran,LEC,Med (31L) → Soft (21L),Med (30L) → Soft (22L),win,2.281,2026-03-24 16:35:57.111175+00
+179,Saran,LEC,Med (29L) → Soft (23L),Med (30L) → Soft (22L),win,2.434,2026-03-24 16:36:15.570408+00
+180,Ajay,VER,Soft (10L) → Med (32L) → Hard (10L),Med (22L) → Hard (30L),win,1.067,2026-03-24 16:36:37.316411+00
+181,Saran,LEC,Med (20L) → Soft (17L) → Med (15L),Soft (20L) → Hard (32L),win,2.225,2026-03-24 16:36:44.035647+00
+182,Saran,LEC,Med (20L) → Soft (17L) → Med (15L),Soft (13L) → Med (18L) → Hard (21L),win,1.48,2026-03-24 16:37:35.022833+00
+183,Saran,LEC,Med (20L) → Soft (17L) → Med (15L),Soft (13L) → Med (18L) → Hard (21L),win,1.48,2026-03-24 16:38:12.753683+00
+184,Saran,LEC,Hard (20L) → Med (32L),Soft (15L) → Hard (37L),lose,1.451,2026-03-24 16:38:41.705431+00
+185,Saran,LEC,Hard (20L) → Med (32L),Soft (15L) → Hard (37L),lose,1.451,2026-03-24 16:39:01.891686+00
+186,Saran,LEC,Med (20L) → Soft (32L),Med (30L) → Soft (22L),lose,3.414,2026-03-24 16:39:29.886309+00
+187,Saran,LEC,Med (20L) → Soft (32L),Med (30L) → Soft (22L),win,0.586,2026-03-24 16:39:45.5501+00
+188,Saran,LEC,Med (27L) → Soft (25L),Med (30L) → Soft (22L),win,3.52,2026-03-24 16:40:09.748609+00
+189,Saran,LEC,Hard (27L) → Soft (25L),Soft (20L) → Hard (32L),win,6.637,2026-03-24 16:40:33.583549+00
+190,Saran,LEC,Med (34L) → Soft (18L),Med (30L) → Soft (22L),lose,0.397,2026-03-24 16:42:01.932268+00
+191,Saran,LEC,Hard (34L) → Med (18L),Med (22L) → Hard (30L),win,0.012,2026-03-24 16:42:21.013276+00
+192,Ajay,LEC,Med (20L) → Hard (32L),Soft (15L) → Hard (37L),lose,1.542,2026-03-24 16:46:26.954655+00
+193,Ajay,VER,Soft (11L) → Hard (30L) → Soft (11L),Soft (17L) → Med (19L) → Hard (16L),win,2.056,2026-03-24 16:49:48.347577+00
+194,Ajay,LEC,Med (15L) → Hard (25L) → Soft (12L),Soft (13L) → Med (18L) → Hard (21L),win,0.16,2026-03-24 16:57:12.878151+00
+195,Ajay,LEC,Med (15L) → Hard (26L) → Hard (11L),Hard (25L) → Med (18L) → Soft (9L),lose,9.428,2026-03-24 16:59:25.321479+00
+196,Ajay,LEC,Med (15L) → Hard (26L) → Soft (11L),Soft (13L) → Med (18L) → Hard (21L),win,0.348,2026-03-24 17:00:29.229921+00
+197,Ajay,VER,Soft (10L) → Hard (32L) → Soft (10L),Med (18L) → Soft (16L) → Hard (18L),win,0.288,2026-03-24 17:02:11.730355+00
+198,Ajay,VER,Soft (10L) → Hard (33L) → Soft (9L),Soft (12L) → Soft (12L) → Hard (28L),lose,0.062,2026-03-24 17:03:57.461319+00
