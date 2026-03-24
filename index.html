@@ -3524,7 +3524,8 @@
 
     <footer>
       <span>F1 Strategy Battle</span>
-      <span>Built by <span>Remin Franklin</span> · Silverstone 2026 · 2026 Regulations</span>
+      <span>Built by <span>Remin Franklin</span> · <span id="footer-track">Silverstone</span> 2026 · 2026
+        Regulations</span>
     </footer>
 
     <!-- GLOBAL LEADERBOARD -->
@@ -3532,7 +3533,8 @@
       <div class="global-lb-header">
         <div>
           <div class="global-lb-title">Global <em>Board</em></div>
-          <div style="font-size:13px;color:var(--muted);margin-top:4px">Every race played worldwide · Silverstone 2026
+          <div style="font-size:13px;color:var(--muted);margin-top:4px">Every race played worldwide · <span
+              id="glb-track-name">Silverstone</span> 2026
           </div>
         </div>
         <span class="lb-live-dot">Live</span>
@@ -3734,6 +3736,11 @@
       const dateStr = now.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
       const ey = document.getElementById('hero-eyebrow');
       if (ey) ey.textContent = `Today's Race · ${dateStr} · ${currentTrack.name}`;
+      // Update footer and leaderboard track name
+      const ft = document.getElementById('footer-track');
+      if (ft) ft.textContent = currentTrack.name;
+      const glbt = document.getElementById('glb-track-name');
+      if (glbt) glbt.textContent = currentTrack.name;
       // Apply track accent CSS variables
       applyTrackAccent(key);
     }
