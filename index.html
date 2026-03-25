@@ -377,7 +377,10 @@
       scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
-      padding: 4px 2px 8px; /* allow box-shadow to render */
+      padding: 4px 2px 10px;
+      /* fade-out left/right edges */
+      mask-image: linear-gradient(to right, transparent 0px, black 32px, black calc(100% - 32px), transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0px, black 32px, black calc(100% - 32px), transparent 100%);
     }
 
     .slider-track::-webkit-scrollbar {
@@ -465,12 +468,13 @@
 
     .driver-card:hover {
       background: var(--bg3);
-      border-color: var(--border2);
+      border-color: var(--driver-color);
+      box-shadow: 0 0 0 1px var(--driver-color), 0 6px 22px rgba(0,0,0,0.28);
       transform: translateY(-2px);
     }
 
     .driver-card:hover::before {
-      opacity: 1;
+      opacity: 0.6;
     }
 
     .driver-card.selected {
@@ -549,8 +553,14 @@
 
     .track-card:hover {
       background: var(--bg3);
+      border-color: var(--tc, var(--track-accent));
+      box-shadow: 0 0 0 1px var(--tc, var(--track-accent)), 0 8px 24px rgba(0,0,0,0.28);
       transform: translateY(-3px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .track-card:hover .track-layout .tc-line {
+      stroke: var(--tc, var(--track-accent));
+      opacity: 0.5;
     }
 
     .track-card.selected {
@@ -3819,11 +3829,35 @@
     }
     .cs-trigger.cs-flash { animation: csTriggerFlash 0.4s ease-out; }
 
-    /* Compound dropdown tweak: full-width inside stint block */
+    /* Compound dropdown — tyre selection inside stint block */
     .cpd-dropdown { margin-bottom: 12px; }
-    .cpd-dropdown .cs-trigger { text-transform: none; font-size: 13px; gap: 7px; padding: 8px 10px; }
-    .cpd-dropdown .cs-option { text-transform: none; font-size: 12px; padding: 9px 12px; }
-    .cpd-dropdown .cs-option:hover { padding-left: 16px; }
+    .cpd-dropdown .cs-trigger {
+      text-transform: none; font-size: 14px; gap: 8px;
+      padding: 9px 12px; background: var(--bg);
+      border-color: var(--stint-compound-color, var(--border));
+    }
+    .cpd-dropdown .cs-trigger:hover,
+    .cpd-dropdown.open .cs-trigger {
+      border-color: var(--stint-compound-color, var(--accent));
+      background: var(--bg);
+      box-shadow: 0 0 0 1px var(--stint-compound-color, var(--accent));
+    }
+    .cpd-dropdown .cs-swatch { width: 12px; height: 12px; }
+    .cpd-dropdown .cs-sub-inline { font-size: 11px; }
+    .cpd-dropdown .cs-menu { background: var(--bg); border-color: var(--border2); }
+    .cpd-dropdown .cs-option {
+      text-transform: none; font-size: 13px;
+      padding: 10px 14px; gap: 10px;
+    }
+    .cpd-dropdown .cs-option:hover {
+      padding-left: 18px;
+      border-left-color: var(--opt-color, var(--accent));
+      background: rgba(255,255,255,0.04);
+    }
+    .cpd-dropdown .cs-option.selected {
+      border-left-color: var(--opt-color, var(--accent));
+      background: rgba(255,255,255,0.03);
+    }
     /* Speed dropdown: right-anchored menu, no text-transform */
     #cs-speed { min-width: 0; }
     #cs-speed .cs-trigger { padding: 7px 10px; font-size: 13px; gap: 5px; width: auto; text-transform: none; }
@@ -3833,6 +3867,70 @@
     .glb-sub-filter .cs-wrap { display: block; }
     .glb-sub-filter .cs-trigger { text-transform: none; }
     .glb-sub-filter .cs-option { text-transform: none; }
+
+    /* ── SELECTED SECTION SUMMARY ── */
+    .section-sel-wrap {
+      overflow: hidden;
+      max-height: 1200px;
+      transition: max-height 0.42s cubic-bezier(.4,0,.2,1), opacity 0.3s ease;
+      opacity: 1;
+    }
+    .section-sel-wrap.collapsed {
+      max-height: 0 !important;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .sel-summary {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 8px;
+    }
+
+    .sel-summary-icon {
+      font-size: 20px;
+      line-height: 1;
+    }
+
+    .sel-summary-name {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      color: var(--text);
+      flex: 1;
+    }
+
+    .sel-summary-sub {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .sel-summary-change {
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--track-accent);
+      background: none;
+      border: 1px solid var(--border2);
+      border-radius: 6px;
+      padding: 4px 10px;
+      cursor: pointer;
+      transition: border-color .15s, color .15s;
+    }
+
+    .sel-summary-change:hover {
+      border-color: var(--track-accent);
+      color: var(--text);
+    }
 
     /* ── STINT BLOCK ENTRY ANIMATION ── */
     @keyframes stintIn {
@@ -3889,10 +3987,22 @@
         <div class="pb-bar-inner" id="pb-bar-inner"></div>
       </div>
 
-      <div class="section-label">Choose your circuit</div>
-      <div class="slider-wrap">
-        <button class="slider-arrow" id="track-prev" onclick="sliderNav('track-slider','prev')" disabled>&#8249;</button>
-        <div class="slider-track track-slider" id="track-slider">
+      <!-- TRACK SUMMARY (shown after selection) -->
+      <div class="sel-summary" id="track-summary" style="display:none">
+        <span class="sel-summary-icon" id="track-sum-flag"></span>
+        <div>
+          <div class="sel-summary-name" id="track-sum-name"></div>
+          <div class="sel-summary-sub" id="track-sum-meta"></div>
+        </div>
+        <button class="sel-summary-change" onclick="expandSection('track')">Change</button>
+      </div>
+
+      <!-- TRACK CHOOSER (hidden after selection) -->
+      <div class="section-sel-wrap" id="track-section">
+        <div class="section-label">Choose your circuit</div>
+        <div class="slider-wrap">
+          <button class="slider-arrow" id="track-prev" onclick="sliderNav('track-slider','prev')" disabled>&#8249;</button>
+          <div class="slider-track track-slider" id="track-slider">
         <div class="track-card selected" data-track="silverstone" onclick="selectTrack('silverstone')"
           style="--tc:#a78bfa">
           <div class="track-flag">🇬🇧</div>
@@ -3939,14 +4049,11 @@
             <span class="track-tag">2–3 stop</span>
           </div>
         </div>
-        </div><!-- /slider-track -->
-        <button class="slider-arrow" id="track-next" onclick="sliderNav('track-slider','next')">&#8250;</button>
-      </div><!-- /slider-wrap -->
-      <div class="slider-dots" id="track-dots">
-        <span class="sdot active" onclick="sliderGoTo('track-slider',0,'track-dots')"></span>
-        <span class="sdot" onclick="sliderGoTo('track-slider',1,'track-dots')"></span>
-        <span class="sdot" onclick="sliderGoTo('track-slider',2,'track-dots')"></span>
-      </div>
+          </div><!-- /slider-track -->
+          <button class="slider-arrow" id="track-next" onclick="sliderNav('track-slider','next')">&#8250;</button>
+        </div><!-- /slider-wrap -->
+        <div class="slider-dots" id="track-dots"></div>
+      </div><!-- /track-section -->
 
       <div class="section-label">Your name</div>
       <div class="name-field-wrap">
@@ -3954,10 +4061,22 @@
           autocomplete="off" spellcheck="false">
       </div>
 
-      <div class="section-label">Choose your driver</div>
-      <div class="slider-wrap">
-        <button class="slider-arrow" id="driver-prev" onclick="sliderNav('driver-slider','prev')" disabled>&#8249;</button>
-        <div class="slider-track driver-slider" id="driver-slider">
+      <!-- DRIVER SUMMARY (shown after selection) -->
+      <div class="sel-summary" id="driver-summary" style="display:none">
+        <span class="sel-summary-icon" id="driver-sum-num" style="font-family:var(--font-display);font-size:24px;font-weight:900;color:var(--driver-summary-color,var(--accent))"></span>
+        <div>
+          <div class="sel-summary-name" id="driver-sum-name"></div>
+          <div class="sel-summary-sub" id="driver-sum-team"></div>
+        </div>
+        <button class="sel-summary-change" onclick="expandSection('driver')">Change</button>
+      </div>
+
+      <!-- DRIVER CHOOSER (hidden after selection) -->
+      <div class="section-sel-wrap" id="driver-section">
+        <div class="section-label">Choose your driver</div>
+        <div class="slider-wrap">
+          <button class="slider-arrow" id="driver-prev" onclick="sliderNav('driver-slider','prev')" disabled>&#8249;</button>
+          <div class="slider-track driver-slider" id="driver-slider">
         <div class="driver-card" data-driver="VER" onclick="selectDriver('VER')" style="--driver-color:var(--ver)">
           <div class="driver-number">1</div>
           <div class="driver-name">Verstappen</div>
@@ -4008,16 +4127,11 @@
             <div class="dstat"><span class="dstat-label">MOM mode</span><span class="dstat-val">Hi-drag</span></div>
           </div>
         </div>
-        </div><!-- /slider-track -->
-        <button class="slider-arrow" id="driver-next" onclick="sliderNav('driver-slider','next')">&#8250;</button>
-      </div><!-- /slider-wrap -->
-      <div class="slider-dots" id="driver-dots">
-        <span class="sdot active" onclick="sliderGoTo('driver-slider',0,'driver-dots')"></span>
-        <span class="sdot" onclick="sliderGoTo('driver-slider',1,'driver-dots')"></span>
-        <span class="sdot" onclick="sliderGoTo('driver-slider',2,'driver-dots')"></span>
-        <span class="sdot" onclick="sliderGoTo('driver-slider',3,'driver-dots')"></span>
-        <span class="sdot" onclick="sliderGoTo('driver-slider',4,'driver-dots')"></span>
-      </div>
+          </div><!-- /slider-track -->
+          <button class="slider-arrow" id="driver-next" onclick="sliderNav('driver-slider','next')">&#8250;</button>
+        </div><!-- /slider-wrap -->
+        <div class="slider-dots" id="driver-dots"></div>
+      </div><!-- /driver-section -->
 
       <div class="section-label">Build your strategy <span
           style="color:var(--muted);font-size:10px;text-transform:none;letter-spacing:0" id="strategy-label-laps">(must
@@ -4621,6 +4735,9 @@
       if (glbt) glbt.textContent = currentTrack.name;
       // Apply track accent CSS variables
       applyTrackAccent(key);
+      // Collapse section and show summary
+      const t = TRACKS[key];
+      setTimeout(() => collapseSection('track', t.name, t.label, t.flag), 260);
     }
 
     const TRACK_ACCENTS = {
@@ -4725,6 +4842,16 @@
       // Pass RGB triplet for CSS box-shadow glow
       const rgb = DRIVER_COLOR_RGB[d];
       if (rgb) card.style.setProperty('--driver-color-rgb', rgb);
+      // Collapse section and show summary
+      const drv = DRIVERS[d];
+      const color = getComputedStyle(document.documentElement).getPropertyValue('--' + (drv.colorVar.replace('--', ''))).trim() || 'var(--accent)';
+      const numEl = document.getElementById('driver-sum-num');
+      if (numEl) numEl.style.color = color;
+      setTimeout(() => collapseSection('driver',
+        drv.name,
+        drv.team,
+        card.querySelector('.driver-number')?.textContent || d
+      ), 260);
     }
 
     function addStint(compound = 'soft', laps = 17) {
@@ -4765,10 +4892,10 @@
         const optionsHtml = ['soft', 'med', 'hard'].map(c => {
           const co = COMPOUND[c];
           const offStr = (co.off > 0 ? '+' : '') + co.off;
-          return '<div class="cs-option' + (s.compound === c ? ' selected' : '') + '" data-v="' + c + '" onclick="setCompound(' + s.id + ',\'' + c + '\')">'
-            + '<span class="cs-swatch" style="background:' + co.color + '"></span>'
-            + '<span>' + co.name + '</span>'
-            + '<span class="cs-option-sub">' + offStr + 's/lap \u00b7 L' + co.cliff + ' cliff \u00b7 ' + co.degMul + '\u00d7 deg</span>'
+          return '<div class="cs-option' + (s.compound === c ? ' selected' : '') + '" data-v="' + c + '" style="--opt-color:' + co.color + '" onclick="setCompound(' + s.id + ',\'' + c + '\')">'
+            + '<span class="cs-swatch" style="background:' + co.color + ';width:12px;height:12px"></span>'
+            + '<span style="color:' + co.color + ';font-weight:700">' + co.name + '</span>'
+            + '<span class="cs-option-sub">' + offStr + 's/lap · cliff L' + co.cliff + ' · ' + co.degMul + '× deg</span>'
             + '</div>';
         }).join('');
         div.innerHTML = `
@@ -6071,6 +6198,9 @@
       const iqStrip2 = document.getElementById('modal-iq-strip');
       if (iqStrip2) iqStrip2.style.display = 'none';
       showScreen('screen-setup');
+      // Re-expand section choosers on restart
+      expandSection('track');
+      expandSection('driver');
     }
 
     async function saveToDatabase(data) {
@@ -7266,17 +7396,16 @@
       if (!track) return;
       const card = track.firstElementChild;
       if (!card) return;
-      const step = card.offsetWidth + 12; // 12 = gap
+      const step = card.offsetWidth + 12;
       track.scrollBy({ left: dir === 'next' ? step : -step, behavior: 'smooth' });
     }
 
-    function sliderGoTo(sliderId, idx, dotsId) {
+    function sliderGoTo(sliderId, idx) {
       const track = document.getElementById(sliderId);
       if (!track) return;
       const card = track.children[idx];
       if (!card) return;
       track.scrollTo({ left: card.offsetLeft, behavior: 'smooth' });
-      if (dotsId) syncDots(dotsId, idx);
     }
 
     function syncDots(dotsId, idx) {
@@ -7307,6 +7436,23 @@
       return closest;
     }
 
+    function buildDots(sliderId, dotsId) {
+      const track = document.getElementById(sliderId);
+      const dotsEl = document.getElementById(dotsId);
+      if (!track || !dotsEl) return;
+      const count = track.children.length;
+      const scrollable = track.scrollWidth > track.clientWidth + 4;
+      dotsEl.innerHTML = '';
+      dotsEl.style.display = scrollable ? 'flex' : 'none';
+      if (!scrollable) return;
+      for (let i = 0; i < count; i++) {
+        const d = document.createElement('span');
+        d.className = 'sdot' + (i === 0 ? ' active' : '');
+        d.addEventListener('click', () => sliderGoTo(sliderId, i));
+        dotsEl.appendChild(d);
+      }
+    }
+
     function initSliders() {
       [
         { slider: 'track-slider', dots: 'track-dots' },
@@ -7314,12 +7460,57 @@
       ].forEach(({ slider, dots }) => {
         const track = document.getElementById(slider);
         if (!track) return;
+        buildDots(slider, dots);
         syncArrows(slider);
         track.addEventListener('scroll', () => {
           syncArrows(slider);
           syncDots(dots, activeCardIdx(track));
         }, { passive: true });
+        // Rebuild dots if container resizes (orientation change, window resize)
+        if (typeof ResizeObserver !== 'undefined') {
+          new ResizeObserver(() => {
+            buildDots(slider, dots);
+            syncArrows(slider);
+          }).observe(track);
+        }
       });
+    }
+
+    /* ── SECTION COLLAPSE / EXPAND ── */
+    function collapseSection(type, name, sub, icon) {
+      const section = document.getElementById(type + '-section');
+      const summary = document.getElementById(type + '-summary');
+      if (!section || !summary) return;
+      // Set natural height first, then animate to 0
+      section.style.maxHeight = section.scrollHeight + 'px';
+      section.classList.add('collapsed');
+      // Populate summary
+      if (type === 'track') {
+        document.getElementById('track-sum-flag').textContent = icon || '';
+        document.getElementById('track-sum-name').textContent = name || '';
+        document.getElementById('track-sum-meta').textContent = sub || '';
+      } else {
+        const numEl = document.getElementById('driver-sum-num');
+        numEl.textContent = icon || '';
+        document.getElementById('driver-sum-name').textContent = name || '';
+        const teamEl = document.getElementById('driver-sum-team');
+        if (teamEl) teamEl.textContent = sub || '';
+      }
+      summary.style.display = 'flex';
+    }
+
+    function expandSection(type) {
+      const section = document.getElementById(type + '-section');
+      const summary = document.getElementById(type + '-summary');
+      if (!section || !summary) return;
+      section.style.maxHeight = section.scrollHeight + 'px';
+      // Force repaint then remove max-height cap to allow natural height
+      requestAnimationFrame(() => {
+        section.style.maxHeight = section.scrollHeight + 'px';
+        section.classList.remove('collapsed');
+        setTimeout(() => { section.style.maxHeight = ''; }, 400);
+      });
+      summary.style.display = 'none';
     }
 
     /* ── CUSTOM SELECT UTILITIES ── */
