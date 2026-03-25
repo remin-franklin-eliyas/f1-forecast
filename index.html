@@ -3597,6 +3597,130 @@
 
     /* ── SC GAP BAR PULSE ── */
     .gap-bar-wrap.sc-pulse { animation: tensionPulse 0.45s ease-in-out 4; }
+
+    /* ── CUSTOM SELECT DROPDOWN ─────────────────────────────────── */
+    .cs-wrap { position: relative; }
+    .cs-trigger {
+      display: flex; align-items: center; gap: 8px;
+      width: 100%; padding: 9px 12px;
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 8px; color: var(--text); cursor: pointer;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 14px; font-weight: 700; letter-spacing: 0.04em;
+      text-transform: uppercase; text-align: left;
+      transition: border-color 0.18s, box-shadow 0.18s, background 0.18s;
+      user-select: none;
+    }
+    .cs-trigger:hover,
+    .cs-wrap.open .cs-trigger {
+      border-color: var(--accent);
+      background: rgba(167,139,250,0.06);
+    }
+    .cs-trigger:focus { outline: none; }
+    .cs-swatch {
+      width: 10px; height: 10px; border-radius: 50%;
+      flex-shrink: 0; transition: background 0.2s;
+    }
+    .cs-label { flex-shrink: 0; }
+    .cs-sub-inline {
+      font-size: 10px; font-weight: 400; letter-spacing: 0.01em;
+      color: var(--muted); text-transform: none; flex: 1;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      text-align: right;
+    }
+    .cs-arrow {
+      font-size: 11px; color: var(--muted); margin-left: auto; flex-shrink: 0;
+      transition: transform 0.22s cubic-bezier(.4,0,.2,1);
+      display: inline-block;
+    }
+    .cs-wrap.open .cs-arrow { transform: rotate(180deg); }
+
+    .cs-menu {
+      position: absolute; top: calc(100% + 5px); left: 0; right: 0;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 10px; z-index: 400; overflow: hidden;
+      pointer-events: none; opacity: 0;
+      transform: translateY(-8px) scaleY(0.94);
+      transform-origin: top center;
+      transition: opacity 0.2s cubic-bezier(.4,0,.2,1),
+                  transform 0.22s cubic-bezier(.4,0,.2,1);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.55);
+    }
+    .cs-wrap.open .cs-menu {
+      pointer-events: all; opacity: 1;
+      transform: translateY(0) scaleY(1);
+    }
+    .cs-option {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 14px; cursor: pointer;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px; font-weight: 600; letter-spacing: 0.04em;
+      color: var(--muted); text-transform: uppercase;
+      border-left: 2px solid transparent;
+      transition: background 0.12s, color 0.12s,
+                  border-left-color 0.12s, padding-left 0.15s;
+      opacity: 0; animation: csOptIn 0.18s ease-out both;
+    }
+    .cs-wrap.open .cs-option { opacity: 1; }
+    .cs-option:nth-child(1) { animation-delay: 0ms; }
+    .cs-option:nth-child(2) { animation-delay: 50ms; }
+    .cs-option:nth-child(3) { animation-delay: 100ms; }
+    .cs-option:nth-child(4) { animation-delay: 150ms; }
+    .cs-option:nth-child(5) { animation-delay: 200ms; }
+    @keyframes csOptIn {
+      from { opacity: 0; transform: translateX(-8px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    .cs-option:hover {
+      background: rgba(255,255,255,0.04); color: var(--text);
+      border-left-color: var(--accent); padding-left: 18px;
+    }
+    .cs-option.selected {
+      color: var(--text);
+      border-left-color: var(--accent);
+      background: rgba(167,139,250,0.05);
+    }
+    .cs-option-sub {
+      font-size: 10px; font-weight: 400; color: var(--muted);
+      text-transform: none; letter-spacing: 0.01em; margin-left: auto;
+    }
+    /* Trigger flash on selection */
+    @keyframes csTriggerFlash {
+      0%   { box-shadow: 0 0 0 0 var(--accent); }
+      50%  { box-shadow: 0 0 0 5px rgba(167,139,250,0); }
+      100% { box-shadow: none; }
+    }
+    .cs-trigger.cs-flash { animation: csTriggerFlash 0.4s ease-out; }
+
+    /* Compound dropdown tweak: full-width inside stint block */
+    .cpd-dropdown { margin-bottom: 12px; }
+    .cpd-dropdown .cs-trigger { text-transform: none; font-size: 13px; gap: 7px; padding: 8px 10px; }
+    .cpd-dropdown .cs-option { text-transform: none; font-size: 12px; padding: 9px 12px; }
+    .cpd-dropdown .cs-option:hover { padding-left: 16px; }
+    /* Speed dropdown: right-anchored menu, no text-transform */
+    #cs-speed { min-width: 0; }
+    #cs-speed .cs-trigger { padding: 7px 10px; font-size: 13px; gap: 5px; width: auto; text-transform: none; }
+    #cs-speed .cs-menu { left: auto; right: 0; min-width: 148px; }
+    #cs-speed .cs-option { text-transform: none; }
+    /* LB sub-filter dropdown */
+    .glb-sub-filter .cs-wrap { display: block; }
+    .glb-sub-filter .cs-trigger { text-transform: none; }
+    .glb-sub-filter .cs-option { text-transform: none; }
+
+    /* ── STINT BLOCK ENTRY ANIMATION ── */
+    @keyframes stintIn {
+      from { opacity: 0; transform: translateY(-6px) scale(0.98); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .stint-block { animation: stintIn 0.22s cubic-bezier(.4,0,.2,1) both; }
+
+    /* ── PREVIEW BAR PULSE ON CHANGE ── */
+    @keyframes prevBarPulse {
+      0%   { opacity: 1; }
+      40%  { opacity: 0.55; }
+      100% { opacity: 1; }
+    }
+    .preview-bar.pulse { animation: prevBarPulse 0.28s ease-out; }
   </style>
 </head>
 
@@ -3771,12 +3895,28 @@
       </div>
 
       <div class="section-label">Difficulty</div>
-      <div class="difficulty-row">
-        <button class="diff-btn active" id="diff-easy" onclick="setDifficulty('easy')">Easy</button>
-        <button class="diff-btn" id="diff-normal" onclick="setDifficulty('normal')">Normal</button>
-        <button class="diff-btn" id="diff-hard" onclick="setDifficulty('hard')">Hard 🔥</button>
+      <div class="cs-wrap" id="cs-difficulty">
+        <button class="cs-trigger">
+          <span class="cs-swatch" id="diff-dot" style="background:#34d399"></span>
+          <span class="cs-label" id="diff-label">Easy</span>
+          <span class="cs-sub-inline" id="diff-desc">Remin's pace slightly reduced — good for learning.</span>
+          <span class="cs-arrow">▾</span>
+        </button>
+        <div class="cs-menu">
+          <div class="cs-option selected" data-v="easy" onclick="setDifficulty('easy')">
+            <span style="color:#34d399;font-size:9px">●</span> Easy
+            <span class="cs-option-sub">Remin +0.20s/lap — forgiving</span>
+          </div>
+          <div class="cs-option" data-v="normal" onclick="setDifficulty('normal')">
+            <span style="color:#FFD700;font-size:9px">●</span> Normal
+            <span class="cs-option-sub">Standard adaptive AI</span>
+          </div>
+          <div class="cs-option" data-v="hard" onclick="setDifficulty('hard')">
+            <span style="color:#f87171;font-size:9px">●</span> Hard 🔥
+            <span class="cs-option-sub">Remin −0.15s/lap, max adaptability</span>
+          </div>
+        </div>
       </div>
-      <div class="diff-desc" id="diff-desc">Remin's pace is slightly reduced — good for learning.</div>
 
       <div class="start-row">
         <button class="btn-start" onclick="startRace()">Lights Out</button>
@@ -3911,10 +4051,17 @@
         </div>
         <div style="display:flex;justify-content:space-between;margin-top:6px;align-items:center">
           <div id="event-pill" class="event-pill" style="margin:0"></div>
-          <div class="speed-btns">
-            <button class="btn-speed active" id="spd1" onclick="setSpeed(1)">1×</button>
-            <button class="btn-speed" id="spd2" onclick="setSpeed(2)">2×</button>
-            <button class="btn-speed" id="spd5" onclick="setSpeed(5)">5×</button>
+          <div class="cs-wrap" id="cs-speed">
+            <button class="cs-trigger">
+              <span style="font-size:12px">⚡</span>
+              <span class="cs-label">1×</span>
+              <span class="cs-arrow">▾</span>
+            </button>
+            <div class="cs-menu">
+              <div class="cs-option selected" data-v="1" onclick="setSpeed(1)">1× <span class="cs-option-sub">Cinematic</span></div>
+              <div class="cs-option" data-v="2" onclick="setSpeed(2)">2× <span class="cs-option-sub">Normal</span></div>
+              <div class="cs-option" data-v="5" onclick="setSpeed(5)">5× <span class="cs-option-sub">Fast forward</span></div>
+            </div>
           </div>
           <div class="race-controls" style="margin:0">
             <button class="btn-ctrl" id="btn-pause" onclick="togglePause()">Pause</button>
@@ -4056,20 +4203,34 @@
       </div>
       <!-- Track sub-filter -->
       <div class="glb-sub-filter visible" id="glb-sf-track">
-        <button class="glb-sf-btn active" id="sf-silverstone" style="--sf-c:#a78bfa"
-          onclick="setLbTrack('silverstone')">🇬🇧 Silverstone</button>
-        <button class="glb-sf-btn" id="sf-monaco" style="--sf-c:#FFD700" onclick="setLbTrack('monaco')">🇲🇨
-          Monaco</button>
-        <button class="glb-sf-btn" id="sf-sao_paulo" style="--sf-c:#22c55e" onclick="setLbTrack('sao_paulo')">🇧🇷 São
-          Paulo</button>
+        <div class="cs-wrap" id="cs-lb-track">
+          <button class="cs-trigger">
+            <span class="cs-label">🇬🇧 Silverstone</span>
+            <span class="cs-arrow">▾</span>
+          </button>
+          <div class="cs-menu">
+            <div class="cs-option selected" data-v="silverstone" onclick="setLbTrack('silverstone')">🇬🇧 Silverstone <span class="cs-option-sub" style="color:#a78bfa">52 laps · High deg</span></div>
+            <div class="cs-option" data-v="monaco" onclick="setLbTrack('monaco')">🇲🇨 Monaco <span class="cs-option-sub" style="color:#FFD700">78 laps · Low deg</span></div>
+            <div class="cs-option" data-v="sao_paulo" onclick="setLbTrack('sao_paulo')">🇧🇷 São Paulo <span class="cs-option-sub" style="color:#22c55e">71 laps · High deg</span></div>
+          </div>
+        </div>
       </div>
       <!-- Driver sub-filter -->
       <div class="glb-sub-filter" id="glb-sf-driver">
-        <button class="glb-sf-btn active" id="sf-VER" style="--sf-c:#3671C6" onclick="setLbDriver('VER')">VER</button>
-        <button class="glb-sf-btn" id="sf-LEC" style="--sf-c:#E8002D" onclick="setLbDriver('LEC')">LEC</button>
-        <button class="glb-sf-btn" id="sf-RUS" style="--sf-c:#00D2BE" onclick="setLbDriver('RUS')">RUS</button>
-        <button class="glb-sf-btn" id="sf-NOR" style="--sf-c:#FF8000" onclick="setLbDriver('NOR')">NOR</button>
-        <button class="glb-sf-btn" id="sf-ALB" style="--sf-c:#37BEDD" onclick="setLbDriver('ALB')">ALB</button>
+        <div class="cs-wrap" id="cs-lb-driver">
+          <button class="cs-trigger">
+            <span class="cs-swatch" id="lb-drv-swatch" style="background:#3671C6"></span>
+            <span class="cs-label" id="lb-drv-label">Verstappen</span>
+            <span class="cs-arrow">▾</span>
+          </button>
+          <div class="cs-menu">
+            <div class="cs-option selected" data-v="VER" onclick="setLbDriver('VER')"><span class="cs-swatch" style="background:#3671C6"></span>Verstappen <span class="cs-option-sub">Red Bull</span></div>
+            <div class="cs-option" data-v="LEC" onclick="setLbDriver('LEC')"><span class="cs-swatch" style="background:#E8002D"></span>Leclerc <span class="cs-option-sub">Ferrari</span></div>
+            <div class="cs-option" data-v="RUS" onclick="setLbDriver('RUS')"><span class="cs-swatch" style="background:#00D2BE"></span>Russell <span class="cs-option-sub">Mercedes</span></div>
+            <div class="cs-option" data-v="NOR" onclick="setLbDriver('NOR')"><span class="cs-swatch" style="background:#FF8000"></span>Norris <span class="cs-option-sub">McLaren</span></div>
+            <div class="cs-option" data-v="ALB" onclick="setLbDriver('ALB')"><span class="cs-swatch" style="background:#37BEDD"></span>Albon <span class="cs-option-sub">Williams</span></div>
+          </div>
+        </div>
       </div>
       <div class="global-lb-table" id="global-lb-table">
         <div class="glb-empty" id="glb-loading">Loading leaderboard…</div>
@@ -4360,7 +4521,10 @@
     function setDifficulty(d) {
       difficulty = d;
       reminPaceDelta = DIFFICULTY_META[d].paceDelta;
-      ['easy', 'normal', 'hard'].forEach(k => document.getElementById(`diff-${k}`)?.classList.toggle('active', k === d));
+      const dotColors = { easy: '#34d399', normal: '#FFD700', hard: '#f87171' };
+      csUpdate('cs-difficulty', d, DIFFICULTY_META[d].label, null);
+      const dot = document.getElementById('diff-dot');
+      if (dot) dot.style.background = dotColors[d] || '#a78bfa';
       const desc = document.getElementById('diff-desc');
       if (desc) desc.textContent = DIFFICULTY_META[d].desc;
     }
@@ -4449,13 +4613,29 @@
         const div = document.createElement('div');
         div.className = 'stint-block';
         div.style.setProperty('--stint-compound-color', compoundColors[s.compound] || 'var(--border)');
+        const ci = COMPOUND[s.compound];
+        const optionsHtml = ['soft', 'med', 'hard'].map(c => {
+          const co = COMPOUND[c];
+          const offStr = (co.off > 0 ? '+' : '') + co.off;
+          return '<div class="cs-option' + (s.compound === c ? ' selected' : '') + '" data-v="' + c + '" onclick="setCompound(' + s.id + ',\'' + c + '\')">'
+            + '<span class="cs-swatch" style="background:' + co.color + '"></span>'
+            + '<span>' + co.name + '</span>'
+            + '<span class="cs-option-sub">' + offStr + 's/lap \u00b7 L' + co.cliff + ' cliff \u00b7 ' + co.degMul + '\u00d7 deg</span>'
+            + '</div>';
+        }).join('');
         div.innerHTML = `
       <div class="stint-header">
         <span class="stint-num">Stint ${i + 1}</span>
         ${userStints.length > 1 ? `<button class="stint-remove" onclick="removeStint(${s.id})" title="Remove">&#x2715;</button>` : ''}
       </div>
-      <div class="compound-row">
-        ${['soft', 'med', 'hard'].map(c => { const ci = COMPOUND[c]; return `<button class="cpd-btn${s.compound === c ? ' active-' + c : ''}" onclick="setCompound(${s.id},'${c}')" data-tip="${ci.off > 0 ? '+' : ''}${ci.off}s/lap · Cliff: L${ci.cliff} · ${ci.degMul}× deg">${c.charAt(0).toUpperCase() + c.slice(1)}</button>`; }).join('')}
+      <div class="cs-wrap cpd-dropdown" id="cpdwrap-${s.id}">
+        <button class="cs-trigger">
+          <span class="cs-swatch" style="background:${ci.color}"></span>
+          <span class="cs-label">${ci.name}</span>
+          <span class="cs-sub-inline">${ci.off > 0 ? '+' : ''}${ci.off}s/lap \u00b7 L${ci.cliff} cliff \u00b7 ${ci.degMul}\u00d7 deg</span>
+          <span class="cs-arrow">\u25be</span>
+        </button>
+        <div class="cs-menu">${optionsHtml}</div>
       </div>
       <div class="lap-row">
         <label>Laps</label>
@@ -4468,6 +4648,7 @@
         cont.appendChild(div);
       });
       updatePreview();
+      csInitAll();
     }
 
     function updatePreview() {
@@ -4482,6 +4663,9 @@
         seg.textContent = total > 0 && s.laps > 4 ? c.name[0] : '';
         prev.appendChild(seg);
       });
+      prev.classList.remove('pulse');
+      void prev.offsetWidth;
+      prev.classList.add('pulse');
       document.getElementById('lap-coverage').textContent = `${total} / ${LAPS} laps`;
       const err = document.getElementById('strat-error');
       err.textContent = total !== LAPS && total > 0 ? `Strategy must cover exactly ${LAPS} laps (currently ${total})` : '';
@@ -5267,7 +5451,7 @@
       lastRemLeading = null;
       gapHistory = [];
       simSpeed = 1;
-      [1, 2, 5].forEach(n => document.getElementById(`spd${n}`)?.classList.toggle('active', n === 1));
+      csUpdate('cs-speed', 1, '1×', null);
       setReminMood('idle');
       setReminSpeech('idle');
       showScreen('screen-race');
@@ -6223,7 +6407,7 @@
     /* ── SPEED CONTROL ── */
     function setSpeed(x) {
       simSpeed = x;
-      [1, 2, 5].forEach(n => document.getElementById(`spd${n}`)?.classList.toggle('active', n === x));
+      csUpdate('cs-speed', x, x + '×', null);
       if (!paused && simInterval) {
         clearInterval(simInterval);
         simInterval = setInterval(tick, Math.round(380 / x));
@@ -6766,15 +6950,18 @@
 
     function setLbTrack(key) {
       lbTrackFilter = key;
-      document.querySelectorAll('#glb-sf-track .glb-sf-btn').forEach(b => b.classList.remove('active'));
-      document.getElementById(`sf-${key}`)?.classList.add('active');
+      const TRACK_FLAGS = { silverstone: '🇬🇧 Silverstone', monaco: '🇲🇨 Monaco', sao_paulo: '🇧🇷 São Paulo' };
+      csUpdate('cs-lb-track', key, TRACK_FLAGS[key] || key, null);
       loadGlobalLeaderboard('track');
     }
 
     function setLbDriver(drv) {
       lbDriverFilter = drv;
-      document.querySelectorAll('#glb-sf-driver .glb-sf-btn').forEach(b => b.classList.remove('active'));
-      document.getElementById(`sf-${drv}`)?.classList.add('active');
+      const DNAMES = { VER: 'Verstappen', LEC: 'Leclerc', RUS: 'Russell', NOR: 'Norris', ALB: 'Albon' };
+      const DCOLORS = { VER: '#3671C6', LEC: '#E8002D', RUS: '#00D2BE', NOR: '#FF8000', ALB: '#37BEDD' };
+      csUpdate('cs-lb-driver', drv, DNAMES[drv] || drv, DCOLORS[drv]);
+      const sw = document.getElementById('lb-drv-swatch');
+      if (sw) sw.style.background = DCOLORS[drv] || '#a78bfa';
       loadGlobalLeaderboard('driver');
     }
 
@@ -6925,6 +7112,41 @@
       setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
     }
 
+    /* ── CUSTOM SELECT UTILITIES ── */
+    function csInitAll() {
+      document.querySelectorAll('.cs-wrap:not([data-cs-init])').forEach(wrap => {
+        wrap.setAttribute('data-cs-init', '1');
+        const trigger = wrap.querySelector('.cs-trigger');
+        if (!trigger) return;
+        trigger.addEventListener('click', e => {
+          e.stopPropagation();
+          const isOpen = wrap.classList.contains('open');
+          document.querySelectorAll('.cs-wrap.open').forEach(w => w.classList.remove('open'));
+          if (!isOpen) wrap.classList.add('open');
+        });
+      });
+    }
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.cs-wrap.open').forEach(w => w.classList.remove('open'));
+    });
+    function csUpdate(wrapId, value, labelText, swatchColor) {
+      const wrap = document.getElementById(wrapId);
+      if (!wrap) return;
+      wrap.querySelectorAll('.cs-option').forEach(o =>
+        o.classList.toggle('selected', o.dataset.v === String(value))
+      );
+      wrap.classList.remove('open');
+      const trigger = wrap.querySelector('.cs-trigger');
+      if (!trigger) return;
+      const swatch = trigger.querySelector('.cs-swatch');
+      if (swatch && swatchColor) swatch.style.background = swatchColor;
+      const labelEl = trigger.querySelector('.cs-label');
+      if (labelEl && labelText !== null) labelEl.textContent = labelText;
+      trigger.classList.remove('cs-flash');
+      void trigger.offsetWidth;
+      trigger.classList.add('cs-flash');
+    }
+
     resetStints();
     renderPBBar(loadPB());
     // v2.1: apply default track accent on page load
@@ -6964,6 +7186,7 @@
 
     checkChallengeParam();
     checkTutorial();
+    csInitAll();
     loadGlobalLeaderboard('track');
     setInterval(() => loadGlobalLeaderboard(lbCurrentTab), 30000);
   </script>
