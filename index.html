@@ -2894,6 +2894,27 @@
       white-space: nowrap;
     }
 
+    /* ── MODAL FEEDBACK PILLS ── */
+    .modal-feedback-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .modal-feedback-chip {
+      font-family: var(--font-display);
+      font-size: 9.5px;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      padding: 3px 8px;
+      border-radius: 20px;
+      border: 1px solid;
+      white-space: nowrap;
+    }
+
     .modal-leaderboard-cta {
       font-size: 12px;
       line-height: 1.65;
@@ -4427,6 +4448,7 @@
             <div class="modal-analysis-label" id="modal-analysis-label">RACE ANALYSIS</div>
             <div class="modal-analysis-text" id="modal-analysis-text"></div>
             <div class="modal-analysis-moments" id="modal-analysis-moments"></div>
+            <div class="modal-feedback-section" id="modal-feedback-section" style="display:none"></div>
             <!-- IQ strip injected by showRaceModal() -->
             <div class="modal-iq-strip" id="modal-iq-strip" style="display:none">
               <div class="modal-iq-score" id="modal-iq-score">—</div>
@@ -7138,10 +7160,12 @@
               if (fillEl) { fillEl.style.width = iqScore + '%'; fillEl.style.background = iqColor; }
 
               // MOM feedback note
+              const momSet = simState.userMomLaps;
+              const momCount = momSet ? momSet.size : 0;
+
+              // MOM note inside IQ strip
               const momEl = document.getElementById('modal-iq-mom');
               if (momEl) {
-                const momSet = simState.userMomLaps;
-                const momCount = momSet ? momSet.size : 0;
                 let momNote = '';
                 let momColor = 'var(--muted)';
                 if (momCount === 0) {
@@ -7166,6 +7190,46 @@
                 momEl.style.display = 'block';
               }
 
+              // Feedback pills
+              const feedbackEl = document.getElementById('modal-feedback-section');
+              if (feedbackEl) {
+                const REASON_MAP = {
+                  no_stop:              { text: 'No pit stop', color: '#f87171' },
+                  too_many_stops:       { text: '4+ stops', color: '#f87171' },
+                  back_to_back:         { text: 'Back-to-back compounds', color: '#f97316' },
+                  mono_compound:        { text: 'Single compound all race', color: '#f87171' },
+                  cliff_overrun:        { text: 'Tyre cliff overrun', color: '#facc15' },
+                  long_opener:          { text: 'Opener too long', color: '#facc15' },
+                  short_stint:          { text: 'Stint under 8 laps', color: '#f97316' },
+                  hard_opener_low_stops:{ text: 'Hard opener, few stops', color: '#facc15' },
+                  dead_hard_close:      { text: 'Hard close, ≤8 laps', color: '#facc15' },
+                  soft_win:             { text: 'Big-gap win (Remin off-form?)', color: '#a78bfa' },
+                  heavy_loss:           { text: 'Heavy loss margin', color: '#f87171' },
+                  crushing_loss:        { text: 'Crushing loss', color: '#f87171' },
+                  monaco_overstops:     { text: 'Too many stops for Monaco', color: '#f97316' },
+                  mom_early_blast:      { text: '\u26a1 MOM burned early', color: '#f97316' },
+                  mom_underused:        { text: '\u26a1 MOM underdeployed', color: '#facc15' },
+                  mom_unused:           { text: '\u26a1 MOM never activated', color: '#f87171' },
+                };
+                // Positive chips when no reasons flagged
+                const chips = iqReasons.filter(r => REASON_MAP[r]).map(r => {
+                  const { text, color } = REASON_MAP[r];
+                  return `<span class="modal-feedback-chip" style="color:${color};border-color:${color}33;background:${color}11">${text}</span>`;
+                });
+                // Always append MOM positive if clean
+                if (momCount > 0 && !iqReasons.includes('mom_early_blast') && !iqReasons.includes('mom_underused') && !iqReasons.includes('mom_unused')) {
+                  const finalPushStart = Math.floor(LAPS * 0.75);
+                  const hasFinalPush = momSet && [...momSet].some(l => l >= finalPushStart);
+                  chips.push(`<span class="modal-feedback-chip" style="color:#34d399;border-color:#34d39933;background:#34d39911">\u26a1 MOM${hasFinalPush ? ' closing push' : ' deployed'} (${momCount} laps)</span>`);
+                }
+                if (chips.length > 0) {
+                  feedbackEl.innerHTML = chips.join('');
+                  feedbackEl.style.display = 'flex';
+                } else {
+                  feedbackEl.style.display = 'none';
+                }
+              }
+
               iqStrip.style.display = 'flex';
             }
 
@@ -7183,30 +7247,34 @@
           const ctaEl = document.getElementById('modal-leaderboard-cta');
           if (ctaEl && SUPABASE_URL && SUPABASE_URL !== 'YOUR_SUPABASE_URL') {
             ctaEl.innerHTML = '<span style="color:var(--muted);font-size:11px">Loading global leaderboard…</span>';
-            fetch(`${SUPABASE_URL}/rest/v1/forecasts?result=eq.win&order=gap_seconds.asc&limit=1`, {
+            fetch(`${SUPABASE_URL}/rest/v1/forecasts?result=eq.win&order=fastest_lap.asc&limit=1`, {
               headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` }
             })
               .then(r => r.json())
               .then(data => {
                 const playerGap = simState.finalGap;
+                const playerFastestLap = simState.raceData?.laps
+                  ? Math.min(...simState.raceData.laps.map(f => f.playerLapTime))
+                  : null;
                 if (Array.isArray(data) && data.length > 0) {
                   const leader = data[0];
-                  const leaderGap = parseFloat(leader.gap_seconds);
+                  const leaderFastest = parseFloat(leader.fastest_lap);
                   const leaderName = leader.name || 'Anonymous';
-                  if (playerGap <= leaderGap && userWins) {
-                    ctaEl.innerHTML = `<span class="cta-highlight">🏆 You're #1 on the global board!</span><br>Gap: <strong>${playerGap.toFixed(3)}s</strong> — the best strategy run in the world. Defend it.`;
+                  if (userWins && playerFastestLap !== null && playerFastestLap <= leaderFastest) {
+                    ctaEl.innerHTML = `<span class="cta-highlight">🏆 Fastest win on the global board!</span><br>Your fastest lap: <strong>${playerFastestLap.toFixed(3)}s</strong> — the sharpest strategy run in the world. Defend it.`;
                   } else if (userWins) {
-                    const diff = (playerGap - leaderGap).toFixed(3);
-                    ctaEl.innerHTML = `Global leader is <strong>${leaderName}</strong> — beat Remin by <strong>${leaderGap.toFixed(3)}s</strong>.<br>You're <span class="cta-highlight">${diff}s off the top</span>. Race again and take that #1 spot.`;
+                    const flText = playerFastestLap !== null ? ` Your fastest: <strong>${playerFastestLap.toFixed(3)}s</strong>.` : '';
+                    ctaEl.innerHTML = `Global fastest win belongs to <strong>${leaderName}</strong> — best lap <strong>${leaderFastest.toFixed(3)}s</strong>.${flText}<br>Race again and chase that lap time.`;
                   } else {
-                    const playerBest = playerGap;
-                    ctaEl.innerHTML = `Global leader <strong>${leaderName}</strong> won by <strong>${leaderGap.toFixed(3)}s</strong>.<br>You lost by <span class="cta-highlight">${playerBest.toFixed(3)}s</span> this run. Study the key moments above and go again — the board is wide open.`;
+                    const flText = playerFastestLap !== null ? ` Your fastest lap this run: <strong>${playerFastestLap.toFixed(3)}s</strong>.` : '';
+                    ctaEl.innerHTML = `Global fastest win: <strong>${leaderName}</strong> at <strong>${leaderFastest.toFixed(3)}s</strong>.${flText}<br>Win first, then chase the lap record — the board is wide open.`;
                   }
                 } else {
                   if (userWins) {
-                    ctaEl.innerHTML = `<span class="cta-highlight">You won with a ${playerGap.toFixed(3)}s gap.</span> No one else on the board yet — you could be #1. Share the challenge and see who can beat you.`;
+                    const flText = playerFastestLap !== null ? ` Your fastest lap: <strong>${playerFastestLap.toFixed(3)}s</strong>.` : '';
+                    ctaEl.innerHTML = `<span class="cta-highlight">You won!</span>${flText} No one else on the board yet — share the challenge and see who can match your lap time.`;
                   } else {
-                    ctaEl.innerHTML = `Remin edged you by <span class="cta-highlight">${playerGap.toFixed(3)}s</span>. The global board is empty — win once and claim the top spot.`;
+                    ctaEl.innerHTML = `Remin edged you by <span class="cta-highlight">${playerGap.toFixed(3)}s</span>. The global board is empty — win once and claim the fastest-lap record.`;
                   }
                 }
               })
