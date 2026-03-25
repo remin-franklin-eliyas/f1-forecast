@@ -86,6 +86,65 @@
       overflow-x: hidden;
     }
 
+    /* ── BACKGROUND ORBS ── */
+    #bg-fx {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    #bg-fx span {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      will-change: transform;
+    }
+
+    /* left orb — large, drifts diagonally */
+    #bg-fx span:nth-child(1) {
+      width: 520px;
+      height: 520px;
+      background: rgba(var(--track-accent-rgb), 0.09);
+      left: -120px;
+      top: 15%;
+      animation: orbA 22s ease-in-out infinite alternate;
+    }
+
+    /* right orb — medium, counters left orb */
+    #bg-fx span:nth-child(2) {
+      width: 420px;
+      height: 420px;
+      background: rgba(var(--track-accent-rgb), 0.07);
+      right: -100px;
+      bottom: 10%;
+      animation: orbB 28s ease-in-out infinite alternate;
+    }
+
+    /* top-center orb — small accent, fades in/out */
+    #bg-fx span:nth-child(3) {
+      width: 280px;
+      height: 280px;
+      background: rgba(var(--track-accent-rgb), 0.05);
+      left: 45%;
+      top: -60px;
+      animation: orbC 18s ease-in-out infinite alternate;
+    }
+
+    @keyframes orbA {
+      from { transform: translate(0, 0) scale(1); }
+      to   { transform: translate(70px, 90px) scale(1.18); }
+    }
+    @keyframes orbB {
+      from { transform: translate(0, 0) scale(1); }
+      to   { transform: translate(-80px, -70px) scale(1.12); }
+    }
+    @keyframes orbC {
+      from { transform: translate(0, 0) scale(1);   opacity: 0.6; }
+      to   { transform: translate(-50px, 40px) scale(0.85); opacity: 1; }
+    }
+
     /* Background grid */
     body::before {
       content: '';
@@ -3734,6 +3793,7 @@
 </head>
 
 <body>
+  <div id="bg-fx" aria-hidden="true"><span></span><span></span><span></span></div>
   <div class="app">
 
     <nav>
