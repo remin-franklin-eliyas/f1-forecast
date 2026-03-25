@@ -3955,6 +3955,141 @@
       100% { opacity: 1; }
     }
     .preview-bar.pulse { animation: prevBarPulse 0.28s ease-out; }
+
+    /* ── MOM SCHEDULER ── */
+    .mom-section {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin-bottom: 18px;
+    }
+
+    .mom-section-title {
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .mom-section-sub {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+
+    .mom-windows {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .mom-window-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 12px;
+    }
+
+    .mom-window-label {
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--muted);
+      flex-shrink: 0;
+      width: 64px;
+    }
+
+    .mom-window-row label {
+      font-size: 11px;
+      color: var(--muted);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .mom-lap-input {
+      width: 56px;
+      background: var(--bg);
+      border: 1px solid var(--border2);
+      border-radius: 6px;
+      color: var(--text);
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      padding: 5px 8px;
+      text-align: center;
+      outline: none;
+      transition: border-color .15s;
+      -moz-appearance: textfield;
+    }
+
+    .mom-lap-input::-webkit-outer-spin-button,
+    .mom-lap-input::-webkit-inner-spin-button { -webkit-appearance: none; }
+
+    .mom-lap-input:focus {
+      border-color: var(--track-accent);
+    }
+
+    .mom-dur-input {
+      width: 44px;
+    }
+
+    .mom-toggle {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .mom-toggle input[type=checkbox] {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--track-accent);
+      cursor: pointer;
+    }
+
+    .mom-toggle-lbl {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .mom-active-badge {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 3px;
+      background: rgba(var(--track-accent-rgb), 0.15);
+      color: var(--track-accent);
+      border: 1px solid rgba(var(--track-accent-rgb), 0.3);
+    }
+
+    /* MOM active glow on status card bar */
+    @keyframes momActivePulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.5; }
+    }
+    .mom-fill.mom-active {
+      animation: momActivePulse 0.7s ease-in-out infinite;
+      filter: brightness(1.4);
+    }
   </style>
 </head>
 
@@ -4157,6 +4292,43 @@
           <div class="preview-bar" id="strat-preview"></div>
         </div>
         <div class="error-msg" id="strat-error"></div>
+      </div>
+
+      <div class="section-label">MOM — Mode of Maneuvering</div>
+      <div class="mom-section">
+        <div class="mom-section-title">
+          ⚡ MOM Deployment <span class="mom-active-badge">2026 Regs</span>
+        </div>
+        <div class="mom-section-sub">
+          Schedule up to 2 MOM windows. Each window gives a <strong style="color:var(--text)">−0.25s/lap</strong> pace boost for the chosen laps. Total budget: <strong style="color:var(--text)">8 laps</strong> per race.
+        </div>
+        <div class="mom-windows">
+          <div class="mom-window-row">
+            <span class="mom-window-label">Window 1</span>
+            <label>Lap</label>
+            <input type="number" class="mom-lap-input" id="mom1-lap" min="1" max="51" value="10" oninput="validateMomInputs()">
+            <label>for</label>
+            <input type="number" class="mom-lap-input mom-dur-input" id="mom1-dur" min="1" max="8" value="4" oninput="validateMomInputs()">
+            <label>laps</label>
+            <label class="mom-toggle">
+              <input type="checkbox" id="mom1-on" checked onchange="validateMomInputs()">
+              <span class="mom-toggle-lbl">Enable</span>
+            </label>
+          </div>
+          <div class="mom-window-row">
+            <span class="mom-window-label">Window 2</span>
+            <label>Lap</label>
+            <input type="number" class="mom-lap-input" id="mom2-lap" min="1" max="51" value="35" oninput="validateMomInputs()">
+            <label>for</label>
+            <input type="number" class="mom-lap-input mom-dur-input" id="mom2-dur" min="1" max="8" value="4" oninput="validateMomInputs()">
+            <label>laps</label>
+            <label class="mom-toggle">
+              <input type="checkbox" id="mom2-on" onchange="validateMomInputs()">
+              <span class="mom-toggle-lbl">Enable</span>
+            </label>
+          </div>
+        </div>
+        <div class="error-msg" id="mom-error" style="margin-top:8px"></div>
       </div>
 
       <div class="wildcard-teaser">
@@ -5049,7 +5221,7 @@
     }
 
     // Per-lap time with fuel effect, tyre warmup, cliff zones, and noise
-    function getLapTime(raceLap, stintLap, compoundKey, driverStats, ev, seed) {
+    function getLapTime(raceLap, stintLap, compoundKey, driverStats, ev, seed, momActive) {
       const c = { ...COMPOUND[compoundKey], ...(currentTrack.compounds?.[compoundKey] || {}) };
       const deg = driverStats.deg;
       const tmMgmt = driverStats.tyreManagement !== undefined ? driverStats.tyreManagement : 0.5;
@@ -5085,6 +5257,9 @@
 
       // Difficulty modifier: only applies to Remin's laps
       if (driverStats.name === 'Remin') lapTime += (reminPaceDelta || 0);
+
+      // MOM boost: active laps gain back pace
+      if (momActive) lapTime -= MOM_BOOST;
 
       return lapTime;
     }
@@ -5127,8 +5302,8 @@
       return bestCandidate;
     }
 
-    // Pre-compute full 52-lap race, returns laps array + totals
-    function simulateRaceFull(playerStints, playerDrvKey, aiStints, event, seed) {
+    // Pre-compute full race, returns laps array + totals
+    function simulateRaceFull(playerStints, playerDrvKey, aiStints, event, seed, playerMomSet, aiMomSet) {
       const playerDrv = DRIVERS[playerDrvKey];
       const playerPitLaps = getPitLaps(playerStints);
       const aiPitLaps = getPitLaps(aiStints);
@@ -5138,8 +5313,10 @@
       for (let lap = 1; lap <= LAPS; lap++) {
         const ps = getStintAt(playerStints, lap);
         const as = getStintAt(aiStints, lap);
-        const pTime = getLapTime(lap, ps.age, ps.compound, playerDrv, event, seed);
-        const aTime = getLapTime(lap, as.age, as.compound, REMIN_STATS, event, seed);
+        const pMom = playerMomSet ? playerMomSet.has(lap) : false;
+        const aMom = aiMomSet    ? aiMomSet.has(lap)    : false;
+        const pTime = getLapTime(lap, ps.age, ps.compound, playerDrv, event, seed, pMom);
+        const aTime = getLapTime(lap, as.age, as.compound, REMIN_STATS, event, seed, aMom);
 
         // Pit loss added on the transition lap
         let pPit = 0, aPit = 0;
@@ -5633,6 +5810,47 @@
       }
     }
 
+    /* ── MOM SYSTEM ── */
+    // Returns Set of lap numbers where MOM is active for the user
+    let userMomLapSet = new Set();
+    let remMomLapSet  = new Set();
+    const MOM_BOOST   = 0.25; // seconds saved per active MOM lap
+    const MOM_BUDGET  = 8;    // max laps per race
+
+    function validateMomInputs() {
+      const err = document.getElementById('mom-error');
+      userMomLapSet = buildMomSet();
+      const total = userMomLapSet.size;
+      if (total > MOM_BUDGET) {
+        if (err) err.textContent = `MOM budget exceeded — max ${MOM_BUDGET} laps (currently ${total}).`;
+      } else {
+        if (err) err.textContent = '';
+      }
+    }
+
+    function buildMomSet() {
+      const laps = new Set();
+      [[1, 2], [2, 2]].forEach(([n]) => {
+        const on  = document.getElementById(`mom${n}-on`)?.checked;
+        if (!on) return;
+        const lap = parseInt(document.getElementById(`mom${n}-lap`)?.value) || 1;
+        const dur = Math.min(parseInt(document.getElementById(`mom${n}-dur`)?.value) || 1, MOM_BUDGET);
+        for (let l = lap; l < lap + dur && l <= LAPS; l++) laps.add(l);
+      });
+      return laps;
+    }
+
+    // Remin MOM: activates after each of his pit stops (3 laps) + final 3 laps
+    function buildRemMomSet(remPitLaps, totalLaps) {
+      const laps = new Set();
+      remPitLaps.forEach(pitLap => {
+        for (let l = pitLap + 1; l <= Math.min(pitLap + 3, totalLaps); l++) laps.add(l);
+      });
+      // Final sprint
+      for (let l = totalLaps - 2; l <= totalLaps; l++) laps.add(l);
+      return laps;
+    }
+
     /* ── MAIN GAME LOGIC ── */
     function startRace() {
       if (!userDriver) { document.getElementById('strat-error').textContent = 'Pick a driver first.'; return; }
@@ -5653,7 +5871,16 @@
       const drv = DRIVERS[userDriver];
       const drvColor = getComputedStyle(document.documentElement).getPropertyValue(drv.colorVar).trim();
 
-      const raceData = simulateRaceFull(userStints, userDriver, remStints, raceEvent, raceSeed);
+      // Build MOM sets — validate first
+      userMomLapSet = buildMomSet();
+      if (userMomLapSet.size > MOM_BUDGET) {
+        document.getElementById('mom-error').textContent = `MOM budget exceeded — max ${MOM_BUDGET} laps.`;
+        return;
+      }
+      const remPitL = getPitLaps(remStints);
+      remMomLapSet = buildRemMomSet(remPitL, LAPS);
+
+      const raceData = simulateRaceFull(userStints, userDriver, remStints, raceEvent, raceSeed, userMomLapSet, remMomLapSet);
 
       simState = {
         lap: 0,
@@ -5663,11 +5890,13 @@
         userStints: JSON.parse(JSON.stringify(userStints)),
         remStints: JSON.parse(JSON.stringify(remStints)),
         userPitLaps: getPitLaps(userStints),
-        remPitLaps: getPitLaps(remStints),
+        remPitLaps: remPitL,
         lastGap: 0,
         event: raceEvent,
         seed: raceSeed,
-        raceData
+        raceData,
+        userMomLaps: userMomLapSet,
+        remMomLaps: remMomLapSet
       };
 
       const displayName = userName || 'YOU';
@@ -5851,12 +6080,22 @@
       document.getElementById('s-rem-age').textContent = `Lap ${rs.age}`;
 
       const drv = DRIVERS[simState.driverKey];
-      const uMom = drv.mom === 'hi-drag' ? 72 : drv.mom === 'low-drag' ? 44 : 58;
-      const rMom = Math.min(40 + Math.round(lap / LAPS * 35), 75);
-      document.getElementById('mom-user').style.width = uMom + '%';
-      document.getElementById('mom-rem').style.width = rMom + '%';
-      document.getElementById('mom-user-lbl').textContent = `MOM Aero · ${drv.mom} · ${uMom}% deploy`;
-      document.getElementById('mom-rem-lbl').textContent = `MOM · Adaptive · ${rMom}% deploy`;
+      const uMomActive = simState.userMomLaps?.has(lap) || false;
+      const rMomActive = simState.remMomLaps?.has(lap)  || false;
+      const uMom = uMomActive ? 100 : (drv.mom === 'hi-drag' ? 72 : drv.mom === 'low-drag' ? 44 : 58);
+      const rMom = rMomActive ? 100 : Math.min(40 + Math.round(lap / LAPS * 35), 75);
+      const momUserEl = document.getElementById('mom-user');
+      const momRemEl  = document.getElementById('mom-rem');
+      momUserEl.style.width = uMom + '%';
+      momRemEl.style.width  = rMom + '%';
+      momUserEl.classList.toggle('mom-active', uMomActive);
+      momRemEl.classList.toggle('mom-active', rMomActive);
+      document.getElementById('mom-user-lbl').textContent = uMomActive
+        ? `⚡ MOM ACTIVE · L${lap} · −0.25s`
+        : `MOM Aero · ${drv.mom} · ${uMom}% deploy`;
+      document.getElementById('mom-rem-lbl').textContent = rMomActive
+        ? `⚡ REMIN MOM · L${lap}`
+        : `MOM · Adaptive · ${rMom}% deploy`;
 
       renderTimeline('tl-user', simState.userStints, lap);
       renderTimeline('tl-rem', simState.remStints, lap);
