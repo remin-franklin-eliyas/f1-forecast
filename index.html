@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>F1 Strategy Battle — Beat Remin at Silverstone 2026</title>
+  <title>F1 Strategy Battle</title>
 
   <!-- Favicon: chequered flag SVG inline -->
   <link rel="icon"
@@ -13,27 +13,27 @@
 
   <!-- SEO -->
   <meta name="description"
-    content="Pick your tyre strategy. Race Remin's adaptive AI over 52 laps at Silverstone. Pure strategy — no driving skill needed. Claim the global top spot.">
+    content="Pick your tyre strategy. Race Remin's adaptive AI over laps at Silverstone. Pure strategy — no driving skill needed. Claim the global top spot.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://remin-franklin-eliyas.github.io/f1-forecast/">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://remin-franklin-eliyas.github.io/f1-forecast/">
-  <meta property="og:title" content="F1 Strategy Battle — Beat Remin at Silverstone 2026">
+  <meta property="og:title" content="F1 Strategy Battle">
   <meta property="og:description"
-    content="Pick your tyre strategy for 52 laps. Out-think Remin's adaptive AI and claim the global leaderboard top spot.">
-  <meta property="og:image" content="https://remin-franklin-eliyas.github.io/f1-forecast/preview.png?v=3">
+    content="Pick your tyre strategy for laps. Out-think Remin's adaptive AI and claim the global leaderboard top spot.">
+  <meta property="og:image" content="https://remin-franklin-eliyas.github.io/f1-forecast/preview.PNG?v=3">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
 
   <!-- Twitter / X Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="F1 Strategy Battle — Beat Remin at Silverstone 2026">
+  <meta name="twitter:title" content="F1 Strategy Battle">
   <meta name="twitter:description"
-    content="Pick your tyre strategy for 52 laps. Out-think Remin's adaptive AI and claim the global leaderboard top spot.">
-  <meta name="twitter:image" content="https://remin-franklin-eliyas.github.io/f1-forecast/preview.png?v=3">
+    content="Pick your tyre strategy for laps. Out-think Remin's adaptive AI and claim the global leaderboard top spot.">
+  <meta name="twitter:image" content="https://remin-franklin-eliyas.github.io/f1-forecast/preview.PNG?v=3">
 
   <!-- Web App Manifest -->
   <link rel="manifest"
@@ -670,6 +670,7 @@
     .lap-row input[type=range] {
       flex: 1;
       -webkit-appearance: none;
+      appearance: none;
       height: 4px;
       background: var(--border2);
       border-radius: 2px;
@@ -3456,6 +3457,146 @@
         gap: 3px;
       }
     }
+
+    /* ── COMPOUND TOOLTIPS ── */
+    .cpd-btn { position: relative; }
+    .cpd-btn[data-tip]::after {
+      content: attr(data-tip);
+      position: absolute;
+      bottom: calc(100% + 7px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: #16162a;
+      color: #c8c8e0;
+      font-size: 10px;
+      font-family: 'Barlow', sans-serif;
+      font-weight: 500;
+      white-space: nowrap;
+      padding: 5px 9px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.15s;
+      z-index: 200;
+    }
+    .cpd-btn[data-tip]:hover::after { opacity: 1; }
+
+    /* ── DIFFICULTY SELECTOR ── */
+    .difficulty-row { display: flex; gap: 8px; margin-bottom: 6px; }
+    .diff-btn {
+      flex: 1;
+      padding: 9px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg3);
+      color: var(--muted);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s, background 0.15s;
+    }
+    .diff-btn.active { border-color: var(--accent); color: var(--text); background: rgba(167,139,250,0.1); }
+    #diff-easy.active  { border-color: #34d399; color: #34d399; background: rgba(52,211,153,0.08); }
+    #diff-hard.active  { border-color: #f87171; color: #f87171; background: rgba(248,113,113,0.08); }
+    .diff-btn:hover:not(.active) { border-color: rgba(255,255,255,0.18); color: var(--text); }
+    .diff-desc { font-size: 11px; color: var(--muted); margin-bottom: 16px; text-align: center; min-height: 14px; }
+
+    /* ── TUTORIAL OVERLAY ── */
+    #tutorial-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(8,8,16,0.9);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    #tutorial-overlay.visible { opacity: 1; }
+    .tutorial-box {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      max-width: 520px;
+      width: 100%;
+      padding: 28px 24px 24px;
+      position: relative;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.6);
+    }
+    .tutorial-close {
+      position: absolute;
+      top: 14px; right: 16px;
+      background: none; border: none;
+      color: var(--muted); font-size: 22px;
+      cursor: pointer; line-height: 1; padding: 0 4px;
+      transition: color 0.15s;
+    }
+    .tutorial-close:hover { color: var(--text); }
+    .tutorial-eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px; letter-spacing: 0.12em;
+      color: var(--accent); text-transform: uppercase; margin-bottom: 6px;
+    }
+    .tutorial-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 28px; font-weight: 800;
+      color: var(--text); line-height: 1.15; margin-bottom: 20px;
+    }
+    .tutorial-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    @media (max-width: 480px) { .tutorial-cards { grid-template-columns: 1fr; } }
+    .tutorial-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+    .tutorial-icon { font-size: 18px; margin-bottom: 6px; }
+    .tutorial-card-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px; font-weight: 700;
+      letter-spacing: 0.06em; color: var(--text);
+      text-transform: uppercase; margin-bottom: 4px;
+    }
+    .tutorial-card-body { font-size: 12px; color: var(--muted); line-height: 1.55; }
+    .tutorial-card-body strong { color: var(--text); }
+    .tutorial-cta {
+      width: 100%;
+      background: var(--accent); color: var(--bg);
+      border: none; border-radius: 10px; padding: 13px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 16px; font-weight: 800;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      cursor: pointer; transition: opacity 0.15s;
+    }
+    .tutorial-cta:hover { opacity: 0.85; }
+    .btn-help {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      font-size: 13px; font-weight: 700;
+      cursor: pointer; flex-shrink: 0;
+      transition: border-color 0.15s, color 0.15s;
+      line-height: 1;
+    }
+    .btn-help:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── SC GAP BAR PULSE ── */
+    .gap-bar-wrap.sc-pulse { animation: tensionPulse 0.45s ease-in-out 4; }
   </style>
 </head>
 
@@ -3468,6 +3609,7 @@
         <span class="badge badge-purple">2026 Regs</span>
         <span class="badge badge-green">MOM Active</span>
         <span class="badge badge-red">No DRS</span>
+        <button class="btn-help" onclick="showTutorial()" title="How to play">?</button>
       </div>
     </nav>
 
@@ -3627,6 +3769,14 @@
         <div><strong>Wildcard event</strong> — a random event (Safety Car, VSC, or Rain) may occur mid-race. Your
           strategy will be tested.</div>
       </div>
+
+      <div class="section-label">Difficulty</div>
+      <div class="difficulty-row">
+        <button class="diff-btn active" id="diff-easy" onclick="setDifficulty('easy')">Easy</button>
+        <button class="diff-btn" id="diff-normal" onclick="setDifficulty('normal')">Normal</button>
+        <button class="diff-btn" id="diff-hard" onclick="setDifficulty('hard')">Hard 🔥</button>
+      </div>
+      <div class="diff-desc" id="diff-desc">Remin's pace is slightly reduced — good for learning.</div>
 
       <div class="start-row">
         <button class="btn-start" onclick="startRace()">Lights Out</button>
@@ -3927,6 +4077,38 @@
       <div class="glb-refresh" id="glb-refresh"></div>
     </div>
 
+    <!-- FIRST-RUN TUTORIAL OVERLAY -->
+    <div id="tutorial-overlay">
+      <div class="tutorial-box">
+        <button class="tutorial-close" onclick="closeTutorial()" title="Close">×</button>
+        <div class="tutorial-eyebrow">How to play</div>
+        <div class="tutorial-title">Beat Remin on<br>pure strategy.</div>
+        <div class="tutorial-cards">
+          <div class="tutorial-card">
+            <div class="tutorial-icon">🟥🟡⬜</div>
+            <div class="tutorial-card-title">Tyre Compounds</div>
+            <div class="tutorial-card-body"><strong>Soft</strong> = fastest but short life. <strong>Med</strong> = balanced. <strong>Hard</strong> = slow but lasts longest. Mix them wisely.</div>
+          </div>
+          <div class="tutorial-card">
+            <div class="tutorial-icon">🔧</div>
+            <div class="tutorial-card-title">Pit Stops</div>
+            <div class="tutorial-card-body">Each stop costs ~23s. Fewer stops = less time lost — but worn tyres = slow laps. That's the core trade-off.</div>
+          </div>
+          <div class="tutorial-card">
+            <div class="tutorial-icon">🎲</div>
+            <div class="tutorial-card-title">Wildcards</div>
+            <div class="tutorial-card-body">A Safety Car, VSC, or Rain may hit mid-race. A SC can hand you a free pit stop — or give Remin one. Timing is everything.</div>
+          </div>
+          <div class="tutorial-card">
+            <div class="tutorial-icon">⚡</div>
+            <div class="tutorial-card-title">MOM Mode</div>
+            <div class="tutorial-card-body">Manufacturer Override Mode deploys aero energy each lap. Your driver's MOM style is your edge over Remin.</div>
+          </div>
+        </div>
+        <button class="tutorial-cta" onclick="closeTutorial()">Got it — Let's Race →</button>
+      </div>
+    </div>
+
   </div>
 
   <script>
@@ -3978,7 +4160,12 @@
     function renderPBBar(pb) {
       const bar = document.getElementById('pb-bar');
       const inner = document.getElementById('pb-bar-inner');
-      if (!bar || !inner || !pb || !pb.races) return;
+      if (!bar || !inner) return;
+      if (!pb || !pb.races) {
+        inner.innerHTML = `<div class="pb-stat"><span class="pb-label" style="opacity:0.55">Your stats</span><span class="pb-value" style="opacity:0.4;font-size:11px">Play a race to start tracking</span></div>`;
+        bar.style.display = 'block';
+        return;
+      }
       const parts = [];
       parts.push(`<div class="pb-stat"><span class="pb-label">Races</span><span class="pb-value">${pb.races}</span></div>`);
       parts.push(`<div class="pb-sep"></div>`);
@@ -4162,6 +4349,40 @@
     };
     const REMIN_STATS = { name: 'Remin', deg: 0.065, pace: 0.14, mom: 'adaptive', aggression: 0.7, tyreManagement: 0.6, adaptability: 0.9 };
 
+    /* ── DIFFICULTY SYSTEM ── */
+    let difficulty = 'easy';
+    let reminPaceDelta = 0.20;
+    const DIFFICULTY_META = {
+      easy:   { label: 'Easy',   paceDelta: +0.20, desc: "Remin's pace is slightly reduced — good for learning." },
+      normal: { label: 'Normal', paceDelta:  0.00, desc: "Standard AI. Remin reads your strategy and adapts." },
+      hard:   { label: 'Hard',   paceDelta: -0.15, desc: "Remin runs harder pace with full adaptability. Good luck." }
+    };
+    function setDifficulty(d) {
+      difficulty = d;
+      reminPaceDelta = DIFFICULTY_META[d].paceDelta;
+      ['easy', 'normal', 'hard'].forEach(k => document.getElementById(`diff-${k}`)?.classList.toggle('active', k === d));
+      const desc = document.getElementById('diff-desc');
+      if (desc) desc.textContent = DIFFICULTY_META[d].desc;
+    }
+
+    /* ── TUTORIAL SYSTEM ── */
+    const TUTORIAL_KEY = 'f1b_seen_v1';
+    function checkTutorial() {
+      if (!localStorage.getItem(TUTORIAL_KEY)) {
+        const overlay = document.getElementById('tutorial-overlay');
+        if (overlay) { overlay.style.display = 'flex'; requestAnimationFrame(() => overlay.classList.add('visible')); }
+      }
+    }
+    function closeTutorial() {
+      localStorage.setItem(TUTORIAL_KEY, '1');
+      const overlay = document.getElementById('tutorial-overlay');
+      if (overlay) { overlay.classList.remove('visible'); setTimeout(() => { overlay.style.display = 'none'; }, 300); }
+    }
+    function showTutorial() {
+      const overlay = document.getElementById('tutorial-overlay');
+      if (overlay) { overlay.style.display = 'flex'; requestAnimationFrame(() => overlay.classList.add('visible')); }
+    }
+
     const COMPOUND = {
       soft: { name: 'Soft', color: '#E8002D', text: '#fff', off: -1.3, degMul: 1.4, degRate: 0.058, cliff: 18, cliffMul: 2.2 },
       med: { name: 'Med', color: '#FFD700', text: '#111', off: -0.6, degMul: 1.0, degRate: 0.038, cliff: 26, cliffMul: 1.8 },
@@ -4234,7 +4455,7 @@
         ${userStints.length > 1 ? `<button class="stint-remove" onclick="removeStint(${s.id})" title="Remove">&#x2715;</button>` : ''}
       </div>
       <div class="compound-row">
-        ${['soft', 'med', 'hard'].map(c => `<button class="cpd-btn${s.compound === c ? ' active-' + c : ''}" onclick="setCompound(${s.id},'${c}')">${c.charAt(0).toUpperCase() + c.slice(1)}</button>`).join('')}
+        ${['soft', 'med', 'hard'].map(c => { const ci = COMPOUND[c]; return `<button class="cpd-btn${s.compound === c ? ' active-' + c : ''}" onclick="setCompound(${s.id},'${c}')" data-tip="${ci.off > 0 ? '+' : ''}${ci.off}s/lap · Cliff: L${ci.cliff} · ${ci.degMul}× deg">${c.charAt(0).toUpperCase() + c.slice(1)}</button>`; }).join('')}
       </div>
       <div class="lap-row">
         <label>Laps</label>
@@ -4393,6 +4614,9 @@
         if (ev.type === 'sc' || ev.type === 'vsc') lapTime += ev.lapDelta;
         else if (ev.type === 'rain') lapTime += (RAIN_PEN[compoundKey] || 1.0);
       }
+
+      // Difficulty modifier: only applies to Remin's laps
+      if (driverStats.name === 'Remin') lapTime += (reminPaceDelta || 0);
 
       return lapTime;
     }
@@ -4984,7 +5208,7 @@
       document.getElementById('s-user-label').textContent = `${displayName.toUpperCase()} · ${drv.name.toUpperCase()}`;
       document.getElementById('s-user-label').style.color = drvColor;
       document.getElementById('tl-user-lbl').textContent = `${displayName} — ${drv.name}`;
-      document.getElementById('race-eyebrow').textContent = `${displayName} · ${drv.name} vs Remin · ${currentTrack.name} 2026`;
+      document.getElementById('race-eyebrow').textContent = `${displayName} · ${drv.name} vs Remin · ${currentTrack.name} 2026${difficulty !== 'normal' ? ' · ' + DIFFICULTY_META[difficulty].label.toUpperCase() : ''}`;
       const rh = document.getElementById('result-heading');
       if (rh) rh.textContent = `Race Result — ${currentTrack.name} GP 2026`;
       const lt = document.getElementById('lap-total');
@@ -5148,7 +5372,9 @@
       const tyreHealth = tyreFraction < 0.6 ? '' : tyreFraction < 0.85 ? 'health-warm' : tyreFraction < 1.0 ? 'health-hot' : 'health-cliff';
       document.getElementById('s-user-tyre').innerHTML = `<span class="tyre-dot ${tyreHealth}" style="background:${uc.color}"></span>${uc.name}${tyreHealth === 'health-cliff' ? ' ⚠' : ''}`;
       document.getElementById('s-user-age').textContent = `Lap ${us.age}`;
-      document.getElementById('s-rem-tyre').innerHTML = `<span class="tyre-dot" style="background:${rc.color}"></span>${rc.name}`;
+      const remTyreFrac = Math.min(rs.age / rc.cliff, 1.1);
+      const remTyreHealth = remTyreFrac < 0.6 ? '' : remTyreFrac < 0.85 ? 'health-warm' : remTyreFrac < 1.0 ? 'health-hot' : 'health-cliff';
+      document.getElementById('s-rem-tyre').innerHTML = `<span class="tyre-dot ${remTyreHealth}" style="background:${rc.color}"></span>${rc.name}${remTyreHealth === 'health-cliff' ? ' ⚠' : ''}`;
       document.getElementById('s-rem-age').textContent = `Lap ${rs.age}`;
 
       const drv = DRIVERS[simState.driverKey];
@@ -5225,6 +5451,9 @@
               scStrip.textContent = '🚗 SAFETY CAR DEPLOYED — LAP ' + lap + ' · PIT WINDOW OPEN · GAP NEUTRALISED';
               scStrip.classList.add('show');
             }
+            // Gap-bar drama pulse on SC
+            const gbWrapSC = document.getElementById('gap-bar-wrap');
+            if (gbWrapSC) { gbWrapSC.classList.add('sc-pulse'); setTimeout(() => gbWrapSC.classList.remove('sc-pulse'), 2000); }
           } else if (isVSC) {
             raceScreen.classList.add('ev-vsc');
             if (scStrip) {
@@ -6516,7 +6745,7 @@
         document.getElementById('glb-refresh').textContent =
           `Updated ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`;
       } catch (e) {
-        tableEl.innerHTML = '<div class="glb-empty">Could not load leaderboard.</div>';
+        tableEl.innerHTML = '<div class="glb-empty">Could not load leaderboard.</div><button style="display:block;margin:8px auto 0;cursor:pointer;background:var(--bg3);border:1px solid var(--border);color:var(--muted);padding:6px 16px;border-radius:6px;font-size:12px;font-family:inherit" onclick="loadGlobalLeaderboard(lbCurrentTab)">↻ Retry</button>';
       }
     }
 
@@ -6559,8 +6788,8 @@
       if (!cid || !SUPABASE_URL || SUPABASE_URL === 'YOUR_SUPABASE_URL') return;
       try {
         const res = await fetch(
-          `${SUPABASE_URL} /rest/v1 / challenges ? id = eq.${encodeURIComponent(cid)}& limit=1`,
-          { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY} ` } }
+          `${SUPABASE_URL}/rest/v1/challenges?id=eq.${encodeURIComponent(cid)}&limit=1`,
+          { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } }
         );
         const rows = await res.json();
         if (Array.isArray(rows) && rows[0]) {
@@ -6622,7 +6851,7 @@
       const p2c = iWin ? '#FF6B35' : '#34d399';
 
       const row = (pos, col, e) => `
-          < div class="h2h-row${pos === 1 ? ' winner' : ''}" >
+          <div class="h2h-row${pos === 1 ? ' winner' : ''}">
           <div class="h2h-pos" style="color:${col}">${pos}</div>
           <div class="h2h-info">
             <div class="h2h-name" style="color:${col}">${e.name}</div>
@@ -6630,7 +6859,7 @@
           </div>
           <div class="h2h-gap" style="color:${col}">${e.result === 'win' ? e.gap.toFixed(3) + 's' : 'No win'}</div>
           <span class="h2h-badge ${e.result}">${e.result === 'win' ? 'Win' : 'Loss'}</span>
-        </div > `;
+        </div>`;
 
       // Verdict copy for all 4 scenarios
       let verdictText, verdictColor, verdictBg;
@@ -6641,7 +6870,7 @@
       else { verdictText = `❌ ${chalName} wins this one.Try a different strategy!`; verdictColor = '#f87171'; verdictBg = 'rgba(248,113,113,0.08)'; }
 
       const h2h = document.getElementById('h2h-section');
-      h2h.innerHTML = `< div class="h2h-label" >⚔️ HEAD TO HEAD</div > ${row(1, p1c, p1)}${row(2, p2c, p2)}
+      h2h.innerHTML = `<div class="h2h-label">⚔️ HEAD TO HEAD</div>${row(1, p1c, p1)}${row(2, p2c, p2)}
         <div style="margin-top:10px;padding:10px 12px;border-radius:8px;font-size:13px;font-weight:600;background:${verdictBg};color:${verdictColor};border:1px solid ${verdictColor}33">${verdictText}</div>`;
       h2h.classList.add('visible');
       return { iWin, myWon, chalWon, chalName };
@@ -6660,11 +6889,11 @@
         gap_seconds: simState.finalGap || 0
       };
       try {
-        const res = await fetch(`${SUPABASE_URL} /rest/v1 / challenges`, {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/challenges`, {
           method: 'POST',
           headers: {
             'apikey': SUPABASE_ANON_KEY,
-            'Authorization': `Bearer ${SUPABASE_ANON_KEY} `,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
             'Content-Type': 'application/json',
             'Prefer': 'return=representation'
           },
@@ -6673,7 +6902,7 @@
         const rows = await res.json();
         const id = rows?.[0]?.id;
         if (id) {
-          const url = `${window.location.origin}${window.location.pathname}?challenge = ${id} `;
+          const url = `${window.location.origin}${window.location.pathname}?challenge=${id}`;
           document.getElementById('challenge-url-text').value = url;
           document.getElementById('challenge-url-wrap').classList.add('visible');
           btn.textContent = '\u2705 Link Ready';
@@ -6734,6 +6963,7 @@
     })();
 
     checkChallengeParam();
+    checkTutorial();
     loadGlobalLeaderboard('track');
     setInterval(() => loadGlobalLeaderboard(lbCurrentTab), 30000);
   </script>
