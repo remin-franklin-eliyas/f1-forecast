@@ -419,8 +419,8 @@
       display: flex;
       justify-content: center;
       gap: 6px;
-      margin-top: 12px;
-      margin-bottom: 20px;
+      margin-top: 10px;
+      margin-bottom: 4px;
     }
 
     .sdot {
@@ -3736,7 +3736,8 @@
     .gap-bar-wrap.sc-pulse { animation: tensionPulse 0.45s ease-in-out 4; }
 
     /* ── CUSTOM SELECT DROPDOWN ─────────────────────────────────── */
-    .cs-wrap { position: relative; }
+    .cs-wrap { position: relative; z-index: 1; }
+    .cs-wrap.open { z-index: 500; }
     .cs-trigger {
       display: flex; align-items: center; gap: 8px;
       width: 100%; padding: 9px 12px;
@@ -3775,7 +3776,7 @@
     .cs-menu {
       position: absolute; top: calc(100% + 5px); left: 0; right: 0;
       background: var(--bg2); border: 1px solid var(--border);
-      border-radius: 10px; z-index: 400; overflow: hidden;
+      border-radius: 10px; z-index: 500;
       pointer-events: none; opacity: 0;
       transform: translateY(-8px) scaleY(0.94);
       transform-origin: top center;
@@ -3889,7 +3890,8 @@
       background: var(--bg2);
       border: 1px solid var(--border);
       border-radius: 10px;
-      margin-bottom: 8px;
+      margin-top: 28px;
+      margin-bottom: 4px;
     }
 
     .sel-summary-icon {
@@ -3935,9 +3937,11 @@
     /* ── STINT BLOCK ENTRY ANIMATION ── */
     @keyframes stintIn {
       from { opacity: 0; transform: translateY(-6px) scale(0.98); }
-      to   { opacity: 1; transform: translateY(0) scale(1); }
+      to   { opacity: 1; }
     }
-    .stint-block { animation: stintIn 0.22s cubic-bezier(.4,0,.2,1) both; }
+    /* fill-mode: backwards — applies 'from' before start, but does NOT persist
+       transform after end, so no stacking context is left on .stint-block */
+    .stint-block { animation: stintIn 0.22s cubic-bezier(.4,0,.2,1) backwards; }
 
     /* ── PREVIEW BAR PULSE ON CHANGE ── */
     @keyframes prevBarPulse {
