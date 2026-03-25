@@ -1977,6 +1977,18 @@
       max-width: 180px;
     }
 
+    .modal-iq-mom {
+      font-size: 10px;
+      line-height: 1.3;
+      margin-top: 2px;
+      font-style: italic;
+      opacity: 0.85;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 180px;
+    }
+
     .modal-iq-bar-wrap {
       flex: 1;
       height: 4px;
@@ -4421,6 +4433,7 @@
               <div class="modal-iq-right">
                 <div class="modal-iq-grade" id="modal-iq-grade">—</div>
                 <div class="modal-iq-sub" id="modal-iq-sub"></div>
+                <div class="modal-iq-mom" id="modal-iq-mom" style="display:none"></div>
               </div>
               <div class="modal-iq-bar-wrap">
                 <div class="modal-iq-bar-fill" id="modal-iq-bar-fill" style="width:0%"></div>
@@ -6777,7 +6790,7 @@
     }
 
     /* ── STRATEGY SCORE ── */
-    function calcStrategyScore(stints, pitLaps, userWins, gapSec, raceData, event) {
+    function calcStrategyScore(stints, pitLaps, userWins, gapSec, raceData, event, momLapSet) {
       // ── Base ──────────────────────────────────────────────────────────
       let score = 38;
       const reasons = [];
@@ -6880,6 +6893,40 @@
         else if (pitLaps.some(p => p > event.endLap && p <= event.endLap + 3)) { score -= 5; } // pitted just after = missed it
       }
 
+      // ── MOM DEPLOYMENT QUALITY ────────────────────────────────────────
+      if (momLapSet && momLapSet.size > 0) {
+        const momLaps = [...momLapSet].sort((a, b) => a - b);
+        const momCount = momLaps.length;
+
+        // Base credit for using MOM at all
+        score += 4;
+
+        // Budget utilisation: 6-8 laps is optimal; 1-2 is wasteful
+        if (momCount >= 6) score += 5;
+        else if (momCount <= 2) { score -= 4; reasons.push('mom_underused'); }
+
+        // Timing quality:
+        // Good — MOM in the final 25% of the race (finishing push)
+        const finalPushStart = Math.floor(LAPS_TOTAL * 0.75);
+        const hasFinalPush = momLaps.some(l => l >= finalPushStart);
+        if (hasFinalPush) score += 6;
+
+        // Good — at least one MOM window starts right after a pit stop (1-3 laps after)
+        const momAfterPit = pitLaps.some(p => momLaps.some(l => l >= p + 1 && l <= p + 3));
+        if (momAfterPit) score += 5;
+
+        // Bad — MOM burned in the opening 5 laps before race order settles
+        const earlyBlast = momLaps.some(l => l <= 5);
+        if (earlyBlast) { score -= 7; reasons.push('mom_early_blast'); }
+
+        // Bonus — won the race with MOM deployed in closing laps
+        if (userWins && hasFinalPush) score += 4;
+      } else {
+        // Chose not to use MOM at all — minor deduction for ignoring the tool
+        score -= 3;
+        reasons.push('mom_unused');
+      }
+
       // ── TRACK-SPECIFIC CONTEXT ────────────────────────────────────────
       if (currentTrackKey === 'monaco') {
         // Monaco: 1-stop is fine; 2-stop is punished by traffic loss
@@ -6901,6 +6948,9 @@
       const hasSoftWin = reasons.includes('soft_win');
       const hasCrush = reasons.includes('crushing_loss');
       const hasBack = reasons.includes('back_to_back');
+      const hasMomEarly = reasons.includes('mom_early_blast');
+      const hasMomUnused = reasons.includes('mom_unused');
+      const hasMomUnder = reasons.includes('mom_underused');
 
       if (score >= 92) return {
         grade: 'Race Engineer', color: '#34d399',
@@ -6909,25 +6959,30 @@
       if (score >= 80) return {
         grade: 'Strategy Chief', color: '#a78bfa',
         sub: hasCliff ? `Strong overall, but you left time on the table running past the cliff.`
-          : `Precise timing. One slightly braver call and this is perfect.`
+          : hasMomEarly ? `Elite pit work — but burning MOM in the opening laps gave away free tenths.`
+            : `Precise timing. One slightly braver call and this is perfect.`
       };
       if (score >= 67) return {
         grade: 'Analyst', color: '#60a5fa',
         sub: hasBack ? `Back-to-back compounds wasted a pit stop — swap order and try again.`
-          : hasSoftWin ? `You won, but the gap suggests Remin underperformed. Can you replicate this on a hard day?`
-            : `Decent read — there's a faster window you left unexplored.`
+          : hasMomUnused ? `Good tyre reads, but you never activated MOM — that\'s pace left on the table.`
+            : hasMomUnder ? `MOM was underdeployed — schedule more of your budget for the final stint.`
+              : hasSoftWin ? `You won, but the gap suggests Remin underperformed. Can you replicate this on a hard day?`
+                : `Decent read — there's a faster window you left unexplored.`
       };
       if (score >= 52) return {
         grade: 'Junior Engineer', color: '#FFD700',
         sub: hasCliff ? `Tyre cliff cost you several critical seconds mid-race.`
-          : hasMono ? `Single compound across all stints killed your pace window.`
-            : `The structure was there — pit timing let you down.`
+          : hasMomEarly ? `Burning MOM on the opening laps wasted the biggest pace advantage in your toolkit.`
+            : hasMono ? `Single compound across all stints killed your pace window.`
+              : `The structure was there — pit timing let you down.`
       };
       if (score >= 36) return {
         grade: 'Data Intern', color: '#f87171',
         sub: hasCrush ? `That gap tells the whole story. The opening stint needs a complete rethink.`
-          : hasMono ? `Running one compound the entire race is never the answer on this track.`
-            : `Tyre management and stop timing both need work. Study Remin\'s strategy.`
+          : hasMomUnused ? `You didn\'t use MOM at all — that\'s a free −0.25s per lap you left behind.`
+            : hasMono ? `Running one compound the entire race is never the answer on this track.`
+              : `Tyre management and stop timing both need work. Study Remin\'s strategy.`
       };
       return {
         grade: 'Backmarker', color: '#6b6b8a',
@@ -7069,7 +7124,8 @@
               const { score: iqScore, reasons: iqReasons } = calcStrategyScore(
                 simState.userStints, simState.userPitLaps,
                 simState.userWins, simState.finalGap,
-                simState.raceData, simState.event
+                simState.raceData, simState.event,
+                simState.userMomLaps
               );
               const { grade: iqGrade, color: iqColor, sub: iqSub } = getScoreGrade(iqScore, iqReasons);
               const scoreEl = document.getElementById('modal-iq-score');
@@ -7080,6 +7136,36 @@
               if (gradeEl) { gradeEl.textContent = iqGrade; gradeEl.style.color = iqColor; }
               if (subEl) { subEl.textContent = iqSub; }
               if (fillEl) { fillEl.style.width = iqScore + '%'; fillEl.style.background = iqColor; }
+
+              // MOM feedback note
+              const momEl = document.getElementById('modal-iq-mom');
+              if (momEl) {
+                const momSet = simState.userMomLaps;
+                const momCount = momSet ? momSet.size : 0;
+                let momNote = '';
+                let momColor = 'var(--muted)';
+                if (momCount === 0) {
+                  momNote = '\u26a1 MOM unused \u2014 free pace left behind.';
+                  momColor = '#f87171';
+                } else if (iqReasons.includes('mom_early_blast')) {
+                  momNote = `\u26a1 MOM fired too early (${momCount} laps) \u2014 save for race end.`;
+                  momColor = '#f97316';
+                } else if (iqReasons.includes('mom_underused')) {
+                  momNote = `\u26a1 MOM underdeployed \u2014 ${momCount}/${MOM_BUDGET} laps used.`;
+                  momColor = '#facc15';
+                } else {
+                  const finalPushStart = Math.floor(LAPS * 0.75);
+                  const hasFinalPush = momSet && [...momSet].some(l => l >= finalPushStart);
+                  momNote = hasFinalPush
+                    ? `\u26a1 MOM well-timed \u2014 ${momCount} laps, closing push secured.`
+                    : `\u26a1 MOM active \u2014 ${momCount} laps deployed.`;
+                  momColor = '#34d399';
+                }
+                momEl.textContent = momNote;
+                momEl.style.color = momColor;
+                momEl.style.display = 'block';
+              }
+
               iqStrip.style.display = 'flex';
             }
 
