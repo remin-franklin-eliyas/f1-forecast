@@ -4115,6 +4115,163 @@
     }
 
     /* MOM active glow on status card bar */
+    /* ── CHIEF SCREEN ── */
+    #screen-chief {
+      position: fixed;
+      inset: 0;
+      z-index: 9000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      background: #08080f;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.6s ease;
+    }
+    #screen-chief.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .chief-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      pointer-events: none;
+    }
+    .chief-orb-1 {
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(255,183,0,0.22) 0%, transparent 70%);
+      top: -160px; left: -160px;
+      animation: chiefOrbA 14s ease-in-out infinite alternate;
+    }
+    .chief-orb-2 {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(167,139,250,0.18) 0%, transparent 70%);
+      bottom: -100px; right: -80px;
+      animation: chiefOrbB 18s ease-in-out infinite alternate;
+    }
+    .chief-orb-3 {
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(52,211,153,0.12) 0%, transparent 70%);
+      top: 40%; left: 55%;
+      animation: chiefOrbC 22s ease-in-out infinite alternate;
+    }
+    @keyframes chiefOrbA {
+      from { transform: translate(0,0) scale(1); }
+      to   { transform: translate(80px, 100px) scale(1.2); }
+    }
+    @keyframes chiefOrbB {
+      from { transform: translate(0,0) scale(1); }
+      to   { transform: translate(-60px,-80px) scale(1.15); }
+    }
+    @keyframes chiefOrbC {
+      from { transform: translate(0,0); }
+      to   { transform: translate(-40px,60px); }
+    }
+    .chief-crown {
+      font-size: 56px;
+      animation: chiefCrownBob 3s ease-in-out infinite;
+      margin-bottom: 12px;
+      position: relative; z-index: 1;
+    }
+    @keyframes chiefCrownBob {
+      0%,100% { transform: translateY(0) rotate(-4deg); }
+      50%      { transform: translateY(-10px) rotate(4deg); }
+    }
+    .chief-headline {
+      font-family: var(--font-display);
+      font-size: clamp(42px, 8vw, 88px);
+      font-weight: 900;
+      letter-spacing: -1px;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, #FFB700 0%, #a78bfa 50%, #34d399 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: chiefGradientShift 6s ease infinite alternate;
+      background-size: 200% 200%;
+      position: relative; z-index: 1;
+      text-align: center;
+    }
+    @keyframes chiefGradientShift {
+      0%   { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+    .chief-sub {
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-top: 6px;
+      position: relative; z-index: 1;
+    }
+    .chief-stats {
+      display: flex;
+      gap: 32px;
+      margin-top: 48px;
+      position: relative; z-index: 1;
+    }
+    .chief-stat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+    .chief-stat-num {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 900;
+      color: #FFB700;
+    }
+    .chief-stat-lbl {
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .chief-ticker {
+      margin-top: 40px;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      opacity: 0.6;
+      position: relative; z-index: 1;
+      animation: chiefBlink 2s ease-in-out infinite;
+    }
+    @keyframes chiefBlink {
+      0%,100% { opacity: 0.6; }
+      50%      { opacity: 0.2; }
+    }
+    .chief-esc {
+      position: absolute;
+      top: 20px; right: 24px;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      opacity: 0.5;
+      cursor: pointer;
+      z-index: 2;
+      transition: opacity .2s;
+    }
+    .chief-esc:hover { opacity: 1; }
+    .chief-scanline {
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 3px,
+        rgba(255,255,255,0.012) 3px,
+        rgba(255,255,255,0.012) 4px
+      );
+      pointer-events: none;
+      z-index: 0;
+    }
+
     @keyframes momActivePulse {
       0%, 100% { opacity: 1; }
       50%       { opacity: 0.5; }
@@ -4471,6 +4628,33 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- CHIEF EASTER EGG SCREEN -->
+    <div id="screen-chief" aria-hidden="true">
+      <div class="chief-orb chief-orb-1"></div>
+      <div class="chief-orb chief-orb-2"></div>
+      <div class="chief-orb chief-orb-3"></div>
+      <div class="chief-scanline"></div>
+      <span class="chief-esc" onclick="exitChief()">ESC × EXIT</span>
+      <div class="chief-crown">👑</div>
+      <div class="chief-headline">Welcome, Chief</div>
+      <div class="chief-sub">The architect is in the building</div>
+      <div class="chief-stats">
+        <div class="chief-stat">
+          <span class="chief-stat-num" id="chief-stat-races">—</span>
+          <span class="chief-stat-lbl">Total races</span>
+        </div>
+        <div class="chief-stat">
+          <span class="chief-stat-num" id="chief-stat-best">—</span>
+          <span class="chief-stat-lbl">Best IQ</span>
+        </div>
+        <div class="chief-stat">
+          <span class="chief-stat-num" id="chief-stat-wins">—</span>
+          <span class="chief-stat-lbl">Win streak</span>
+        </div>
+      </div>
+      <div class="chief-ticker">press any key or tap to race</div>
     </div>
 
     <!-- RACE SCREEN -->
@@ -5894,6 +6078,12 @@
 
       userName = (document.getElementById('user-name-input').value || '').trim().slice(0, 40);
 
+      // — Easter egg: "REMIN" name triggers chief screen —
+      if (userName.toUpperCase() === 'REMIN') {
+        showChief();
+        return;
+      }
+
       // Daily seed: same Remin AI behaviour for everyone on the same calendar day
       const today = new Date().toISOString().slice(0, 10); // "2026-03-24"
       const dailySeedStr = today + userDriver + currentTrackKey;
@@ -6445,6 +6635,35 @@
     function showScreen(id) {
       document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
       document.getElementById(id).classList.add('active');
+    }
+
+    /* \u2500\u2500 CHIEF EASTER EGG \u2500\u2500 */
+    function showChief() {
+      const el = document.getElementById('screen-chief');
+      el.removeAttribute('aria-hidden');
+      el.classList.add('active');
+
+      // Pull personal best stats from localStorage
+      const pb = (() => { try { return JSON.parse(localStorage.getItem('f1_pb') || '{}'); } catch { return {}; } })();
+      const racesEl = document.getElementById('chief-stat-races');
+      const bestEl  = document.getElementById('chief-stat-best');
+      const winsEl  = document.getElementById('chief-stat-wins');
+      if (racesEl) racesEl.textContent = pb.totalRaces  ?? '0';
+      if (bestEl)  bestEl.textContent  = pb.bestScore   ?? '\u2014';
+      if (winsEl)  winsEl.textContent  = pb.winStreak   ?? '0';
+
+      // Any keypress / tap dismisses and proceeds to race
+      const dismiss = () => { exitChief(); };
+      el.addEventListener('keydown', dismiss, { once: true });
+      el.addEventListener('click', dismiss, { once: true });
+      el.setAttribute('tabindex', '-1');
+      el.focus();
+    }
+
+    function exitChief() {
+      const el = document.getElementById('screen-chief');
+      el.classList.remove('active');
+      el.setAttribute('aria-hidden', 'true');
     }
 
     function goSetup() {
