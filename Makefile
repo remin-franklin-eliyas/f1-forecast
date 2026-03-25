@@ -1,4 +1,4 @@
-.PHONY: help install lint format test fetch explore clean
+.PHONY: help install lint format format-check test fetch explore clean
 
 help:  ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*##' $(MAKEFILE_LIST) | \
@@ -6,7 +6,6 @@ help:  ## Show this help
 
 install:  ## Install all dependencies (runtime + dev)
 	pip install -r requirements.txt -r requirements-dev.txt
-	pre-commit install
 
 lint:  ## Run ruff lint checks
 	ruff check .

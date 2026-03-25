@@ -1,6 +1,14 @@
 {
   "name": "F1 Forecast",
   "image": "mcr.microsoft.com/devcontainers/python:3.12",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/f1-forecast,type=bind,consistency=cached",
+  "workspaceFolder": "/workspaces/f1-forecast",
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "lts"
+    }
+  },
   "customizations": {
     "vscode": {
       "extensions": [
@@ -11,6 +19,9 @@
         "ms-toolsai.vscode-jupyter-slideshow",
         "charliermarsh.ruff",
         "ms-python.black-formatter",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "antfu.vite",
         "github.copilot",
         "github.copilot-chat",
         "eamodio.gitlens",
@@ -29,26 +40,35 @@
             "source.organizeImports.ruff": "explicit"
           }
         },
+        "[javascript]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode",
+          "editor.formatOnSave": true
+        },
         "[json]": {
           "editor.defaultFormatter": "vscode.json-language-features"
         },
         "jupyter.notebookFileRoot": "${workspaceFolder}",
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "terminal.integrated.cwd": "${workspaceFolder}",
         "files.exclude": {
           "**/__pycache__": true,
           "**/.pytest_cache": true,
-          "**/*.egg-info": true
+          "**/*.egg-info": true,
+          "**/node_modules": true,
+          "**/dist": false
         }
       }
     }
   },
-  "postCreateCommand": "pip install -r requirements.txt -r requirements-dev.txt && pre-commit install",
+  "postCreateCommand": "pip install -r requirements.txt -r requirements-dev.txt && ([ -f package.json ] && npm install || true)",
   "remoteUser": "vscode",
-  "features": {
-    "ghcr.io/devcontainers/features/git:1": {}
-  },
   "mounts": [],
-  "forwardPorts": [8501],
+  "forwardPorts": [5173, 8501],
   "portsAttributes": {
+    "5173": {
+      "label": "Vite Dev Server",
+      "onAutoForward": "openBrowser"
+    },
     "8501": {
       "label": "Streamlit Dashboard",
       "onAutoForward": "notify"
