@@ -92,43 +92,42 @@
       inset: 0;
       pointer-events: none;
       z-index: 0;
-      overflow: hidden;
     }
 
     #bg-fx span {
       position: absolute;
       border-radius: 50%;
-      filter: blur(100px);
+      filter: blur(80px);
       will-change: transform;
     }
 
     /* left orb — large, drifts diagonally */
     #bg-fx span:nth-child(1) {
-      width: 520px;
-      height: 520px;
-      background: rgba(var(--track-accent-rgb), 0.09);
-      left: -120px;
-      top: 15%;
+      width: 600px;
+      height: 600px;
+      background: rgba(var(--track-accent-rgb), 0.18);
+      left: -80px;
+      top: 10%;
       animation: orbA 22s ease-in-out infinite alternate;
     }
 
     /* right orb — medium, counters left orb */
     #bg-fx span:nth-child(2) {
-      width: 420px;
-      height: 420px;
-      background: rgba(var(--track-accent-rgb), 0.07);
-      right: -100px;
-      bottom: 10%;
+      width: 480px;
+      height: 480px;
+      background: rgba(var(--track-accent-rgb), 0.13);
+      right: -60px;
+      bottom: 8%;
       animation: orbB 28s ease-in-out infinite alternate;
     }
 
-    /* top-center orb — small accent, fades in/out */
+    /* top-center orb — small accent, fades and drifts */
     #bg-fx span:nth-child(3) {
-      width: 280px;
-      height: 280px;
-      background: rgba(var(--track-accent-rgb), 0.05);
-      left: 45%;
-      top: -60px;
+      width: 320px;
+      height: 320px;
+      background: rgba(var(--track-accent-rgb), 0.10);
+      left: 40%;
+      top: -40px;
       animation: orbC 18s ease-in-out infinite alternate;
     }
 
@@ -141,7 +140,7 @@
       to   { transform: translate(-80px, -70px) scale(1.12); }
     }
     @keyframes orbC {
-      from { transform: translate(0, 0) scale(1);   opacity: 0.6; }
+      from { transform: translate(0, 0) scale(1);  opacity: 0.6; }
       to   { transform: translate(-50px, 40px) scale(0.85); opacity: 1; }
     }
 
