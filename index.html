@@ -360,20 +360,85 @@
       background: var(--border);
     }
 
-    /* ── DRIVER GRID ── */
-    .driver-grid {
-      display: grid;
-      grid-template-columns: repeat(6, minmax(0, 1fr));
-      gap: 12px;
-      margin-bottom: 32px;
+    /* ── SLIDER SYSTEM ── */
+    .slider-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      position: relative;
     }
 
-    /* 5-driver layout: 3 top row + 2 bottom row centered */
-    .driver-grid .driver-card:nth-child(1) { grid-column: 1 / 3; }
-    .driver-grid .driver-card:nth-child(2) { grid-column: 3 / 5; }
-    .driver-grid .driver-card:nth-child(3) { grid-column: 5 / 7; }
-    .driver-grid .driver-card:nth-child(4) { grid-column: 2 / 4; }
-    .driver-grid .driver-card:nth-child(5) { grid-column: 4 / 6; }
+    .slider-track {
+      flex: 1;
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding: 4px 2px 8px; /* allow box-shadow to render */
+    }
+
+    .slider-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .slider-arrow {
+      flex-shrink: 0;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid var(--border2);
+      background: var(--bg2);
+      color: var(--text);
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .15s, border-color .15s, opacity .15s;
+      line-height: 1;
+    }
+
+    .slider-arrow:hover {
+      background: var(--bg3);
+      border-color: var(--track-accent);
+    }
+
+    .slider-arrow:disabled {
+      opacity: 0.3;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .slider-dots {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 12px;
+      margin-bottom: 20px;
+    }
+
+    .sdot {
+      height: 6px;
+      width: 6px;
+      border-radius: 3px;
+      background: var(--border2);
+      transition: background .25s, width .25s;
+      cursor: pointer;
+    }
+
+    .sdot.active {
+      background: var(--track-accent);
+      width: 18px;
+    }
+
+    /* ── DRIVER SLIDER CARDS ── */
+    .driver-slider .driver-card {
+      flex: 0 0 190px;
+      scroll-snap-align: start;
+    }
 
     .driver-card {
       background: var(--bg2);
@@ -466,11 +531,10 @@
     }
 
     /* ── TRACK SELECTOR ── */
-    .track-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-bottom: 28px;
+    .track-slider .track-card {
+      flex: 0 0 calc((100% - 24px) / 3);
+      min-width: 200px;
+      scroll-snap-align: start;
     }
 
     .track-card {
@@ -1378,27 +1442,23 @@
     }
 
     @media (max-width: 640px) {
-      .driver-grid {
-        grid-template-columns: repeat(4, 1fr);
+      .driver-slider .driver-card {
+        flex: 0 0 calc(50% - 6px);
       }
-      .driver-grid .driver-card:nth-child(1) { grid-column: 1 / 3; }
-      .driver-grid .driver-card:nth-child(2) { grid-column: 3 / 5; }
-      .driver-grid .driver-card:nth-child(3) { grid-column: 1 / 3; }
-      .driver-grid .driver-card:nth-child(4) { grid-column: 3 / 5; }
-      .driver-grid .driver-card:nth-child(5) { grid-column: 2 / 4; }
+      .track-slider .track-card {
+        flex: 0 0 75%;
+        min-width: 0;
+      }
     }
 
     @media (max-width: 540px) {
-      .driver-grid {
-        grid-template-columns: repeat(2, 1fr);
+      .driver-slider .driver-card {
+        flex: 0 0 calc(50% - 6px);
       }
 
-      .driver-grid .driver-card:nth-child(n) {
-        grid-column: auto;
-      }
-
-      .track-grid {
-        grid-template-columns: 1fr;
+      .track-slider .track-card {
+        flex: 0 0 88%;
+        min-width: 0;
       }
 
       .status-grid {
@@ -3830,7 +3890,9 @@
       </div>
 
       <div class="section-label">Choose your circuit</div>
-      <div class="track-grid" id="track-grid">
+      <div class="slider-wrap">
+        <button class="slider-arrow" id="track-prev" onclick="sliderNav('track-slider','prev')" disabled>&#8249;</button>
+        <div class="slider-track track-slider" id="track-slider">
         <div class="track-card selected" data-track="silverstone" onclick="selectTrack('silverstone')"
           style="--tc:#a78bfa">
           <div class="track-flag">🇬🇧</div>
@@ -3877,6 +3939,13 @@
             <span class="track-tag">2–3 stop</span>
           </div>
         </div>
+        </div><!-- /slider-track -->
+        <button class="slider-arrow" id="track-next" onclick="sliderNav('track-slider','next')">&#8250;</button>
+      </div><!-- /slider-wrap -->
+      <div class="slider-dots" id="track-dots">
+        <span class="sdot active" onclick="sliderGoTo('track-slider',0,'track-dots')"></span>
+        <span class="sdot" onclick="sliderGoTo('track-slider',1,'track-dots')"></span>
+        <span class="sdot" onclick="sliderGoTo('track-slider',2,'track-dots')"></span>
       </div>
 
       <div class="section-label">Your name</div>
@@ -3886,7 +3955,9 @@
       </div>
 
       <div class="section-label">Choose your driver</div>
-      <div class="driver-grid" id="driver-grid">
+      <div class="slider-wrap">
+        <button class="slider-arrow" id="driver-prev" onclick="sliderNav('driver-slider','prev')" disabled>&#8249;</button>
+        <div class="slider-track driver-slider" id="driver-slider">
         <div class="driver-card" data-driver="VER" onclick="selectDriver('VER')" style="--driver-color:var(--ver)">
           <div class="driver-number">1</div>
           <div class="driver-name">Verstappen</div>
@@ -3937,6 +4008,15 @@
             <div class="dstat"><span class="dstat-label">MOM mode</span><span class="dstat-val">Hi-drag</span></div>
           </div>
         </div>
+        </div><!-- /slider-track -->
+        <button class="slider-arrow" id="driver-next" onclick="sliderNav('driver-slider','next')">&#8250;</button>
+      </div><!-- /slider-wrap -->
+      <div class="slider-dots" id="driver-dots">
+        <span class="sdot active" onclick="sliderGoTo('driver-slider',0,'driver-dots')"></span>
+        <span class="sdot" onclick="sliderGoTo('driver-slider',1,'driver-dots')"></span>
+        <span class="sdot" onclick="sliderGoTo('driver-slider',2,'driver-dots')"></span>
+        <span class="sdot" onclick="sliderGoTo('driver-slider',3,'driver-dots')"></span>
+        <span class="sdot" onclick="sliderGoTo('driver-slider',4,'driver-dots')"></span>
       </div>
 
       <div class="section-label">Build your strategy <span
@@ -7180,6 +7260,68 @@
       setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
     }
 
+    /* ── SLIDER SYSTEM ── */
+    function sliderNav(sliderId, dir) {
+      const track = document.getElementById(sliderId);
+      if (!track) return;
+      const card = track.firstElementChild;
+      if (!card) return;
+      const step = card.offsetWidth + 12; // 12 = gap
+      track.scrollBy({ left: dir === 'next' ? step : -step, behavior: 'smooth' });
+    }
+
+    function sliderGoTo(sliderId, idx, dotsId) {
+      const track = document.getElementById(sliderId);
+      if (!track) return;
+      const card = track.children[idx];
+      if (!card) return;
+      track.scrollTo({ left: card.offsetLeft, behavior: 'smooth' });
+      if (dotsId) syncDots(dotsId, idx);
+    }
+
+    function syncDots(dotsId, idx) {
+      const dotsEl = document.getElementById(dotsId);
+      if (!dotsEl) return;
+      dotsEl.querySelectorAll('.sdot').forEach((d, i) => d.classList.toggle('active', i === idx));
+    }
+
+    function syncArrows(sliderId) {
+      const track = document.getElementById(sliderId);
+      if (!track) return;
+      const prefix = sliderId.replace('-slider', '');
+      const prev = document.getElementById(prefix + '-prev');
+      const next = document.getElementById(prefix + '-next');
+      const atStart = track.scrollLeft <= 4;
+      const atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
+      if (prev) prev.disabled = atStart;
+      if (next) next.disabled = atEnd;
+    }
+
+    function activeCardIdx(track) {
+      const cards = Array.from(track.children);
+      let closest = 0, minDist = Infinity;
+      cards.forEach((c, i) => {
+        const dist = Math.abs(c.offsetLeft - track.scrollLeft);
+        if (dist < minDist) { minDist = dist; closest = i; }
+      });
+      return closest;
+    }
+
+    function initSliders() {
+      [
+        { slider: 'track-slider', dots: 'track-dots' },
+        { slider: 'driver-slider', dots: 'driver-dots' }
+      ].forEach(({ slider, dots }) => {
+        const track = document.getElementById(slider);
+        if (!track) return;
+        syncArrows(slider);
+        track.addEventListener('scroll', () => {
+          syncArrows(slider);
+          syncDots(dots, activeCardIdx(track));
+        }, { passive: true });
+      });
+    }
+
     /* ── CUSTOM SELECT UTILITIES ── */
     function csInitAll() {
       document.querySelectorAll('.cs-wrap:not([data-cs-init])').forEach(wrap => {
@@ -7255,6 +7397,7 @@
     checkChallengeParam();
     checkTutorial();
     csInitAll();
+    initSliders();
     loadGlobalLeaderboard('track');
     setInterval(() => loadGlobalLeaderboard(lbCurrentTab), 30000);
   </script>
