@@ -247,6 +247,32 @@
       margin-bottom: 12px;
     }
 
+    /* ── SCROLL REVEAL ── */
+    .scroll-reveal {
+      opacity: 0;
+      filter: blur(10px);
+      transform: translateY(28px);
+      transition:
+        opacity 0.55s cubic-bezier(0.22,1,0.36,1),
+        filter  0.55s cubic-bezier(0.22,1,0.36,1),
+        transform 0.55s cubic-bezier(0.22,1,0.36,1);
+      will-change: opacity, filter, transform;
+    }
+    .scroll-reveal.revealed {
+      opacity: 1;
+      filter: blur(0px);
+      transform: translateY(0);
+    }
+    /* stagger siblings: each nth child adds a small delay */
+    .scroll-reveal:nth-child(2) { transition-delay: 0.04s; }
+    .scroll-reveal:nth-child(3) { transition-delay: 0.08s; }
+    .scroll-reveal:nth-child(4) { transition-delay: 0.12s; }
+    .scroll-reveal:nth-child(5) { transition-delay: 0.16s; }
+    .scroll-reveal:nth-child(6) { transition-delay: 0.20s; }
+    .scroll-reveal:nth-child(7) { transition-delay: 0.24s; }
+    .scroll-reveal:nth-child(8) { transition-delay: 0.28s; }
+    .scroll-reveal:nth-child(n+9) { transition-delay: 0.32s; }
+
     /* ── HERO ── */
     .hero {
       padding: 8px 0 32px;
@@ -4416,7 +4442,7 @@
       </div>
 
       <!-- TRACK CHOOSER (hidden after selection) -->
-      <div class="section-sel-wrap" id="track-section">
+      <div class="section-sel-wrap scroll-reveal" id="track-section">
         <div class="section-label">Choose your circuit</div>
         <div class="slider-wrap">
           <button class="slider-arrow" id="track-prev" onclick="sliderNav('track-slider','prev')" disabled>&#8249;</button>
@@ -4473,8 +4499,8 @@
         <div class="slider-dots" id="track-dots"></div>
       </div><!-- /track-section -->
 
-      <div class="section-label">Your name</div>
-      <div class="name-field-wrap">
+      <div class="section-label scroll-reveal">Your name</div>
+      <div class="name-field-wrap scroll-reveal">
         <input type="text" class="name-field" id="user-name-input" placeholder="Enter your name…" maxlength="40"
           autocomplete="off" spellcheck="false">
       </div>
@@ -4490,7 +4516,7 @@
       </div>
 
       <!-- DRIVER CHOOSER (hidden after selection) -->
-      <div class="section-sel-wrap" id="driver-section">
+      <div class="section-sel-wrap scroll-reveal" id="driver-section">
         <div class="section-label">Choose your driver</div>
         <div class="slider-wrap">
           <button class="slider-arrow" id="driver-prev" onclick="sliderNav('driver-slider','prev')" disabled>&#8249;</button>
@@ -4551,11 +4577,11 @@
         <div class="slider-dots" id="driver-dots"></div>
       </div><!-- /driver-section -->
 
-      <div class="section-label">Build your strategy <span
+      <div class="section-label scroll-reveal">Build your strategy <span
           style="color:var(--muted);font-size:10px;text-transform:none;letter-spacing:0" id="strategy-label-laps">(must
           total 52 laps)</span>
       </div>
-      <div class="strategy-builder">
+      <div class="strategy-builder scroll-reveal">
         <div id="stints-container"></div>
         <button class="add-stint-btn" onclick="addStint()">+ Add stint</button>
         <div class="preview-wrap">
@@ -4568,8 +4594,8 @@
         <div class="error-msg" id="strat-error"></div>
       </div>
 
-      <div class="section-label">MOM — Mode of Maneuvering</div>
-      <div class="mom-section">
+      <div class="section-label scroll-reveal">MOM — Mode of Maneuvering</div>
+      <div class="mom-section scroll-reveal">
         <div class="mom-section-title">
           ⚡ MOM Deployment <span class="mom-active-badge">2026 Regs</span>
         </div>
@@ -4605,14 +4631,14 @@
         <div class="error-msg" id="mom-error" style="margin-top:8px"></div>
       </div>
 
-      <div class="wildcard-teaser">
+      <div class="wildcard-teaser scroll-reveal">
         <div class="wildcard-teaser-icon">🎲</div>
         <div><strong>Wildcard event</strong> — a random event (Safety Car, VSC, or Rain) may occur mid-race. Your
           strategy will be tested.</div>
       </div>
 
-      <div class="section-label">Difficulty</div>
-      <div class="cs-wrap" id="cs-difficulty">
+      <div class="section-label scroll-reveal">Difficulty</div>
+      <div class="cs-wrap scroll-reveal" id="cs-difficulty">
         <button class="cs-trigger">
           <span class="cs-swatch" id="diff-dot" style="background:#34d399"></span>
           <span class="cs-label" id="diff-label">Easy</span>
@@ -4635,7 +4661,7 @@
         </div>
       </div>
 
-      <div class="start-row">
+      <div class="start-row scroll-reveal">
         <button class="btn-start" onclick="startRace()">Lights Out</button>
         <div class="vs-text">vs <strong>Remin</strong> — reads your strategy and adapts</div>
       </div>
@@ -8326,6 +8352,21 @@
     csInitAll();
     initSliders();
     loadGlobalLeaderboard('track');
+
+    // Scroll-reveal observer
+    (function initScrollReveal() {
+      const els = document.querySelectorAll('#screen-setup .scroll-reveal');
+      if (!els.length) return;
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('revealed');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+      els.forEach(el => io.observe(el));
+    })();
     setInterval(() => loadGlobalLeaderboard(lbCurrentTab), 30000);
   </script>
 
