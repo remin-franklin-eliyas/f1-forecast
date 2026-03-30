@@ -118,7 +118,6 @@ Engagement, personality, and shareability pass.
 
 **Easter eggs:**
 - **REMIN screen** — typing "REMIN" as name and pressing Lights Out replaces the entire screen with a full-takeover chief screen: animated tri-colour gradient headline ("Welcome, Chief"), drifting orbs, scanlines, live personal best stats pulled from localStorage, crown emoji bob animation. Click or keypress to dismiss.
-- **VISHAL overlay** — typing "VISHAL" triggers a 2-second overlay that fades in and out while the race starts in the background; warm amber/red palette with "Welcome Pondy Pottai" headline.
 
 **Scroll-reveal system:**
 - Every section in the setup screen (track chooser, name field, driver chooser, strategy builder, MOM section, wildcard teaser, difficulty, start row) starts hidden with `opacity: 0`, `blur(10px)`, `translateY(28px)`
